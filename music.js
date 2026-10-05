@@ -42,8 +42,8 @@ window.TRACKS = [
   },
   {
     "artist": "Алла Пугачёва",
-    "title": "Песочные часы",
-    "src": "music/07-pugacheva-pesochnye-chasy.mp3",
+    "title": "Часы",
+    "src": "music/07-pugacheva-chasy.mp3",
     "color": "#A8466E"
   }
 ];

@@ -244,6 +244,35 @@ a{color:inherit}
 .radio .txt{min-width:0}
 .radio .who{font:.78cqw/1.25 var(--mono); color:#6b5434; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .radio .what{font:1.25cqw/1.15 var(--hand); color:var(--pen); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.radio .vol-row{grid-column:1/-1; display:flex; align-items:center; gap:.5cqw; font:.72cqw/1 var(--mono); color:#6b5434}
+.radio .vol-row input{flex:1; min-width:0}
+input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
+.records{position:relative; padding:44px 0 0}
+.shelf-head{display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap; color:var(--cream); margin-bottom:6px}
+.shelf-head h2{margin:0}
+.vol-big{display:flex; align-items:center; gap:12px; font-size:16px; color:#d9c9a4}
+.vol-big input{width:min(240px,50vw); height:22px}
+.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; padding:26px 6px 6px;
+  scrollbar-width:thin; scrollbar-color:#6E3B1F transparent;
+  background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 158px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 172px/100% 10px no-repeat}
+.lp{flex:0 0 auto; width:140px; scroll-snap-align:start; border:0; background:none; padding:0 0 4px; cursor:pointer; text-align:left; color:var(--cream)}
+.lp-art{position:relative; display:block; width:132px; height:132px; margin-bottom:22px}
+.lp-disc{position:absolute; top:5px; left:5px; width:122px; height:122px; border-radius:50%;
+  background:radial-gradient(circle, #ddd6c6 0 3%, var(--c) 3.5% 30%, #0e0e0e 31%), repeating-radial-gradient(circle, #121212 0 2px, #222 2px 3px);
+  box-shadow:0 4px 10px rgba(0,0,0,.5); transform:translateX(12px); transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+.lp-disc::after{content:""; position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 30deg, transparent 0 10%, rgba(255,255,255,.15) 14%, transparent 20% 55%, rgba(255,255,255,.1) 66%, transparent 72%)}
+.lp-sleeve{position:absolute; inset:0; border-radius:3px; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; padding:8px 9px 9px;
+  background:linear-gradient(135deg,#dccaa3,#bca576); color:#2a1c10; box-shadow:0 6px 14px rgba(0,0,0,.45)}
+.lp-sleeve::before{content:""; position:absolute; left:0; right:0; top:0; height:22%; background:var(--c); opacity:.9}
+.lp-sleeve::after{content:"33⅓"; position:absolute; right:8px; top:5px; font:11px/1 var(--mono); color:rgba(255,255,255,.85)}
+.lp-sleeve b{position:relative; z-index:1; font:400 19px/1 var(--hand); color:#22357a; transform:rotate(-3deg); transform-origin:left bottom;
+  text-shadow:0 0 .5px rgba(34,53,122,.6); margin-bottom:5px}
+.lp-sleeve i{position:relative; z-index:1; font:normal 14px/1 var(--hand); color:#3b4f8f; transform:rotate(-2deg); transform-origin:left bottom; opacity:.9}
+.lp:hover .lp-disc{transform:translateX(26px)}
+.lp.on .lp-disc{transform:translateX(38px)}
+.lp.on.playing .lp-disc{animation:lpSpin 1.8s linear infinite}
+@keyframes lpSpin{from{transform:translateX(38px) rotate(0)}to{transform:translateX(38px) rotate(360deg)}}
+.lp.on .lp-sleeve{outline:3px solid #e3c98f; outline-offset:3px}
 .rec{position:absolute; inset:0; transition:transform .45s cubic-bezier(.55,0,.8,.3), opacity .45s}
 .rec.out{transform:translate(-150%,-20%) rotate(-50deg); opacity:0}
 .rec.from{transition:none; transform:translate(150%,-20%) rotate(50deg); opacity:0}
@@ -328,6 +357,8 @@ a{color:inherit}
   .radio{width:60%}
   .radio .who{font-size:2.3cqw}
   .radio .what{font-size:3.7cqw}
+  .radio .vol-row{font-size:2.2cqw; gap:1.4cqw}
+  input.vol{height:24px}
 }
 
 /* ================= CONTENT ================= */
@@ -406,25 +437,30 @@ p{margin:0 0 1em}
 .close-case::before{content:""; width:14px; height:14px; border:2px solid currentColor; border-radius:2px;
   background:linear-gradient(currentColor,currentColor) 50% 45%/60% 2px no-repeat}
 .close-case:active{transform:translateY(2px); box-shadow:0 1px 0 #4a0f13}
-.leaf.right{perspective:2400px}
-.fcover{position:absolute; inset:-8px -8px -8px 0; z-index:30; transform-origin:0 50%; transform-style:preserve-3d; display:none; pointer-events:none}
-.fcover .front,.fcover .back{position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:2px 6px 6px 2px}
-.fcover .front{display:flex; flex-direction:column; align-items:flex-start; gap:14px; padding:clamp(28px,5vw,56px); color:#3b2a1c;
-  background:var(--kraft); background-image:linear-gradient(160deg, rgba(255,255,255,.2), transparent 55%), repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
-  box-shadow:inset 6px 0 10px -4px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.4)}
-.fcover .org{font:14px/1.3 var(--mono); letter-spacing:.12em; text-transform:none; opacity:.8}
-.fcover .no{font:400 clamp(34px,5vw,56px)/1 var(--display); margin-top:auto}
-.fcover .who{font:22px/1.3 var(--mono); border-bottom:2px solid rgba(59,42,28,.6); padding:0 4px 4px; min-width:70%}
-.fcover .dates{font:15px/1.7 var(--mono); margin-bottom:auto}
-.fcover .tie{position:absolute; right:-4px; top:50%; width:44px; height:8px; margin-top:-4px; background:#ece4d0; border-radius:2px; box-shadow:0 1px 2px rgba(0,0,0,.3)}
-.fcover .back{transform:rotateY(180deg); background:#b89868; background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
-  box-shadow:inset -6px 0 10px -4px rgba(0,0,0,.3)}
-.flip-sheet{position:absolute; inset:0; z-index:25; display:none; transform-origin:0 50%; pointer-events:none;
-  background:var(--paper); -webkit-backface-visibility:hidden; backface-visibility:hidden; box-shadow:2px 0 6px rgba(0,0,0,.18);
+.kraft{background-color:var(--kraft)}
+.spread{display:grid; grid-template-columns:1fr 1fr; perspective:2600px; position:relative}
+.board{position:relative; background:var(--kraft);
+  background-image:linear-gradient(160deg, rgba(255,255,255,.16), transparent 55%), repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px)}
+.board.back{grid-column:2; grid-row:1; padding:16px 16px 16px 10px; border-radius:0 6px 6px 0; perspective:2200px;
+  box-shadow:14px 24px 40px rgba(0,0,0,.45), inset 12px 0 16px -12px rgba(0,0,0,.45)}
+.board.cover{grid-column:1; grid-row:1; z-index:2; background:none; transform-origin:100% 50%; transform-style:preserve-3d}
+.board.cover .face{-webkit-backface-visibility:hidden; backface-visibility:hidden}
+.board.cover .inside{height:100%; padding:16px 10px 16px 16px; border-radius:6px 0 0 6px; background:inherit;
+  background:var(--kraft); background-image:linear-gradient(200deg, rgba(255,255,255,.16), transparent 55%), repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
+  box-shadow:-14px 24px 40px rgba(0,0,0,.45), inset -12px 0 16px -12px rgba(0,0,0,.45)}
+.board.cover .outside{position:absolute; inset:0; transform:rotateY(180deg); border-radius:0 6px 6px 0;
+  display:flex; flex-direction:column; align-items:flex-start; gap:14px; padding:clamp(28px,5vw,56px); color:#3b2a1c;
+  background:#c9a978; background-image:linear-gradient(160deg, rgba(255,255,255,.22), transparent 55%), repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
+  box-shadow:inset 12px 0 16px -12px rgba(0,0,0,.4), 0 18px 40px rgba(0,0,0,.45)}
+.outside .org{font:14px/1.3 var(--mono); letter-spacing:.12em; opacity:.8}
+.outside .no{font:400 clamp(34px,4.6vw,56px)/1 var(--display); margin-top:auto}
+.outside .who{font:21px/1.3 var(--mono); border-bottom:2px solid rgba(59,42,28,.6); padding:0 4px 4px; min-width:70%}
+.outside .dates{font:15px/1.7 var(--mono); margin-bottom:auto}
+.outside .tie{position:absolute; right:-6px; top:50%; width:46px; height:8px; margin-top:-4px; background:#ece4d0; border-radius:2px; box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.flip-sheet{position:absolute; inset:16px 16px 16px 10px; z-index:5; display:none; transform-origin:0 50%; pointer-events:none;
+  background:var(--paper); box-shadow:2px 0 6px rgba(0,0,0,.18);
   background-image:repeating-linear-gradient(transparent 0 27px, rgba(43,74,139,.08) 27px 28px)}
-.spread{display:grid; grid-template-columns:minmax(260px,.85fr) 1.4fr; background:var(--kraft); padding:18px; border-radius:6px;
-  box-shadow:0 24px 50px rgba(0,0,0,.5); gap:18px}
-.leaf{background:var(--paper); padding:32px 30px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.leaf{background:var(--paper); padding:32px 30px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.2); height:100%}
 .leaf.left{transform:rotate(-.5deg)}
 .formhead{font-family:var(--mono); font-size:14px; color:var(--ink-soft); display:flex; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:6px; margin-bottom:16px}
 .mug{position:relative; width:72%; margin:8px auto 22px; background:#f6f0e2; padding:8px 8px 14px; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(1.5deg)}
@@ -495,6 +531,11 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 
 @media (max-width:860px){
   .intro .grid,.night .pair,.spread,.quotes{grid-template-columns:1fr}
+  .board.back{grid-column:1; grid-row:2; border-radius:0 0 6px 6px; padding-left:16px; box-shadow:0 24px 40px rgba(0,0,0,.45), inset 0 12px 16px -12px rgba(0,0,0,.4)}
+  .board.cover{transform-origin:50% 50%}
+  .board.cover .inside{border-radius:6px 6px 0 0; padding-right:16px; box-shadow:0 0 30px rgba(0,0,0,.35)}
+  .board.cover .outside{border-radius:6px}
+  .flip-sheet{inset:16px}
   .night .side + .side{border-left:0; border-top:2px dashed rgba(35,32,27,.25)}
   .links{columns:1}
   .margin-notes{float:none; width:auto; margin:0 0 20px}
@@ -509,7 +550,9 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   .night .side{padding:22px 18px}
   .case-bar{justify-content:stretch}
   .case-bar .close-case{width:100%; justify-content:center}
-  .fcover .who{font-size:18px}
+  .outside .who{font-size:18px}
+  .board.back{padding:10px}
+  .board.cover .inside{padding:10px}
   .btn{width:100%; justify-content:center}
   .brand{display:none}
   .bar nav{margin:0 auto; gap:0}
@@ -776,6 +819,7 @@ body.splash-on{overflow:hidden}
         <div class="txt" aria-live="polite"><div class="who" id="nowWho"></div><div class="what" id="nowWhat"></div></div>
         <button type="button" id="prevBtn" aria-label="Предыдущая пластинка">‹</button>
         <button type="button" id="nextBtn" aria-label="Следующая пластинка">›</button>
+        <label class="vol-row"><span aria-hidden="true">тише</span><input type="range" class="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Громкость"><span aria-hidden="true">громче</span></label>
       </div>
 
       <div class="servant" aria-hidden="true">
@@ -811,6 +855,16 @@ body.splash-on{overflow:hidden}
         </div>
         <div class="feet"><b></b><b></b></div>
       </div>
+    </div>
+  </section>
+
+  <section class="records" aria-labelledby="shelfTitle">
+    <div class="wrap">
+      <div class="shelf-head">
+        <h2 id="shelfTitle">Пластинки</h2>
+        <label class="vol-big"><span>Громкость</span><input type="range" class="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Громкость"></label>
+      </div>
+      <div class="shelf-row" id="shelfRow" role="list"></div>
     </div>
   </section>
 
@@ -992,9 +1046,7 @@ body.splash-on{overflow:hidden}
   /* ---------- intro: the record before the room ---------- */
   const introEl = document.getElementById('intro');
   const bootTV = () => document.getElementById('screen').classList.add('booting');
-  let seen = false;
-  try { seen = sessionStorage.getItem('lihie-intro') === '1'; } catch (e) {}
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || seen){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
     introEl.remove(); setTimeout(bootTV, 0);
   } else {
     introEl.hidden = false; document.body.classList.add('splash-on');
@@ -1012,7 +1064,6 @@ body.splash-on{overflow:hidden}
     let done = false;
     const finish = () => {
       if (done) return; done = true;
-      try { sessionStorage.setItem('lihie-intro', '1'); } catch (e) {}
       introEl.classList.add('leave'); document.body.classList.remove('splash-on');
       setTimeout(bootTV, 250);
       setTimeout(() => { grainOn = false; introEl.remove(); }, 900);
@@ -1031,26 +1082,29 @@ body.splash-on{overflow:hidden}
   <div class="wrap dossier">
     <div class="case-bar"><button class="close-case" type="button">Закрыть дело</button></div>
     <div class="spread">
-      <div class="leaf left">
-        <div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
-        <div class="mug"><span class="clip"></span><img src="${b.photo}" alt="${b.alt}" style="object-position:${b.pos}">${stampSvg(b)}</div>
-        <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>
-      </div>
-      <div class="leaf right">
-        <h1>${b.name}</h1>
-        <p class="sub">${b.sub}</p>
-        <div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>
-        <div class="prose">${list(b.prose, p => `<p>${p}</p>`)}</div>
+      <div class="board back">
+        <div class="leaf right">
+          <h1>${b.name}</h1>
+          <p class="sub">${b.sub}</p>
+          <div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>
+          <div class="prose">${list(b.prose, p => `<p>${p}</p>`)}</div>
+        </div>
         <div class="flip-sheet" aria-hidden="true"></div><div class="flip-sheet" aria-hidden="true"></div>
-        <div class="fcover" aria-hidden="true">
-          <div class="front">
-            <span class="org">${b.unit}</span>
-            <span class="no">Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}</span>
-            <span class="who">${b.fields[0][1]}</span>
-            <span class="dates">Начато: ноябрь 1996 г.<br>Окончено: ______________</span>
-            <i class="tie"></i>
+      </div>
+      <div class="board cover">
+        <div class="face inside">
+          <div class="leaf left">
+            <div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
+            <div class="mug"><span class="clip"></span><img src="${b.photo}" alt="${b.alt}" style="object-position:${b.pos}">${stampSvg(b)}</div>
+            <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>
           </div>
-          <div class="back"></div>
+        </div>
+        <div class="face outside" aria-hidden="true">
+          <span class="org">${b.unit}</span>
+          <span class="no">Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}</span>
+          <span class="who">${b.fields[0][1]}</span>
+          <span class="dates">Начато: ноябрь 1996 г.<br>Окончено: ______________</span>
+          <i class="tie"></i>
         </div>
       </div>
     </div>
@@ -1107,44 +1161,59 @@ body.splash-on{overflow:hidden}
 
   /* ---------- the case folder: opens on arrival, closes on "Закрыть дело" ---------- */
   const easeBook = 'cubic-bezier(.45,.05,.25,1)';
+  const narrow = () => matchMedia('(max-width:860px)').matches;
+  const parts = page => ({
+    sp: page.querySelector('.spread'), cover: page.querySelector('.board.cover'), back: page.querySelector('.board.back'),
+    sheets: [...page.querySelectorAll('.flip-sheet')], below: [...page.querySelectorAll('.block, .case-bar.bottom')]
+  });
   function resetFolder(page){
-    page.querySelectorAll('.fcover,.flip-sheet').forEach(el => { el.getAnimations({subtree:true}).forEach(a => a.cancel()); el.style.display = 'none'; });
-    page.querySelectorAll('.leaf.left,.spread,.dossier').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+    const {sp, cover, back, sheets, below} = parts(page);
+    [sp, cover, back, ...sheets, ...below].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+    sheets.forEach(sh => sh.style.display = 'none');
   }
   async function openFolder(page){
     if (reduce) return;
     resetFolder(page);
-    const cover = page.querySelector('.fcover'), left = page.querySelector('.leaf.left');
-    const sheets = [...page.querySelectorAll('.flip-sheet')];
-    cover.style.display = 'block'; sheets.forEach(sh => sh.style.display = 'block');
-    page.querySelector('.spread').animate([{transform:'translateY(18px)', opacity:.0}, {transform:'none', opacity:1}], {duration:350, easing:'ease-out'});
-    left.animate([{opacity:0, transform:'rotate(-.5deg) translateX(12px)'}, {opacity:0, offset:.55}, {opacity:1, transform:'rotate(-.5deg)'}], {duration:1150, easing:'ease-out'});
-    const flip = cover.animate([{transform:'rotateY(0deg)'}, {transform:'rotateY(-180deg)'}], {duration:950, delay:250, easing:easeBook, fill:'forwards'});
-    await flip.finished.catch(() => {});
-    if (!page.classList.contains('on')) return resetFolder(page);
-    // fade only the inner face: fading the 3D container itself would flatten it and flash the mirrored front
-    await cover.querySelector('.back').animate([{opacity:1}, {opacity:0}], {duration:220, fill:'forwards'}).finished.catch(() => {});
-    cover.style.display = 'none'; flip.cancel();
-    // a couple of pages flutter over before the text settles
-    await Promise.all(sheets.map((sh, k) => sh.animate(
-      [{transform:'rotateY(0deg)', opacity:1}, {transform:'rotateY(-150deg)', opacity:1, offset:.85}, {transform:'rotateY(-178deg)', opacity:0}],
-      {duration:520, delay:k * 140, easing:'cubic-bezier(.4,0,.3,1)', fill:'forwards'}).finished.catch(() => {})));
-    resetFolder(page);
+    const {sp, cover, back, sheets, below} = parts(page), n = narrow();
+    const shut = n ? 'translateX(0)' : 'translateX(-25%)';     // a closed folder sits centred
+    const T = 420, OPEN = 1150;
+    sheets.forEach(sh => sh.style.display = 'block');
+    const anims = [
+      // the closed folder is laid on the desk
+      sp.animate([{transform:shut + ' translateY(40px)', opacity:0}, {transform:shut, opacity:1}], {duration:T, easing:'ease-out', fill:'both'}),
+      // the cover swings open on its spine, carrying the card pinned inside it
+      cover.animate([{transform:'rotateY(-180deg)'}, {transform:'rotateY(0deg)'}], {duration:OPEN, delay:T + 120, easing:easeBook, fill:'both'}),
+      sp.animate([{transform:shut}, {transform:'translateX(0)'}], {duration:OPEN, delay:T + 120, easing:easeBook, fill:'forwards'}),
+      // pages turn over once the cover is out of the way
+      ...sheets.map((sh, k) => sh.animate(
+        [{transform:'rotateY(0deg)', opacity:1}, {transform:'rotateY(-120deg)', opacity:1, offset:.75}, {transform:'rotateY(-160deg)', opacity:0}],
+        {duration:620, delay:T + OPEN - 250 + k * 170, easing:'cubic-bezier(.4,0,.3,1)', fill:'both'})),
+      // the rest of the case appears last
+      ...below.map((el, k) => el.animate([{opacity:0, transform:'translateY(18px)'}, {opacity:1, transform:'none'}],
+        {duration:450, delay:T + OPEN + 250 + k * 90, easing:'ease-out', fill:'both'}))
+    ];
+    if (n) anims.push(back.animate([{opacity:0, transform:'translateY(-24px)'}, {opacity:1, transform:'none'}], {duration:500, delay:T + OPEN - 300, easing:'ease-out', fill:'both'}));
+    await Promise.all(anims.map(a => a.finished.catch(() => {})));
+    if (page.classList.contains('on')) resetFolder(page);
   }
+
   let closing = false;
   async function closeFolder(page){
     if (closing) return; closing = true;
     if (!reduce){
       resetFolder(page);
       if (scrollY > 80) scrollTo({top:0});
-      const cover = page.querySelector('.fcover'), left = page.querySelector('.leaf.left');
-      cover.style.display = 'block';
-      left.animate([{opacity:1}, {opacity:1, offset:.4}, {opacity:0}], {duration:900, fill:'forwards'});
-      cover.querySelector('.back').animate([{opacity:0}, {opacity:1}], {duration:160, fill:'forwards'});
-      await cover.animate([{transform:'rotateY(-180deg)'}, {transform:'rotateY(0deg)'}],
-        {duration:950, easing:easeBook, fill:'forwards'}).finished.catch(() => {});
-      await page.querySelector('.dossier').animate([{transform:'none', opacity:1}, {transform:'translateY(24px) scale(.97)', opacity:0}],
-        {duration:320, easing:'ease-in', fill:'forwards'}).finished.catch(() => {});
+      const {sp, cover, back, below} = parts(page), n = narrow();
+      const shut = n ? 'translateX(0)' : 'translateX(-25%)';
+      const SHUT = 1000;
+      const anims = [
+        ...below.map(el => el.animate([{opacity:1}, {opacity:0}], {duration:220, fill:'forwards'})),
+        cover.animate([{transform:'rotateY(0deg)'}, {transform:'rotateY(-180deg)'}], {duration:SHUT, delay:180, easing:easeBook, fill:'both'}),
+        sp.animate([{transform:'translateX(0)', opacity:1}, {transform:shut, opacity:1, offset:.72}, {transform:shut + ' translateY(46px)', opacity:0}],
+          {duration:SHUT + 420, delay:180, easing:'ease-in-out', fill:'both'})
+      ];
+      if (n) anims.push(back.animate([{opacity:1}, {opacity:0}], {duration:300, delay:150, fill:'forwards'}));
+      await Promise.all(anims.map(a => a.finished.catch(() => {})));
     }
     location.hash = '#/bots';
     setTimeout(() => { resetFolder(page); closing = false; }, 50);
@@ -1223,7 +1292,26 @@ body.splash-on{overflow:hidden}
   const $ = id => document.getElementById(id);
   const audio = new Audio(); audio.preload = 'none';
   const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
-  let ti = 0, playing = false, swapping = false;
+  let ti = 0, playing = false, swapping = false, unlocked = false;
+
+  // the shelf: one sleeve per record
+  const shelf = $('shelfRow');
+  shelf.innerHTML = TRACKS.map((t, i) => `<button class="lp" type="button" role="listitem" data-i="${i}" style="--c:${t.color}" aria-label="${t.artist}, «${t.title}»">
+    <span class="lp-art" aria-hidden="true"><span class="lp-disc"></span><span class="lp-sleeve"><b>${t.title}</b><i>${t.artist}</i></span></span></button>`).join('');
+  const lps = [...shelf.children];
+
+  // volume (iPhone Safari ignores page volume: there the sliders are hidden and the phone buttons do the job)
+  const vols = [...document.querySelectorAll('input.vol')];
+  let vol = .8;
+  try { const v = parseFloat(localStorage.getItem('lihie-vol')); if (v >= 0 && v <= 1) vol = v; } catch (e) {}
+  audio.volume = .5;
+  const volWorks = Math.abs(audio.volume - .5) < .01;
+  audio.volume = vol;
+  if (!volWorks) document.querySelectorAll('.vol-row, .vol-big').forEach(el => el.hidden = true);
+  vols.forEach(v => { v.value = vol; v.addEventListener('input', () => {
+    vol = +v.value; audio.volume = vol; vols.forEach(o => { if (o !== v) o.value = vol; });
+    try { localStorage.setItem('lihie-vol', vol); } catch (e) {}
+  }); });
 
   function label(){
     const t = TRACKS[ti]; if (!t) return;
@@ -1240,6 +1328,7 @@ body.splash-on{overflow:hidden}
     sleeve.style.setProperty('--next', next.color || '#8d7650');
     sleeve.setAttribute('aria-label', 'Следующая пластинка: ' + next.artist + ', «' + next.title + '»');
     player.setAttribute('aria-label', 'Проигрыватель: ' + t.artist + ', «' + t.title + '». ' + (playing ? 'Остановить' : 'Поставить'));
+    lps.forEach((b, i) => { b.classList.toggle('on', i === ti); b.classList.toggle('playing', i === ti && playing); b.setAttribute('aria-current', i === ti ? 'true' : 'false'); });
   }
   function ui(){
     player.classList.toggle('playing', playing);
@@ -1248,36 +1337,49 @@ body.splash-on{overflow:hidden}
     ppBtn.setAttribute('aria-label', playing ? 'Остановить' : 'Поставить пластинку');
     label();
   }
-  async function play(){
+  function load(i){ if (audio.dataset.i !== String(i)){ audio.src = TRACKS[i].src; audio.dataset.i = i; } }
+  // phones only allow sound that starts from a tap; a silent play+pause inside the tap unlocks the player for later
+  function unlock(i){
+    if (unlocked) return; unlocked = true;
+    load(i); const p = audio.play(); audio.pause(); if (p) p.catch(() => {});
+  }
+  function play(){
     if (!TRACKS.length) return;
-    const t = TRACKS[ti];
-    if (audio.dataset.i !== String(ti)){ audio.src = t.src; audio.dataset.i = ti; }
-    playing = true; ui();
-    // start right inside the tap: iPhone and Android only allow sound that starts from a user gesture
+    load(ti); playing = true; ui();
     audio.play().catch(() => {});
   }
   function stop(){ playing = false; audio.pause(); ui(); }
-  async function change(dir){
-    if (swapping || TRACKS.length < 2) return;
+  async function swapTo(next, autoplay){
+    if (swapping || !TRACKS.length) return;
+    if (next === ti){ if (autoplay && !playing) play(); return; }
     swapping = true;
-    const was = playing;
-    if (was){ stop(); await wait(700); }  // needle goes back to the rest
+    const was = playing || autoplay;
+    if (playing){ stop(); await wait(700); }  // needle goes back to the rest
     rec.classList.add('out'); await wait(450);
-    ti = (ti + dir + TRACKS.length) % TRACKS.length;
-    label();
+    ti = next; label();
     rec.classList.remove('out'); rec.classList.add('from'); void rec.offsetWidth;
     rec.classList.remove('from'); rec.classList.add('back'); await wait(520);
     rec.classList.remove('back');
     swapping = false;
     if (was) play();
   }
-  player.addEventListener('click', () => { if (!swapping) (playing ? stop() : play()); });
-  ppBtn.addEventListener('click', () => { if (!swapping) (playing ? stop() : play()); });
-  $('prevBtn').addEventListener('click', () => change(-1));
-  $('nextBtn').addEventListener('click', () => change(1));
-  sleeve.addEventListener('click', () => change(1));
-  audio.addEventListener('ended', () => change(1));
-  if (!TRACKS.length) document.querySelector('.radio').hidden = true;
+  const step = d => (ti + d + TRACKS.length) % TRACKS.length;
+  const toggle = () => { if (swapping) return; if (playing) stop(); else { unlocked = true; play(); } };
+  player.addEventListener('click', toggle);
+  ppBtn.addEventListener('click', toggle);
+  $('prevBtn').addEventListener('click', () => { unlock(ti); swapTo(step(-1)); });
+  $('nextBtn').addEventListener('click', () => { unlock(ti); swapTo(step(1)); });
+  sleeve.addEventListener('click', () => { unlock(ti); swapTo(step(1)); });
+  lps.forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i;
+    if (i === ti){ toggle(); return; }
+    unlock(i); swapTo(i, true);
+    // keep the room in view so the swap on the turntable is visible
+    const room = document.querySelector('.room').getBoundingClientRect();
+    if (room.bottom < innerHeight * .4) document.querySelector('.room').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  }));
+  audio.addEventListener('ended', () => swapTo(step(1), true));
+  if (!TRACKS.length){ document.querySelector('.radio').hidden = true; document.querySelector('.records').hidden = true; }
   ui();
 
   /* ---------- snow in the window ---------- */
