@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лихие</title>
+<meta name="description" content="Лихие: боты для SillyTavern в одном городе. Петербург, 1996 год.">
+<meta property="og:title" content="Лихие">
+<meta property="og:description" content="Петербург, 1996-й. Боты для SillyTavern, которые живут в одном городе.">
+<meta property="og:image" content="assets/duo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Neucha&family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Ruslan+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wall:#3E5A4B; --wall-deep:#283C33; --gold:#A08A55;
+  --carpet:#7A1C22; --orange:#C46A2A; --cream:#E7D6B0; --navy:#20304A;
+  --wood:#3A2014; --wood-hi:#6E3B1F; --wood-lo:#24130B;
+  --paper:#E9E0C8; --paper-2:#DCCFAF; --ink:#23201B; --ink-soft:#5A5144;
+  --stamp:#A8261F; --pen:#2B4A8B; --glow:#9FD3C7; --kraft:#C5A574;
+  --bar:56px;
+  --display:'Ruslan Display','PT Serif',Georgia,serif;
+  --serif:'PT Serif','Lora',Georgia,serif;
+  --mono:'PT Mono','DejaVu Sans Mono',monospace;
+  --hand:'Neucha','Comic Neue',cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font:18px/1.62 var(--serif);
+  background-color:var(--wall-deep);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='96'%3E%3Cpath d='M0 0v96M32 0v96' stroke='%23000' stroke-opacity='.12' stroke-width='1'/%3E%3Cpath d='M16 14c7 7 7 17 0 24c-7-7-7-17 0-24z' fill='%23A08A55' fill-opacity='.16'/%3E%3Cpath d='M48 62c7 7 7 17 0 24c-7-7-7-17 0-24z' fill='%23A08A55' fill-opacity='.16'/%3E%3Ccircle cx='16' cy='48' r='2.5' fill='%23A08A55' fill-opacity='.2'/%3E%3Ccircle cx='48' cy='0' r='2.5' fill='%23A08A55' fill-opacity='.2'/%3E%3Ccircle cx='48' cy='96' r='2.5' fill='%23A08A55' fill-opacity='.2'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.nw{white-space:nowrap}
+.short{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky; top:0; z-index:50; height:var(--bar);
+  display:flex; align-items:center; gap:24px; padding:0 20px;
+  background:linear-gradient(#3a2316,#241309); color:var(--cream);
+  border-bottom:2px solid #120904; box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+.brand{font-family:var(--display); font-size:21px; letter-spacing:.04em; text-decoration:none; white-space:nowrap; color:var(--cream)}
+.bar nav{display:flex; gap:4px; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+.bar nav a{
+  text-decoration:none; padding:6px 12px; border-radius:3px; font-size:16px; white-space:nowrap;
+  color:#d9c9a4;
+}
+.bar nav a:hover{background:rgba(231,214,176,.08); color:var(--cream)}
+.bar nav a[aria-current="page"]{color:var(--cream); box-shadow:inset 0 -3px 0 var(--orange)}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.on{display:block}
+
+/* ================= THE ROOM ================= */
+.room{
+  --floor:17%;
+  position:relative; overflow:hidden; border-bottom:6px solid #120904;
+  background-color:var(--wall);
+  background-image:
+    radial-gradient(ellipse 60% 70% at 50% 18%, rgba(255,196,120,.22), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='96'%3E%3Cpath d='M0 0v96M32 0v96' stroke='%23000' stroke-opacity='.10'/%3E%3Cpath d='M16 14c7 7 7 17 0 24c-7-7-7-17 0-24z' fill='%23B59C62' fill-opacity='.42'/%3E%3Cpath d='M48 62c7 7 7 17 0 24c-7-7-7-17 0-24z' fill='%23B59C62' fill-opacity='.42'/%3E%3Ccircle cx='16' cy='48' r='2.5' fill='%23B59C62' fill-opacity='.5'/%3E%3Ccircle cx='48' cy='0' r='2.5' fill='%23B59C62' fill-opacity='.5'/%3E%3Ccircle cx='48' cy='96' r='2.5' fill='%23B59C62' fill-opacity='.5'/%3E%3C/svg%3E");
+}
+.room::before{ /* vignette */
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:radial-gradient(ellipse 80% 90% at 50% 40%, transparent 55%, rgba(10,8,5,.55));
+}
+.room::after{ /* floor */
+  content:""; position:absolute; left:0; right:0; bottom:0; height:var(--floor); z-index:0;
+  border-top:10px solid #2a170d;
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.05) 40%, rgba(0,0,0,.4)),
+    repeating-linear-gradient(90deg, #5b331c 0 86px, #4a2915 86px 88px, #66391f 88px 170px, #4a2915 170px 172px, #553019 172px 260px, #4a2915 260px 262px);
+}
+.stage{
+  position:relative; z-index:2; margin:0 auto;
+  width:min(100%, calc((100svh - var(--bar)) * 16 / 9));
+  aspect-ratio:16/9; container-type:inline-size;
+}
+.stage > *{position:absolute}
+
+/* window */
+.window{left:2.5%; top:9%; width:15%; height:54%}
+.window .frame{
+  position:absolute; inset:0; background:#cfc7b4; padding:5%;
+  box-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.45), inset 0 0 0 .25cqw #b3ab97;
+}
+.window .glass{position:relative; width:100%; height:100%; overflow:hidden;
+  background:linear-gradient(#0b1626, #1b2c45 70%, #33415a);}
+.window .glass::before{ /* house across the street */
+  content:""; position:absolute; left:-4%; right:-4%; bottom:0; height:62%;
+  background:
+    linear-gradient(#e9b55f,#e9b55f) 18% 22%/9% 7% no-repeat,
+    linear-gradient(#f0c46e,#f0c46e) 70% 46%/9% 7% no-repeat,
+    linear-gradient(#d99a4e,#d99a4e) 40% 72%/9% 7% no-repeat,
+    linear-gradient(#e9b55f,#e9b55f) 88% 10%/9% 7% no-repeat,
+    #121a26;
+}
+.window .lampost{position:absolute; left:58%; bottom:0; width:4%; height:72%; background:#0a0f17}
+.window .lampost::after{content:""; position:absolute; left:-280%; top:-12%; width:660%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,190,110,.75), rgba(255,170,90,.12) 45%, transparent 70%)}
+.window canvas{position:absolute; inset:0; width:100%; height:100%}
+.window .mullion-v{position:absolute; left:50%; top:0; bottom:0; width:6%; transform:translateX(-50%); background:#cfc7b4}
+.window .mullion-h{position:absolute; left:0; right:0; top:34%; height:4%; background:#cfc7b4}
+.window .fortochka{position:absolute; left:6%; top:3%; width:38%; height:26%; border:.2cqw solid #cfc7b4}
+.window .curtain{position:absolute; top:-6%; bottom:-10%; width:30%;
+  background:repeating-linear-gradient(90deg, #2c4636 0 14%, #355540 14% 30%, #24392c 30% 44%);
+  box-shadow:0 0 1cqw rgba(0,0,0,.5)}
+.window .curtain.l{left:-14%; border-radius:0 0 40% 0}
+.window .curtain.r{right:-14%; border-radius:0 0 0 40%}
+.window .tulle{position:absolute; inset:0 18% -8% 18%;
+  background:repeating-linear-gradient(90deg, rgba(240,235,220,.10) 0 3px, rgba(240,235,220,.18) 3px 6px);
+  mix-blend-mode:screen}
+.window .sill{position:absolute; left:-8%; right:-8%; bottom:-5%; height:4%; background:#d9d2c0; box-shadow:0 .5cqw .8cqw rgba(0,0,0,.4)}
+
+/* carpet */
+.carpet{left:19%; top:4.5%; width:57%; height:62%;
+  filter:drop-shadow(0 .6cqw 1.2cqw rgba(0,0,0,.5))}
+.carpet svg{width:100%; height:100%; display:block}
+.carpet::before,.carpet::after{content:""; position:absolute; left:1%; right:1%; height:3.2%;
+  background:repeating-linear-gradient(90deg, var(--cream) 0 2px, transparent 2px 5px)}
+.carpet::before{top:-3%}
+.carpet::after{bottom:-3%}
+
+/* lamp */
+.lamp{left:47%; top:0; width:9%; height:12%; z-index:3}
+.lamp .cord{position:absolute; left:50%; top:0; width:.15cqw; height:28%; background:#1b120c}
+.lamp .shade{position:absolute; left:0; right:0; top:26%; height:56%;
+  background:linear-gradient(90deg,#9a4b1d,#e08a3c 45%,#f0a654 55%,#9a4b1d);
+  clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);}
+.lamp .fringe{position:absolute; left:-1%; right:-1%; top:80%; height:20%;
+  background:repeating-linear-gradient(90deg,#b8641f 0 2px,transparent 2px 4px)}
+.lamp .bulb{position:absolute; left:15%; right:15%; top:84%; height:60%; border-radius:50%;
+  background:radial-gradient(ellipse at 50% 0, rgba(255,214,150,.75), transparent 70%)}
+
+/* TV stand */
+.stand{left:23%; width:31%; bottom:12%; height:16.5%}
+.stand .body{position:absolute; inset:0 0 18% 0; border-radius:.3cqw;
+  background:linear-gradient(180deg,var(--wood-hi),var(--wood) 30%,var(--wood-lo));
+  box-shadow:inset 0 .2cqw 0 rgba(255,255,255,.08), 0 .6cqw 1cqw rgba(0,0,0,.5);
+  display:grid; grid-template-columns:1fr 1fr; gap:3%; padding:5% 4%}
+.stand .body span{border:.12cqw solid rgba(0,0,0,.35); border-radius:.2cqw; position:relative;
+  background:linear-gradient(100deg,rgba(255,255,255,.04),transparent 40%)}
+.stand .body span::after{content:""; position:absolute; top:44%; width:7%; height:12%; background:#c9a35a; border-radius:20%}
+.stand .body span:first-child::after{right:6%}
+.stand .body span:last-child::after{left:6%}
+.stand .leg{position:absolute; bottom:0; width:2.4%; height:24%; background:var(--wood-lo)}
+.stand .leg.l{left:6%; transform:skewX(12deg)}
+.stand .leg.r{right:6%; transform:skewX(-12deg)}
+
+/* the TV */
+.tv{left:22.5%; width:32%; bottom:28%; z-index:4}
+.tv .case{
+  position:relative; display:grid; grid-template-columns:1fr 22%; gap:3.5%;
+  padding:4.5% 4.5% 4.5% 4.5%; border-radius:1.2cqw;
+  background:
+    repeating-linear-gradient(95deg, rgba(0,0,0,.08) 0 3px, transparent 3px 9px),
+    linear-gradient(160deg,#7a4524,#4a2614 55%,#2e170b);
+  box-shadow: inset 0 .25cqw 0 rgba(255,220,180,.15), inset 0 -.4cqw .8cqw rgba(0,0,0,.4), 0 1.4cqw 2.4cqw rgba(0,0,0,.55);
+}
+.tv .bezel{padding:5%; border-radius:1.6cqw/1.8cqw; background:linear-gradient(#bfb8a7,#8d8676); box-shadow:inset 0 0 .8cqw rgba(0,0,0,.6)}
+.screen{
+  position:relative; aspect-ratio:4/3; overflow:hidden; background:#0c0f0e;
+  border-radius:11%/14%; isolation:isolate;
+  box-shadow: inset 0 0 2.4cqw rgba(0,0,0,.95);
+}
+.screen .ch{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .1s}
+.screen .ch.on{opacity:1; visibility:visible}
+.screen .ch img{width:100%; height:100%; object-fit:cover; filter:saturate(.75) contrast(1.12) brightness(.92)}
+.screen .ch::after{content:""; position:absolute; inset:0; background:linear-gradient(transparent 35%, rgba(5,8,8,.88))}
+.screen .osd{position:absolute; top:6%; left:7%; z-index:2; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
+.screen .cap{position:absolute; left:7%; right:7%; bottom:7%; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
+.screen h1,.screen .cap .t{font-family:var(--display); font-weight:400; font-size:2.5cqw; line-height:1.05; margin:0 0 .5cqw; letter-spacing:.02em}
+.screen .cap p{margin:0 0 .8cqw; font-size:1.02cqw; line-height:1.35; max-width:34ch}
+.screen .cap a{display:inline-block; font-size:1.05cqw; padding:.35cqw .8cqw; background:rgba(231,214,176,.92); color:#1c140d; text-decoration:none; border-radius:.2cqw; text-shadow:none}
+.screen .cap a:hover{background:#fff3d6}
+.screen .scan{position:absolute; inset:0; z-index:5; pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px);
+  animation:flicker 6s infinite steps(1)}
+.screen .glass{position:absolute; inset:0; z-index:6; pointer-events:none; border-radius:inherit;
+  background:
+    radial-gradient(ellipse 70% 55% at 30% 20%, rgba(255,255,255,.14), transparent 60%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55));}
+.screen canvas{position:absolute; inset:0; width:100%; height:100%; z-index:4; opacity:0; image-rendering:pixelated; pointer-events:none}
+.screen.switching canvas{opacity:.95}
+.screen .boot{position:absolute; inset:0; z-index:7; background:#e8fff6; pointer-events:none; opacity:0}
+@keyframes flicker{0%{opacity:1}48%{opacity:.86}49%{opacity:1}82%{opacity:.92}83%{opacity:1}}
+@keyframes crtOn{
+  0%{transform:scale(1,.004); filter:brightness(4)}
+  45%{transform:scale(1,.004); filter:brightness(4)}
+  70%{transform:scale(1,1.02); filter:brightness(1.6)}
+  100%{transform:scale(1,1); filter:brightness(1)}
+}
+.screen.booting .chs{animation:crtOn 1.1s cubic-bezier(.2,.7,.2,1) both}
+.chs{position:absolute; inset:0}
+
+.tv .panel{display:flex; flex-direction:column; align-items:center; gap:4cqw; padding-top:3%}
+.tv .plate{font:400 1.05cqw/1 var(--display); letter-spacing:.18em; color:#e5d3a6; background:#1a0f08; padding:.4cqw .5cqw; border-radius:.15cqw; box-shadow:inset 0 0 0 .1cqw #b8975a}
+.dial{position:relative; width:72%; aspect-ratio:1}
+.dial .knob{
+  position:absolute; inset:18%; border-radius:50%; border:0; padding:0; cursor:pointer;
+  background:radial-gradient(circle at 35% 30%, #4a4a4a, #151515 70%);
+  box-shadow:0 .3cqw .5cqw rgba(0,0,0,.6), inset 0 0 0 .25cqw #2a2a2a;
+  transition:transform .35s cubic-bezier(.3,1.6,.5,1);
+}
+.dial .knob::after{content:""; position:absolute; left:46%; top:6%; width:8%; height:38%; background:#e5d3a6; border-radius:.1cqw}
+.dial .n{position:absolute; width:1.7cqw; height:1.7cqw; margin:-.85cqw; border:0; border-radius:50%; background:none; cursor:pointer;
+  font:700 .95cqw/1.7cqw var(--mono); color:#d8c497; padding:0}
+.dial .n[aria-pressed="true"]{color:#ffe6a8; text-shadow:0 0 .5cqw #ffb84d}
+.tv .grille{width:100%; flex:1; min-height:5cqw; border-radius:.3cqw;
+  background:repeating-linear-gradient(0deg, #1b0f07 0 .35cqw, #6a3b1f .35cqw .7cqw)}
+.tv .note{position:absolute; left:-4%; top:-9%; z-index:5; transform:rotate(-5deg);
+  background:#f4ecc9; color:var(--pen); font:1.25cqw/1.1 var(--hand); padding:.45cqw .8cqw;
+  box-shadow:0 .25cqw .5cqw rgba(0,0,0,.35)}
+.tv .note::before{content:""; position:absolute; left:40%; top:-.5cqw; width:2.8cqw; height:.9cqw; background:rgba(230,224,200,.75); transform:rotate(3deg)}
+.tv .feet{display:flex; justify-content:space-between; padding:0 12%}
+.tv .feet i{width:6%; height:.6cqw; background:#1a0f08; border-radius:0 0 .2cqw .2cqw}
+
+/* coffee table + record player */
+.table{left:58.5%; width:17%; bottom:12%; height:13%}
+.table .top{position:absolute; left:0; right:0; top:0; height:16%; border-radius:.2cqw;
+  background:linear-gradient(var(--wood-hi),var(--wood)); box-shadow:0 .5cqw .8cqw rgba(0,0,0,.45)}
+.table .leg{position:absolute; top:14%; bottom:0; width:3.5%; background:var(--wood-lo)}
+.table .leg.l{left:10%; transform:skewX(10deg)} .table .leg.r{right:10%; transform:skewX(-10deg)}
+.sleeve{left:56.6%; bottom:12.4%; width:7%; aspect-ratio:1; transform:rotate(-8deg); transform-origin:bottom left;
+  background:linear-gradient(135deg,#d7c39b,#b8a072); border-radius:.15cqw; box-shadow:0 .4cqw .8cqw rgba(0,0,0,.5)}
+.sleeve::after{content:""; position:absolute; inset:30%; border-radius:50%; background:#8d7650; box-shadow:inset 0 0 .3cqw rgba(0,0,0,.5)}
+
+.player{left:59.5%; width:15%; bottom:25%; z-index:4; cursor:pointer; border:0; padding:0; background:none}
+.player .deck{
+  position:relative; width:100%; aspect-ratio:1.25/1; border-radius:.4cqw;
+  transform:perspective(40cqw) rotateX(52deg); transform-origin:50% 100%;
+  background:linear-gradient(145deg,#d6d2c8,#a9a499);
+  box-shadow:inset 0 0 0 .5cqw #5a3119, inset 0 0 0 .6cqw #2a170d;
+}
+.platter{position:absolute; left:6%; top:7%; width:66%; aspect-ratio:1; border-radius:50%;
+  background:#2b2b2b; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.55)}
+.disc{position:absolute; inset:2%; animation:spin 1.8s linear infinite; animation-play-state:paused}
+.player.playing .disc{animation-play-state:running}
+.sheen{position:absolute; inset:2%; border-radius:50%; pointer-events:none;
+  background:conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.16) 13%, transparent 19% 50%, rgba(255,255,255,.12) 63%, transparent 69%);
+  -webkit-mask:radial-gradient(circle, transparent 37%, #000 38%); mask:radial-gradient(circle, transparent 37%, #000 38%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.arm{position:absolute; right:7%; top:6%; width:12%; height:84%; transform-origin:50% 7%; transform:rotate(4deg);
+  transition:transform .9s cubic-bezier(.4,0,.2,1)}
+.player.playing .arm{transform:rotate(27deg)}
+.arm svg{width:100%; height:100%; overflow:visible}
+.player .front{position:relative; height:1.7cqw; margin-top:-.1cqw; border-radius:0 0 .3cqw .3cqw;
+  background:linear-gradient(#5a3119,#2a170d); display:flex; align-items:center; justify-content:space-between; padding:0 6%;
+  font:.7cqw/1 var(--mono); color:#d8c497; letter-spacing:.1em}
+.player .led{width:.6cqw; height:.6cqw; border-radius:50%; background:#4a1410}
+.player.playing .led{background:#ff4a2e; box-shadow:0 0 .6cqw #ff6a3a}
+.player .hint{position:absolute; left:0; right:0; top:calc(100% + .8cqw); text-align:center; font:1.15cqw/1.2 var(--hand); color:#f4ecc9; opacity:.85}
+
+/* servant */
+.servant{right:2%; width:20.5%; bottom:12%; height:75%; z-index:3}
+.servant .sv{position:absolute; inset:0 0 3% 0; display:flex; flex-direction:column;
+  background:linear-gradient(90deg,#2a160b,#5a311a 12%,#3d2010 50%,#5a311a 88%,#2a160b);
+  border-radius:.3cqw .3cqw .2cqw .2cqw; box-shadow:0 1cqw 2cqw rgba(0,0,0,.55); padding:4% 5% 5%}
+.servant .cornice{position:absolute; left:-2%; right:-2%; top:-1.2%; height:2.4%; background:linear-gradient(#6e3b1f,#2a160b); border-radius:.2cqw}
+.servant .glasspart{position:relative; flex:0 0 58%; display:grid; grid-template-rows:1fr 1fr; overflow:hidden;
+  background:linear-gradient(180deg,#1a120d,#2a1d14); box-shadow:inset 0 0 1.5cqw rgba(0,0,0,.8)}
+.servant .shelf{position:relative; border-bottom:.35cqw solid #c9c2b0; display:flex; align-items:flex-end; justify-content:space-around; padding:0 4%}
+.servant .shelf svg{width:100%; height:86%; display:block}
+.servant .doors{position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; pointer-events:none}
+.servant .doors i{border:.35cqw solid #4a2814; box-shadow:inset 0 0 0 .1cqw rgba(255,255,255,.08);
+  background:linear-gradient(115deg, rgba(255,255,255,.10) 0 18%, transparent 22% 60%, rgba(255,255,255,.06) 64% 70%, transparent 74%)}
+.servant .glint{position:absolute; top:-20%; bottom:-20%; width:18%; left:-30%; pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent); transform:skewX(-18deg);
+  animation:glint 9s ease-in-out infinite 2s}
+@keyframes glint{0%,80%{left:-30%}100%{left:130%}}
+.servant .photo{position:absolute; right:10%; bottom:5%; width:26%; aspect-ratio:3/4; transform:rotate(4deg);
+  background:#f2ead7; padding:4% 4% 9%; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.6)}
+.servant .photo img{width:100%; height:100%; object-fit:cover; object-position:30% 30%; filter:grayscale(1) sepia(.35) contrast(1.1)}
+.servant .mid{flex:0 0 7%; margin:4% 0; background:linear-gradient(#4a2814,#2a160b); border-radius:.15cqw; box-shadow:inset 0 .1cqw 0 rgba(255,255,255,.1)}
+.servant .lower{flex:1; display:grid; grid-template-columns:1fr 1fr; gap:4%}
+.servant .lower i{position:relative; border-radius:.2cqw; background:linear-gradient(100deg,#5a311a,#3a1f0f 60%,#4e2a15);
+  box-shadow:inset 0 0 0 .15cqw rgba(0,0,0,.45), inset .2cqw .2cqw .4cqw rgba(255,255,255,.06)}
+.servant .lower i::after{content:""; position:absolute; top:12%; width:5%; height:22%; background:#c9a35a; border-radius:.2cqw}
+.servant .lower i:first-child::after{right:8%} .servant .lower i:last-child::after{left:8%}
+.servant .feet{position:absolute; left:8%; right:8%; bottom:0; height:3%; display:flex; justify-content:space-between}
+.servant .feet b{width:7%; background:#1a0d06}
+
+
+@media (max-width:760px){
+  .room{--floor:20%}
+  .stage{width:100%; aspect-ratio:3/4.3}
+  .window,.servant,.lamp,.sleeve{display:none}
+  .carpet{left:5%; width:90%; top:3%; height:52%}
+  .stand{left:12%; width:76%; bottom:9%; height:13%}
+  .tv{left:4%; width:92%; bottom:22%}
+  .tv .case{grid-template-columns:1fr 20%}
+  .screen h1,.screen .cap .t{font-size:6.6cqw}
+  .screen .cap p{font-size:3cqw; max-width:none}
+  .screen .cap a{font-size:3cqw; padding:1cqw 2cqw}
+  .screen .osd{font-size:6cqw}
+  .tv .plate{font-size:2.2cqw}
+  .dial .n{width:4.4cqw; height:4.4cqw; margin:-2.2cqw; font-size:2.4cqw; line-height:4.4cqw}
+  .tv .note{font-size:3.2cqw; padding:1cqw 2cqw; top:-6%}
+  .table{display:none}
+  .player{left:auto; right:4%; width:30%; bottom:2%}
+  .player .front{height:3.4cqw; font-size:1.6cqw}
+  .player .hint{display:none}
+}
+
+/* ================= CONTENT ================= */
+.wrap{max-width:1120px; margin:0 auto; padding:0 20px}
+.sheet{
+  position:relative; background:var(--paper); color:var(--ink);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(ellipse at 90% 100%, rgba(120,90,40,.12), transparent 60%);
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset, 0 18px 40px rgba(0,0,0,.45);
+  padding:clamp(24px,5vw,56px);
+}
+h2{font-family:var(--display); font-weight:400; font-size:clamp(28px,4vw,40px); line-height:1.1; margin:0 0 .5em; letter-spacing:.01em}
+h3{font-size:21px; line-height:1.3; margin:0 0 .3em}
+p{margin:0 0 1em}
+.lede{font-size:21px; line-height:1.55}
+.prose{max-width:66ch}
+.section{padding:72px 0}
+.section + .section{padding-top:0}
+.on-wall{color:var(--cream)}
+.on-wall .muted{color:#c9bc98}
+
+/* intro */
+.intro{margin-top:-6px; transform:rotate(-.4deg)}
+.intro .grid{display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:start}
+.intro .tag{font-family:var(--hand); color:var(--pen); font-size:22px; line-height:1.3; transform:rotate(-2deg); border-left:3px solid rgba(43,74,139,.35); padding-left:16px}
+.intro .tag p{margin:0 0 .8em}
+
+/* folders */
+.folders{display:grid; gap:40px}
+.folder{
+  position:relative; display:grid; grid-template-columns:38% 1fr; gap:24px; text-decoration:none; color:var(--ink);
+  background:var(--kraft);
+  background-image:linear-gradient(160deg, rgba(255,255,255,.18), transparent 50%), repeating-linear-gradient(0deg, rgba(0,0,0,.025) 0 2px, transparent 2px 5px);
+  padding:28px 26px 30px; border-radius:4px 4px 6px 6px;
+  box-shadow:0 14px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(80,55,25,.35);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.folder:hover{transform:translateY(-4px) rotate(-.4deg); box-shadow:0 22px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(80,55,25,.35)}
+.folder .ph{align-self:start; position:relative; background:#f3ecdc; padding:6px 6px 10px; transform:rotate(-2.5deg); box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.folder .ph img{aspect-ratio:3/4; object-fit:cover; width:100%; filter:sepia(.25) contrast(1.05)}
+.clip{position:absolute; top:-14px; left:22px; width:16px; height:46px; border:3px solid #9aa0a6; border-radius:10px; border-bottom-color:transparent}
+.folder .print{font-family:var(--mono); font-size:14px; line-height:1.5; color:#4a3a22}
+.folder .print .row{display:flex; gap:8px; border-bottom:1px solid rgba(74,58,34,.4); padding:4px 0}
+.folder .print .row span:first-child{min-width:68px; color:#6b5434}
+.folder .name{font-family:var(--display); font-size:30px; line-height:1.05; margin:12px 0 8px}
+.folder .say{font-size:17px; margin:0 0 14px}
+.folder .open{display:inline-block; font-weight:700; border-bottom:2px solid var(--stamp); color:var(--stamp)}
+.ties{position:absolute; bottom:-14px; left:50%; width:60px; height:26px; transform:translateX(-50%)}
+.ties::before,.ties::after{content:""; position:absolute; top:0; width:6px; height:26px; background:#e9e1cd; border-radius:2px}
+.ties::before{left:18px; transform:rotate(14deg)} .ties::after{right:18px; transform:rotate(-14deg)}
+
+/* two sides */
+.night{margin-top:40px}
+.story-kicker{font-family:var(--hand); font-size:24px; color:#e3c98f; margin:0 0 2px}
+.folders{grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr))}
+.folder.soon{background:transparent; box-shadow:none; border:2px dashed rgba(231,214,176,.35); color:var(--cream); grid-template-columns:1fr; align-content:center; min-height:240px; text-align:center}
+.folder.soon:hover{transform:none}
+.folder.soon .name{color:var(--cream)}
+.folder.soon .say{color:#c9bc98; margin:0 auto; max-width:30ch}
+.night .when{font-family:var(--mono); font-size:15px; color:#c9bc98; margin:0 0 12px}
+.night .pair{color:var(--ink); display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--paper)}
+.night .side{padding:28px 30px; position:relative}
+.night .side + .side{border-left:2px dashed rgba(35,32,27,.25)}
+.night .who{font-family:var(--hand); font-size:22px; color:var(--pen); margin:0 0 8px}
+.night blockquote{margin:0; font-size:17px; line-height:1.62}
+.night blockquote em{color:#5a3a2a}
+
+/* dossier pages */
+.dossier{padding:48px 0 80px}
+.spread{display:grid; grid-template-columns:minmax(260px,.85fr) 1.4fr; background:var(--kraft); padding:18px; border-radius:6px;
+  box-shadow:0 24px 50px rgba(0,0,0,.5); gap:18px}
+.leaf{background:var(--paper); padding:32px 30px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.leaf.left{transform:rotate(-.5deg)}
+.formhead{font-family:var(--mono); font-size:14px; color:var(--ink-soft); display:flex; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:6px; margin-bottom:16px}
+.mug{position:relative; width:72%; margin:8px auto 22px; background:#f6f0e2; padding:8px 8px 14px; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(1.5deg)}
+.mug img{aspect-ratio:3/4; object-fit:cover; width:100%}
+.fields{font-family:var(--mono); font-size:14.5px; line-height:1.45; margin:0}
+.fields div{display:grid; grid-template-columns:42% 1fr; gap:8px; padding:5px 0; border-bottom:1px dotted rgba(35,32,27,.45)}
+.fields dt{color:var(--ink-soft)}
+.fields dd{margin:0}
+.stamp{position:absolute; right:-44px; bottom:-30px; width:104px; transform:rotate(-14deg); opacity:.78; mix-blend-mode:multiply}
+.leaf.right h1{font-family:var(--display); font-weight:400; font-size:clamp(34px,5vw,54px); line-height:1.02; margin:0 0 10px}
+.leaf.right .sub{font-size:20px; color:var(--ink-soft); margin:0 0 24px}
+.margin-notes{float:right; width:34%; margin:0 -8px 16px 24px; font-family:var(--hand); color:var(--pen); font-size:20px; line-height:1.3; transform:rotate(1.5deg)}
+.margin-notes p{margin:0 0 .7em}
+.leaf .prose p{font-size:17.5px}
+
+.block{margin-top:40px}
+.quotes{display:grid; grid-template-columns:1fr 1fr; gap:16px 32px; margin:0; padding:0; list-style:none}
+.quotes li{font-size:17px; line-height:1.55; padding-left:18px; border-left:3px solid var(--carpet)}
+.links{columns:2; column-gap:40px; margin:0; padding:0; list-style:none}
+.links li{break-inside:avoid; padding:7px 0; border-bottom:1px solid rgba(35,32,27,.18); font-size:17px}
+.links b{font-weight:700}
+.starts{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px}
+.start{background:#f4eedf; padding:20px 22px 22px; box-shadow:0 3px 8px rgba(0,0,0,.18); position:relative}
+.start .t{font-family:var(--mono); font-size:13.5px; color:var(--ink-soft); margin:0 0 6px}
+.start h3{font-size:20px}
+.start p{font-size:16.5px; margin:0}
+.start.main{background:#fbf6e9; box-shadow:0 0 0 2px var(--carpet), 0 3px 8px rgba(0,0,0,.18)}
+.start .badge{position:absolute; top:-12px; right:14px; background:var(--carpet); color:var(--cream); font-size:13px; padding:2px 10px; border-radius:2px}
+.dl{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+.btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; font-size:17px;
+  padding:12px 18px; border-radius:3px; background:var(--carpet); color:var(--cream);
+  box-shadow:0 3px 0 #4a0f13, 0 6px 12px rgba(0,0,0,.25); transition:transform .1s, box-shadow .1s}
+.btn:active{transform:translateY(2px); box-shadow:0 1px 0 #4a0f13}
+.btn.alt{background:var(--navy); box-shadow:0 3px 0 #0e1626, 0 6px 12px rgba(0,0,0,.25)}
+.btn small{font-weight:400; font-size:13px; opacity:.8}
+.meta{font-size:15.5px; color:var(--ink-soft); margin-top:12px}
+
+/* city */
+.places{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:22px}
+.place{background:var(--paper); padding:22px 24px; box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.place .addr{font-family:var(--mono); font-size:13.5px; color:var(--ink-soft); margin:0 0 6px}
+.place p{font-size:16.5px; margin:0}
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px}
+.icard{background:#f2ecdc; padding:16px 18px 18px; position:relative;
+  background-image:linear-gradient(transparent 31px, rgba(168,38,31,.5) 31px 32px, transparent 32px), repeating-linear-gradient(transparent 0 25px, rgba(43,74,139,.13) 25px 26px);
+  background-position:0 0, 0 32px; box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.icard h3{font-size:18px; margin:0 0 10px; line-height:24px}
+.icard p{font-size:15.5px; line-height:26px; margin:0}
+.group-title{font-family:var(--hand); font-size:26px; color:var(--cream); margin:36px 0 14px}
+
+/* manual */
+.manual{max-width:860px; margin:0 auto}
+.manual .cover{display:flex; justify-content:space-between; align-items:baseline; border-bottom:3px double var(--ink); padding-bottom:12px; margin-bottom:28px; font-family:var(--mono); font-size:14px; color:var(--ink-soft)}
+.steps{counter-reset:s; list-style:none; padding:0; margin:0 0 36px}
+.steps li{counter-increment:s; position:relative; padding:0 0 22px 64px}
+.steps li::before{content:counter(s); position:absolute; left:0; top:-4px; width:44px; height:44px; border:2px solid var(--ink); border-radius:50%;
+  display:grid; place-items:center; font-family:var(--display); font-size:22px}
+.steps h3{margin-bottom:4px}
+.steps p{font-size:17px; margin:0}
+table.settings{width:100%; border-collapse:collapse; font-size:16.5px; margin:8px 0 28px}
+.settings td{padding:9px 10px; border-bottom:1px solid rgba(35,32,27,.25)}
+.settings td:last-child{font-family:var(--mono); text-align:right; white-space:nowrap}
+.faq dt{font-weight:700; margin-top:18px}
+.faq dd{margin:4px 0 0; font-size:17px}
+
+footer{padding:56px 20px 64px; text-align:center; color:#c9bc98; font-size:16px}
+footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; margin-bottom:8px}
+
+@media (max-width:860px){
+  .intro .grid,.night .pair,.spread,.quotes{grid-template-columns:1fr}
+  .night .side + .side{border-left:0; border-top:2px dashed rgba(35,32,27,.25)}
+  .links{columns:1}
+  .margin-notes{float:none; width:auto; margin:0 0 20px}
+  .folder{grid-template-columns:34% 1fr}
+}
+@media (max-width:520px){
+  body{font-size:17px}
+  .brand{display:none}
+  .bar nav{margin:0 auto; gap:0}
+  .bar nav a{padding:6px 8px; font-size:15.5px}
+  .long{display:none}
+  .short{display:inline}
+  .folder{grid-template-columns:1fr}
+  .folder .ph{width:60%}
+  .brand{font-size:18px}
+  .bar{gap:10px; padding:0 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important; transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#/">Лихие</a>
+  <nav aria-label="Разделы">
+    <a href="#/">Главная</a>
+    <a href="#/bots">Персонажи</a>
+    <a href="#/gorod">Город</a>
+    <a href="#/start"><span class="long">Как подключить</span><span class="short">Подключить</span></a>
+  </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<main class="page" data-route="/">
+  <section class="room" aria-label="Комната, ноябрь 1996 года">
+    <div class="stage">
+      <div class="window" aria-hidden="true">
+        <div class="frame"><div class="glass">
+          <div class="lampost"></div>
+          <canvas id="snow" width="160" height="260"></canvas>
+          <div class="mullion-v"></div><div class="mullion-h"></div><div class="fortochka"></div>
+          <div class="tulle"></div>
+        </div></div>
+        <div class="curtain l"></div><div class="curtain r"></div>
+        <div class="sill"></div>
+      </div>
+
+      <div class="carpet" aria-hidden="true">
+        <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+          <defs>
+            <pattern id="cField" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#7A1C22"/>
+              <path d="M20 4L36 20L20 36L4 20Z" fill="none" stroke="#C46A2A" stroke-width="2"/>
+              <path d="M20 13L27 20L20 27L13 20Z" fill="#20304A"/>
+              <circle cx="20" cy="20" r="2.4" fill="#E7D6B0"/>
+              <path d="M0 0L5 0L0 5ZM40 0L35 0L40 5ZM0 40L5 40L0 35ZM40 40L35 40L40 35Z" fill="#E7D6B0"/>
+            </pattern>
+            <pattern id="cBorder" width="30" height="30" patternUnits="userSpaceOnUse">
+              <rect width="30" height="30" fill="#20304A"/>
+              <path d="M15 5L25 15L15 25L5 15Z" fill="#7A1C22" stroke="#E7D6B0" stroke-width="1.5"/>
+              <path d="M15 11L19 15L15 19L11 15Z" fill="#C46A2A"/>
+              <path d="M0 15h3M27 15h3M15 0v3M15 27v3" stroke="#C46A2A" stroke-width="2"/>
+            </pattern>
+            <pattern id="cTeeth" width="12" height="8" patternUnits="userSpaceOnUse">
+              <rect width="12" height="8" fill="#E7D6B0"/><path d="M0 8L6 0L12 8Z" fill="#C46A2A"/>
+            </pattern>
+            <filter id="wool" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4"/>
+              <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0"/>
+              <feComposite in2="SourceGraphic" operator="in"/>
+            </filter>
+            <radialGradient id="cShade" cx=".5" cy=".35" r=".75">
+              <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/>
+            </radialGradient>
+          </defs>
+          <rect width="600" height="400" fill="#E7D6B0"/>
+          <rect x="5" y="5" width="590" height="390" fill="url(#cBorder)"/>
+          <rect x="35" y="35" width="530" height="330" fill="url(#cTeeth)"/>
+          <rect x="43" y="43" width="514" height="314" fill="#20304A"/>
+          <rect x="48" y="48" width="504" height="304" fill="url(#cField)"/>
+          <g stroke="#E7D6B0" stroke-width="2.5">
+            <path d="M48 48H140L48 140Z" fill="#20304A"/>
+            <path d="M552 48H460L552 140Z" fill="#20304A"/>
+            <path d="M48 352H140L48 260Z" fill="#20304A"/>
+            <path d="M552 352H460L552 260Z" fill="#20304A"/>
+          </g>
+          <g fill="#C46A2A"><path d="M66 66l12 12-12 12-12-12z"/><path d="M534 66l12 12-12 12-12-12z"/><path d="M66 310l12 12-12 12-12-12z"/><path d="M534 310l12 12-12 12-12-12z"/></g>
+          <path d="M300 82L408 150V250L300 318L192 250V150Z" fill="#20304A" stroke="#E7D6B0" stroke-width="4"/>
+          <path d="M300 104L388 158V242L300 296L212 242V158Z" fill="#7A1C22" stroke="#C46A2A" stroke-width="4"/>
+          <g transform="translate(300 200)">
+            <rect x="-38" y="-38" width="76" height="76" fill="#C46A2A"/>
+            <rect x="-38" y="-38" width="76" height="76" fill="#C46A2A" transform="rotate(45)"/>
+            <rect x="-26" y="-26" width="52" height="52" fill="#20304A" transform="rotate(45)"/>
+            <circle r="17" fill="#E7D6B0"/>
+            <path d="M0-11L11 0L0 11L-11 0Z" fill="#7A1C22"/>
+          </g>
+          <g fill="#E7D6B0"><path d="M300 62l10 10-10 10-10-10z"/><path d="M300 318l10 10-10 10-10-10z"/><path d="M172 200l10-10 10 10-10 10z"/><path d="M408 200l10-10 10 10-10 10z"/></g>
+          <rect width="600" height="400" filter="url(#wool)" opacity=".35"/>
+          <rect width="600" height="400" fill="url(#cShade)"/>
+        </svg>
+      </div>
+
+      <div class="lamp" aria-hidden="true"><div class="cord"></div><div class="shade"></div><div class="fringe"></div><div class="bulb"></div></div>
+
+      <div class="stand" aria-hidden="true"><div class="body"><span></span><span></span></div><i class="leg l"></i><i class="leg r"></i></div>
+
+      <div class="tv">
+        <div class="note" aria-hidden="true">крути ручку ↓</div>
+        <div class="case">
+          <div class="bezel">
+            <div class="screen booting" id="screen">
+              <div class="chs">
+                <div class="ch on" data-ch="title">
+                  <img src="assets/duo.webp" alt="Виктор с сигаретой у машины, рядом Лёша в шинели читает папку; во дворе за ними тело и милиция">
+                  <span class="osd" aria-hidden="true"></span>
+                  <div class="cap">
+                    <h1>Лихие</h1>
+                    <p>Петербург, <span class="nw">1996-й</span>. Боты для SillyTavern, которые живут в одном городе.</p>
+                    <a href="#files" data-scroll>Персонажи</a>
+                  </div>
+                </div>
+                <div class="ch" data-ch="city">
+                  <img src="assets/yard.webp" alt="Двор ночью: милиция над телом, соседки у подъезда">
+                  <span class="osd" aria-hidden="true"></span>
+                  <div class="cap"><p class="t">Кировский район</p><p>Двор на Зайцева, Автовский рынок, кухня у Вити. Места и люди.</p><a href="#/gorod">Посмотреть город</a></div>
+                </div>
+              </div>
+              <canvas width="120" height="90" aria-hidden="true"></canvas>
+              <div class="scan" aria-hidden="true"></div>
+              <div class="glass" aria-hidden="true"></div>
+            </div>
+          </div>
+          <div class="panel">
+            <span class="plate" aria-hidden="true">ВЕЧЕР</span>
+            <div class="dial" role="group" aria-label="Переключатель каналов">
+              <button class="knob" type="button" aria-label="Следующий канал"></button>
+              <!-- номера каналов расставляет скрипт -->
+            </div>
+            <div class="grille" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="feet" aria-hidden="true"><i></i><i></i></div>
+      </div>
+
+      <div class="table" aria-hidden="true"><div class="top"></div><i class="leg l"></i><i class="leg r"></i></div>
+      <div class="sleeve" aria-hidden="true"></div>
+
+      <button class="player playing" id="player" type="button" aria-pressed="true" aria-label="Проигрыватель: «Наутилус Помпилиус», «Крылья». Остановить или запустить пластинку">
+        <div class="deck">
+          <div class="platter">
+            <svg class="disc" viewBox="0 0 200 200" aria-hidden="true">
+              <defs><path id="lbl" d="M100,100 m-25,0 a25,25 0 1,1 50,0 a25,25 0 1,1 -50,0"/></defs>
+              <circle cx="100" cy="100" r="99" fill="#0d0d0d"/>
+              <g fill="none" stroke-width="1.4">
+                <circle cx="100" cy="100" r="94" stroke="#1e1e1e"/><circle cx="100" cy="100" r="89" stroke="#151515"/>
+                <circle cx="100" cy="100" r="84" stroke="#1e1e1e"/><circle cx="100" cy="100" r="79" stroke="#151515"/>
+                <circle cx="100" cy="100" r="72" stroke="#262626"/><circle cx="100" cy="100" r="66" stroke="#151515"/>
+                <circle cx="100" cy="100" r="60" stroke="#1e1e1e"/><circle cx="100" cy="100" r="54" stroke="#151515"/>
+                <circle cx="100" cy="100" r="47" stroke="#262626"/><circle cx="100" cy="100" r="42" stroke="#1a1a1a"/>
+              </g>
+              <circle cx="100" cy="100" r="36" fill="#B3261E"/>
+              <circle cx="100" cy="100" r="33" fill="none" stroke="#F1E6CC" stroke-width=".7"/>
+              <text font-family="PT Serif, serif" font-size="6.6" fill="#F1E6CC" letter-spacing=".9"><textPath href="#lbl">НАУТИЛУС ПОМПИЛИУС ✦ КРЫЛЬЯ ✦ 1996 ✦</textPath></text>
+              <text x="100" y="94" text-anchor="middle" font-family="PT Serif, serif" font-size="5.4" fill="#F1E6CC">Сторона 1</text>
+              <text x="100" y="112" text-anchor="middle" font-family="PT Serif, serif" font-size="8" fill="#F1E6CC">33⅓</text>
+              <circle cx="100" cy="100" r="3.2" fill="#d9d4c7"/>
+            </svg>
+            <div class="sheen"></div>
+          </div>
+          <div class="arm" aria-hidden="true">
+            <svg viewBox="0 0 20 140" preserveAspectRatio="none">
+              <circle cx="10" cy="10" r="8" fill="#3a3a3a" stroke="#9a9a9a" stroke-width="1.5"/>
+              <rect x="6" y="-8" width="8" height="10" rx="1.5" fill="#555"/>
+              <path d="M10 10V112L5 124" fill="none" stroke="#d6d6d6" stroke-width="3" stroke-linecap="round"/>
+              <rect x="0" y="120" width="10" height="16" rx="1.5" fill="#2a2a2a" transform="rotate(20 5 128)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="front" aria-hidden="true"><span>ЭПУ-1</span><span class="led"></span><span>33 / 45</span></div>
+        <span class="hint" aria-hidden="true">пластинку можно остановить</span>
+      </button>
+
+      <div class="servant" aria-hidden="true">
+        <div class="cornice"></div>
+        <div class="sv">
+          <div class="glasspart">
+            <div class="shelf">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="xMidYMax meet">
+                <g fill="rgba(210,230,240,.28)" stroke="rgba(255,255,255,.75)" stroke-width=".5">
+                  <path d="M8 14h9l-2 10h-5zM12.5 24v10M9 36h7"/>
+                  <path d="M21 14h9l-2 10h-5zM25.5 24v10M22 36h7"/>
+                  <path d="M34 14h9l-2 10h-5zM38.5 24v10M35 36h7"/>
+                  <path d="M50 4h12l3 6-3 6 3 6-3 6 3 6-2 6H50l-2-6 3-6-3-6 3-6-3-6 3-6z"/>
+                  <path d="M70 18h22l-3 12H73zM81 30v4M74 36h14"/>
+                </g>
+                <g stroke="rgba(255,255,255,.45)" stroke-width=".35"><path d="M52 10h8M52 16h8M52 22h8M52 28h8M52 34h8"/><path d="M73 22l4 8M89 22l-4 8M81 18v12"/></g>
+              </svg>
+            </div>
+            <div class="shelf">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="xMidYMax meet">
+                <circle cx="20" cy="21" r="17" fill="#efe9dc" stroke="#2f4f8f" stroke-width="2.2"/>
+                <circle cx="20" cy="21" r="12.5" fill="none" stroke="#2f4f8f" stroke-width=".7" stroke-dasharray="2 1.5"/>
+                <path d="M20 13c3 3 3 6 0 8c-3-2-3-5 0-8zM14 21c3-2 6-2 6 0c0 2-3 2-6 0zM26 21c-3-2-6-2-6 0c0 2 3 2 6 0z" fill="#2f4f8f"/>
+                <g fill="#f3efe6" stroke="#b99a5c" stroke-width=".6"><path d="M44 29h12a6 6 0 0 1-12 0zM56 30h2a2 2 0 0 1 0 4h-2"/><ellipse cx="50" cy="37" rx="8" ry="1.6"/></g>
+              </svg>
+            </div>
+            <div class="photo"><img src="assets/duo.webp" alt=""></div>
+            <div class="doors"><i></i><i></i></div>
+            <div class="glint"></div>
+          </div>
+          <div class="mid"></div>
+          <div class="lower"><i></i><i></i></div>
+        </div>
+        <div class="feet"><b></b><b></b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="section">
+      <div class="sheet intro">
+        <div class="grid">
+          <div class="prose">
+            <h2>Петербург, <span class="nw">1996-й</span></h2>
+            <p class="lede">Ларёк на каждом углу, сигареты поштучно, зарплату на Кировском заводе обещают «на днях». Город снова Петербург, но люди ещё путаются, как его называть.</p>
+            <p>По ночам во дворах находят тех, кому не повезло. «Крышу» здесь знают лучше, чем участкового, а милиция бывает честной не всегда и не до конца.</p>
+            <p>Здесь собраны боты для SillyTavern, которые живут в одном городе: те же улицы, те же люди, общие старты. Кто-то служит в милиции, кто-то платит бандитам, кто-то просто живёт этажом выше.</p>
+          </div>
+          <div class="tag" aria-label="Заметки на полях">
+            <p>Все здесь друг друга знают. Или хотя бы слышали.</p>
+            <p>Секреты открываются не сразу.</p>
+            <p>У каждого есть пустой старт, чтобы начать по-своему.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section on-wall" id="files">
+      <h2>Персонажи</h2>
+      <div class="folders" data-folders></div>
+    </section>
+
+    <section class="section on-wall">
+      <p class="story-kicker">Первая история</p>
+      <h2>Почти честные</h2>
+      <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя никогда не подписывает враньё. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
+      <p class="muted prose">У них общие старты: сцена та же, а мысли у каждого свои.</p>
+
+      <div class="night">
+        <p class="when">02:15–02:40, двор на улице Зайцева</p>
+        <div class="pair">
+          <div class="side">
+            <p class="who">Лёша</p>
+            <blockquote><p>Лёша приехал первым, как всегда. Это был его район, его дворы, его бабки у подъездов, и на трупы здесь он приезжал раньше «скорой».</p>
+            <p><em>Нож. Снизу, под рёбра, один раз. Не пьянка. Кто-то знал, куда бить. Это уже не моё. Это Витькино.</em></p></blockquote>
+          </div>
+          <div class="side">
+            <p class="who">Витя</p>
+            <blockquote><p>Тёмно-синяя «Вольво» въехала во двор почти бесшумно. Из неё выбрался очень высокий мужчина в коричневой кожанке. Посмотрел на окна, на подъезд, на следы у гаражей, на бабок. Только потом пошёл к телу.</p>
+            <p><em>Нож. Один удар, снизу, под рёбра. Не пьяная драка. Человек знал, куда бить.</em></p></blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="night">
+        <p class="when">01:30, кухня у Вити, сталинка у «Автово»</p>
+        <div class="pair">
+          <div class="side">
+            <p class="who">Витя</p>
+            <blockquote><p>Лёша играл плохо. Два раза за вечер начинал байку и бросал на середине. А Лёша байки на середине не бросал никогда.</p>
+            <p><em>Пришёл в одиннадцать. Без звонка. С бутылкой. Сидит третий час и молчит про главное. Ну-ну, Лёха. Я подожду.</em></p></blockquote>
+          </div>
+          <div class="side">
+            <p class="who">Лёша</p>
+            <blockquote><p>Лёша проигрывал третью партию подряд и знал почему: думал не о ферзе. Слова, ради которых пришёл, так и лежали у него где-то под рёбрами.</p>
+            <p>В дверь позвонили. Коротко, неуверенно. Потом ещё раз.</p></blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ================= CATALOG ================= -->
+<main class="page" data-route="/bots">
+  <div class="wrap section on-wall">
+    <h2>Персонажи</h2>
+    <p class="lede prose" style="color:var(--cream)">Все жильцы города. Откройте дело, чтобы прочитать характеристику, выбрать старт и скачать карточку.</p>
+    <div class="folders" data-folders></div>
+  </div>
+</main>
+
+<!-- личные дела персонажей собираются из bots.js -->
+<div id="botpages"></div>
+
+<!-- ================= CITY ================= -->
+<main class="page" data-route="/gorod">
+  <div class="wrap section on-wall">
+    <h2>Город</h2>
+    <p class="lede prose" style="color:var(--cream)">Питер снова Питер, и люди ещё путаются, как его называть. Сырой воздух с залива, тонированные «бэхи» во дворах, в порту по ночам что-то грузят, и никто не спрашивает что.</p>
+
+    <p class="group-title">Места</p>
+    <div class="places">
+      <article class="place"><p class="addr">ул. Зайцева, Кировский район</p><h3>Двор у гаражей</h3><p>Две пятиэтажки, гаражи, соседки в пальто поверх халатов. Здесь всё начинается.</p></article>
+      <article class="place"><p class="addr">Литейный проспект, 4</p><h3>«Большой дом»</h3><p>ГУВД. Кабинет Виктора, его отделение и его начальство, которое улыбается.</p></article>
+      <article class="place"><p class="addr">Кировский район</p><h3>Кировский ОВД</h3><p>Лёшин угрозыск: прокуренные кабинеты, дежурка, «уазики» во дворе, Гусев за стенкой.</p></article>
+      <article class="place"><p class="addr">у метро «Автово»</p><h3>Квартира Виктора</h3><p>Сталинка с низкой притолокой на кухне. Отцовские шахматы, японский видак, гитара, Найда под столом.</p></article>
+      <article class="place"><p class="addr">у метро «Автово»</p><h3>Автовский рынок</h3><p>Павильоны, ларьки, директор Кравец, который платит и боится. Чей это рынок, в районе знают все.</p></article>
+      <article class="place"><p class="addr">у метро «Автово»</p><h3>Ларёк звукозаписи</h3><p>Стеклянная будка в кассетах. Выцветшие плакаты «Кино» и «ДДТ», тетрадка с заказами.</p></article>
+      <article class="place"><p class="addr">Таллинское шоссе</p><h3>Автосервис «У Михалыча»</h3><p>Бокс из силикатного кирпича за заправкой, груда покрышек, две собаки на цепи, крепкий чай.</p></article>
+    </div>
+
+    <p class="group-title">Свои</p>
+    <div class="cards">
+      <article class="icard"><h3>Найда</h3><p>Старая служебная овчарка на пенсии. Живёт у Виктора, боится грозы, разбирается в людях.</p></article>
+      <article class="icard"><h3>Михалыч</h3><p>Бывший прапорщик их роты. Держит автосервис и чинит всё, что ездит.</p></article>
+      <article class="icard"><h3>Корнилов, Лапин, Шевчук</h3><p>Опера из отделения Виктора. Лапина за базы и память зовут Профессором.</p></article>
+      <article class="icard"><h3>Бондарь</h3><p>Молодой честный опер у Лёши. Задаёт слишком много вопросов.</p></article>
+      <article class="icard"><h3>Баба Валя</h3><p>Соседка Виктора. Пирожки, сплетни, выгуливает Найду.</p></article>
+    </div>
+
+    <p class="group-title">Начальство и прокуратура</p>
+    <div class="cards">
+      <article class="icard"><h3>Бережной</h3><p>Начальник Виктора на Литейном. Всегда улыбается, наверху у него покровители.</p></article>
+      <article class="icard"><h3>Гусев</h3><p>Майор лет сорока, Лёшин непосредственный начальник. Друг друга они не выносят.</p></article>
+      <article class="icard"><h3>Рогов</h3><p>Начальник Кировского ОВД.</p></article>
+      <article class="icard"><h3>Трофимов</h3><p>Следователь прокуратуры. Едет всегда, но не всегда вовремя: домино.</p></article>
+    </div>
+
+    <p class="group-title">По ту сторону</p>
+    <div class="cards">
+      <article class="icard"><h3>Лысый</h3><p>Хозяин района. Метит на Таллинское шоссе и давно воюет с Виктором.</p></article>
+      <article class="icard"><h3>Кот</h3><p>Правая рука Лысого, бывший мент. Виктор когда-то добился его увольнения.</p></article>
+      <article class="icard"><h3>Кравец</h3><p>Директор Автовского рынка. Платит и живёт в страхе.</p></article>
+      <article class="icard"><h3>Жора Сапог</h3><p>Хозяин бани. По четвергам нарды в парилке с Лёшей.</p></article>
+      <article class="icard"><h3>Дед Корней</h3><p>Вор старой закалки. Чай на нейтральной территории, разговоры по понятиям.</p></article>
+    </div>
+  </div>
+</main>
+
+<!-- ================= SETUP ================= -->
+<main class="page" data-route="/start">
+  <div class="wrap section">
+    <div class="sheet manual">
+      <div class="cover"><span>Руководство по эксплуатации</span><span>SillyTavern</span></div>
+      <h2>Как подключить</h2>
+      <p class="prose">Обе карточки собраны одинаково: описание на английском, речь и прозвища на русском, лорбук встроен, старты на русском.</p>
+
+      <ol class="steps">
+        <li><h3>Скачайте карточку</h3><p>PNG с портретом или JSON, внутри одно и то же. Файлы на страницах <a href="#/viktor">Виктора</a> и <a href="#/lesha">Лёши</a>.</p></li>
+        <li><h3>Импортируйте в SillyTavern</h3><p>Список персонажей, кнопка импорта из файла, выберите скачанный файл.</p></li>
+        <li><h3>Согласитесь на встроенный лорбук</h3><p>Таверна спросит, импортировать ли лорбук персонажа. Ответьте «да», и он сам привяжется к карточке.</p></li>
+        <li><h3>Выберите старт</h3><p>Старты лежат свайпами на первом сообщении, листайте стрелкой вправо. Последний, «Ваш старт», пустой: начало пишете сами.</p></li>
+      </ol>
+
+      <h3>Настройки World Info</h3>
+      <p>Со стандартными настройками тоже работает. Если хотите как задумано:</p>
+      <table class="settings">
+        <tr><td>Scan Depth</td><td>2</td></tr>
+        <tr><td>Context %</td><td>17%</td></tr>
+        <tr><td>Budget Cap</td><td>8192</td></tr>
+        <tr><td>Recursive Scan</td><td>вкл.</td></tr>
+        <tr><td>Max Recursion Steps</td><td>1</td></tr>
+        <tr><td>Insertion Strategy</td><td>Character Lore First</td></tr>
+      </table>
+
+      <dl class="faq">
+        <dt>Записи лорбука срабатывают не всегда. Так и надо?</dt>
+        <dd>Да. Постоянная только запись о тоне эпохи. Остальные включаются по ключевым словам в последних сообщениях: упомянули Найду, подтянулась Найда.</dd>
+        <dt>Почему секреты не всплывают сразу?</dt>
+        <dd>На них стоит задержка: они открываются, когда чат станет длиннее. Интимные записи срабатывают только при двух условиях сразу.</dd>
+        <dt>Что такое глубина у записей?</dt>
+        <dd>Она важна только для записей с позицией @Depth: это состояния вроде «ранен» или «выпивший», они встают ближе к концу контекста. Авторская заметка персонажа тоже уже встроена, на глубине 4.</dd>
+        <dt>Зачем тогда отдельный файл лорбука?</dt>
+        <dd>На случай, если встроенный не подтянулся. Тогда World Info, импорт, выбрать файл и привязать к персонажу.</dd>
+      </dl>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="sig">Лихие</div>
+  <p>Боты для SillyTavern о Петербурге девяностых.</p>
+  <p id="credits"></p>
+</footer>
+
+<script src="bots.js"></script>
+<script>
+(() => {
+  const BOTS = window.BOTS || [];
+
+  /* ---------- build pages from bots.js ---------- */
+  const stampSvg = (b) => `<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="st-${b.id}" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="#A8261F" stroke-width="3"/><circle cx="60" cy="60" r="34" fill="none" stroke="#A8261F" stroke-width="1.5"/><text font-family="PT Mono, monospace" font-size="10.5" fill="#A8261F" letter-spacing="1.5"><textPath href="#st-${b.id}">${b.stamp}</textPath></text><text x="60" y="58" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">ДЛЯ</text><text x="60" y="72" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">СВОИХ</text></svg>`;
+  const list = (arr, f) => (arr || []).map(f).join('');
+  const dossier = (b) => `
+<main class="page" data-route="/${b.id}">
+  <div class="wrap dossier">
+    <div class="spread">
+      <div class="leaf left">
+        <div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
+        <div class="mug"><span class="clip"></span><img src="${b.photo}" alt="${b.alt}" style="object-position:${b.pos}">${stampSvg(b)}</div>
+        <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>
+      </div>
+      <div class="leaf right">
+        <h1>${b.name}</h1>
+        <p class="sub">${b.sub}</p>
+        <div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>
+        <div class="prose">${list(b.prose, p => `<p>${p}</p>`)}</div>
+      </div>
+    </div>
+    <section class="block sheet"><h2>Как говорит</h2><ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul></section>
+    <section class="block sheet"><h2>Связи</h2><ul class="links">${list(b.links, ([n, d]) => `<li><b>${n}</b>, ${d}</li>`)}</ul></section>
+    <section class="block"><h2 class="on-wall">Старты</h2><div class="starts">${list(b.starts, (st, i) => `<article class="start${i ? '' : ' main'}">${i ? '' : '<span class="badge">первый</span>'}<p class="t">${st.t}</p><h3>${st.h}</h3><p>${st.p}</p></article>`)}</div></section>
+    <section class="block sheet">
+      <h2>Скачать</h2>
+      <div class="dl">
+        ${b.files.png ? `<a class="btn" href="${b.files.png}" download="${b.files.name}.png">Карточка PNG <small>с портретом</small></a>` : ''}
+        ${b.files.json ? `<a class="btn alt" href="${b.files.json}" download="${b.files.name}.json">Карточка JSON</a>` : ''}
+        ${b.files.lore ? `<a class="btn alt" href="${b.files.lore}" download="${b.files.name}_лорбук.json">Лорбук отдельно</a>` : ''}
+      </div>
+      <p class="meta">Лорбук на ${b.loreCount} записей уже встроен в карточку. Отдельный файл нужен, только если встроенный не подтянулся. ${b.credit || ''} <a href="#/start">Как подключить</a></p>
+    </section>
+  </div>
+</main>`;
+  const folder = (b) => `
+<a class="folder" href="#/${b.id}">
+  <div class="ph"><span class="clip"></span><img src="${b.photo}" alt="" loading="lazy" style="object-position:${b.pos}"></div>
+  <div>
+    <div class="print">${list([['История', '«' + b.story + '»'], ...b.folder.rows], ([k, v]) => `<div class="row"><span>${k}</span><span>${v}</span></div>`)}</div>
+    <div class="name">${b.name}</div>
+    <p class="say">${b.folder.say}</p>
+    <span class="open">Открыть дело</span>
+  </div>
+  <span class="ties" aria-hidden="true"></span>
+</a>`;
+  const soon = `<div class="folder soon"><div><div class="name">Дело в работе</div><p class="say">Скоро в городе появятся новые лица.</p></div></div>`;
+  document.getElementById('botpages').outerHTML = BOTS.map(dossier).join('');
+  document.querySelectorAll('[data-folders]').forEach(el => el.innerHTML = BOTS.map(folder).join('') + soon);
+  document.getElementById('credits').innerHTML = BOTS.filter(b => b.credit).map(b => b.credit).join('<br>');
+
+  // TV: title channel, one channel per bot, city channel last
+  const chs = document.querySelector('.chs');
+  const cityCh = chs.querySelector('[data-ch="city"]');
+  BOTS.forEach(b => cityCh.insertAdjacentHTML('beforebegin', `<div class="ch" data-ch="bot"><img src="${b.tvPhoto || b.photo}" alt="${b.name}" style="object-position:${b.tvPos || b.pos}"><span class="osd" aria-hidden="true"></span><div class="cap"><p class="t">${b.name}</p><p>${b.tv}</p><a href="#/${b.id}">Личное дело</a></div></div>`));
+  [...chs.children].forEach((c, i) => { c.dataset.ch = i + 1; c.querySelector('.osd').textContent = i + 1; });
+  const total = chs.children.length;
+  const dial = document.querySelector('.dial');
+  for (let n = 1; n <= total; n++){
+    const label = n === 1 ? 'Канал 1' : n === total ? `Канал ${n}: город` : `Канал ${n}: ${BOTS[n - 2].name}`;
+    dial.insertAdjacentHTML('beforeend', `<button class="n" data-go="${n}" aria-pressed="${n === 1}" aria-label="${label}">${n}</button>`);
+  }
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/gorod':'Город · Лихие','/start':'Как подключить · Лихие'};
+  BOTS.forEach(b => titles['/' + b.id] = b.name + ' · Лихие');
+  const botIds = new Set(BOTS.map(b => '/' + b.id));
+
+  /* ---------- router ---------- */
+  const pages = [...document.querySelectorAll('.page')];
+  const navLinks = [...document.querySelectorAll('.bar nav a')];
+  function route(){
+    let r = (location.hash.replace(/^#/, '') || '/');
+    if (!titles[r]) r = '/';
+    pages.forEach(p => p.classList.toggle('on', p.dataset.route === r));
+    const navR = botIds.has(r) ? '/bots' : r;
+    navLinks.forEach(a => a.getAttribute('href') === '#' + navR ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'));
+    document.title = titles[r];
+    window.scrollTo(0, 0);
+    homeVisible = r === '/';
+    if (homeVisible) startSnow();
+  }
+  let homeVisible = true;
+  addEventListener('hashchange', route);
+  document.querySelectorAll('[data-scroll]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(a.getAttribute('href').slice(1)).scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  }));
+
+  /* ---------- TV ---------- */
+  const screen = document.getElementById('screen');
+  const chans = [...screen.querySelectorAll('.ch')];
+  const nums = [...document.querySelectorAll('.dial .n')];
+  const knob = document.querySelector('.dial .knob');
+  const noiseCv = screen.querySelector('canvas');
+  const nctx = noiseCv.getContext('2d');
+  const angles = {};
+  nums.forEach((n, i) => angles[i + 1] = nums.length < 2 ? 0 : -70 + 140 * i / (nums.length - 1));
+  // place the numbers around the knob
+  nums.forEach(n => {
+    const a = (angles[n.dataset.go] - 90) * Math.PI / 180;
+    n.style.left = (50 + Math.cos(a) * 47) + '%';
+    n.style.top = (50 + Math.sin(a) * 47) + '%';
+  });
+  let cur = 1, busy = false;
+  function noise(){
+    const img = nctx.createImageData(120, 90), d = img.data;
+    for (let i = 0; i < d.length; i += 4){ const v = Math.random() * 255 | 0; d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255; }
+    nctx.putImageData(img, 0, 0);
+  }
+  function setChannel(n){
+    if (busy || n === cur) return;
+    cur = n;
+    knob.style.transform = `rotate(${angles[n]}deg)`;
+    nums.forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.go === n)));
+    const show = () => chans.forEach(c => c.classList.toggle('on', +c.dataset.ch === n));
+    if (reduce){ show(); return; }
+    busy = true; screen.classList.add('switching');
+    const t0 = performance.now();
+    (function loop(t){
+      noise();
+      if (t - t0 < 340) requestAnimationFrame(loop);
+      else { show(); screen.classList.remove('switching'); busy = false; }
+    })(t0);
+  }
+  knob.style.transform = `rotate(${angles[1]}deg)`;
+  knob.addEventListener('click', () => setChannel(cur % nums.length + 1));
+  nums.forEach(b => b.addEventListener('click', () => setChannel(+b.dataset.go)));
+  if (reduce) screen.classList.remove('booting');
+
+  /* ---------- record player ---------- */
+  const player = document.getElementById('player');
+  let audio = null, audioTried = false;
+  player.addEventListener('click', () => {
+    const on = !player.classList.contains('playing');
+    player.classList.toggle('playing', on);
+    player.setAttribute('aria-pressed', String(on));
+    // optional: if you drop assets/music.mp3 into the repo, the record will actually play it
+    if (!audioTried){ audioTried = true; audio = new Audio('assets/music.mp3'); audio.loop = true; audio.addEventListener('error', () => { audio = null; }); }
+    if (audio){ on ? audio.play().catch(() => {}) : audio.pause(); }
+  });
+  if (reduce){ player.classList.remove('playing'); player.setAttribute('aria-pressed','false'); }
+
+  /* ---------- snow in the window ---------- */
+  const snow = document.getElementById('snow');
+  const sctx = snow.getContext('2d');
+  const flakes = Array.from({length: 70}, () => ({x: Math.random() * 160, y: Math.random() * 260, r: Math.random() * 1.6 + .5, s: Math.random() * .5 + .25, w: Math.random() * 6.28}));
+  let snowing = false, roomInView = true;
+  new IntersectionObserver(es => { roomInView = es[0].isIntersecting; if (roomInView) startSnow(); }).observe(document.querySelector('.room'));
+  function drawSnow(){
+    sctx.clearRect(0, 0, 160, 260);
+    sctx.fillStyle = 'rgba(240,244,255,.85)';
+    for (const f of flakes){
+      f.y += f.s; f.w += .02; f.x += Math.sin(f.w) * .25;
+      if (f.y > 262){ f.y = -4; f.x = Math.random() * 160; }
+      sctx.beginPath(); sctx.arc(f.x, f.y, f.r, 0, 6.28); sctx.fill();
+    }
+  }
+  function startSnow(){
+    if (reduce){ drawSnow(); return; }
+    if (snowing) return; snowing = true;
+    (function tick(){
+      if (!homeVisible || !roomInView || document.hidden){ snowing = false; return; }
+      drawSnow(); requestAnimationFrame(tick);
+    })();
+  }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) startSnow(); });
+
+  route();
+})();
+</script>
+</body>
+</html>
