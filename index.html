@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#241309">
 <title>Лихие</title>
 <meta name="description" content="Лихие: боты для SillyTavern в одном городе. Петербург, 1996 год.">
 <meta property="og:title" content="Лихие">
@@ -25,7 +26,8 @@
   --hand:'Neucha','Comic Neue',cursive;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%}
+button{-webkit-tap-highlight-color:transparent; touch-action:manipulation}
 body{
   margin:0; color:var(--ink); font:18px/1.62 var(--serif);
   background-color:var(--wall-deep);
@@ -40,8 +42,8 @@ a{color:inherit}
 
 /* ---------- top bar ---------- */
 .bar{
-  position:sticky; top:0; z-index:50; height:var(--bar);
-  display:flex; align-items:center; gap:24px; padding:0 20px;
+  position:sticky; top:0; z-index:50; height:calc(var(--bar) + env(safe-area-inset-top)); padding-top:env(safe-area-inset-top);
+  display:flex; align-items:center; gap:24px; padding-left:max(20px, env(safe-area-inset-left)); padding-right:max(20px, env(safe-area-inset-right));
   background:linear-gradient(#3a2316,#241309); color:var(--cream);
   border-bottom:2px solid #120904; box-shadow:0 4px 14px rgba(0,0,0,.4);
 }
@@ -228,9 +230,24 @@ a{color:inherit}
   background:linear-gradient(var(--wood-hi),var(--wood)); box-shadow:0 .5cqw .8cqw rgba(0,0,0,.45)}
 .table .leg{position:absolute; top:14%; bottom:0; width:3.5%; background:var(--wood-lo)}
 .table .leg.l{left:10%; transform:skewX(10deg)} .table .leg.r{right:10%; transform:skewX(-10deg)}
-.sleeve{left:56.6%; bottom:12.4%; width:7%; aspect-ratio:1; transform:rotate(-8deg); transform-origin:bottom left;
-  background:linear-gradient(135deg,#d7c39b,#b8a072); border-radius:.15cqw; box-shadow:0 .4cqw .8cqw rgba(0,0,0,.5)}
-.sleeve::after{content:""; position:absolute; inset:30%; border-radius:50%; background:#8d7650; box-shadow:inset 0 0 .3cqw rgba(0,0,0,.5)}
+.sleeve{left:55.4%; bottom:12.4%; width:7%; aspect-ratio:1; transform:rotate(-8deg); transform-origin:bottom left; z-index:4; cursor:pointer; padding:0; border:0;
+  background:linear-gradient(135deg,#d7c39b,#b8a072); border-radius:.15cqw; box-shadow:0 .4cqw .8cqw rgba(0,0,0,.5); transition:transform .2s}
+.sleeve:hover{transform:rotate(-11deg) translateY(-.4cqw)}
+.sleeve span{position:absolute; inset:30%; border-radius:50%; background:var(--next,#8d7650); box-shadow:inset 0 0 .3cqw rgba(0,0,0,.5), 0 0 0 .25cqw #8d7650; transition:background .4s}
+.radio{left:58%; width:19%; bottom:2%; z-index:5; display:grid; grid-template-columns:auto 1fr auto auto; align-items:center; gap:.45cqw;
+  padding:.5cqw .6cqw .5cqw .5cqw; background:#efe4c6; color:#2a1c10; border-radius:.2cqw; transform:rotate(-1.2deg);
+  box-shadow:0 .4cqw .9cqw rgba(0,0,0,.5); background-image:repeating-linear-gradient(0deg, transparent 0 1.3cqw, rgba(43,74,139,.12) 1.3cqw calc(1.3cqw + 1px))}
+.radio button{width:1.9cqw; height:1.9cqw; border-radius:50%; border:.12cqw solid #2a1c10; background:transparent; color:#2a1c10;
+  font:700 1cqw/1 var(--serif); cursor:pointer; padding:0; display:grid; place-items:center}
+.radio button:hover{background:#2a1c10; color:#efe4c6}
+.radio .pp{width:2.3cqw; height:2.3cqw; background:#7A1C22; border-color:#7A1C22; color:#efe4c6; font-size:.95cqw}
+.radio .txt{min-width:0}
+.radio .who{font:.78cqw/1.25 var(--mono); color:#6b5434; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.radio .what{font:1.25cqw/1.15 var(--hand); color:var(--pen); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.rec{position:absolute; inset:0; transition:transform .45s cubic-bezier(.55,0,.8,.3), opacity .45s}
+.rec.out{transform:translate(-150%,-20%) rotate(-50deg); opacity:0}
+.rec.from{transition:none; transform:translate(150%,-20%) rotate(50deg); opacity:0}
+.rec.back{transition:transform .5s cubic-bezier(.2,.7,.3,1), opacity .35s}
 
 .player{left:59.5%; width:15%; bottom:25%; z-index:4; cursor:pointer; border:0; padding:0; background:none}
 .player .deck{
@@ -240,7 +257,7 @@ a{color:inherit}
   box-shadow:inset 0 0 0 .5cqw #5a3119, inset 0 0 0 .6cqw #2a170d;
 }
 .platter{position:absolute; left:6%; top:7%; width:66%; aspect-ratio:1; border-radius:50%;
-  background:#2b2b2b; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.55)}
+  background:radial-gradient(circle, #9a958a 0 3%, #3a3a3a 4% 60%, #2b2b2b 61%); box-shadow:0 .2cqw .4cqw rgba(0,0,0,.55)}
 .disc{position:absolute; inset:2%; animation:spin 1.8s linear infinite; animation-play-state:paused}
 .player.playing .disc{animation-play-state:running}
 .sheen{position:absolute; inset:2%; border-radius:50%; pointer-events:none;
@@ -256,7 +273,6 @@ a{color:inherit}
   font:.7cqw/1 var(--mono); color:#d8c497; letter-spacing:.1em}
 .player .led{width:.6cqw; height:.6cqw; border-radius:50%; background:#4a1410}
 .player.playing .led{background:#ff4a2e; box-shadow:0 0 .6cqw #ff6a3a}
-.player .hint{position:absolute; left:0; right:0; top:calc(100% + .8cqw); text-align:center; font:1.15cqw/1.2 var(--hand); color:#f4ecc9; opacity:.85}
 
 /* servant */
 .servant{right:2%; width:20.5%; bottom:12%; height:75%; z-index:3}
@@ -301,16 +317,21 @@ a{color:inherit}
   .screen .cap a{font-size:3cqw; padding:1cqw 2cqw}
   .screen .osd{font-size:6cqw}
   .tv .plate{font-size:2.2cqw}
-  .dial .n{width:4.4cqw; height:4.4cqw; margin:-2.2cqw; font-size:2.4cqw; line-height:4.4cqw}
+  .dial .n{width:max(28px,6cqw); height:max(28px,6cqw); margin:calc(max(28px,6cqw) / -2); font-size:max(12px,2.8cqw); line-height:max(28px,6cqw)}
   .tv .note{font-size:3.2cqw; padding:1cqw 2cqw; top:-6%}
   .table{display:none}
-  .player{left:auto; right:4%; width:30%; bottom:2%}
+  .player{left:auto; right:3%; width:29%; bottom:2%}
   .player .front{height:3.4cqw; font-size:1.6cqw}
-  .player .hint{display:none}
+  .radio{left:4%; width:60%; bottom:3%; gap:1.2cqw; padding:1.4cqw 1.6cqw}
+  .radio button{width:max(36px,8cqw); height:max(36px,8cqw); font-size:max(15px,3.6cqw)}
+  .radio .pp{width:max(40px,9cqw); height:max(40px,9cqw); font-size:max(13px,3.2cqw)}
+  .radio{width:60%}
+  .radio .who{font-size:2.3cqw}
+  .radio .what{font-size:3.7cqw}
 }
 
 /* ================= CONTENT ================= */
-.wrap{max-width:1120px; margin:0 auto; padding:0 20px}
+.wrap{max-width:1120px; margin:0 auto; padding:0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right))}
 .sheet{
   position:relative; background:var(--paper); color:var(--ink);
   background-image:
@@ -376,7 +397,31 @@ p{margin:0 0 1em}
 .night blockquote em{color:#5a3a2a}
 
 /* dossier pages */
-.dossier{padding:48px 0 80px}
+.dossier{padding:28px 0 80px}
+.case-bar{display:flex; justify-content:flex-end; margin:0 0 18px}
+.case-bar.bottom{justify-content:center; margin:44px 0 0}
+.close-case{font:700 17px/1 var(--serif); color:var(--cream); background:var(--carpet); border:0; cursor:pointer;
+  padding:13px 20px 13px 18px; border-radius:3px; box-shadow:0 3px 0 #4a0f13, 0 6px 14px rgba(0,0,0,.35);
+  display:inline-flex; align-items:center; gap:10px; min-height:44px; -webkit-tap-highlight-color:transparent}
+.close-case::before{content:""; width:14px; height:14px; border:2px solid currentColor; border-radius:2px;
+  background:linear-gradient(currentColor,currentColor) 50% 45%/60% 2px no-repeat}
+.close-case:active{transform:translateY(2px); box-shadow:0 1px 0 #4a0f13}
+.leaf.right{perspective:2400px}
+.fcover{position:absolute; inset:-8px -8px -8px 0; z-index:30; transform-origin:0 50%; transform-style:preserve-3d; display:none; pointer-events:none}
+.fcover .front,.fcover .back{position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:2px 6px 6px 2px}
+.fcover .front{display:flex; flex-direction:column; align-items:flex-start; gap:14px; padding:clamp(28px,5vw,56px); color:#3b2a1c;
+  background:var(--kraft); background-image:linear-gradient(160deg, rgba(255,255,255,.2), transparent 55%), repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
+  box-shadow:inset 6px 0 10px -4px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.4)}
+.fcover .org{font:14px/1.3 var(--mono); letter-spacing:.12em; text-transform:none; opacity:.8}
+.fcover .no{font:400 clamp(34px,5vw,56px)/1 var(--display); margin-top:auto}
+.fcover .who{font:22px/1.3 var(--mono); border-bottom:2px solid rgba(59,42,28,.6); padding:0 4px 4px; min-width:70%}
+.fcover .dates{font:15px/1.7 var(--mono); margin-bottom:auto}
+.fcover .tie{position:absolute; right:-4px; top:50%; width:44px; height:8px; margin-top:-4px; background:#ece4d0; border-radius:2px; box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.fcover .back{transform:rotateY(180deg); background:#b89868; background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px);
+  box-shadow:inset -6px 0 10px -4px rgba(0,0,0,.3)}
+.flip-sheet{position:absolute; inset:0; z-index:25; display:none; transform-origin:0 50%; pointer-events:none;
+  background:var(--paper); -webkit-backface-visibility:hidden; backface-visibility:hidden; box-shadow:2px 0 6px rgba(0,0,0,.18);
+  background-image:repeating-linear-gradient(transparent 0 27px, rgba(43,74,139,.08) 27px 28px)}
 .spread{display:grid; grid-template-columns:minmax(260px,.85fr) 1.4fr; background:var(--kraft); padding:18px; border-radius:6px;
   box-shadow:0 24px 50px rgba(0,0,0,.5); gap:18px}
 .leaf{background:var(--paper); padding:32px 30px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.2)}
@@ -401,7 +446,7 @@ p{margin:0 0 1em}
 .links{columns:2; column-gap:40px; margin:0; padding:0; list-style:none}
 .links li{break-inside:avoid; padding:7px 0; border-bottom:1px solid rgba(35,32,27,.18); font-size:17px}
 .links b{font-weight:700}
-.starts{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px}
+.starts{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:20px}
 .start{background:#f4eedf; padding:20px 22px 22px; box-shadow:0 3px 8px rgba(0,0,0,.18); position:relative}
 .start .t{font-family:var(--mono); font-size:13.5px; color:var(--ink-soft); margin:0 0 6px}
 .start h3{font-size:20px}
@@ -418,16 +463,16 @@ p{margin:0 0 1em}
 .meta{font-size:15.5px; color:var(--ink-soft); margin-top:12px}
 
 /* city */
-.places{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:22px}
-.place{background:var(--paper); padding:22px 24px; box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.places{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr)); gap:22px}
+.place{background:var(--paper); color:var(--ink); padding:22px 24px; box-shadow:0 10px 24px rgba(0,0,0,.35)}
 .place .addr{font-family:var(--mono); font-size:13.5px; color:var(--ink-soft); margin:0 0 6px}
 .place p{font-size:16.5px; margin:0}
-.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px}
-.icard{background:#f2ecdc; padding:16px 18px 18px; position:relative;
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr)); gap:18px}
+.icard{background:#f2ecdc; color:var(--ink); padding:16px 18px 18px; position:relative;
   background-image:linear-gradient(transparent 31px, rgba(168,38,31,.5) 31px 32px, transparent 32px), repeating-linear-gradient(transparent 0 25px, rgba(43,74,139,.13) 25px 26px);
   background-position:0 0, 0 32px; box-shadow:0 6px 14px rgba(0,0,0,.3)}
 .icard h3{font-size:18px; margin:0 0 10px; line-height:24px}
-.icard p{font-size:15.5px; line-height:26px; margin:0}
+.icard p{font-size:16px; line-height:26px; margin:0; color:#2f2a22}
 .group-title{font-family:var(--hand); font-size:26px; color:var(--cream); margin:36px 0 14px}
 
 /* manual */
@@ -445,7 +490,7 @@ table.settings{width:100%; border-collapse:collapse; font-size:16.5px; margin:8p
 .faq dt{font-weight:700; margin-top:18px}
 .faq dd{margin:4px 0 0; font-size:17px}
 
-footer{padding:56px 20px 64px; text-align:center; color:#c9bc98; font-size:16px}
+footer{padding:56px 20px calc(64px + env(safe-area-inset-bottom)); text-align:center; color:#c9bc98; font-size:16px}
 footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; margin-bottom:8px}
 
 @media (max-width:860px){
@@ -457,6 +502,15 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 }
 @media (max-width:520px){
   body{font-size:17px}
+  .leaf{padding:24px 18px}
+  .spread{padding:10px; gap:10px}
+  .margin-notes{font-size:19px}
+  .sheet{padding:24px 18px}
+  .night .side{padding:22px 18px}
+  .case-bar{justify-content:stretch}
+  .case-bar .close-case{width:100%; justify-content:center}
+  .fcover .who{font-size:18px}
+  .btn{width:100%; justify-content:center}
   .brand{display:none}
   .bar nav{margin:0 auto; gap:0}
   .bar nav a{padding:6px 8px; font-size:15.5px}
@@ -467,6 +521,52 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   .brand{font-size:18px}
   .bar{gap:10px; padding:0 12px}
 }
+/* ================= INTRO ================= */
+.splash{position:fixed; inset:0; z-index:200; overflow:hidden; cursor:pointer; display:grid; place-items:center;
+  background:radial-gradient(ellipse 75% 70% at 50% 45%, #EEE5D3 0%, #E2D5BC 45%, #BFAE8E 85%, #9C8A6B 100%);
+  transition:opacity .8s ease, visibility .8s; -webkit-tap-highlight-color:transparent}
+.splash.leave{opacity:0; visibility:hidden}
+.splash .leak{position:absolute; width:70vmax; height:70vmax; border-radius:50%; left:-20vmax; top:-25vmax; pointer-events:none;
+  background:radial-gradient(circle, rgba(255,170,90,.35), rgba(255,140,60,.08) 45%, transparent 70%); filter:blur(10px);
+  animation:leak 7s ease-in-out infinite alternate}
+@keyframes leak{to{transform:translate(55vmax,35vmax) scale(1.2); opacity:.6}}
+.splash canvas{position:absolute; inset:0; width:100%; height:100%; opacity:.16; mix-blend-mode:multiply; pointer-events:none}
+.splash .scratch{position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg, transparent 0 18%, rgba(60,40,20,.18) 18% calc(18% + 1px), transparent calc(18% + 1px) 71%, rgba(255,255,255,.35) 71% calc(71% + 1px), transparent calc(71% + 1px));
+  animation:scratch 1.4s steps(1) infinite}
+@keyframes scratch{0%{transform:translateX(0)}23%{transform:translateX(-9vw); opacity:.5}41%{transform:translateX(13vw); opacity:1}67%{transform:translateX(4vw); opacity:0}84%{transform:translateX(-15vw); opacity:.8}}
+.splash .vign{position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 18vmin rgba(60,40,20,.55); animation:breathe 3.2s ease-in-out infinite alternate}
+@keyframes breathe{to{box-shadow:inset 0 0 24vmin rgba(60,40,20,.65)}}
+.splash .inner{position:relative; display:flex; flex-direction:column; align-items:center; gap:3vmin; transform:translateY(-3vmin)}
+.splash .set{--S:min(52vmin,400px); position:relative; width:calc(var(--S) * 1.55); height:var(--S)}
+.splash .cover{position:absolute; left:50%; top:0; width:var(--S); height:var(--S); margin-left:calc(var(--S) / -2); z-index:2;
+  background:linear-gradient(135deg,#d2bd93,#b39a6b 60%,#a58c5e); border-radius:.4vmin;
+  box-shadow:0 2vmin 4vmin rgba(60,40,20,.45), inset 0 0 0 .5vmin rgba(255,255,255,.12);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:6%; color:#3b2a1c;
+  animation:coverOut 1.1s cubic-bezier(.6,0,.2,1) .35s both}
+.splash .cover::before{content:""; position:absolute; left:50%; top:42%; width:28%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%);
+  background:#8f7650; box-shadow:inset 0 0 1.2vmin rgba(0,0,0,.45)}
+.splash .cover small{font:calc(var(--S) * .036)/1.3 var(--mono); letter-spacing:.12em; opacity:.8}
+.splash .cover b{font:400 calc(var(--S) * .095)/1 var(--display); letter-spacing:.03em}
+@keyframes coverOut{from{transform:translateX(0) rotate(0); opacity:0}25%{opacity:1}to{transform:translateX(-28%) rotate(-4deg); opacity:1}}
+.splash .vinyl{position:absolute; left:50%; top:3%; width:calc(var(--S) * .94); height:calc(var(--S) * .94); margin-left:calc(var(--S) * -.47); z-index:1;
+  animation:vinylOut 1.1s cubic-bezier(.6,0,.2,1) .35s both}
+@keyframes vinylOut{from{transform:translateX(0); opacity:0}25%{opacity:1}to{transform:translateX(30%); opacity:1}}
+.splash .vinyl svg{width:100%; height:100%; display:block; filter:drop-shadow(0 1.6vmin 2.4vmin rgba(40,25,10,.5));
+  animation:spinUp 1.4s cubic-bezier(.5,0,1,1) 1.2s both, spin 1.8s linear 2.6s infinite}
+@keyframes spinUp{from{transform:rotate(0)}to{transform:rotate(300deg)}}
+.splash .vinyl .shine{position:absolute; inset:0; border-radius:50%; pointer-events:none;
+  background:conic-gradient(from 25deg, transparent 0 8%, rgba(255,255,255,.18) 13%, transparent 19% 50%, rgba(255,255,255,.14) 63%, transparent 69%);
+  -webkit-mask:radial-gradient(circle, transparent 36%, #000 37%, #000 70%, transparent 71%); mask:radial-gradient(circle, transparent 36%, #000 37%, #000 70%, transparent 71%)}
+.splash h2{font:400 clamp(52px,11vmin,118px)/1 var(--display); color:#3b2a1c; margin:0; letter-spacing:.06em; display:flex}
+.splash h2 span{display:inline-block; animation:letter .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes letter{from{opacity:0; transform:translateY(.35em); filter:blur(4px)}to{opacity:1; transform:none; filter:none}}
+.splash .sub{font:italic clamp(16px,2.6vmin,22px)/1.3 var(--serif); color:#5b4630; margin:0; letter-spacing:.08em; animation:letter .8s ease 2.4s both}
+.splash .skip{position:absolute; left:50%; bottom:calc(5vmin + env(safe-area-inset-bottom)); padding:12px 20px; transform:translateX(-50%); background:none; border:0; cursor:pointer;
+  font:clamp(17px,2.4vmin,21px)/1 var(--hand); color:#5b4630; animation:hint 2.2s ease-in-out .8s infinite both}
+@keyframes hint{0%,100%{opacity:.35}50%{opacity:.85}}
+body.splash-on{overflow:hidden}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important; transition:none!important}
   html{scroll-behavior:auto}
@@ -474,6 +574,41 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 </style>
 </head>
 <body>
+
+<div class="splash" id="intro" hidden>
+  <div class="leak"></div>
+  <canvas id="grain" width="160" height="160" aria-hidden="true"></canvas>
+  <div class="scratch" aria-hidden="true"></div>
+  <div class="vign" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="set" aria-hidden="true">
+      <div class="vinyl">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="ilbl" d="M100,100 m-25,0 a25,25 0 1,1 50,0 a25,25 0 1,1 -50,0"/></defs>
+          <circle cx="100" cy="100" r="99" fill="#0f0d0c"/>
+          <g fill="none" stroke-width=".9">
+            <circle cx="100" cy="100" r="95" stroke="#232020"/><circle cx="100" cy="100" r="92" stroke="#171515"/><circle cx="100" cy="100" r="89" stroke="#232020"/>
+            <circle cx="100" cy="100" r="85" stroke="#171515"/><circle cx="100" cy="100" r="82" stroke="#2a2626"/><circle cx="100" cy="100" r="78" stroke="#171515"/>
+            <circle cx="100" cy="100" r="74" stroke="#232020"/><circle cx="100" cy="100" r="70" stroke="#171515"/><circle cx="100" cy="100" r="66" stroke="#2a2626"/>
+            <circle cx="100" cy="100" r="62" stroke="#171515"/><circle cx="100" cy="100" r="58" stroke="#232020"/><circle cx="100" cy="100" r="54" stroke="#171515"/>
+            <circle cx="100" cy="100" r="50" stroke="#2a2626"/><circle cx="100" cy="100" r="46" stroke="#171515"/><circle cx="100" cy="100" r="42" stroke="#232020"/>
+          </g>
+          <circle cx="100" cy="100" r="36" fill="#B3261E"/>
+          <circle cx="100" cy="100" r="33" fill="none" stroke="#F1E6CC" stroke-width=".6"/>
+          <text font-family="PT Serif, serif" font-size="6.6" fill="#F1E6CC" letter-spacing=".8"><textPath href="#ilbl">НАУТИЛУС ПОМПИЛИУС ✦ КРЫЛЬЯ ✦</textPath></text>
+          <text x="100" y="94" text-anchor="middle" font-family="PT Serif, serif" font-size="7" fill="#F1E6CC">Крылья</text>
+          <text x="100" y="112" text-anchor="middle" font-family="PT Serif, serif" font-size="6.5" fill="#F1E6CC">33⅓</text>
+          <circle cx="100" cy="100" r="3.2" fill="#d9d4c7"/>
+        </svg>
+        <div class="shine"></div>
+      </div>
+      <div class="cover"><small>НАУТИЛУС ПОМПИЛИУС</small><b>Крылья</b></div>
+    </div>
+    <h2 aria-label="Лихие"><span style="animation-delay:1.5s">Л</span><span style="animation-delay:1.62s">и</span><span style="animation-delay:1.74s">х</span><span style="animation-delay:1.86s">и</span><span style="animation-delay:1.98s">е</span></h2>
+    <p class="sub">Петербург, <span class="nw">1996-й</span></p>
+  </div>
+  <button class="skip" type="button">нажмите, чтобы пропустить</button>
+</div>
 
 <header class="bar">
   <a class="brand" href="#/">Лихие</a>
@@ -563,7 +698,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
         <div class="note" aria-hidden="true">крути ручку ↓</div>
         <div class="case">
           <div class="bezel">
-            <div class="screen booting" id="screen">
+            <div class="screen" id="screen">
               <div class="chs">
                 <div class="ch on" data-ch="title">
                   <img src="assets/duo.webp" alt="Виктор с сигаретой у машины, рядом Лёша в шинели читает папку; во дворе за ними тело и милиция">
@@ -598,11 +733,12 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
       </div>
 
       <div class="table" aria-hidden="true"><div class="top"></div><i class="leg l"></i><i class="leg r"></i></div>
-      <div class="sleeve" aria-hidden="true"></div>
+      <button class="sleeve" id="sleeve" type="button" aria-label="Следующая пластинка"><span></span></button>
 
-      <button class="player playing" id="player" type="button" aria-pressed="true" aria-label="Проигрыватель: «Наутилус Помпилиус», «Крылья». Остановить или запустить пластинку">
+      <button class="player" id="player" type="button" aria-pressed="false" aria-label="Проигрыватель">
         <div class="deck">
           <div class="platter">
+            <div class="rec" id="rec">
             <svg class="disc" viewBox="0 0 200 200" aria-hidden="true">
               <defs><path id="lbl" d="M100,100 m-25,0 a25,25 0 1,1 50,0 a25,25 0 1,1 -50,0"/></defs>
               <circle cx="100" cy="100" r="99" fill="#0d0d0d"/>
@@ -613,14 +749,15 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
                 <circle cx="100" cy="100" r="60" stroke="#1e1e1e"/><circle cx="100" cy="100" r="54" stroke="#151515"/>
                 <circle cx="100" cy="100" r="47" stroke="#262626"/><circle cx="100" cy="100" r="42" stroke="#1a1a1a"/>
               </g>
-              <circle cx="100" cy="100" r="36" fill="#B3261E"/>
+              <circle id="lblBg" cx="100" cy="100" r="36" fill="#B3261E"/>
               <circle cx="100" cy="100" r="33" fill="none" stroke="#F1E6CC" stroke-width=".7"/>
-              <text font-family="PT Serif, serif" font-size="6.6" fill="#F1E6CC" letter-spacing=".9"><textPath href="#lbl">НАУТИЛУС ПОМПИЛИУС ✦ КРЫЛЬЯ ✦ 1996 ✦</textPath></text>
-              <text x="100" y="94" text-anchor="middle" font-family="PT Serif, serif" font-size="5.4" fill="#F1E6CC">Сторона 1</text>
-              <text x="100" y="112" text-anchor="middle" font-family="PT Serif, serif" font-size="8" fill="#F1E6CC">33⅓</text>
+              <text id="lblArc" font-family="PT Serif, serif" font-size="6.6" fill="#F1E6CC" letter-spacing=".9"><textPath href="#lbl" id="lblArcPath">НАУТИЛУС ПОМПИЛИУС ✦</textPath></text>
+              <text id="lblTitle" x="100" y="93" text-anchor="middle" font-family="PT Serif, serif" font-size="5.4" fill="#F1E6CC"></text>
+              <text id="lblNum" x="100" y="113" text-anchor="middle" font-family="PT Serif, serif" font-size="7" fill="#F1E6CC">33⅓</text>
               <circle cx="100" cy="100" r="3.2" fill="#d9d4c7"/>
             </svg>
             <div class="sheen"></div>
+            </div>
           </div>
           <div class="arm" aria-hidden="true">
             <svg viewBox="0 0 20 140" preserveAspectRatio="none">
@@ -632,8 +769,14 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
           </div>
         </div>
         <div class="front" aria-hidden="true"><span>ЭПУ-1</span><span class="led"></span><span>33 / 45</span></div>
-        <span class="hint" aria-hidden="true">пластинку можно остановить</span>
       </button>
+
+      <div class="radio" role="group" aria-label="Пластинки">
+        <button type="button" class="pp" id="ppBtn" aria-label="Поставить пластинку">&#9654;&#65038;</button>
+        <div class="txt" aria-live="polite"><div class="who" id="nowWho"></div><div class="what" id="nowWhat"></div></div>
+        <button type="button" id="prevBtn" aria-label="Предыдущая пластинка">‹</button>
+        <button type="button" id="nextBtn" aria-label="Следующая пластинка">›</button>
+      </div>
 
       <div class="servant" aria-hidden="true">
         <div class="cornice"></div>
@@ -802,7 +945,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
       <p class="prose">Обе карточки собраны одинаково: описание на английском, речь и прозвища на русском, лорбук встроен, старты на русском.</p>
 
       <ol class="steps">
-        <li><h3>Скачайте карточку</h3><p>PNG с портретом или JSON, внутри одно и то же. Файлы на страницах <a href="#/viktor">Виктора</a> и <a href="#/lesha">Лёши</a>.</p></li>
+        <li><h3>Скачайте карточку</h3><p>PNG с портретом или JSON, внутри одно и то же. Кнопки скачивания появляются на странице персонажа, когда карточка выложена.</p></li>
         <li><h3>Импортируйте в SillyTavern</h3><p>Список персонажей, кнопка импорта из файла, выберите скачанный файл.</p></li>
         <li><h3>Согласитесь на встроенный лорбук</h3><p>Таверна спросит, импортировать ли лорбук персонажа. Ответьте «да», и он сам привяжется к карточке.</p></li>
         <li><h3>Выберите старт</h3><p>Старты лежат свайпами на первом сообщении, листайте стрелкой вправо. Последний, «Ваш старт», пустой: начало пишете сами.</p></li>
@@ -837,19 +980,56 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   <div class="sig">Лихие</div>
   <p>Боты для SillyTavern о Петербурге девяностых.</p>
   <p id="credits"></p>
+  <p>Сайт: <a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Sloppy</a></p>
 </footer>
 
 <script src="bots.js"></script>
+<script src="music.js"></script>
 <script>
 (() => {
   const BOTS = window.BOTS || [];
 
+  /* ---------- intro: the record before the room ---------- */
+  const introEl = document.getElementById('intro');
+  const bootTV = () => document.getElementById('screen').classList.add('booting');
+  let seen = false;
+  try { seen = sessionStorage.getItem('lihie-intro') === '1'; } catch (e) {}
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || seen){
+    introEl.remove(); setTimeout(bootTV, 0);
+  } else {
+    introEl.hidden = false; document.body.classList.add('splash-on');
+    const g = document.getElementById('grain').getContext('2d');
+    let grainOn = true, frame = 0;
+    (function grain(){
+      if (!grainOn) return;
+      if (frame++ % 2 === 0){
+        const img = g.createImageData(160, 160), d = img.data;
+        for (let i = 0; i < d.length; i += 4){ const v = Math.random() * 255 | 0; d[i] = d[i+1] = d[i+2] = v; d[i+3] = Math.random() < .004 ? 255 : 90; }
+        g.putImageData(img, 0, 0);
+      }
+      requestAnimationFrame(grain);
+    })();
+    let done = false;
+    const finish = () => {
+      if (done) return; done = true;
+      try { sessionStorage.setItem('lihie-intro', '1'); } catch (e) {}
+      introEl.classList.add('leave'); document.body.classList.remove('splash-on');
+      setTimeout(bootTV, 250);
+      setTimeout(() => { grainOn = false; introEl.remove(); }, 900);
+      removeEventListener('keydown', finish);
+    };
+    introEl.addEventListener('click', finish);
+    addEventListener('keydown', finish);
+    setTimeout(finish, 5200);
+  }
+
   /* ---------- build pages from bots.js ---------- */
   const stampSvg = (b) => `<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="st-${b.id}" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="#A8261F" stroke-width="3"/><circle cx="60" cy="60" r="34" fill="none" stroke="#A8261F" stroke-width="1.5"/><text font-family="PT Mono, monospace" font-size="10.5" fill="#A8261F" letter-spacing="1.5"><textPath href="#st-${b.id}">${b.stamp}</textPath></text><text x="60" y="58" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">ДЛЯ</text><text x="60" y="72" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">СВОИХ</text></svg>`;
   const list = (arr, f) => (arr || []).map(f).join('');
-  const dossier = (b) => `
+  const dossier = (b, i) => `
 <main class="page" data-route="/${b.id}">
   <div class="wrap dossier">
+    <div class="case-bar"><button class="close-case" type="button">Закрыть дело</button></div>
     <div class="spread">
       <div class="leaf left">
         <div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
@@ -861,6 +1041,17 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
         <p class="sub">${b.sub}</p>
         <div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>
         <div class="prose">${list(b.prose, p => `<p>${p}</p>`)}</div>
+        <div class="flip-sheet" aria-hidden="true"></div><div class="flip-sheet" aria-hidden="true"></div>
+        <div class="fcover" aria-hidden="true">
+          <div class="front">
+            <span class="org">${b.unit}</span>
+            <span class="no">Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}</span>
+            <span class="who">${b.fields[0][1]}</span>
+            <span class="dates">Начато: ноябрь 1996 г.<br>Окончено: ______________</span>
+            <i class="tie"></i>
+          </div>
+          <div class="back"></div>
+        </div>
       </div>
     </div>
     <section class="block sheet"><h2>Как говорит</h2><ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul></section>
@@ -868,13 +1059,17 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
     <section class="block"><h2 class="on-wall">Старты</h2><div class="starts">${list(b.starts, (st, i) => `<article class="start${i ? '' : ' main'}">${i ? '' : '<span class="badge">первый</span>'}<p class="t">${st.t}</p><h3>${st.h}</h3><p>${st.p}</p></article>`)}</div></section>
     <section class="block sheet">
       <h2>Скачать</h2>
+      ${(b.files.png || b.files.json || b.files.lore) ? `
       <div class="dl">
         ${b.files.png ? `<a class="btn" href="${b.files.png}" download="${b.files.name}.png">Карточка PNG <small>с портретом</small></a>` : ''}
         ${b.files.json ? `<a class="btn alt" href="${b.files.json}" download="${b.files.name}.json">Карточка JSON</a>` : ''}
         ${b.files.lore ? `<a class="btn alt" href="${b.files.lore}" download="${b.files.name}_лорбук.json">Лорбук отдельно</a>` : ''}
       </div>
-      <p class="meta">Лорбук на ${b.loreCount} записей уже встроен в карточку. Отдельный файл нужен, только если встроенный не подтянулся. ${b.credit || ''} <a href="#/start">Как подключить</a></p>
+      <p class="meta">Лорбук на ${b.loreCount} записей уже встроен в карточку. Отдельный файл нужен, только если встроенный не подтянулся. ${b.credit || ''} <a href="#/start">Как подключить</a></p>` : `
+      <p class="lede">Карточка пока не выложена. Скоро появится здесь.</p>
+      ${b.credit ? `<p class="meta">${b.credit}</p>` : ''}`}
     </section>
+    <div class="case-bar bottom"><button class="close-case" type="button">Закрыть дело</button></div>
   </div>
 </main>`;
   const folder = (b) => `
@@ -889,7 +1084,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   <span class="ties" aria-hidden="true"></span>
 </a>`;
   const soon = `<div class="folder soon"><div><div class="name">Дело в работе</div><p class="say">Скоро в городе появятся новые лица.</p></div></div>`;
-  document.getElementById('botpages').outerHTML = BOTS.map(dossier).join('');
+  document.getElementById('botpages').outerHTML = BOTS.map((b, i) => dossier(b, i)).join('');
   document.querySelectorAll('[data-folders]').forEach(el => el.innerHTML = BOTS.map(folder).join('') + soon);
   document.getElementById('credits').innerHTML = BOTS.filter(b => b.credit).map(b => b.credit).join('<br>');
 
@@ -910,6 +1105,55 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   BOTS.forEach(b => titles['/' + b.id] = b.name + ' · Лихие');
   const botIds = new Set(BOTS.map(b => '/' + b.id));
 
+  /* ---------- the case folder: opens on arrival, closes on "Закрыть дело" ---------- */
+  const easeBook = 'cubic-bezier(.45,.05,.25,1)';
+  function resetFolder(page){
+    page.querySelectorAll('.fcover,.flip-sheet').forEach(el => { el.getAnimations({subtree:true}).forEach(a => a.cancel()); el.style.display = 'none'; });
+    page.querySelectorAll('.leaf.left,.spread,.dossier').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+  }
+  async function openFolder(page){
+    if (reduce) return;
+    resetFolder(page);
+    const cover = page.querySelector('.fcover'), left = page.querySelector('.leaf.left');
+    const sheets = [...page.querySelectorAll('.flip-sheet')];
+    cover.style.display = 'block'; sheets.forEach(sh => sh.style.display = 'block');
+    page.querySelector('.spread').animate([{transform:'translateY(18px)', opacity:.0}, {transform:'none', opacity:1}], {duration:350, easing:'ease-out'});
+    left.animate([{opacity:0, transform:'rotate(-.5deg) translateX(12px)'}, {opacity:0, offset:.55}, {opacity:1, transform:'rotate(-.5deg)'}], {duration:1150, easing:'ease-out'});
+    const flip = cover.animate([{transform:'rotateY(0deg)'}, {transform:'rotateY(-180deg)'}], {duration:950, delay:250, easing:easeBook, fill:'forwards'});
+    await flip.finished.catch(() => {});
+    if (!page.classList.contains('on')) return resetFolder(page);
+    // fade only the inner face: fading the 3D container itself would flatten it and flash the mirrored front
+    await cover.querySelector('.back').animate([{opacity:1}, {opacity:0}], {duration:220, fill:'forwards'}).finished.catch(() => {});
+    cover.style.display = 'none'; flip.cancel();
+    // a couple of pages flutter over before the text settles
+    await Promise.all(sheets.map((sh, k) => sh.animate(
+      [{transform:'rotateY(0deg)', opacity:1}, {transform:'rotateY(-150deg)', opacity:1, offset:.85}, {transform:'rotateY(-178deg)', opacity:0}],
+      {duration:520, delay:k * 140, easing:'cubic-bezier(.4,0,.3,1)', fill:'forwards'}).finished.catch(() => {})));
+    resetFolder(page);
+  }
+  let closing = false;
+  async function closeFolder(page){
+    if (closing) return; closing = true;
+    if (!reduce){
+      resetFolder(page);
+      if (scrollY > 80) scrollTo({top:0});
+      const cover = page.querySelector('.fcover'), left = page.querySelector('.leaf.left');
+      cover.style.display = 'block';
+      left.animate([{opacity:1}, {opacity:1, offset:.4}, {opacity:0}], {duration:900, fill:'forwards'});
+      cover.querySelector('.back').animate([{opacity:0}, {opacity:1}], {duration:160, fill:'forwards'});
+      await cover.animate([{transform:'rotateY(-180deg)'}, {transform:'rotateY(0deg)'}],
+        {duration:950, easing:easeBook, fill:'forwards'}).finished.catch(() => {});
+      await page.querySelector('.dossier').animate([{transform:'none', opacity:1}, {transform:'translateY(24px) scale(.97)', opacity:0}],
+        {duration:320, easing:'ease-in', fill:'forwards'}).finished.catch(() => {});
+    }
+    location.hash = '#/bots';
+    setTimeout(() => { resetFolder(page); closing = false; }, 50);
+  }
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.close-case');
+    if (btn) closeFolder(btn.closest('.page'));
+  });
+
   /* ---------- router ---------- */
   const pages = [...document.querySelectorAll('.page')];
   const navLinks = [...document.querySelectorAll('.bar nav a')];
@@ -923,6 +1167,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
     window.scrollTo(0, 0);
     homeVisible = r === '/';
     if (homeVisible) startSnow();
+    if (botIds.has(r)) openFolder(document.querySelector(`.page[data-route="${r}"]`));
   }
   let homeVisible = true;
   addEventListener('hashchange', route);
@@ -970,20 +1215,70 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   knob.style.transform = `rotate(${angles[1]}deg)`;
   knob.addEventListener('click', () => setChannel(cur % nums.length + 1));
   nums.forEach(b => b.addEventListener('click', () => setChannel(+b.dataset.go)));
-  if (reduce) screen.classList.remove('booting');
 
   /* ---------- record player ---------- */
-  const player = document.getElementById('player');
-  let audio = null, audioTried = false;
-  player.addEventListener('click', () => {
-    const on = !player.classList.contains('playing');
-    player.classList.toggle('playing', on);
-    player.setAttribute('aria-pressed', String(on));
-    // optional: if you drop assets/music.mp3 into the repo, the record will actually play it
-    if (!audioTried){ audioTried = true; audio = new Audio('assets/music.mp3'); audio.loop = true; audio.addEventListener('error', () => { audio = null; }); }
-    if (audio){ on ? audio.play().catch(() => {}) : audio.pause(); }
-  });
-  if (reduce){ player.classList.remove('playing'); player.setAttribute('aria-pressed','false'); }
+  const TRACKS = window.TRACKS || [];
+  const player = document.getElementById('player'), rec = document.getElementById('rec');
+  const ppBtn = document.getElementById('ppBtn'), sleeve = document.getElementById('sleeve');
+  const $ = id => document.getElementById(id);
+  const audio = new Audio(); audio.preload = 'none';
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  let ti = 0, playing = false, swapping = false;
+
+  function label(){
+    const t = TRACKS[ti]; if (!t) return;
+    const arc = (t.artist.toUpperCase() + ' ✦ ').repeat(t.artist.length < 12 ? 2 : 1);
+    $('lblArcPath').textContent = arc;
+    $('lblArc').setAttribute('font-size', Math.min(7, 150 / (arc.length * .66)).toFixed(2));
+    $('lblTitle').textContent = t.title;
+    $('lblTitle').setAttribute('font-size', Math.min(6.4, 58 / (t.title.length * .52)).toFixed(2));
+    $('lblNum').textContent = '№ ' + (ti + 1);
+    $('lblBg').setAttribute('fill', t.color || '#B3261E');
+    $('nowWho').textContent = t.artist;
+    $('nowWhat').textContent = '«' + t.title + '»';
+    const next = TRACKS[(ti + 1) % TRACKS.length];
+    sleeve.style.setProperty('--next', next.color || '#8d7650');
+    sleeve.setAttribute('aria-label', 'Следующая пластинка: ' + next.artist + ', «' + next.title + '»');
+    player.setAttribute('aria-label', 'Проигрыватель: ' + t.artist + ', «' + t.title + '». ' + (playing ? 'Остановить' : 'Поставить'));
+  }
+  function ui(){
+    player.classList.toggle('playing', playing);
+    player.setAttribute('aria-pressed', String(playing));
+    ppBtn.textContent = playing ? '\u275A\u275A' : '\u25B6\uFE0E';
+    ppBtn.setAttribute('aria-label', playing ? 'Остановить' : 'Поставить пластинку');
+    label();
+  }
+  async function play(){
+    if (!TRACKS.length) return;
+    const t = TRACKS[ti];
+    if (audio.dataset.i !== String(ti)){ audio.src = t.src; audio.dataset.i = ti; }
+    playing = true; ui();
+    // start right inside the tap: iPhone and Android only allow sound that starts from a user gesture
+    audio.play().catch(() => {});
+  }
+  function stop(){ playing = false; audio.pause(); ui(); }
+  async function change(dir){
+    if (swapping || TRACKS.length < 2) return;
+    swapping = true;
+    const was = playing;
+    if (was){ stop(); await wait(700); }  // needle goes back to the rest
+    rec.classList.add('out'); await wait(450);
+    ti = (ti + dir + TRACKS.length) % TRACKS.length;
+    label();
+    rec.classList.remove('out'); rec.classList.add('from'); void rec.offsetWidth;
+    rec.classList.remove('from'); rec.classList.add('back'); await wait(520);
+    rec.classList.remove('back');
+    swapping = false;
+    if (was) play();
+  }
+  player.addEventListener('click', () => { if (!swapping) (playing ? stop() : play()); });
+  ppBtn.addEventListener('click', () => { if (!swapping) (playing ? stop() : play()); });
+  $('prevBtn').addEventListener('click', () => change(-1));
+  $('nextBtn').addEventListener('click', () => change(1));
+  sleeve.addEventListener('click', () => change(1));
+  audio.addEventListener('ended', () => change(1));
+  if (!TRACKS.length) document.querySelector('.radio').hidden = true;
+  ui();
 
   /* ---------- snow in the window ---------- */
   const snow = document.getElementById('snow');
