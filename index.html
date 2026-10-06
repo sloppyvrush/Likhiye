@@ -497,7 +497,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.naida{display:none}
   .lamp{left:40%; width:20%; height:9%}
   .moth{width:3.4cqw}
   .dust{left:10%; width:80%; top:4%; height:60%}
@@ -545,7 +545,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
   html.room-pan .moth{will-change:transform}
   html.room-pan .stage{width:var(--stageW); aspect-ratio:16/9; margin:0}
   html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
-  html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
+  html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table, html.room-pan .naida{display:block}
   html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
   html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
@@ -566,6 +566,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
   html.room-pan .radio .vol-row{font-size:1.05cqw; gap:.8cqw}
   html.room-pan input.vol{height:24px}
   html.room-pan .lamp{left:47%; width:9%; height:12%}
+  html.room-pan .naida-note{font-size:1.4cqw}
   html.room-pan .moth{width:1.6cqw}
   html.room-pan .dust{left:26%; top:7%; width:50%; height:78%}
   html.room-pan .pan-hint{display:block}
@@ -573,6 +574,52 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .pan-hint{display:none; position:relative; z-index:9; margin:6px auto -30px; height:34px; text-align:center; pointer-events:none;
   font:20px/34px var(--hand); color:#e3c98f; transition:opacity .6s}
 .pan-hint.gone{opacity:0}
+
+
+/* dossier photo table */
+.ft-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:16px; align-items:start}
+.ft-ph{position:relative; display:block; width:100%; padding:8px 8px 10px; border:0; margin:0; text-align:left; cursor:zoom-in;
+  background:#f8f3e6; box-shadow:0 3px 9px rgba(0,0,0,.3); transform:rotate(var(--r,0deg)); transition:transform .25s}
+.ft-ph:hover{transform:rotate(0) scale(1.03)}
+.ft-ph:focus-visible{outline:2px solid var(--pen); outline-offset:3px}
+.ft-ph img{display:block; width:100%; aspect-ratio:2/3; object-fit:cover; object-position:50% 18%; filter:sepia(.18) contrast(1.04); background:#2a211b}
+.ft-ph.pet img{object-fit:contain; object-position:50% 70%; padding:14% 6%; background:radial-gradient(ellipse at 50% 60%, #6b5038, #2a1e15 75%)}
+.ft-ph::before,.ft-ph::after{content:""; position:absolute; width:22px; height:22px; background:linear-gradient(135deg, rgba(40,30,20,.75) 50%, transparent 50%)}
+.ft-ph::before{left:3px; top:3px}
+.ft-ph::after{right:3px; bottom:34px; transform:rotate(180deg)}
+.ft-ph .cap{display:block; margin-top:8px; font:12px/1.35 var(--mono); color:#4a3a22}
+.ft-note{font-family:var(--hand); font-size:20px; color:var(--pen); transform:rotate(-2deg); margin:18px 0 0 6px}
+.lightbox{position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:20px; background:rgba(12,8,5,.86); cursor:zoom-out}
+.lightbox[hidden]{display:none}
+.lightbox figure{margin:0; background:#f8f3e6; padding:12px 12px 14px; box-shadow:0 20px 50px rgba(0,0,0,.6); max-width:min(92vw,560px); animation:lbIn .3s ease}
+.lightbox img{display:block; max-height:78vh; max-width:100%; margin:0 auto}
+.lightbox img.pet{background:radial-gradient(ellipse at 50% 60%, #6b5038, #2a1e15 75%); padding:6%}
+.lightbox figcaption{font:14px var(--mono); color:#4a3a22; margin-top:10px}
+.lb-x{position:absolute; top:12px; right:16px; border:0; background:none; color:#f3ecdc; font:34px/1 var(--serif); cursor:pointer}
+@keyframes lbIn{from{transform:scale(.94) rotate(-1deg); opacity:0}}
+@media (prefers-reduced-motion:reduce){.lightbox figure{animation:none}}
+@media (max-width:640px){ .ft-grid{gap:12px} .ft-ph .cap{font-size:10.5px} .ft-ph::after{bottom:30px} }
+
+/* pets on the case folders */
+.folders.folders{row-gap:84px; padding-top:58px}
+.pet-on{position:absolute; z-index:2; pointer-events:none}
+.pet-on img{display:block; width:100%; filter:drop-shadow(0 6px 6px rgba(0,0,0,.45))}
+.pet-on.dog{width:190px; right:18px; top:-70px}
+.pet-on.cat{width:118px; right:26px; top:-104px}
+.pet-on i{position:absolute; left:-6px; top:8px; transform:translateX(-100%) rotate(-3deg); white-space:nowrap; font:normal 19px var(--hand); color:#e3c98f; opacity:0; transition:opacity .25s}
+.folder:hover .pet-on i,.folder:focus-visible .pet-on i{opacity:1}
+@media (max-width:640px){ .folders.folders{row-gap:92px; padding-top:44px} .pet-on.dog{width:140px; top:-52px; right:10px} .pet-on.cat{width:88px; top:-78px; right:16px} .pet-on i{display:none} }
+
+/* Najda in the room */
+.naida{left:75.5%; width:16.5%; bottom:.6%; z-index:2; padding:0; border:0; background:none; cursor:pointer}
+.naida img{display:block; width:100%; transform-origin:50% 100%; animation:breathe 4.6s ease-in-out infinite; filter:drop-shadow(0 .5cqw .4cqw rgba(0,0,0,.55)) brightness(.86) sepia(.08)}
+@keyframes breathe{50%{transform:scale(1.012,1.022)}}
+.naida-note{position:absolute; left:50%; bottom:100%; transform:translate(-50%,-.4cqw) rotate(-2deg); white-space:nowrap; padding:.4cqw .8cqw; background:#f4ecd2; color:#1f2f6b;
+  font:500 1.25cqw/1.1 'Caveat',var(--hand); box-shadow:0 .2cqw .5cqw rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .25s}
+.naida:hover .naida-note,.naida.say .naida-note,.naida:focus-visible .naida-note{opacity:1}
+.naida.wag img{animation:wag .5s ease-in-out 2, breathe 4.6s ease-in-out .5s infinite}
+@keyframes wag{25%{transform:rotate(-1.2deg)} 75%{transform:rotate(1.2deg)}}
+@media (prefers-reduced-motion:reduce){.naida img{animation:none}}
 
 /* ================= CONTENT ================= */
 .wrap{max-width:1120px; margin:0 auto; padding:0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right))}
@@ -1398,6 +1445,7 @@ body.splash-on{overflow:hidden}
         <label class="vol-row"><span aria-hidden="true">тише</span><input type="range" class="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Громкость"><span aria-hidden="true">громче</span></label>
       </div>
 
+      <button class="naida" id="naida" type="button" aria-label="Найда, старая служебная овчарка"><img src="assets/people/naida.webp" alt=""><span class="naida-note">Найда. Гроза ей не нравится</span></button>
       <div class="servant" aria-hidden="true">
         <div class="cornice"></div>
         <div class="sv">
@@ -1476,7 +1524,7 @@ body.splash-on{overflow:hidden}
     <section class="section on-wall">
       <p class="story-kicker">Первая история</p>
       <h2>Почти честные</h2>
-      <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя никогда не подписывает враньё. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
+      <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя не терпит вранья. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
       <p class="muted prose">У них общие старты: сцена та же, а мысли у каждого свои.</p>
 
       <div class="night">
@@ -1719,6 +1767,7 @@ body.splash-on{overflow:hidden}
   <p>Сайт: <a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Sloppy</a></p>
 </footer>
 
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Фотография крупно"><figure><img alt=""><figcaption></figcaption></figure><button class="lb-x" type="button" aria-label="Закрыть">×</button></div>
 <script src="bots.js"></script>
 <script src="music.js"></script>
 <script>
@@ -1781,6 +1830,11 @@ body.splash-on{overflow:hidden}
       <div class="prose">${list(b.prose.slice(0, half), p => `<p>${p}</p>`)}</div>`);
     P.push(`${head('Характеристика, продолжение')}<div class="prose">${list(b.prose.slice(half), p => `<p>${p}</p>`)}</div>`);
     P.push(`${head('Как говорит')}<ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul>`);
+    if (b.gallery && b.gallery.length){
+      const ph = ([src, cap], k) => `<button class="ft-ph${/naida|pirat/.test(src) ? ' pet' : ''}" type="button" style="--r:${[-1.6, 1.2, 1.4, -1.1][k % 4]}deg" data-full="${src}" data-cap="${cap}" aria-label="${cap}, открыть крупно"><img src="${src}" alt="" loading="lazy"><span class="cap">${cap}</span></button>`;
+      P.push(`${head('Фототаблица')}<div class="ft-grid">${b.gallery.slice(0, 2).map(ph).join('')}</div>${b.galleryNote ? `<p class="ft-note">${b.galleryNote}</p>` : ''}`);
+      P.push(`${head('Фототаблица, продолжение')}<div class="ft-grid">${b.gallery.slice(2, 4).map((g, k) => ph(g, k + 2)).join('')}</div>`);
+    }
     P.push(`${head('Связи')}<ul class="links">${list(b.links, ([n, d]) => `<li><b>${n}</b>, ${d}</li>`)}</ul>`);
     for (let s0 = 0; s0 < b.starts.length; s0 += 3){
       P.push(`${head(s0 ? 'Старты, продолжение' : 'Старты')}<div class="starts">${list(b.starts.slice(s0, s0 + 3), (st, k) => {
@@ -1837,6 +1891,7 @@ body.splash-on{overflow:hidden}
     <span class="open">Открыть дело</span>
   </div>
   <span class="ties" aria-hidden="true"></span>
+  ${b.pet ? `<span class="pet-on ${/pirat/.test(b.pet.src) ? 'cat' : 'dog'}" aria-hidden="true"><img src="${b.pet.src}" alt="" loading="lazy"><i>${b.pet.name}, ${b.pet.note}</i></span>` : ''}
 </a>`;
   const soon = `<div class="folder soon"><div><div class="name">Дело в работе</div><p class="say">Скоро в городе появятся новые лица.</p></div></div>`;
   document.getElementById('botpages').outerHTML = BOTS.map((b, i) => dossier(b, i)).join('');
@@ -2203,6 +2258,30 @@ body.splash-on{overflow:hidden}
       s.classList.add('gone'); s.classList.remove('flut'); s.innerHTML = ''; s.disabled = true; s.removeAttribute('aria-label'); s.setAttribute('aria-hidden', 'true');
       setTimeout(() => note.classList.remove('tug'), 320);
       fall.addEventListener('animationend', () => { fall.remove(); if (!note.querySelector('.falling')) note.classList.remove('tearing'); });
+    });
+  })();
+
+  /* ---------- photo table: open a photo large ---------- */
+  (() => {
+    const lb = document.getElementById('lightbox'); if (!lb) return;
+    const img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+    let back = null;
+    const close = () => { if (lb.hidden) return; lb.hidden = true; if (back) back.focus(); };
+    document.addEventListener('click', e => {
+      const ph = e.target.closest('.ft-ph');
+      if (ph){ back = ph; img.src = ph.dataset.full; img.className = ph.classList.contains('pet') ? 'pet' : ''; cap.textContent = ph.dataset.cap; lb.hidden = false; lb.querySelector('.lb-x').focus(); return; }
+      if (e.target.closest('#lightbox')) close();
+    });
+    addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    addEventListener('hashchange', close);
+  })();
+
+  /* ---------- Najda on the floor: a tap makes her wag ---------- */
+  (() => {
+    const n = document.getElementById('naida'); if (!n) return;
+    n.addEventListener('click', () => {
+      n.classList.remove('wag'); void n.offsetWidth; n.classList.add('wag', 'say');
+      clearTimeout(n._t); n._t = setTimeout(() => n.classList.remove('say', 'wag'), 2200);
     });
   })();
 
