@@ -396,7 +396,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .shelf-head h2{margin:0}
 .vol-big{display:flex; align-items:center; gap:12px; font-size:16px; color:#d9c9a4}
 .vol-big input{width:min(240px,50vw); height:22px}
-.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; padding:26px 6px 6px;
+.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-left:12px; padding:26px 12px 6px;
   scrollbar-width:thin; scrollbar-color:#6E3B1F transparent;
   background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 158px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 172px/100% 10px no-repeat}
 .lp{flex:0 0 auto; width:140px; scroll-snap-align:start; border:0; background:none; padding:0 0 4px; cursor:pointer; text-align:left; color:var(--cream)}
@@ -487,7 +487,10 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.lamp,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.moth,.dust{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing{display:none}
+  .lamp{left:40%; width:20%; height:9%}
+  .moth{width:3.4cqw}
+  .dust{left:10%; width:80%; top:4%; height:60%}
   .carpet{left:5%; width:90%; top:3%; height:52%}
   .stand{left:12%; width:76%; bottom:15.5%; height:12%}
   .tv{left:4%; width:92%; bottom:27%}
@@ -511,6 +514,42 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
   .radio .vol-row{font-size:2.2cqw; gap:1.4cqw}
   input.vol{height:24px}
 }
+
+/* panorama: the full desktop room on a phone, swiped sideways */
+@media (max-width:760px){
+  html.room-pan .room{--stageW:calc(min(100svh - var(--bar) - 60px, 640px) * 16 / 9); --floor:17%; overflow-x:auto; overflow-y:hidden;
+    overscroll-behavior-x:contain; scrollbar-width:none; background-attachment:local}
+  html.room-pan .room::-webkit-scrollbar{display:none}
+  html.room-pan .stage{width:var(--stageW); aspect-ratio:16/9; margin:0}
+  html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
+  html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
+  html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
+  html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
+  html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
+  html.room-pan .tv .case{grid-template-columns:1fr 22%}
+  html.room-pan .screen h1, html.room-pan .screen .cap .t{font-size:2.5cqw}
+  html.room-pan .screen .cap p{font-size:1.3cqw; max-width:30ch}
+  html.room-pan .screen .cap a{font-size:1.35cqw; padding:.5cqw 1cqw}
+  html.room-pan .screen .osd{font-size:2.1cqw}
+  html.room-pan .tv .plate{font-size:1.05cqw}
+  html.room-pan .dial .n{width:30px; height:30px; margin:-15px; font-size:12px; line-height:30px}
+  html.room-pan .tv .note{font-size:1.25cqw; padding:.45cqw .8cqw; top:-7%}
+  html.room-pan .player{left:59.5%; right:auto; width:15%; bottom:25%}
+  html.room-pan .player .front{height:1.7cqw; font-size:.7cqw}
+  html.room-pan .radio{left:24.6%; width:28%; bottom:1.2%; gap:.7cqw; padding:.8cqw 1cqw}
+  html.room-pan .radio button{width:3.2cqw; height:3.2cqw; font-size:1.5cqw}
+  html.room-pan .radio .pp{width:3.8cqw; height:3.8cqw; font-size:1.4cqw}
+  html.room-pan .radio .who{font-size:1.15cqw} html.room-pan .radio .what{font-size:1.9cqw}
+  html.room-pan .radio .vol-row{font-size:1.05cqw; gap:.8cqw}
+  html.room-pan input.vol{height:24px}
+  html.room-pan .lamp{left:47%; width:9%; height:12%}
+  html.room-pan .moth{width:1.6cqw}
+  html.room-pan .dust{left:26%; top:7%; width:50%; height:78%}
+  html.room-pan .pan-hint{display:block}
+}
+.pan-hint{display:none; position:relative; z-index:9; margin:6px auto -30px; height:34px; text-align:center; pointer-events:none;
+  font:20px/34px var(--hand); color:#e3c98f; transition:opacity .6s}
+.pan-hint.gone{opacity:0}
 
 /* ================= CONTENT ================= */
 .wrap{max-width:1120px; margin:0 auto; padding:0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right))}
@@ -1169,6 +1208,7 @@ body.splash-on{overflow:hidden}
     <div class="light-shade" aria-hidden="true"></div>
     <div class="light-glow" aria-hidden="true"></div>
   </section>
+  <div class="pan-hint" aria-hidden="true">← листай комнату →</div>
 
   <section class="records" aria-labelledby="shelfTitle">
     <div class="wrap">
@@ -1356,6 +1396,15 @@ body.splash-on{overflow:hidden}
 <script>
 (() => {
   const BOTS = window.BOTS || [];
+  // phones get the whole room, swiped sideways; ?room=compact brings back the squeezed version
+  if (!/[?&]room=compact\b/.test(location.search)) document.documentElement.classList.add('room-pan');
+  addEventListener('load', () => {
+    const room = document.querySelector('.room');
+    if (!document.documentElement.classList.contains('room-pan') || room.scrollWidth <= room.clientWidth) return;
+    room.scrollLeft = room.scrollWidth * .385 - room.clientWidth / 2;
+    const hint = document.querySelector('.pan-hint');
+    setTimeout(() => room.addEventListener('scroll', () => hint.classList.add('gone'), {once:true, passive:true}), 400);
+  });
 
   /* ---------- intro: the record before the room ---------- */
   const introEl = document.getElementById('intro');
