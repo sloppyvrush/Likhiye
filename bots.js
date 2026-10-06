@@ -19,8 +19,9 @@
   starts               старты; первый в списке помечается как «первый»
   files                пути к PNG, JSON и лорбуку и имя файла при скачивании; пустая строка значит «кнопки нет»,
                        а если пусты все три, на странице будет написано «Карточка пока не выложена»
-  gallery              фототаблица в личном деле: [картинка, подпись]; четыре снимка, по два на страницу
-  pet                  питомец: картинка без фона, имя и пометка; сидит на папке в каталоге
+  gallery              фототаблица в личном деле: [картинка без фона, подпись, фон]; четыре снимка, последний горизонтальный.
+                       Фоны: lineup (ростомер), bricks (кирпичная стена), home-v / home-l (обои и пол), floor (паркет), plaid (плед)
+  galleryNotes         две пометки ручкой на страницах фототаблицы
   loreCount            сколько записей в лорбуке
   credit               подпись автора (можно со ссылкой), или пустая строка
 */
@@ -211,13 +212,12 @@ window.BOTS = [
       "name": "Виктор_Громов"
     },
     "gallery": [
-      ["assets/people/viktor-uniform.webp", "Фото 1. В форменной одежде"],
-      ["assets/people/viktor-civil.webp", "Фото 2. В гражданской одежде"],
-      ["assets/people/viktor-home.webp", "Фото 3. По месту жительства"],
-      ["assets/people/naida.webp", "Фото 4. Служебная собака Найда, на пенсии"]
+      ["assets/people/viktor-uniform.webp", "Фото 1. В форменной одежде", "lineup"],
+      ["assets/people/viktor-civil.webp", "Фото 2. В гражданской одежде", "bricks"],
+      ["assets/people/viktor-home.webp", "Фото 3. По месту жительства", "home-v"],
+      ["assets/people/naida.webp", "Фото 4. Служебная собака Найда, на пенсии", "floor"]
     ],
-    "galleryNote": "Форму надевает только к начальству и на похороны.",
-    "pet": {"src": "assets/people/naida.webp", "name": "Найда", "note": "боится грозы"},
+    "galleryNotes": ["Форму надевает только к начальству и на похороны.", "Найда решает про людей быстрее него."],
     "loreCount": 50,
     "credit": "Витя персонаж <a href=\"https://t.me/sillysloppy\" target=\"_blank\" rel=\"noopener\">Sloppy</a>."
   },
@@ -390,13 +390,12 @@ window.BOTS = [
       "name": "Алексей_Тихонов"
     },
     "gallery": [
-      ["assets/people/lesha-uniform.webp", "Фото 1. В форменной одежде"],
-      ["assets/people/lesha-civil.webp", "Фото 2. В гражданской одежде"],
-      ["assets/people/lesha-home.webp", "Фото 3. По месту жительства"],
-      ["assets/people/pirat.webp", "Фото 4. Кот Пират, одноглазый, прибился сам"]
+      ["assets/people/lesha-uniform.webp", "Фото 1. В форменной одежде", "lineup"],
+      ["assets/people/lesha-civil.webp", "Фото 2. В гражданской одежде", "bricks"],
+      ["assets/people/lesha-home.webp", "Фото 3. По месту жительства", "home-l"],
+      ["assets/people/pirat.webp", "Фото 4. Кот Пират, одноглазый, прибился сам", "plaid"]
     ],
-    "galleryNote": "Бумажка с фамилиями, к вечеру выучит.",
-    "pet": {"src": "assets/people/pirat.webp", "name": "Пират", "note": "одноглазый, прибился сам"},
+    "galleryNotes": ["Бумажка с фамилиями, к вечеру выучит.", "Пират спит на его кителе. Глаз потерял в драке, ещё до Лёши."],
     "loreCount": 33,
     "credit": "Лёша персонаж <a href=\"https://t.me/milkiwaywlw\" target=\"_blank\" rel=\"noopener\">Milkiway</a>."
   }
