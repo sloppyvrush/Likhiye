@@ -497,7 +497,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.naida{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing{display:none}
   .lamp{left:40%; width:20%; height:9%}
   .moth{width:3.4cqw}
   .dust{left:10%; width:80%; top:4%; height:60%}
@@ -545,7 +545,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
   html.room-pan .moth{will-change:transform}
   html.room-pan .stage{width:var(--stageW); aspect-ratio:16/9; margin:0}
   html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
-  html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table, html.room-pan .naida{display:block}
+  html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
   html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
   html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
@@ -566,7 +566,6 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
   html.room-pan .radio .vol-row{font-size:1.05cqw; gap:.8cqw}
   html.room-pan input.vol{height:24px}
   html.room-pan .lamp{left:47%; width:9%; height:12%}
-  html.room-pan .naida-note{font-size:1.4cqw}
   html.room-pan .moth{width:1.6cqw}
   html.room-pan .dust{left:26%; top:7%; width:50%; height:78%}
   html.room-pan .pan-hint{display:block}
@@ -583,13 +582,32 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .ft-side .ft-note{margin:0 0 0 4px}
 .ft-note{font-family:var(--hand); font-size:20px; line-height:1.25; color:var(--pen); transform:rotate(-2deg); margin:18px 0 0 6px}
 .ft-grid .ft-note{align-self:center; margin:0}
-.ft-ph{position:relative; display:block; width:100%; padding:8px 8px 10px; border:0; margin:0; text-align:left; cursor:zoom-in;
-  background:#f8f3e6; box-shadow:0 3px 9px rgba(0,0,0,.3); transform:rotate(var(--r,0deg)); transition:transform .25s}
+.ft-ph{position:relative; display:block; width:100%; perspective:1400px; container-type:inline-size; transform:rotate(var(--r,0deg)); transition:transform .25s}
 .ft-ph:hover{transform:rotate(0) scale(1.03)}
-.ft-ph:focus-visible{outline:2px solid var(--pen); outline-offset:3px}
-.ft-ph::before,.ft-ph::after{content:""; position:absolute; z-index:2; width:22px; height:22px; background:linear-gradient(135deg, rgba(40,30,20,.8) 50%, transparent 50%)}
-.ft-ph::before{left:3px; top:3px}
-.ft-ph::after{right:3px; bottom:34px; transform:rotate(180deg)}
+.ft-flip{position:relative; display:grid; width:100%; padding:0; border:0; margin:0; background:none; text-align:left; cursor:pointer; color:inherit; font:inherit;
+  transform-style:preserve-3d; transition:transform .7s cubic-bezier(.3,.1,.2,1)}
+.ft-ph.flipped .ft-flip{transform:rotateY(180deg)}
+.ft-flip:focus-visible{outline:2px solid var(--pen); outline-offset:3px}
+.ft-front,.ft-back{grid-area:1/1; display:block; -webkit-backface-visibility:hidden; backface-visibility:hidden; box-shadow:0 3px 9px rgba(0,0,0,.3)}
+.ft-front{position:relative; padding:8px 8px 10px; background:#f8f3e6}
+.ft-back{position:relative; transform:rotateY(180deg); overflow:hidden; padding:12% 9% 9%;
+  background:radial-gradient(ellipse at 70% 80%, rgba(150,120,70,.16), transparent 60%), repeating-linear-gradient(0deg, transparent 0 3px, rgba(120,100,60,.05) 3px 4px), #ebe2cb}
+.ft-lab{position:absolute; right:7%; top:5%; padding:3px 6px; border:1.5px solid rgba(110,60,150,.55); border-radius:3px; transform:rotate(4deg);
+  font:clamp(7px,4.2cqw,10px)/1.25 var(--mono); color:rgba(110,60,150,.7); text-align:center; text-transform:uppercase; letter-spacing:.04em}
+.ft-hw{display:block; margin-top:22%; font:500 clamp(14px,9cqw,22px)/1.18 'Caveat',var(--hand); color:#22357a; transform:rotate(-3deg)}
+.ft-back::after{content:"фотобумага «Унибром»  ГОСТ 10752-79"; position:absolute; left:8%; right:8%; bottom:5%; font:clamp(6px,3.6cqw,9px)/1.2 var(--mono); color:rgba(90,70,40,.4); letter-spacing:.06em; text-align:center}
+.ft-hint{margin:6px 0 0; font:13px/1.3 var(--mono); color:#7a6648}
+.ft-ph.wide .ft-hw{margin-top:9%; font-size:clamp(14px,6.4cqw,22px)}
+.ft-front::before,.ft-front::after{content:""; position:absolute; z-index:2; width:22px; height:22px; background:linear-gradient(135deg, rgba(40,30,20,.8) 50%, transparent 50%)}
+.ft-front::before{left:3px; top:3px}
+.ft-front::after{right:3px; bottom:34px; transform:rotate(180deg)}
+.ft-zoom{position:absolute; z-index:3; right:12px; top:12px; width:30px; height:30px; display:grid; place-items:center; padding:0; border:0; border-radius:50%;
+  background:rgba(248,243,230,.9); color:#3a2a18; cursor:zoom-in; box-shadow:0 1px 4px rgba(0,0,0,.35); opacity:0; transition:opacity .2s}
+.ft-zoom svg{width:17px; height:17px}
+.ft-ph:hover .ft-zoom,.ft-zoom:focus-visible{opacity:1}
+.ft-ph.flipped .ft-zoom{opacity:0; pointer-events:none}
+@media (hover:none){ .ft-zoom{opacity:.92} }
+@media (prefers-reduced-motion:reduce){ .ft-flip{transition:none} }
 .ft-ph .cap{display:block; margin-top:8px; font:12px/1.35 var(--mono); color:#4a3a22}
 .scene{display:block; position:relative; overflow:hidden; aspect-ratio:2/3; filter:sepia(.14) contrast(1.03)}
 .ft-ph.wide .scene{aspect-ratio:3/2}
@@ -641,55 +659,60 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .lightbox figure{max-width:min(94vw,800px)}
 .lightbox .scene{height:min(76vh,900px); width:auto; margin:0 auto}
 .lightbox .scene.wide{height:auto; width:min(86vw,760px); aspect-ratio:3/2}
-@media (max-width:640px){ .ft-grid{gap:12px} .ft-ph .cap{font-size:10.5px} .ft-ph::after{bottom:30px} .bg-lineup .plate{font-size:8px} }
+@media (max-width:640px){ .ft-grid{gap:12px} .ft-ph .cap{font-size:10.5px} .ft-front::after{bottom:30px} .bg-lineup .plate{font-size:8px} }
 
 
-/* home page: the two case folders tossed together, a stamp on top opens them */
-.pile{position:relative; display:block; max-width:780px; height:clamp(380px, 48vw, 500px); margin:36px auto 20px; color:inherit; text-decoration:none}
-.pf{position:absolute; top:0; width:min(56%, 420px); height:86%; padding:30px 26px 26px; border-radius:4px 4px 6px 6px; color:var(--ink);
-  background:var(--kraft); background-image:linear-gradient(160deg, rgba(255,255,255,.18), transparent 50%), repeating-linear-gradient(0deg, rgba(0,0,0,.025) 0 2px, transparent 2px 5px);
-  box-shadow:0 16px 34px rgba(0,0,0,.5), inset 0 0 0 1px rgba(80,55,25,.35); transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
-.pf0{left:3%; top:9%; transform:rotate(-7deg); z-index:2}
-.pf1{right:3%; transform:rotate(5deg); z-index:1}
-.pf2{left:22%; top:4%; transform:rotate(1deg); z-index:0}
-.pf-tab{position:absolute; top:-24px; left:22px; padding:5px 14px 6px; border-radius:6px 6px 0 0; background:#b48f5c; font:13px var(--mono); color:#3a2a15; box-shadow:inset 0 0 0 1px rgba(80,55,25,.3)}
-.pf1 .pf-tab{left:auto; right:22px}
-.pf-ph{position:relative; width:58%; background:#f3ecdc; padding:7px; transform:rotate(-2.5deg); box-shadow:0 4px 10px rgba(0,0,0,.35)}
-.pf1 .pf-ph{margin-left:auto; transform:rotate(2deg)}
-.pf-ph img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.25) contrast(1.05)}
-.pf-name{font:400 clamp(20px, 2.6vw, 28px)/1.05 var(--display); margin:16px 0 4px}
-.pf1 .pf-name,.pf1 .pf-meta{text-align:right}
-.pf-meta{font:13px var(--mono); color:#5c4626; margin:0}
-.pile-stamp{position:absolute; left:50%; top:47%; z-index:5; width:clamp(150px, 22vw, 200px); color:#b3261e; transform:translate(-50%,-50%) rotate(-14deg);
-  border-radius:50%; background:radial-gradient(circle, rgba(243,232,210,.92) 0 60%, rgba(243,232,210,.75) 70%, transparent 71%);
-  filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)); transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
-.pile-stamp svg{display:block; width:100%}
-.pile:hover .pf0,.pile:focus-visible .pf0{transform:rotate(-10deg) translate(-18px, 6px)}
-.pile:hover .pf1,.pile:focus-visible .pf1{transform:rotate(8deg) translate(18px, -4px)}
-.pile:hover .pile-stamp,.pile:focus-visible .pile-stamp{transform:translate(-50%,-50%) rotate(-8deg) scale(1.07)}
-.pile:active .pile-stamp{transform:translate(-50%,-50%) rotate(-8deg) scale(.94)}
-.pile:focus-visible{outline:none}
-.pile:focus-visible .pile-stamp{box-shadow:0 0 0 4px #e3c98f}
+/* home page: two service IDs on the table; they open on hover (tap on phones) */
+.ids{position:relative; max-width:880px; height:clamp(400px, 46vw, 480px); margin:34px auto 20px}
+.ksiva{position:absolute; z-index:1; width:min(330px, 38%); aspect-ratio:1.45; container-type:inline-size; perspective:1800px; color:#2a2418; text-decoration:none;
+  transform:rotate(var(--r)); transition:transform .5s cubic-bezier(.3,1.2,.5,1)}
+.k0{left:43%; top:4%; --r:-6deg}
+.k1{left:59%; top:42%; --r:5deg}
+.ksiva:hover,.ksiva:focus-visible,.ksiva.open{z-index:4; transform:rotate(calc(var(--r) * .4)) translateY(-6px)}
+.ksiva:focus-visible{outline:none}
+.ksiva::before{content:""; position:absolute; inset:4% -1% -4% 2%; background:rgba(0,0,0,.4); filter:blur(10px); border-radius:8px; z-index:-1}
+.k-page{position:absolute; inset:0; padding:5.5cqw 6cqw; border-radius:2px 7px 7px 2px; box-shadow:inset 3px 0 6px rgba(0,0,0,.18);
+  background:repeating-radial-gradient(circle at 120% 50%, transparent 0 7px, rgba(140,90,110,.08) 7px 8px), linear-gradient(135deg,#efe1d6,#e6d3c6)}
+.k-row{display:grid; grid-template-columns:30% 1fr; gap:3cqw; align-items:baseline; margin:0 0 2.4cqw; border-bottom:1px solid rgba(80,40,40,.25); padding-bottom:1cqw}
+.k-row span{font:4.2cqw/1.1 var(--serif); color:#6b4a4a}
+.k-row b{font:700 5cqw/1.1 var(--mono); letter-spacing:.06em; text-transform:uppercase; color:#1d1b2e}
+.k-row.wide b{font-size:3.6cqw; text-transform:none; letter-spacing:0; line-height:1.2}
+.k-valid{font:3.6cqw/1.2 var(--serif); color:#5a3c3c; margin:2.5cqw 0 1cqw}
+.k-sign{display:flex; align-items:center; gap:2cqw; margin:0; font:3.4cqw/1.1 var(--serif); color:#5a3c3c}
+.k-sign svg{width:30cqw}
+.k-cover{position:absolute; inset:0; transform-origin:0 50%; transform-style:preserve-3d; transition:transform .85s cubic-bezier(.35,.9,.3,1)}
+.ksiva:hover .k-cover,.ksiva:focus-visible .k-cover,.ksiva.open .k-cover{transform:rotateY(-178deg)}
+.k-face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:7px 2px 2px 7px}
+.k-front{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1cqw; border-radius:2px 7px 7px 2px; color:#d9b45c;
+  background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.14), transparent 60%), repeating-radial-gradient(circle at 40% 40%, rgba(0,0,0,.05) 0 1px, transparent 1px 3px), linear-gradient(135deg,#8e211b,#6e1713 60%,#5a110e);
+  box-shadow:inset 0 0 0 2.2cqw rgba(0,0,0,.0), inset 0 0 0 calc(2.2cqw + 1px) rgba(217,180,92,.55), inset 0 0 18px rgba(0,0,0,.45)}
+.k-emb{width:20cqw; filter:drop-shadow(0 1px 0 rgba(0,0,0,.45))}
+.k-emb svg{display:block; width:100%}
+.k-t1{font:700 13cqw/1 var(--display); letter-spacing:.12em; text-shadow:0 1px 0 rgba(0,0,0,.5), 0 -1px 0 rgba(255,230,160,.25)}
+.k-t2{font:700 5.2cqw/1 var(--mono); letter-spacing:.4em; text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.k-back{transform:rotateY(180deg); padding:5cqw; text-align:center;
+  background:repeating-radial-gradient(circle at -20% 50%, transparent 0 7px, rgba(140,90,110,.08) 7px 8px), linear-gradient(225deg,#efe1d6,#e6d3c6); box-shadow:inset -3px 0 6px rgba(0,0,0,.18)}
+.k-head{margin:0; font:700 4.2cqw/1.2 var(--mono); letter-spacing:.06em; color:#5a1f1f; text-transform:uppercase}
+.k-no{margin:1.5cqw 0 3cqw; font:3.8cqw/1.2 var(--serif); color:#5a3c3c}
+.k-ph{width:34%; margin:0 auto; padding:1.2cqw; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.k-ph img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; filter:grayscale(.85) contrast(1.1)}
+.k-stamp{position:absolute; left:56%; top:46%; width:30cqw; aspect-ratio:1; border-radius:50%; transform:rotate(-18deg);
+  border:.9cqw solid rgba(88,52,150,.6); box-shadow:inset 0 0 0 2.4cqw transparent, inset 0 0 0 calc(2.4cqw + .5cqw) rgba(88,52,150,.5); background:radial-gradient(circle, rgba(88,52,150,.18) 0 18%, transparent 19%)}
+.ids-stamp{position:absolute; z-index:3; left:14%; top:60%; width:clamp(130px, 18vw, 170px); color:#b3261e; border-radius:50%; transform:rotate(-14deg);
+  background:radial-gradient(circle, rgba(243,232,210,.94) 0 60%, rgba(243,232,210,.78) 70%, transparent 71%); filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)); transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.ids-stamp svg{display:block; width:100%}
+.ids-stamp:focus-visible{outline:none; box-shadow:0 0 0 4px #e3c98f}
+.ids-stamp:hover,.ids-stamp:focus-visible{transform:rotate(-8deg) scale(1.07)}
+.ids-stamp:active{transform:rotate(-8deg) scale(.94)}
 @media (max-width:640px){
-  .pile{height:430px; margin-top:44px}
-  .pf{width:70%; height:78%; padding:24px 16px 18px}
-  .pf0{left:0; top:14%} .pf1{right:0; top:0}
-  .pf-ph{width:72%}
-  .pf-tab{font-size:11px; top:-21px}
-  .pf-meta{font-size:11px}
+  .ids{height:290px; margin-top:24px}
+  .ksiva{width:48%}
+  .k0{left:50%; top:3%} .k1{left:47%; top:50%}
+  .ids-stamp{left:5%; top:47%; width:118px}
 }
-@media (prefers-reduced-motion:reduce){.pf,.pile-stamp{transition:none}}
+@media (prefers-reduced-motion:reduce){.k-cover,.ksiva{transition:none}}
 
-/* Najda in the room */
-.naida{left:75.5%; width:16.5%; bottom:.6%; z-index:2; padding:0; border:0; background:none; cursor:pointer}
-.naida img{display:block; width:100%; transform-origin:50% 100%; animation:breathe 4.6s ease-in-out infinite; filter:drop-shadow(0 .5cqw .4cqw rgba(0,0,0,.55)) brightness(.86) sepia(.08)}
-@keyframes breathe{50%{transform:scale(1.012,1.022)}}
-.naida-note{position:absolute; left:50%; bottom:100%; transform:translate(-50%,-.4cqw) rotate(-2deg); white-space:nowrap; padding:.4cqw .8cqw; background:#f4ecd2; color:#1f2f6b;
-  font:500 1.25cqw/1.1 'Caveat',var(--hand); box-shadow:0 .2cqw .5cqw rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .25s}
-.naida:hover .naida-note,.naida.say .naida-note,.naida:focus-visible .naida-note{opacity:1}
-.naida.wag img{animation:wag .5s ease-in-out 2, breathe 4.6s ease-in-out .5s infinite}
-@keyframes wag{25%{transform:rotate(-1.2deg)} 75%{transform:rotate(1.2deg)}}
-@media (prefers-reduced-motion:reduce){.naida img{animation:none}}
+
 
 /* ================= CONTENT ================= */
 .wrap{max-width:1120px; margin:0 auto; padding:0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right))}
@@ -830,8 +853,6 @@ p{margin:0 0 1em}
 .leaf .links{columns:1}
 .leaf .links li{padding:6px 0; font-size:16px}
 .leaf .starts{grid-template-columns:1fr; gap:16px}
-.leaf .start{padding:16px 18px 18px}
-.leaf .start p{font-size:15.5px}
 .leaf .prose p{font-size:16.5px}
 .leaf .mug{width:46%; margin:4px auto 16px}
 .leaf .fields{font-size:13.5px}
@@ -854,13 +875,6 @@ p{margin:0 0 1em}
 .links{columns:2; column-gap:40px; margin:0; padding:0; list-style:none}
 .links li{break-inside:avoid; padding:7px 0; border-bottom:1px solid rgba(35,32,27,.18); font-size:17px}
 .links b{font-weight:700}
-.starts{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:20px}
-.start{background:#f4eedf; padding:20px 22px 22px; box-shadow:0 3px 8px rgba(0,0,0,.18); position:relative}
-.start .t{font-family:var(--mono); font-size:13.5px; color:var(--ink-soft); margin:0 0 6px}
-.start h3{font-size:20px}
-.start p{font-size:16.5px; margin:0}
-.start.main{background:#fbf6e9; box-shadow:0 0 0 2px var(--carpet), 0 3px 8px rgba(0,0,0,.18)}
-.start .badge{position:absolute; top:-12px; right:14px; background:var(--carpet); color:var(--cream); font-size:13px; padding:2px 10px; border-radius:2px}
 .dl{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
 .btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; font-size:17px;
   padding:12px 18px; border-radius:3px; background:var(--carpet); color:var(--cream);
@@ -932,13 +946,13 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
   .btn{width:100%; justify-content:center}
   .brand{display:none}
   .bar nav{margin:0 auto; gap:0}
-  .bar nav a{padding:6px 8px; font-size:15.5px}
+  .bar nav a{padding:6px 7px; font-size:15px}
   .long{display:none}
   .short{display:inline}
   .folder{grid-template-columns:1fr}
   .folder .ph{width:60%}
   .brand{font-size:18px}
-  .bar{gap:10px; padding:0 12px}
+  .bar{gap:10px; padding:0 8px}
 }
 
 /* ================= CITY: map ================= */
@@ -955,6 +969,10 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 .mp-sea{font:italic 22px var(--serif); fill:#4f625d; letter-spacing:.25em}
 .mp-dist{font:italic 15px var(--serif); fill:#5a4a33; letter-spacing:.06em}
 .mp-riv{font:italic 13px var(--serif); fill:#4f625d}
+.mp-mt.mt2{fill:#1f3f80} .mp-mt.mt3{fill:#23663a}
+.mp-rw{font:600 9.5px var(--mono); fill:#3b2a1c; letter-spacing:.02em}
+.mp-park{font:italic 10.5px var(--serif); fill:#4d5e36}
+.mp-sm{font-size:10px}
 .mp-big{font:700 19px var(--serif); fill:#5a3d1a; letter-spacing:.3em; opacity:.75}
 .mp-t1{font:700 15px var(--serif); fill:#3b2a1c; text-anchor:middle; letter-spacing:.25em}
 .mp-t2{font:700 21px var(--serif); fill:#3b2a1c; text-anchor:middle; letter-spacing:.12em}
@@ -1199,6 +1217,188 @@ body.splash-on{overflow:hidden}
   *,*::before,*::after{animation:none!important; transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* ================= PHOTO ARCHIVE ================= */
+.arc-top{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:24px}
+.arc-top .lede{margin-bottom:0; max-width:60ch}
+.arc-shuffle{border:0; padding:11px 18px 12px; background:#e9dcbc; color:#2a1c10; font:700 16px var(--serif); border-radius:3px; cursor:pointer; box-shadow:0 3px 0 #a88f5c, 0 6px 14px rgba(0,0,0,.35)}
+.arc-shuffle:hover{background:#f3e8cc}
+.arc-shuffle:active{transform:translateY(2px); box-shadow:0 1px 0 #a88f5c, 0 3px 8px rgba(0,0,0,.35)}
+.arc-shuffle:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
+.desk{position:relative; height:clamp(560px, 78vh, 820px); margin-bottom:40px; border-radius:6px; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+  border:10px solid #2c170b; box-shadow:inset 0 0 0 2px rgba(255,220,170,.08), 0 24px 50px rgba(0,0,0,.5);
+  background:
+    linear-gradient(118deg, transparent 38%, rgba(255,255,255,.05) 44%, transparent 50%, transparent 66%, rgba(255,255,255,.035) 70%, transparent 74%),
+    radial-gradient(ellipse 70% 75% at 32% 26%, rgba(255,196,120,.30), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(10,5,2,.55)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0035 .09' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .2  0 0 0 0 .1  0 0 0 -1.6 1.25'/%3E%3C/filter%3E%3Crect width='900' height='600' fill='%234a2a17'/%3E%3Crect width='900' height='600' filter='url(%23w)'/%3E%3C/svg%3E") 0 0 / 900px 600px, #4a2a17}
+.desk-props{position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:2px}
+.dp-sheet{position:absolute; right:5%; bottom:8%; width:clamp(150px, 19%, 230px); aspect-ratio:1/1.41; padding:14px 16px; background:#e9e2cf; transform:rotate(7deg); box-shadow:0 2px 6px rgba(0,0,0,.35); opacity:.92}
+.dp-sheet b{display:block; font:700 11px var(--mono); letter-spacing:.12em; text-align:center; color:#2b2b2b; margin-bottom:12px}
+.dp-sheet i{display:block; height:5px; margin:0 0 9px; background:rgba(40,40,40,.28); border-radius:1px}
+.dp-sheet i:nth-child(3n){width:70%} .dp-sheet i:nth-child(4n){width:85%}
+.dp-cal{position:absolute; left:4%; bottom:6%; width:clamp(90px, 10%, 128px); aspect-ratio:3/4; padding:10px; background:#f1ead8; transform:rotate(-4deg); box-shadow:0 2px 5px rgba(0,0,0,.35); text-align:center}
+.dp-cal b{display:block; font:700 22px/1 var(--display); color:#a8261f}
+.dp-cal span{display:block; margin:4px 0 6px; font:10px var(--mono); letter-spacing:.1em; color:#333}
+.dp-cal em{display:block; height:52%; background:
+  repeating-linear-gradient(90deg, transparent 0 calc(100%/7 - 2px), rgba(241,234,216,1) calc(100%/7 - 2px) calc(100%/7)),
+  repeating-linear-gradient(0deg, rgba(40,40,40,.32) 0 4px, transparent 4px 12px)}
+.dp-ash{position:absolute; right:4%; top:5%; width:clamp(80px, 9%, 120px)}
+.dp-lens{position:absolute; left:40%; bottom:3%; width:clamp(120px, 15%, 190px); transform:rotate(-18deg); filter:drop-shadow(0 4px 4px rgba(0,0,0,.45))}
+.dp-pencil{position:absolute; left:6%; top:7%; width:clamp(130px, 17%, 220px); transform:rotate(24deg); filter:drop-shadow(0 3px 2px rgba(0,0,0,.45))}
+.dp-ring{position:absolute; width:clamp(60px, 7%, 92px); aspect-ratio:1; border-radius:50%; border:5px solid rgba(70,35,10,.32); filter:blur(.6px)}
+.dp-ring.r1{left:58%; top:10%} .dp-ring.r2{left:61%; top:13%; width:clamp(48px, 5.5%, 74px); border-width:3px; border-color:rgba(70,35,10,.2)}
+.desk-hint{position:absolute; right:2%; bottom:-10px; transform:translateY(100%); margin:0; font:22px 'Caveat',var(--hand); color:#e3c98f; pointer-events:none}
+
+/* a photo on the desk: .ap positions, .ap-lift rotates and lifts, .ap-card turns over */
+.ap{--w:clamp(112px, 14vw, 190px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:grab}
+.ap.h{--w:clamp(160px, 21vw, 290px)}
+.ap:focus-visible{outline:none}
+.ap:focus-visible .ap-face{outline:3px solid #e3c98f; outline-offset:2px}
+.ap-lift{--r:0deg; --t:0deg; --s:1; width:var(--w); container-type:inline-size; transform:translate(-50%,-50%) rotate(calc(var(--r) + var(--t))) scale(var(--s)); transition:transform .35s cubic-bezier(.2,.8,.3,1); perspective:1600px}
+.ap.drag{cursor:grabbing}
+.ap.drag .ap-lift{--s:1.07; transition:transform .1s linear}
+.ap-card{--ry:0deg; --tx:0deg; --ty:0deg; display:grid; transform-style:preserve-3d; transform:rotateX(var(--tx)) rotateY(calc(var(--ry) + var(--ty))); transition:transform .7s cubic-bezier(.3,.1,.2,1)}
+.ap.flip .ap-card{--ry:180deg}
+.ap-face{grid-area:1/1; position:relative; -webkit-backface-visibility:hidden; backface-visibility:hidden; box-shadow:0 2px 3px rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.28); transition:box-shadow .3s}
+.ap.drag .ap-face{box-shadow:0 4px 6px rgba(0,0,0,.25), 0 22px 34px rgba(0,0,0,.5)}
+.ap-front{padding:6%; background:#f6f1e4}
+.ap.lab .ap-front{padding:6% 6% 9%; clip-path:polygon(0 1%,3% 0,6% 1%,9% 0,12% 1%,15% 0,18% 1%,21% 0,24% 1%,27% 0,30% 1%,33% 0,36% 1%,39% 0,42% 1%,45% 0,48% 1%,51% 0,54% 1%,57% 0,60% 1%,63% 0,66% 1%,69% 0,72% 1%,75% 0,78% 1%,81% 0,84% 1%,87% 0,90% 1%,93% 0,96% 1%,99% 0,100% 1%,100% 99%,97% 100%,94% 99%,91% 100%,88% 99%,85% 100%,82% 99%,79% 100%,76% 99%,73% 100%,70% 99%,67% 100%,64% 99%,61% 100%,58% 99%,55% 100%,52% 99%,49% 100%,46% 99%,43% 100%,40% 99%,37% 100%,34% 99%,31% 100%,28% 99%,25% 100%,22% 99%,19% 100%,16% 99%,13% 100%,10% 99%,7% 100%,4% 99%,1% 100%,0 99%)}
+.ap.color .ap-front{padding:4%; background:#fbfaf6}
+.ap .scene{pointer-events:none}
+.ap.h .scene{aspect-ratio:3/2}
+.ap.h .scene img{height:84%; bottom:3%}
+.ap .scene.full img{height:100%; bottom:0; object-fit:cover; object-position:50% 30%}
+.ap.color .scene{filter:saturate(1.08) contrast(1.04)}
+.ap.color .scene::after{content:""; position:absolute; inset:0; z-index:2; background:linear-gradient(125deg, rgba(255,255,255,.18), transparent 30%, transparent 70%, rgba(255,255,255,.06))}
+.ap-date{position:absolute; right:9%; bottom:7%; z-index:3; font:700 clamp(8px, 6cqw, 14px)/1 var(--mono); color:#ff9a3a; letter-spacing:.08em; text-shadow:0 0 3px rgba(255,110,0,.75); pointer-events:none}
+.ap-back{transform:rotateY(180deg); overflow:hidden; padding:16% 10% 12%;
+  background:radial-gradient(ellipse at 30% 80%, rgba(150,120,70,.14), transparent 60%), repeating-linear-gradient(0deg, transparent 0 3px, rgba(120,100,60,.05) 3px 4px), #ebe2cb}
+.ap.color .ap-back{background:repeating-linear-gradient(-30deg, transparent 0 26px, rgba(120,110,90,.07) 26px 27px), #f2efe6}
+.ap-back .ft-lab{font-size:clamp(6px, 4cqw, 10px)}
+.ap-back .ft-hw{margin-top:18%; font-size:clamp(12px, 8.6cqw, 23px)}
+.ap.h .ap-back .ft-hw{margin-top:6%; font-size:clamp(12px, 6cqw, 23px)}
+.ap.color .ap-back .ft-hw{margin-top:4%}
+.ap-back::after{content:attr(data-print); position:absolute; left:8%; right:8%; bottom:5%; font:clamp(5px, 3.4cqw, 9px)/1.2 var(--mono); color:rgba(90,70,40,.42); letter-spacing:.06em; text-align:center}
+
+/* picked up: the photo flies to the middle of the screen */
+.ap.exam{z-index:1000 !important; cursor:pointer}
+.ap.exam .ap-lift{transform:translate(-50%,-50%) translate(var(--dx), var(--dy)) scale(var(--es)); transition:transform .55s cubic-bezier(.2,.8,.25,1)}
+.ap.exam .ap-face{box-shadow:0 10px 18px rgba(0,0,0,.35), 0 40px 70px rgba(0,0,0,.55)}
+.ap.exam.spin .ap-card{transition:none}
+.ap.exam.tilt .ap-card{transition:transform .25s ease-out}
+.ap-veil{position:fixed; inset:0; z-index:999; background:rgba(14,9,5,.78); animation:veilIn .35s ease}
+.ap-veil[hidden],.ap-help[hidden]{display:none}
+@keyframes veilIn{from{opacity:0}}
+.ap-help{position:fixed; left:50%; bottom:max(18px, env(safe-area-inset-bottom)); z-index:1001; transform:translateX(-50%); width:max-content; max-width:calc(100vw - 32px); margin:0;
+  font:22px/1.2 'Caveat',var(--hand); color:#e3c98f; text-align:center; pointer-events:none}
+@media (max-width:640px){
+  .desk{height:max(640px, 118vw); border-width:7px}
+  .ap{--w:clamp(96px, 30vw, 150px)} .ap.h{--w:clamp(140px, 44vw, 210px)}
+  .dp-sheet{width:34%} .dp-cal{width:24%} .dp-ash{width:20%} .dp-lens{width:34%; left:34%} .dp-pencil{width:38%}
+  .desk-hint{font-size:19px; right:2%}
+  .arc-shuffle{width:100%}
+}
+@media (prefers-reduced-motion:reduce){ .ap-lift,.ap-card,.ap.exam .ap-lift{transition:none} .ap-veil{animation:none} }
+
+/* ================= STARTS: envelope and video tapes ================= */
+.envelope{position:relative; display:block; width:min(440px, 92%); margin:56px auto 10px; padding:0; border:0; background:none; cursor:pointer; transform:rotate(-1.5deg); transition:transform .3s}
+.envelope:hover{transform:rotate(-.5deg) translateY(-3px)}
+.envelope:focus-visible{outline:3px solid #e3c98f; outline-offset:6px}
+.env-peek{position:absolute; left:0; right:0; top:-34px; height:80px}
+.env-peek i{position:absolute; bottom:0; box-shadow:0 2px 5px rgba(0,0,0,.45); transition:transform .4s cubic-bezier(.2,.8,.3,1)}
+.pk-tape{width:46%; height:64px; border-radius:5px 5px 0 0; background:linear-gradient(#232326, #141416)}
+.pk-tape::after{content:""; position:absolute; left:8%; right:8%; top:10px; height:22px; background:repeating-linear-gradient(transparent 0 6px, rgba(43,74,139,.25) 6px 7px), #efe7d2}
+.pk-tape.a{left:10%; transform:rotate(-6deg)} .pk-tape.b{left:42%; transform:rotate(4deg); height:58px}
+.pk-photo{left:64%; width:26%; height:72px; background:#f6f1e4; padding:5px; transform:rotate(11deg)}
+.pk-photo::after{content:""; position:absolute; inset:5px 5px 12px; background:linear-gradient(160deg, #4b5a63, #2b2a2a)}
+.envelope:hover .pk-tape.a{transform:rotate(-8deg) translateY(-14px)} .envelope:hover .pk-tape.b{transform:rotate(6deg) translateY(-20px)} .envelope:hover .pk-photo{transform:rotate(15deg) translateY(-10px)}
+.env-body{position:relative; display:block; aspect-ratio:1.62; overflow:hidden; border-radius:2px; box-shadow:0 10px 24px rgba(0,0,0,.45);
+  background:radial-gradient(ellipse at 30% 20%, rgba(255,240,200,.25), transparent 60%), repeating-linear-gradient(80deg, rgba(90,60,25,.06) 0 2px, transparent 2px 5px), #c9a46c}
+.env-flap{position:absolute; left:0; right:0; top:0; height:46%; background:linear-gradient(#b8915a, #c29b63); clip-path:polygon(0 0,100% 0,50% 100%); filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.env-body::before{content:""; position:absolute; inset:0; background:linear-gradient(to top right, transparent 49.6%, rgba(80,50,20,.18) 50%, transparent 50.4%), linear-gradient(to top left, transparent 49.6%, rgba(80,50,20,.18) 50%, transparent 50.4%)}
+.env-stamp{position:absolute; left:8%; bottom:16%; padding:6px 10px; border:2.5px solid rgba(168,38,31,.75); border-radius:4px; transform:rotate(-7deg);
+  font:700 clamp(11px, 3vw, 14px)/1.25 var(--mono); color:rgba(168,38,31,.8); text-transform:uppercase; letter-spacing:.06em; text-align:center}
+.env-hw{position:absolute; right:8%; bottom:30%; font:700 clamp(20px, 5vw, 27px)/1 'Caveat',var(--hand); color:#22357a; transform:rotate(-4deg)}
+.env-open{position:absolute; right:8%; bottom:11%; font:13px var(--mono); color:#5a4022; border-bottom:1px dashed rgba(90,64,34,.6)}
+
+.vhs-room{position:fixed; inset:0; z-index:300; display:flex; flex-direction:column; overflow:auto; overscroll-behavior:contain; padding:56px 20px 70px;
+  background:radial-gradient(ellipse 60% 55% at 62% 40%, rgba(80,120,170,.16), transparent 70%), radial-gradient(ellipse at 50% 120%, rgba(255,170,90,.12), transparent 60%), #120c08;
+  animation:veilIn .3s ease}
+.vhs-room[hidden]{display:none}
+.vr-x{position:fixed; top:10px; right:16px; z-index:5; border:0; background:none; color:#f3ecdc; font:38px/1 var(--serif); cursor:pointer}
+.vr-x:focus-visible{outline:2px solid #e3c98f}
+.vr-stage{display:grid; grid-template-columns:minmax(0, 440px) minmax(0, 560px); gap:40px; align-items:center; justify-content:center; width:100%; max-width:1080px; margin:auto auto 0}
+.vr-set{grid-column:2; grid-row:1}
+.vr-tapes{grid-column:1; grid-row:1; display:grid; grid-template-columns:1fr 1fr; gap:18px 16px}
+.vr-hint{margin:30px 0 auto; text-align:center; font:22px 'Caveat',var(--hand); color:#e3c98f}
+
+/* the TV */
+.vr-tv{display:grid; grid-template-columns:1fr 17%; gap:4%; padding:5% 4.5% 6%; border-radius:14px;
+  background:linear-gradient(90deg, rgba(0,0,0,.25), transparent 6%, transparent 94%, rgba(0,0,0,.3)), repeating-linear-gradient(92deg, #5a3a22 0 3px, #4b2f1b 3px 7px, #624028 7px 9px);
+  box-shadow:inset 0 2px 0 rgba(255,220,170,.18), 0 26px 50px rgba(0,0,0,.6)}
+.vr-screen{position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:9% / 11%; container-type:inline-size; background:#0d1b3d;
+  box-shadow:0 0 0 6px #1d1410, 0 0 0 9px #3b2a1c, inset 0 0 40px rgba(0,0,0,.8)}
+.vr-screen canvas{position:absolute; inset:0; width:100%; height:100%; opacity:0; image-rendering:pixelated; transition:opacity .15s}
+.vr-screen.noise canvas{opacity:1}
+.vr-glass{position:absolute; inset:0; z-index:4; pointer-events:none; border-radius:inherit;
+  background:radial-gradient(ellipse 120% 90% at 30% 20%, rgba(255,255,255,.12), transparent 40%), radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0,0,0,.55)), repeating-linear-gradient(transparent 0 2px, rgba(0,0,0,.18) 2px 3px)}
+.vr-idle,.vr-show{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:9% 10%}
+.vr-idle{background:#1a3fb0; color:#e8ecff; align-items:center; font:700 5cqw var(--mono); letter-spacing:.06em}
+.vr-idle p{margin:0}
+.vr-show{opacity:0; background:radial-gradient(ellipse at 50% 40%, #2a2a36, #0b0b10); color:#f2ead6; text-shadow:-1.5px 0 rgba(255,40,60,.55), 1.5px 0 rgba(40,220,255,.5)}
+.vr-screen.play .vr-show{opacity:1; animation:vhsJit 4s steps(1) infinite}
+.vr-screen.play .vr-idle,.vr-screen.noise .vr-idle{opacity:0}
+.vr-screen.play .vr-show::after{content:""; position:absolute; left:0; right:0; height:9%; top:-10%; background:linear-gradient(transparent, rgba(255,255,255,.08), transparent); animation:vhsBand 5.5s linear infinite}
+@keyframes vhsBand{to{top:110%}}
+@keyframes vhsJit{0%,100%{transform:none} 31%{transform:translateX(1px)} 32%{transform:none} 77%{transform:translateX(-1.5px) skewX(-.6deg)} 78%{transform:none}}
+.vr-osd{position:absolute; font:700 4.2cqw/1 var(--mono); color:#fff; letter-spacing:.05em; text-shadow:2px 2px 0 rgba(0,0,0,.7)}
+.vr-osd.tl{left:8%; top:8%} .vr-osd.tr{right:8%; top:8%; color:#ffd36b} .vr-osd.bl{left:8%; bottom:8%}
+.vr-t{margin:0 0 2.5cqw; font:3.6cqw/1.2 var(--mono); color:#d9cfb5}
+.vr-h{margin:0 0 3cqw; font:400 7.4cqw/1.02 var(--display); color:#fff4dc}
+.vr-p{margin:0; font:3.9cqw/1.4 var(--serif)}
+.vr-side{position:relative; display:flex; flex-direction:column; align-items:center; gap:10%; padding-top:6%; border-radius:6px; background:linear-gradient(#c9c3b6, #a49d8f); box-shadow:inset 0 1px 0 #ece6d8}
+.vr-knob{width:62%; aspect-ratio:1; border-radius:50%; background:conic-gradient(from 20deg, #2c2c2c, #555, #2c2c2c, #444, #2c2c2c); box-shadow:0 2px 3px rgba(0,0,0,.5), inset 0 0 0 3px rgba(255,255,255,.08)}
+.vr-knob.s{width:44%}
+.vr-grille{flex:1; width:70%; margin-bottom:34%; background:repeating-linear-gradient(transparent 0 4px, rgba(0,0,0,.45) 4px 6px)}
+.vr-make{position:absolute; bottom:6%; font:700 clamp(6px, 1.1vw, 9px) var(--mono); color:#4a463e; letter-spacing:.1em}
+
+/* the video recorder under it */
+.vr-vcr{position:relative; display:flex; align-items:center; gap:4%; margin:10px 3% 0; padding:3.2% 4%; border-radius:4px;
+  background:linear-gradient(#3a3a3e, #1f1f22 60%, #18181a); box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 12px 24px rgba(0,0,0,.55)}
+.vr-slot{flex:0 0 42%; height:22px; border-radius:2px; background:linear-gradient(#050505, #1b1b1b); box-shadow:inset 0 2px 4px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.1)}
+.vr-led{min-width:5.5em; padding:4px 8px; border-radius:2px; background:#071009; font:700 15px/1 var(--mono); color:#5dff8a; text-shadow:0 0 6px rgba(80,255,140,.7); letter-spacing:.12em; text-align:center}
+.vr-make2{flex:1; min-width:0; overflow:hidden; white-space:nowrap; font:9px var(--mono); color:#9a9a9f; letter-spacing:.16em; text-align:right}
+.vr-eject{border:0; padding:7px 12px; border-radius:3px; background:linear-gradient(#55555a, #3a3a3e); color:#eee; font:13px var(--mono); cursor:pointer; box-shadow:0 2px 0 #111}
+.vr-eject:disabled{opacity:.4; cursor:default}
+.vr-eject:not(:disabled):hover{background:linear-gradient(#66666b, #47474b)}
+.vr-eject:focus-visible{outline:2px solid #e3c98f; outline-offset:2px}
+
+/* a video tape */
+.tape{--tr:0deg; position:relative; display:block; width:100%; aspect-ratio:1.8; padding:0; border:0; border-radius:6px; cursor:pointer; text-align:left; color:inherit; font:inherit;
+  background:linear-gradient(170deg, #2a2a2e, #151517 70%); box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 6px 14px rgba(0,0,0,.55);
+  transform:rotate(var(--tr)); transition:transform .25s, opacity .3s}
+.tape:hover{transform:rotate(0) translateY(-4px) scale(1.03)}
+.tape:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
+.tape.gone{opacity:.12; pointer-events:none}
+.tp-label{position:absolute; left:6%; right:6%; top:6%; height:65%; padding:3% 5%; overflow:hidden; border-radius:2px;
+  background:repeating-linear-gradient(transparent 0 calc(1em - 1px), rgba(43,74,139,.22) calc(1em - 1px) 1em), #efe7d2; font-size:clamp(10px, 1.3vw, 14px)}
+.tp-label b{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font:700 1.3em/.98 'Caveat',var(--hand); color:#1f2f6b}
+.tp-label i{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:.2em; font:normal .98em/1.05 'Caveat',var(--hand); color:#3b4f8f}
+.tp-win{position:absolute; left:28%; right:28%; bottom:6%; height:19%; display:flex; justify-content:space-between; align-items:center; padding:0 6%; border-radius:3px; background:rgba(20,16,12,.9); box-shadow:inset 0 0 0 2px #0a0a0a}
+.tp-win i{height:78%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, #ddd 0 18%, #3a2a1c 19% 60%, #22180f 61%)}
+.tp-first{position:absolute; right:-6px; top:-8px; padding:2px 8px; background:#a8261f; color:#f6ecd6; font:12px var(--mono); transform:rotate(6deg); box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.tape.fly{position:fixed; z-index:310; margin:0; pointer-events:none; transform-origin:0 0; transition:transform .6s cubic-bezier(.3,.7,.2,1), opacity .3s}
+@media (max-width:820px){
+  .vhs-room{padding:52px 14px 60px}
+  .vr-stage{grid-template-columns:1fr; gap:26px}
+  .vr-set,.vr-tapes{grid-column:1} .vr-set{grid-row:1} .vr-tapes{grid-row:2}
+  .vr-tapes{gap:14px 12px}
+  .vr-led{font-size:12px; min-width:4.6em} .vr-make2{display:none} .vr-slot{flex-basis:38%; height:16px}
+  .tp-label{font-size:clamp(10px, 3.05vw, 13px)}
+  .vr-hint{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){ .vr-screen.play .vr-show, .vr-screen.play .vr-show::after{animation:none} .tape.fly{transition:none} }
 </style>
 </head>
 <body>
@@ -1242,8 +1442,9 @@ body.splash-on{overflow:hidden}
   <a class="brand" href="#/">Лихие</a>
   <nav aria-label="Разделы">
     <a href="#/">Главная</a>
-    <a href="#/bots">Персонажи</a>
+    <a href="#/bots"><span class="long">Персонажи</span><span class="short">Герои</span></a>
     <a href="#/gorod">Город</a>
+    <a href="#/archive"><span class="long">Фотоархив</span><span class="short">Архив</span></a>
     <a href="#/start"><span class="long">Как подключить</span><span class="short">Подключить</span></a>
   </nav>
 </header>
@@ -1515,7 +1716,6 @@ body.splash-on{overflow:hidden}
         <label class="vol-row"><span aria-hidden="true">тише</span><input type="range" class="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Громкость"><span aria-hidden="true">громче</span></label>
       </div>
 
-      <button class="naida" id="naida" type="button" aria-label="Найда, старая служебная овчарка"><img src="assets/people/naida.webp" alt=""><span class="naida-note">Найда. Гроза ей не нравится</span></button>
       <div class="servant" aria-hidden="true">
         <div class="cornice"></div>
         <div class="sv">
@@ -1658,9 +1858,29 @@ body.splash-on{overflow:hidden}
   <filter id="mpBlot" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter>
   <pattern id="mpWave" width="14" height="7" patternUnits="userSpaceOnUse"><path d="M0,4 q3.5,-3 7,0 t7,0" fill="none" stroke="#6f817c" stroke-width=".7" opacity=".55"/></pattern>
   <radialGradient id="mpAge" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#5a3d1a" stop-opacity=".35"/></radialGradient>
+  <pattern id="mpTrees" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.5" fill="#6f8150" opacity=".55"/><circle cx="7" cy="6.5" r="1.2" fill="#6f8150" opacity=".45"/></pattern>
+  <pattern id="mpCross" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6,3v6M4,5h4" stroke="#6b5a3e" stroke-width=".8" opacity=".55"/></pattern>
+  <pattern id="mpHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0,0v6" stroke="#6b5a3e" stroke-width="1" opacity=".38"/></pattern>
+  <pattern id="mpBlk" width="11" height="9" patternUnits="userSpaceOnUse"><rect x="1" y="1" width="8.5" height="6.5" fill="none" stroke="#7a6446" stroke-width=".6" opacity=".55"/></pattern>
 </defs>
 <rect width="1000" height="690" fill="#e6d8b8"/>
 <rect width="1000" height="690" filter="url(#mpGrain)"/>
+<!-- land detail: built-up blocks, parks, cemetery, industry -->
+<path d="M520,270 L870,262 L905,430 L850,476 L600,478 L548,420 Z" fill="url(#mpBlk)" opacity=".5"/>
+<path d="M410,140 L720,132 L760,206 L560,252 L400,214 Z" fill="url(#mpBlk)" opacity=".45"/>
+<path d="M300,215 L515,232 L520,272 L320,325 Z" fill="url(#mpBlk)" opacity=".45"/>
+<path d="M360,445 L560,440 L600,560 L560,690 L340,690 L330,560 Z" fill="url(#mpBlk)" opacity=".3"/>
+<path d="M408,388 C424,376 452,378 462,392 C470,406 456,420 434,420 C414,420 400,402 408,388 Z" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><path d="M408,388 C424,376 452,378 462,392 C470,406 456,420 434,420 C414,420 400,402 408,388 Z" fill="url(#mpTrees)"/>
+<path d="M636,548 L668,546 L672,606 L640,608 Z" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><path d="M636,548 L668,546 L672,606 L640,608 Z" fill="url(#mpTrees)"/>
+<ellipse cx="814" cy="270" rx="17" ry="11" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><ellipse cx="814" cy="270" rx="17" ry="11" fill="url(#mpTrees)"/>
+<path d="M664,224 L682,222 L684,250 L666,252 Z" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><path d="M664,224 L682,222 L684,250 L666,252 Z" fill="url(#mpTrees)"/>
+<ellipse cx="420" cy="34" rx="78" ry="17" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><ellipse cx="420" cy="34" rx="78" ry="17" fill="url(#mpTrees)"/>
+<ellipse cx="330" cy="104" rx="40" ry="14" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><ellipse cx="330" cy="104" rx="40" ry="14" fill="url(#mpTrees)"/>
+<path d="M262,628 C290,614 330,618 336,636 C330,652 290,660 264,650 Z" fill="#bcc59c" stroke="#8a9a6a" stroke-width=".8"/><path d="M262,628 C290,614 330,618 336,636 C330,652 290,660 264,650 Z" fill="url(#mpTrees)"/>
+<ellipse cx="290" cy="500" rx="24" ry="15" fill="#d3caa9" stroke="#8a7a5a" stroke-width=".8"/><ellipse cx="290" cy="500" rx="24" ry="15" fill="url(#mpCross)"/>
+<path d="M486,446 L548,430 L566,464 L502,482 Z" fill="url(#mpHatch)" stroke="#6b5a3e" stroke-width=".6" stroke-opacity=".5"/>
+<path d="M300,372 L348,358 L356,438 L292,452 Z" fill="url(#mpHatch)" stroke="#6b5a3e" stroke-width=".6" stroke-opacity=".5"/>
+<ellipse cx="300" cy="102" rx="13" ry="10" fill="none" stroke="#6b5a3e" stroke-width="1.4" opacity=".7"/>
 <!-- water: gulf + rivers -->
 <path d="M0,0 L214,0 C232,90 252,170 300,226 C326,256 344,296 326,330 C298,372 252,392 232,440 C214,482 200,560 168,690 L0,690 Z" fill="#a9b7b2"/>
 <path d="M0,0 L214,0 C232,90 252,170 300,226 C326,256 344,296 326,330 C298,372 252,392 232,440 C214,482 200,560 168,690 L0,690 Z" fill="url(#mpWave)"/>
@@ -1679,6 +1899,9 @@ body.splash-on{overflow:hidden}
 <path d="M842,476 C724,488 604,476 522,456 C470,444 420,436 360,436" fill="none" stroke="#7f8f8a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
 <path d="M842,476 C724,488 604,476 522,456 C470,444 420,436 360,436" fill="none" stroke="#a9b7b2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
 <path d="M1000,430 C935,405 880,335 862,262 C848,212 800,200 742,214 C684,228 640,250 592,255 C562,258 540,262 520,268" fill="none" stroke="url(#mpWave)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M318,104 C352,66 420,48 500,50 C560,52 604,34 640,0" fill="none" stroke="#7f8f8a" stroke-width="11" stroke-linecap="round"/><path d="M318,104 C352,66 420,48 500,50 C560,52 604,34 640,0" fill="none" stroke="#a9b7b2" stroke-width="8" stroke-linecap="round"/>
+<path d="M480,50 C478,32 486,14 496,0" fill="none" stroke="#7f8f8a" stroke-width="8" stroke-linecap="round"/><path d="M480,50 C478,32 486,14 496,0" fill="none" stroke="#a9b7b2" stroke-width="5" stroke-linecap="round"/>
+<path d="M700,246 C680,284 640,300 600,318 C576,328 556,318 540,300" fill="none" stroke="#7f8f8a" stroke-width="6" stroke-linecap="round"/><path d="M700,246 C680,284 640,300 600,318 C576,328 556,318 540,300" fill="none" stroke="#a9b7b2" stroke-width="3.6" stroke-linecap="round"/>
 <rect x="296" y="372" width="46" height="7" fill="#cdbf9e" stroke="#6b5a3e" stroke-width=".8" transform="rotate(-18 296 372)"/>
 <rect x="312" y="392" width="46" height="7" fill="#cdbf9e" stroke="#6b5a3e" stroke-width=".8" transform="rotate(-18 312 392)"/>
 <rect x="282" y="406" width="46" height="7" fill="#cdbf9e" stroke="#6b5a3e" stroke-width=".8" transform="rotate(-18 282 406)"/>
@@ -1712,6 +1935,70 @@ body.splash-on{overflow:hidden}
 <path d="M560,140 L600,250" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
 <path d="M380,240 L470,300" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round" />
 <path d="M380,240 L470,300" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+<!-- more streets -->
+<path d="M762,300 C752,360 744,420 730,520" fill="none" stroke="#e6d8b8" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M762,300 C752,360 744,420 730,520" fill="none" stroke="#6b5a3e" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M606,256 L642,342" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M606,256 L642,342" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M640,266 C670,300 700,326 724,342" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M640,266 C670,300 700,326 724,342" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M300,266 C380,262 450,262 512,260" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M300,266 C380,262 450,262 512,260" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M345,231 L349,299" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M345,231 L349,299" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M367,233 L371,297" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M367,233 L371,297" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M389,234 L393,295" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M389,234 L393,295" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M411,236 L415,292" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M411,236 L415,292" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M433,238 L437,290" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M433,238 L437,290" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M455,240 L459,288" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M455,240 L459,288" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M477,242 L481,286" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M477,242 L481,286" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M499,244 L503,284" fill="none" stroke="#e6d8b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M499,244 L503,284" fill="none" stroke="#6b5a3e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M480,190 C530,178 580,164 622,152" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M480,190 C530,178 580,164 622,152" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M330,470 C326,540 312,610 296,690" fill="none" stroke="#e6d8b8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M330,470 C326,540 312,610 296,690" fill="none" stroke="#6b5a3e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M478,472 C510,490 540,512 566,530" fill="none" stroke="#e6d8b8" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M478,472 C510,490 540,512 566,530" fill="none" stroke="#6b5a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M780,190 C800,150 830,120 880,100" fill="none" stroke="#e6d8b8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M780,190 C800,150 830,120 880,100" fill="none" stroke="#6b5a3e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<!-- railways -->
+<path d="M556,402 C534,450 512,520 496,600 C490,632 484,660 478,690" fill="none" stroke="#3b2a1c" stroke-width="3.4" stroke-linecap="round" opacity=".75"/><path d="M556,402 C534,450 512,520 496,600 C490,632 484,660 478,690" fill="none" stroke="#efe5cc" stroke-width="1.7" stroke-dasharray="7 7"/>
+<path d="M674,356 C680,460 686,580 692,690" fill="none" stroke="#3b2a1c" stroke-width="3.4" stroke-linecap="round" opacity=".75"/><path d="M674,356 C680,460 686,580 692,690" fill="none" stroke="#efe5cc" stroke-width="1.7" stroke-dasharray="7 7"/>
+<path d="M770,304 C820,350 880,420 1000,520" fill="none" stroke="#3b2a1c" stroke-width="3.4" stroke-linecap="round" opacity=".75"/><path d="M770,304 C820,350 880,420 1000,520" fill="none" stroke="#efe5cc" stroke-width="1.7" stroke-dasharray="7 7"/>
+<path d="M782,186 C792,130 802,70 812,0" fill="none" stroke="#3b2a1c" stroke-width="3.4" stroke-linecap="round" opacity=".75"/><path d="M782,186 C792,130 802,70 812,0" fill="none" stroke="#efe5cc" stroke-width="1.7" stroke-dasharray="7 7"/>
+<path d="M520,442 C460,446 400,442 352,432" fill="none" stroke="#3b2a1c" stroke-width="3.4" stroke-linecap="round" opacity=".75"/><path d="M520,442 C460,446 400,442 352,432" fill="none" stroke="#efe5cc" stroke-width="1.7" stroke-dasharray="7 7"/>
+<rect x="550" y="394" width="16" height="8" fill="#3b2a1c" opacity=".7"/><rect x="666" y="350" width="16" height="8" fill="#3b2a1c" opacity=".7"/><rect x="764" y="296" width="16" height="8" fill="#3b2a1c" opacity=".7" transform="rotate(30 772 300)"/><rect x="774" y="182" width="16" height="8" fill="#3b2a1c" opacity=".7"/>
+<!-- metro: line 2 (blue) and line 3 (green) -->
+<path d="M586,0 L588,90 L590,150 L640,205 L690,286 L660,322 L622,374 L616,420 L612,470 L614,520 L618,575 L622,630 L626,686" fill="none" stroke="#2b5cad" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".82"/>
+<path d="M335,262 L440,258 L690,286 L752,294 L850,330 L905,392 L990,470" fill="none" stroke="#2f8a4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".82"/>
+<circle cx="590" cy="150" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="640" cy="205" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="660" cy="322" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="616" cy="420" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="612" cy="470" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="614" cy="520" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="618" cy="575" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="622" cy="630" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="626" cy="686" r="4.4" fill="#f4ecd6" stroke="#2b5cad" stroke-width="2.1"/>
+<circle cx="335" cy="262" r="4.4" fill="#f4ecd6" stroke="#2f8a4a" stroke-width="2.1"/>
+<circle cx="440" cy="258" r="4.4" fill="#f4ecd6" stroke="#2f8a4a" stroke-width="2.1"/>
+<circle cx="752" cy="294" r="4.4" fill="#f4ecd6" stroke="#2f8a4a" stroke-width="2.1"/>
+<circle cx="850" cy="330" r="4.4" fill="#f4ecd6" stroke="#2f8a4a" stroke-width="2.1"/>
+<circle cx="905" cy="392" r="4.4" fill="#f4ecd6" stroke="#2f8a4a" stroke-width="2.1"/>
+<circle cx="690" cy="286" r="6" fill="#f4ecd6" stroke="#3b2a1c" stroke-width="2"/><circle cx="622" cy="374" r="6" fill="none" stroke="#3b2a1c" stroke-width="1.4"/>
+<!-- detail labels -->
+<text x="598" y="154" class="mp-mt mt2">Петроградская</text>
+<text x="648" y="203" class="mp-mt mt2">Горьковская</text>
+<text x="668" y="328" class="mp-mt mt2">Сенная</text>
+<text x="630" y="384" class="mp-mt">Технологич. ин-т</text>
+<text x="626" y="579" class="mp-mt mt2">Парк Победы</text>
+<text x="630" y="634" class="mp-mt mt2">Московская</text>
+<text x="335" y="280" class="mp-mt mt3" text-anchor="middle">Приморская</text>
+<text x="440" y="250" class="mp-mt mt3" text-anchor="middle">Василеостровская</text>
+<text x="858" y="344" class="mp-mt mt3">пл. Ал. Невского</text>
+<text x="734" y="420" class="mp-st" transform="rotate(-80 734 420)">Лиговский пр.</text>
+<text x="318" y="662" class="mp-st" transform="rotate(-80 318 662)">пр. Нар. Ополчения</text>
+<text x="560" y="382" class="mp-rw" text-anchor="middle">Балтийский вокз.</text>
+<text x="706" y="350" class="mp-rw">Витебский вокз.</text>
+<text x="790" y="322" class="mp-rw">Московский вокз.</text>
+<text x="796" y="192" class="mp-rw">Финляндский вокз.</text>
+<text x="434" y="374" class="mp-park" text-anchor="middle">Екатерингоф</text>
+<text x="290" y="526" class="mp-park" text-anchor="middle">Красненькое кл.</text>
+<text x="420" y="38" class="mp-park" text-anchor="middle">ЦПКиО</text>
+<text x="430" y="96" class="mp-park" text-anchor="middle">Крестовский о-в</text>
+<text x="500" y="66" class="mp-riv mp-sm" transform="rotate(-6 500 66)">Ср. Невка</text>
+<text x="600" y="322" class="mp-riv mp-sm" transform="rotate(-26 600 322)">кан. Грибоедова</text>
 <path d="M762,300 L708,318 L664,352 L622,374 L548,408 L478,432 L444,474 L398,534 L366,604 L330,652" fill="none" stroke="#b3261e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
 <circle cx="762" cy="300" r="5" fill="#f4ecd6" stroke="#b3261e" stroke-width="2.2"/>
 <text x="771" y="304" class="mp-mt">пл. Восстания</text>
@@ -1791,6 +2078,32 @@ body.splash-on{overflow:hidden}
 </main>
 
 <!-- ================= SETUP ================= -->
+<!-- ================= PHOTO ARCHIVE ================= -->
+<main class="page" data-route="/archive">
+  <div class="wrap section on-wall archive">
+    <div class="arc-top">
+      <div>
+        <h2>Фотоархив</h2>
+        <p class="lede prose" style="color:var(--cream)">Снимки из дел и чужих альбомов, вперемешку на одном столе. Двигайте их, берите в руки и читайте, что написано на обороте.</p>
+      </div>
+      <button class="arc-shuffle" type="button">Разбросать заново</button>
+    </div>
+    <div class="desk" data-desk>
+      <div class="desk-props" aria-hidden="true">
+        <div class="dp-sheet"><b>ОРИЕНТИРОВКА</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dp-cal"><b>1996</b><span>ФЕВРАЛЬ</span><em></em></div>
+        <svg class="dp-ash" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="rgba(190,215,220,.22)" stroke="rgba(230,245,250,.45)" stroke-width="3"/><circle cx="60" cy="60" r="38" fill="rgba(40,40,40,.35)" stroke="rgba(230,245,250,.25)" stroke-width="2"/><g transform="rotate(-25 60 60)"><rect x="52" y="48" width="44" height="7" rx="2" fill="#efe9dc"/><rect x="52" y="48" width="12" height="7" rx="1" fill="#c98a3c"/><rect x="92" y="48" width="5" height="7" fill="#555"/></g><g transform="rotate(40 60 60)"><rect x="40" y="62" width="22" height="7" rx="2" fill="#efe9dc"/><rect x="40" y="62" width="10" height="7" fill="#c98a3c"/></g><circle cx="66" cy="70" r="6" fill="rgba(120,120,120,.6)"/></svg>
+        <svg class="dp-lens" viewBox="0 0 200 90"><rect x="96" y="38" width="96" height="14" rx="7" fill="#2a1a10"/><rect x="96" y="40" width="96" height="4" rx="2" fill="#5a3a22"/><circle cx="48" cy="45" r="40" fill="rgba(200,225,230,.18)" stroke="#9a8a6a" stroke-width="7"/><path d="M26 30a28 28 0 0 1 22-12" stroke="rgba(255,255,255,.55)" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+        <svg class="dp-pencil" viewBox="0 0 240 20"><path d="M0 10l26-8v16z" fill="#e2c39a"/><path d="M0 10l8-2.5v5z" fill="#333"/><rect x="26" y="2" width="190" height="16" fill="#b23a2b"/><rect x="26" y="7" width="190" height="2" fill="rgba(255,255,255,.18)"/><rect x="216" y="2" width="22" height="16" rx="2" fill="#c9b27a"/></svg>
+        <i class="dp-ring r1"></i><i class="dp-ring r2"></i>
+      </div>
+      <p class="desk-hint">Тяните снимки. Нажмите, чтобы взять в руки.</p>
+      <div class="ap-veil" hidden></div>
+      <p class="ap-help" hidden>Нажмите на снимок, чтобы перевернуть. Мимо, чтобы положить.</p>
+    </div>
+  </div>
+</main>
+
 <main class="page" data-route="/start">
   <div class="wrap section">
     <div class="sheet manual">
@@ -1837,6 +2150,31 @@ body.splash-on{overflow:hidden}
   <p>Сайт: <a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Sloppy</a></p>
 </footer>
 
+<div class="vhs-room" id="vhsRoom" hidden role="dialog" aria-modal="true" aria-label="Старты на видеокассетах">
+  <button class="vr-x" type="button" aria-label="Закрыть">×</button>
+  <div class="vr-stage">
+    <div class="vr-set">
+      <div class="vr-tv">
+        <div class="vr-screen" aria-live="polite">
+          <canvas width="200" height="150" aria-hidden="true"></canvas>
+          <div class="vr-idle"><span class="vr-osd tl">AV-1</span><p>Вставьте кассету</p></div>
+          <div class="vr-show"><span class="vr-osd tl">PLAY ▶</span><span class="vr-osd tr vr-first">ПЕРВЫЙ</span><span class="vr-osd bl vr-count">0:00:00</span>
+            <p class="vr-t"></p><h3 class="vr-h"></h3><p class="vr-p"></p></div>
+          <i class="vr-glass" aria-hidden="true"></i>
+        </div>
+        <div class="vr-side" aria-hidden="true"><i class="vr-knob"></i><i class="vr-knob s"></i><i class="vr-grille"></i><span class="vr-make">ЦВЕТНОЙ</span></div>
+      </div>
+      <div class="vr-vcr">
+        <span class="vr-slot" aria-hidden="true"></span>
+        <span class="vr-led" aria-hidden="true">--:--</span>
+        <span class="vr-make2" aria-hidden="true">ВИДЕОМАГНИТОФОН</span>
+        <button class="vr-eject" type="button" disabled>Извлечь</button>
+      </div>
+    </div>
+    <div class="vr-tapes"></div>
+  </div>
+  <p class="vr-hint">Выберите кассету, она сама встанет в магнитофон.</p>
+</div>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Фотография крупно"><figure><figcaption></figcaption></figure><button class="lb-x" type="button" aria-label="Закрыть">×</button></div>
 <script src="bots.js"></script>
 <script src="music.js"></script>
@@ -1887,6 +2225,11 @@ body.splash-on{overflow:hidden}
   /* ---------- build pages from bots.js ---------- */
   const stampSvg = (b) => `<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="st-${b.id}" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="#A8261F" stroke-width="3"/><circle cx="60" cy="60" r="34" fill="none" stroke="#A8261F" stroke-width="1.5"/><text font-family="PT Mono, monospace" font-size="10.5" fill="#A8261F" letter-spacing="1.5"><textPath href="#st-${b.id}">${b.stamp}</textPath></text><text x="60" y="58" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">ДЛЯ</text><text x="60" y="72" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#A8261F">СВОИХ</text></svg>`;
   const list = (arr, f) => (arr || []).map(f).join('');
+  // props drawn behind a cut-out figure (height chart, poster, picture frame)
+  const sceneExtra = (bg, num) => ({
+    lineup: [120, 140, 160, 180, 200].map((v, n) => `<span class="mk" style="bottom:${(n + 1) * 16.66}%">${v}</span>`).join('') + `<span class="plate">96/${num}</span><i class="sh"></i>`,
+    bricks: '<span class="poster"></span><i class="sh"></i>',
+    'home-v': '<span class="frame"></span>', 'home-l': '<span class="frame"></span>'}[bg] || '');
   // pages of the case, in reading order; the folder shows two at a time (one on phones)
   const pagesFor = (b, i) => {
     const P = [];
@@ -1902,23 +2245,20 @@ body.splash-on{overflow:hidden}
     P.push(`${head('Как говорит')}<ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul>`);
     if (b.gallery && b.gallery.length){
       const num = String(i + 1).padStart(3, '0'), notes = b.galleryNotes || [];
-      const ph = ([src, cap, bg], k) => {
-        const wide = k === 3, extra = {
-          lineup: [120, 140, 160, 180, 200].map((v, n) => `<span class="mk" style="bottom:${(n + 1) * 16.66}%">${v}</span>`).join('') + `<span class="plate">96/${num}</span><i class="sh"></i>`,
-          bricks: '<span class="poster"></span><i class="sh"></i>',
-          'home-v': '<span class="frame"></span>', 'home-l': '<span class="frame"></span>',
-          floor: '', plaid: ''}[bg] || '';
-        return `<button class="ft-ph${wide ? ' wide' : ''}${bg === 'plaid' ? ' pet-cat' : ''}" type="button" style="--r:${[-1.6, 1.2, 1.4, -.8][k % 4]}deg" data-cap="${cap}" aria-label="${cap}, открыть крупно"><span class="scene bg-${bg}">${extra}<img src="${src}" alt="" loading="lazy"></span><span class="cap">${cap}</span></button>`;
+      const ph = ([src, cap, bg, back], k) => {
+        const wide = k === 3, extra = sceneExtra(bg, num);
+        return `<div class="ft-ph${wide ? ' wide' : ''}${bg === 'plaid' ? ' pet-cat' : ''}" style="--r:${[-1.6, 1.2, 1.4, -.8][k % 4]}deg" data-cap="${cap}">
+          <button class="ft-flip" type="button" aria-pressed="false" aria-label="${cap}. Перевернуть снимок">
+            <span class="ft-front"><span class="scene bg-${bg}">${extra}<img src="${src}" alt="" loading="lazy"></span><span class="cap">${cap}</span></span>
+            <span class="ft-back"><span class="ft-lab">Фотолаборатория ${b.unit}<br>№&nbsp;${num}-${k + 1}</span><span class="ft-hw">${back || ''}</span></span>
+          </button>
+          <button class="ft-zoom" type="button" aria-label="${cap}, открыть крупно"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+        </div>`;
       };
-      P.push(`${head('Фототаблица')}<div class="ft-grid">${b.gallery.slice(0, 2).map((g, k) => ph(g, k)).join('')}</div>${notes[0] ? `<p class="ft-note">${notes[0]}</p>` : ''}`);
+      P.push(`${head('Фототаблица')}<p class="ft-hint">Снимки переворачиваются, на обороте подписи.</p><div class="ft-grid">${b.gallery.slice(0, 2).map((g, k) => ph(g, k)).join('')}</div>${notes[0] ? `<p class="ft-note">${notes[0]}</p>` : ''}`);
       P.push(`${head('Фототаблица, продолжение')}<div class="ft-grid">${ph(b.gallery[2], 2)}<div class="ft-side">${notes[1] ? `<p class="ft-note">${notes[1]}</p>` : ''}${b.gallery[3] ? ph(b.gallery[3], 3) : ''}</div></div>`);
     }
     P.push(`${head('Связи')}<ul class="links">${list(b.links, ([n, d]) => `<li><b>${n}</b>, ${d}</li>`)}</ul>`);
-    for (let s0 = 0; s0 < b.starts.length; s0 += 3){
-      P.push(`${head(s0 ? 'Старты, продолжение' : 'Старты')}<div class="starts">${list(b.starts.slice(s0, s0 + 3), (st, k) => {
-        const first = s0 + k === 0;
-        return `<article class="start${first ? ' main' : ''}">${first ? '<span class="badge">первый</span>' : ''}<p class="t">${st.t}</p><h3>${st.h}</h3><p>${st.p}</p></article>`; })}</div>`);
-    }
     P.push(`${head('Скачать')}${(b.files.png || b.files.json || b.files.lore) ? `
       <div class="dl">
         ${b.files.png ? `<a class="btn" href="${b.files.png}" download="${b.files.name}.png">Карточка PNG <small>с портретом</small></a>` : ''}
@@ -1932,6 +2272,7 @@ body.splash-on{overflow:hidden}
     return P;
   };
   const PAGES = {};
+  const plural = (n, one, few, many) => (n % 10 === 1 && n % 100 !== 11) ? one : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? few : many;
   const dossier = (b, i) => { PAGES[b.id] = pagesFor(b, i); return `
 <main class="page" data-route="/${b.id}">
   <div class="wrap dossier">
@@ -1957,6 +2298,15 @@ body.splash-on{overflow:hidden}
       <span class="pg-num" aria-live="polite"></span>
       <button class="pg-btn next" type="button">Вперёд ›</button>
     </div>
+    <button class="envelope" type="button" data-env="${b.id}" aria-label="Конверт «Материалы»: старты на видеокассетах, ${b.starts.length}">
+      <span class="env-peek" aria-hidden="true"><i class="pk-tape a"></i><i class="pk-tape b"></i><i class="pk-photo"></i></span>
+      <span class="env-body" aria-hidden="true">
+        <span class="env-flap"></span>
+        <span class="env-stamp">Материалы<br>к делу №&nbsp;96/${String(i + 1).padStart(3, '0')}</span>
+        <span class="env-hw">Старты: ${b.starts.length}&nbsp;${plural(b.starts.length, 'кассета', 'кассеты', 'кассет')}</span>
+        <span class="env-open">Открыть конверт</span>
+      </span>
+    </button>
   </div>
 </main>`; };
   const folder = (b) => `
@@ -1973,22 +2323,45 @@ body.splash-on{overflow:hidden}
   const soon = `<div class="folder soon"><div><div class="name">Дело в работе</div><p class="say">Скоро в городе появятся новые лица.</p></div></div>`;
   document.getElementById('botpages').outerHTML = BOTS.map((b, i) => dossier(b, i)).join('');
   document.querySelectorAll('[data-folders]').forEach(el => el.innerHTML = BOTS.map(folder).join('') + soon);
-  // home page: the case folders tossed on top of each other, with a stamp that opens them
+  // home page: the two service IDs ("ксивы") dropped on the table; hover (or tap) opens them
   const pileEl = document.querySelector('[data-pile]');
-  if (pileEl) pileEl.outerHTML = `<a class="pile" href="#/bots" aria-label="Открыть дела: ${BOTS.map(b => b.name).join(', ')}">
-    ${BOTS.slice(0, 3).map((b, i) => `<div class="pf pf${i}">
-      <span class="pf-tab">Дело № 96/${String(i + 1).padStart(3, '0')}</span>
-      <div class="pf-ph"><span class="clip"></span><img src="${b.photo}" alt="" loading="lazy" style="object-position:${b.pos}"></div>
-      <p class="pf-name">${b.name}</p>
-      <p class="pf-meta">${b.folder.rows[1][1]}</p>
-      <span class="ties" aria-hidden="true"></span>
-    </div>`).join('')}
-    <span class="pile-stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="pileRing" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+  const idcard = (b, i) => {
+    const [fam, nam, pat] = b.fields[0][1].split(' ');
+    const f = k => (b.fields.find(r => r[0] === k) || [])[1] || '';
+    const num = ['047213', '113806', '202517'][i % 3];
+    return `<a class="ksiva k${i}" href="#/${b.id}" aria-label="Удостоверение: ${b.name}. Открыть дело">
+      <div class="k-page">
+        <p class="k-row"><span>Фамилия</span><b>${fam}</b></p>
+        <p class="k-row"><span>Имя</span><b>${nam}</b></p>
+        <p class="k-row"><span>Отчество</span><b>${pat}</b></p>
+        <p class="k-row"><span>Звание</span><b>${f('Звание')}</b></p>
+        <p class="k-row wide"><span>Должность</span><b>${f('Должность')}</b></p>
+        <p class="k-valid">Действительно до 31 декабря 1997 г.</p>
+        <p class="k-sign"><span>Начальник ${b.unit}</span><svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 20c10-14 14 6 22-6s8 10 16-2 10 8 18 0c6-6 10 2 16-4 8-8 14 6 24-2" fill="none" stroke="#1f2f6b" stroke-width="2" stroke-linecap="round"/></svg></p>
+      </div>
+      <div class="k-cover">
+        <div class="k-face k-front"><span class="k-emb" aria-hidden="true"><svg viewBox="0 0 60 60"><path d="M30 6l6.5 15.5L53 23l-12.5 11L44 51 30 42.5 16 51l3.5-17L7 23l16.5-1.5z" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="30" cy="30" r="27" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2.5"/></svg></span><span class="k-t1">МВД</span><span class="k-t2">РОССИИ</span></div>
+        <div class="k-face k-back">
+          <p class="k-head">${b.unit}</p>
+          <p class="k-no">Удостоверение № ${num}</p>
+          <div class="k-ph"><img src="${b.photo}" alt="" loading="lazy" style="object-position:${b.pos}"></div>
+          <span class="k-stamp" aria-hidden="true"></span>
+        </div>
+      </div>
+    </a>`;
+  };
+  if (pileEl) pileEl.outerHTML = `<div class="ids">
+    ${BOTS.slice(0, 2).map(idcard).join('')}
+    <a class="pile-stamp ids-stamp" href="#/bots" aria-label="Открыть дела"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="pileRing" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
       <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="2.5"/>
       <text font-family="PT Mono, monospace" font-size="15" letter-spacing="3" fill="currentColor"><textPath href="#pileRing">УГОЛОВНЫЙ РОЗЫСК ✦ ЛЕНИНГРАД ✦ 1996 ✦</textPath></text>
       <text x="100" y="94" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="27" fill="currentColor">ОТКРЫТЬ</text>
-      <text x="100" y="124" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="27" fill="currentColor">ДЕЛА</text></svg></span>
-  </a>`;
+      <text x="100" y="124" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="27" fill="currentColor">ДЕЛА</text></svg></a>
+  </div>`;
+  // on touch screens the first tap opens the ID, the second follows the link
+  if (!matchMedia('(hover:hover)').matches) document.querySelectorAll('.ksiva').forEach(k => k.addEventListener('click', e => {
+    if (!k.classList.contains('open')){ e.preventDefault(); document.querySelectorAll('.ksiva.open').forEach(o => o.classList.remove('open')); k.classList.add('open'); }
+  }));
   document.getElementById('credits').innerHTML = BOTS.filter(b => b.credit).map(b => b.credit).join('<br>');
 
   // TV: title channel, one channel per bot, city channel last
@@ -2004,7 +2377,7 @@ body.splash-on{overflow:hidden}
   }
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/gorod':'Город · Лихие','/start':'Как подключить · Лихие'};
+  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/gorod':'Город · Лихие','/archive':'Фотоархив · Лихие','/start':'Как подключить · Лихие'};
   BOTS.forEach(b => titles['/' + b.id] = b.name + ' · Лихие');
   const botIds = new Set(BOTS.map(b => '/' + b.id));
 
@@ -2361,7 +2734,9 @@ body.splash-on{overflow:hidden}
     let back = null;
     const close = () => { if (lb.hidden) return; lb.hidden = true; fig.querySelector('.scene')?.remove(); if (back) back.focus(); };
     document.addEventListener('click', e => {
-      const ph = e.target.closest('.ft-ph');
+      const fl = e.target.closest('.ft-flip');
+      if (fl){ const on = fl.parentElement.classList.toggle('flipped'); fl.setAttribute('aria-pressed', on); return; }
+      const zb = e.target.closest('.ft-zoom'), ph = zb && zb.closest('.ft-ph');
       if (ph){
         back = ph; fig.querySelector('.scene')?.remove();
         const sc = ph.querySelector('.scene').cloneNode(true);
@@ -2375,13 +2750,235 @@ body.splash-on{overflow:hidden}
     addEventListener('hashchange', close);
   })();
 
-  /* ---------- Najda on the floor: a tap makes her wag ---------- */
+
+  /* ---------- photo archive: a desk of loose photos ---------- */
   (() => {
-    const n = document.getElementById('naida'); if (!n) return;
-    n.addEventListener('click', () => {
-      n.classList.remove('wag'); void n.offsetWidth; n.classList.add('wag', 'say');
-      clearTimeout(n._t); n._t = setTimeout(() => n.classList.remove('say', 'wag'), 2200);
+    const desk = document.querySelector('[data-desk]'); if (!desk || !window.ARCHIVE) return;
+    const veil = desk.querySelector('.ap-veil'), help = desk.querySelector('.ap-help');
+    const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    let z = 10, rnd = 1996;
+    const rand = () => { rnd = (rnd * 16807) % 2147483647; return rnd / 2147483647; };
+    const photos = ARCHIVE.map(([src, bg, shape, back, date], k) => {
+      const el = document.createElement('div');
+      const lab = !!bg, num = /lesha|pirat/.test(src) ? '002' : '001';
+      el.className = `ap ${shape === 'h' ? 'h' : 'v'} ${lab ? 'lab' : 'color'}`;
+      el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `Снимок ${k + 1}. Нажмите, чтобы взять в руки`);
+      el.innerHTML = `<div class="ap-lift"><div class="ap-card">
+        <div class="ap-face ap-front"><span class="scene ${lab ? 'bg-' + bg : 'full'}">${lab ? sceneExtra(bg, num) : ''}<img src="${src}" alt="" loading="lazy" draggable="false"></span>${date ? `<span class="ap-date">${date}</span>` : ''}</div>
+        <div class="ap-face ap-back" data-print="${lab ? 'фотобумага «Унибром»  ГОСТ 10752-79' : 'фото за 1 час  Невский, 54'}">${lab ? `<span class="ft-lab">Фотолаборатория ГУВД СПб<br>№&nbsp;${num}-${k + 1}</span>` : ''}<span class="ft-hw">${back}</span></div>
+      </div></div>`;
+      desk.appendChild(el);
+      return {el, lift: el.firstElementChild, card: el.querySelector('.ap-card'), x: 50, y: 50, r: 0};
     });
+    const place = p => { p.el.style.left = p.x + '%'; p.el.style.top = p.y + '%'; p.lift.style.setProperty('--r', p.r + 'deg'); };
+    // a loose grid with jitter, in random order, so every photo shows at least a corner
+    const scatter = () => {
+      const w = innerWidth;
+      const cols = w < 640 ? 3 : w < 1000 ? 4 : 5, rows = Math.ceil(photos.length / cols);
+      const order = photos.map((_, i) => i).sort(() => rand() - .5);
+      order.forEach((pi, n) => {
+        const p = photos[pi], c = n % cols, r = Math.floor(n / cols);
+        p.x = Math.min(88, Math.max(12, 8 + (c + .5) / cols * 84 + (rand() - .5) * (60 / cols)));
+        p.y = Math.min(84, Math.max(16, 12 + (r + .5) / rows * 76 + (rand() - .5) * (40 / rows)));
+        p.r = Math.round((rand() - .5) * 26);
+        p.el.style.zIndex = ++z; place(p);
+      });
+    };
+    scatter();
+    desk.closest('.archive').querySelector('.arc-shuffle').addEventListener('click', () => { if (!open) scatter(); });
+
+    /* dragging on the desk; a tap without movement picks the photo up */
+    let drag = null, open = null;
+    photos.forEach(p => {
+      p.el.addEventListener('pointerdown', e => {
+        if (e.button > 0) return;
+        if (open){ if (open === p) spinStart(e, p); return; }
+        e.preventDefault(); p.el.setPointerCapture(e.pointerId);
+        const dr = desk.getBoundingClientRect();
+        drag = {p, id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: p.x, oy: p.y, w: dr.width, h: dr.height, moved: false, lx: e.clientX, lt: performance.now(), t: 0};
+        p.el.style.zIndex = ++z;
+      });
+      p.el.addEventListener('pointermove', e => {
+        if (open === p && spin) return spinMove(e);
+        if (!drag || drag.p !== p || e.pointerId !== drag.id) return;
+        const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+        if (!drag.moved && Math.hypot(dx, dy) < 6) return;
+        if (!drag.moved){ drag.moved = true; p.el.classList.add('drag'); }
+        const pw = p.lift.offsetWidth / drag.w * 50, ph = p.lift.offsetHeight / drag.h * 50;
+        p.x = Math.min(100 - pw * .6, Math.max(pw * .6, drag.ox + dx / drag.w * 100));
+        p.y = Math.min(100 - ph * .5, Math.max(ph * .5, drag.oy + dy / drag.h * 100));
+        // the photo swings a little in the direction it is pulled
+        const now = performance.now(), v = (e.clientX - drag.lx) / Math.max(8, now - drag.lt);
+        drag.t = drag.t * .6 + Math.max(-14, Math.min(14, v * 9)) * .4; drag.lx = e.clientX; drag.lt = now;
+        p.lift.style.setProperty('--t', drag.t.toFixed(1) + 'deg');
+        place(p);
+      });
+      const end = e => {
+        if (open === p && spin) return spinEnd(e);
+        if (!drag || drag.p !== p) return;
+        const moved = drag.moved; drag = null;
+        p.el.classList.remove('drag'); p.lift.style.setProperty('--t', '0deg');
+        if (moved){ p.r = Math.max(-16, Math.min(16, p.r + Math.round((Math.random() - .5) * 8))); place(p); }
+        else if (e.type === 'pointerup') pick(p);
+      };
+      p.el.addEventListener('pointerup', end);
+      p.el.addEventListener('pointercancel', end);
+      p.el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open === p ? turn(p) : pick(p); }
+        else if (!open && e.key.startsWith('Arrow')){
+          e.preventDefault(); const st = 2;
+          if (e.key === 'ArrowLeft') p.x -= st; if (e.key === 'ArrowRight') p.x += st;
+          if (e.key === 'ArrowUp') p.y -= st; if (e.key === 'ArrowDown') p.y += st;
+          p.x = Math.min(95, Math.max(5, p.x)); p.y = Math.min(95, Math.max(5, p.y)); place(p);
+        }
+      });
+    });
+
+    /* in hand: centred and large; drag sideways to turn it, tap to flip it over */
+    let spin = null;
+    const turn = p => { p.el.classList.toggle('flip'); p.card.style.removeProperty('--ry'); };
+    const pick = p => {
+      open = p; p.el.style.zIndex = ++z;
+      const r = p.el.getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
+      const s = Math.min(vw * (vw < 640 ? .84 : .62) / p.lift.offsetWidth, vh * (vw < 640 ? .64 : .72) / p.lift.offsetHeight);
+      p.lift.style.setProperty('--dx', (vw / 2 - r.left) + 'px');
+      p.lift.style.setProperty('--dy', (vh / 2 - (vw < 640 ? 34 : 14) - r.top) + 'px');
+      p.lift.style.setProperty('--es', Math.max(1.2, s).toFixed(3));
+      p.el.classList.add('exam'); veil.hidden = false; help.hidden = false;
+      p.el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape кладёт на стол');
+      document.documentElement.style.overflow = 'hidden';
+    };
+    const drop = () => {
+      const p = open; if (!p) return; open = null; spin = null;
+      p.el.classList.remove('exam', 'tilt'); p.card.style.setProperty('--tx', '0deg'); p.card.style.setProperty('--ty', '0deg');
+      veil.hidden = true; help.hidden = true; document.documentElement.style.overflow = '';
+      p.el.setAttribute('aria-label', 'Снимок. Нажмите, чтобы взять в руки');
+    };
+    const spinStart = (e, p) => {
+      e.preventDefault(); p.el.setPointerCapture(e.pointerId);
+      spin = {sx: e.clientX, base: p.el.classList.contains('flip') ? 180 : 0, moved: false};
+    };
+    const spinMove = e => {
+      const dx = e.clientX - spin.sx; if (!spin.moved && Math.abs(dx) < 6) return;
+      spin.moved = true; open.el.classList.add('spin'); open.el.classList.remove('tilt');
+      open.card.style.setProperty('--tx', '0deg'); open.card.style.setProperty('--ty', '0deg');
+      open.card.style.setProperty('--ry', (spin.base + dx * .6) + 'deg');
+    };
+    const spinEnd = e => {
+      const p = open, s = spin; spin = null; p.el.classList.remove('spin');
+      if (!s.moved){ if (e.type === 'pointerup') turn(p); return; }
+      const a = s.base + (e.clientX - s.sx) * .6, side = ((Math.round(a / 180) % 2) + 2) % 2;
+      p.card.style.setProperty('--ry', Math.round(a / 180) * 180 + 'deg');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p.el.classList.toggle('flip', side === 1);
+        setTimeout(() => { if (!spin){ p.card.style.transition = 'none'; p.card.style.removeProperty('--ry'); p.card.offsetWidth; p.card.style.transition = ''; } }, 720);
+      }));
+    };
+    // with a mouse the photo in hand leans toward the cursor
+    if (fine) addEventListener('pointermove', e => {
+      if (!open || spin) return;
+      const r = open.el.querySelector('.ap-card').getBoundingClientRect();
+      const nx = (e.clientX - (r.left + r.width / 2)) / innerWidth, ny = (e.clientY - (r.top + r.height / 2)) / innerHeight;
+      open.el.classList.add('tilt');
+      open.card.style.setProperty('--ty', (nx * 22).toFixed(1) + 'deg');
+      open.card.style.setProperty('--tx', (-ny * 18).toFixed(1) + 'deg');
+    });
+    veil.addEventListener('click', drop);
+    addEventListener('keydown', e => { if (e.key === 'Escape' && open){ const p = open; drop(); p.el.focus(); } });
+    addEventListener('hashchange', drop);
+  })();
+
+
+  /* ---------- starts: video tapes out of the envelope ---------- */
+  (() => {
+    const room = document.getElementById('vhsRoom'); if (!room) return;
+    const tapesEl = room.querySelector('.vr-tapes'), scr = room.querySelector('.vr-screen'), cv = scr.querySelector('canvas'), cx = cv.getContext('2d');
+    const led = room.querySelector('.vr-led'), slot = room.querySelector('.vr-slot'), ej = room.querySelector('.vr-eject');
+    const T = room.querySelector('.vr-t'), H = room.querySelector('.vr-h'), Pp = room.querySelector('.vr-p'), first = room.querySelector('.vr-first'), cnt = room.querySelector('.vr-count');
+    const wait = ms => new Promise(r => setTimeout(r, reduce ? Math.min(ms, 60) : ms));
+    let bot = null, cur = null, busy = false, opener = null, raf = 0, tick = 0;
+    const img = cx.createImageData(200, 150);
+    const noise = on => {
+      scr.classList.toggle('noise', on); cancelAnimationFrame(raf);
+      if (!on) return;
+      const draw = () => { const d = img.data; for (let i = 0; i < d.length; i += 4){ const v = Math.random() * 255 | 0; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; } cx.putImageData(img, 0, 0); raf = requestAnimationFrame(draw); };
+      draw();
+    };
+    const clock = () => { clearInterval(tick); let sec = 0; cnt.textContent = '0:00:00';
+      tick = setInterval(() => { sec++; cnt.textContent = `0:${String(sec / 60 | 0).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; led.textContent = `${String(sec / 60 | 0).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; }, 1000); };
+    const tapeHTML = (st, k) => `<button class="tape" type="button" data-i="${k}" style="--tr:${[-3, 2.5, 1.5, -2, 3, -1.5][k % 6]}deg" aria-label="Кассета: ${st.h}, ${st.t}">
+      <span class="tp-label"><b>${st.h}</b><i>${st.t}</i></span><span class="tp-win"><i></i><i></i></span>${k === 0 ? '<span class="tp-first">первый</span>' : ''}</button>`;
+    const open = env => {
+      bot = BOTS.find(b => b.id === env.dataset.env); if (!bot) return;
+      opener = env; cur = null; busy = false;
+      tapesEl.innerHTML = bot.starts.map(tapeHTML).join('');
+      scr.classList.remove('play'); noise(false); led.textContent = '--:--'; ej.disabled = true;
+      room.hidden = false; document.documentElement.style.overflow = 'hidden'; room.scrollTop = 0;
+      // the tapes spill out of the envelope
+      const er = env.getBoundingClientRect(), ex = er.left + er.width / 2, ey = er.top + er.height / 3;
+      [...tapesEl.children].forEach((t, k) => {
+        const r = t.getBoundingClientRect();
+        t.style.transition = 'none';
+        t.style.transform = `translate(${ex - (r.left + r.width / 2)}px, ${ey - (r.top + r.height / 2)}px) rotate(${(k % 2 ? 1 : -1) * (20 + k * 7)}deg) scale(.5)`;
+        t.style.opacity = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          t.style.transition = `transform .7s cubic-bezier(.2,.9,.25,1.05) ${k * 70}ms, opacity .3s ${k * 70}ms`;
+          t.style.transform = ''; t.style.opacity = '';
+          setTimeout(() => t.style.transition = '', 800 + k * 70);
+        }));
+      });
+      setTimeout(() => tapesEl.firstElementChild?.focus({preventScroll: true}), 400);
+    };
+    const close = () => {
+      if (room.hidden) return; room.hidden = true; noise(false); clearInterval(tick);
+      room.querySelectorAll('.tape.fly').forEach(f => f.remove());
+      document.documentElement.style.overflow = ''; opener?.focus({preventScroll: true});
+    };
+    // fly a copy of the tape between its place on the table and the slot
+    const fly = async (t, toSlot) => {
+      const r = t.getBoundingClientRect(), sr = slot.getBoundingClientRect();
+      const f = t.cloneNode(true); f.classList.remove('gone'); f.classList.add('fly');
+      Object.assign(f.style, {left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px'});
+      const sc = sr.width / r.width, atSlot = `translate(${sr.left - r.left}px, ${sr.top - r.top - r.height * sc * .55}px) scale(${sc})`;
+      f.style.transform = toSlot ? 'none' : atSlot + ' scaleY(.05)';
+      if (!toSlot) f.style.opacity = '0';
+      document.body.appendChild(f); f.offsetWidth;
+      if (toSlot){
+        f.style.transform = atSlot; await wait(620);
+        f.style.transition = 'transform .32s ease-in, opacity .32s ease-in';
+        f.style.transform = atSlot + ` translateY(${r.height * .6}px) scaleY(.05)`; f.style.opacity = '0'; await wait(330);
+      } else {
+        f.style.opacity = '1'; f.style.transform = atSlot; await wait(300);
+        f.style.transform = 'none'; await wait(620);
+      }
+      f.remove();
+    };
+    const play = async (t) => {
+      busy = true; const k = +t.dataset.i, st = bot.starts[k];
+      if (room.scrollTop > 40){ room.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}); await wait(420); }
+      t.classList.add('gone'); await fly(t, true);
+      cur = t; ej.disabled = false; led.textContent = 'PLAY';
+      noise(true); await wait(650);
+      T.textContent = st.t; H.textContent = st.h; Pp.textContent = st.p; first.hidden = k !== 0;
+      scr.classList.add('play'); noise(false); clock();
+      busy = false;
+    };
+    const eject = async () => {
+      if (!cur) return; busy = true; const t = cur; cur = null; ej.disabled = true; clearInterval(tick);
+      scr.classList.remove('play'); noise(true); led.textContent = 'EJ'; await wait(260); noise(false); led.textContent = '--:--';
+      await fly(t, false); t.classList.remove('gone'); busy = false;
+    };
+    document.addEventListener('click', async e => {
+      const env = e.target.closest('.envelope'); if (env){ open(env); return; }
+      if (room.hidden) return;
+      const t = e.target.closest('.vr-tapes .tape');
+      if (t && !busy){ if (cur) await eject(); play(t); return; }
+      if (e.target.closest('.vr-eject') && !busy){ eject(); return; }
+      if (e.target.closest('.vr-x') || e.target === room) close();
+    });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && !room.hidden) close(); });
+    addEventListener('hashchange', close);
   })();
 
   /* ---------- drawers under the TV ---------- */
