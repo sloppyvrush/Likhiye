@@ -1436,6 +1436,36 @@ body.splash-on{overflow:hidden}
   .npc-modal{place-items:start center}
 }
 @media (prefers-reduced-motion:reduce){.npc,.npc-sheet{transition:none; animation:none}}
+
+/* ---------- home: joint starts envelope beside the IDs, a real rubber stamp ---------- */
+.ids .ids-env{position:absolute; z-index:2; left:0; top:2%; width:min(330px, 38%); margin:0; transform:rotate(-4deg)}
+.ids .ids-env:hover{transform:rotate(-2deg) translateY(-4px)}
+.ids .ids-env .env-hw{right:6%; bottom:auto; top:40%; font-size:clamp(17px, 2.3vw, 24px)}
+.ids .ids-env .env-stamp{transform:rotate(-8deg) scale(.78); transform-origin:0 100%}
+.ids-stamp.seal{position:absolute; z-index:3; left:12%; top:52%; width:clamp(104px, 13vw, 132px); background:none; filter:none; border-radius:0; transform:rotate(-6deg); color:#b3261e; transition:transform .25s}
+.seal > svg{position:relative; z-index:2; display:block; width:100%; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.45))}
+.seal .sl-body{transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.seal .sl-shadow{transition:transform .25s, opacity .25s; transform-origin:100px 236px}
+.seal:hover .sl-body,.seal:focus-visible .sl-body{transform:translateY(-14px)}
+.seal:hover .sl-shadow,.seal:focus-visible .sl-shadow{transform:scale(.8); opacity:.6}
+.seal:hover,.seal:focus-visible{transform:rotate(-2deg)}
+.seal:focus-visible{outline:none; box-shadow:none}
+.seal:focus-visible svg{filter:drop-shadow(0 0 6px #e3c98f)}
+.seal .sl-ink{position:absolute; z-index:1; left:-34%; bottom:-30%; width:120%; aspect-ratio:1; color:rgba(179,38,30,.85); opacity:0; transform:rotate(-14deg) scale(.6); pointer-events:none; mix-blend-mode:multiply}
+.seal .sl-ink svg{width:100%; display:block}
+.seal.press .sl-body{transform:translateY(10px); transition-duration:.12s}
+.seal.press .sl-ink{opacity:1; transform:rotate(-14deg) scale(1); transition:opacity .15s .08s, transform .15s .08s}
+.seal .sl-hint{position:absolute; left:50%; top:100%; margin-top:6px; transform:translateX(-50%) rotate(-3deg); white-space:nowrap; font:400 18px/1 var(--hand); color:#e3c98f; opacity:.85}
+@media (max-width:640px){
+  .ids{height:330px}
+  .ids .ids-env{width:46%; left:-1%; top:1%}
+  .ids .ids-env .env-open{display:none}
+  .ids .ids-env .env-stamp{display:none}
+  .ids .ids-env .env-hw{top:auto; bottom:22%; right:auto; left:10%; font-size:16px}
+  .ids-stamp.seal{left:8%; top:48%; width:92px}
+  .seal .sl-hint{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.seal,.seal .sl-body,.seal .sl-shadow,.seal .sl-ink{transition:none}}
 </style>
 </head>
 <body>
@@ -1480,6 +1510,7 @@ body.splash-on{overflow:hidden}
   <nav aria-label="Разделы">
     <a href="#/">Главная</a>
     <a href="#/bots"><span class="long">Персонажи</span><span class="short">Герои</span></a>
+    <a href="#/lyudi">Люди</a>
     <a href="#/gorod">Город</a>
     <a href="#/archive"><span class="long">Фотоархив</span><span class="short">Архив</span></a>
     <a href="#/start"><span class="long">Как подключить</span><span class="short">Подключить</span></a>
@@ -1827,11 +1858,6 @@ body.splash-on{overflow:hidden}
       <h2>Персонажи</h2>
       <div data-pile></div>
     </section>
-    <section class="section on-wall" id="people">
-      <h2>Люди района</h2>
-      <p class="muted prose">Кого встретишь в отделе, во дворе и в чужом «мерседесе». Нажми на фото, чтобы открыть дело.</p>
-      <div class="npc-board" id="npcBoard"></div>
-    </section>
 
 
     <section class="section on-wall">
@@ -1839,15 +1865,6 @@ body.splash-on{overflow:hidden}
       <h2>Почти честные</h2>
       <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя не терпит вранья. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
       <p class="muted prose">У них общие старты: сцена та же, а мысли у каждого свои.</p>
-      <button class="envelope duo-env" type="button" data-env="duo" aria-label="Конверт «Материалы»: общие старты на видеокассетах">
-        <span class="env-peek" aria-hidden="true"><i class="pk-tape a"></i><i class="pk-tape b"></i><i class="pk-photo"></i></span>
-        <span class="env-body" aria-hidden="true">
-          <span class="env-flap"></span>
-          <span class="env-stamp">Материалы<br>«Почти честные»</span>
-          <span class="env-hw" id="duoCount">Общие старты</span>
-          <span class="env-open">Открыть конверт</span>
-        </span>
-      </button>
 
       <div class="night">
         <p class="when">02:15–02:40, двор на улице Зайцева</p>
@@ -1897,6 +1914,17 @@ body.splash-on{overflow:hidden}
 <div id="botpages"></div>
 
 <!-- ================= CITY ================= -->
+<!-- ================= PEOPLE ================= -->
+<main class="page" data-route="/lyudi">
+  <div class="wrap">
+    <section class="section on-wall" id="people">
+      <h2>Люди района</h2>
+      <p class="muted prose">Кого встретишь в отделе, во дворе и в чужом «мерседесе». Нажми на фото, чтобы открыть дело.</p>
+      <div class="npc-board" id="npcBoard"></div>
+    </section>
+  </div>
+</main>
+
 <main class="page" data-route="/gorod">
   <div class="wrap section on-wall city">
     <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ddRough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/></filter></svg>
@@ -2406,11 +2434,37 @@ body.splash-on{overflow:hidden}
   };
   if (pileEl) pileEl.outerHTML = `<div class="ids">
     ${BOTS.slice(0, 2).map(idcard).join('')}
-    <a class="pile-stamp ids-stamp" href="#/bots" aria-label="Открыть дела"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="pileRing" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
-      <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <text font-family="PT Mono, monospace" font-size="15" letter-spacing="3" fill="currentColor"><textPath href="#pileRing">УГОЛОВНЫЙ РОЗЫСК ✦ ЛЕНИНГРАД ✦ 1996 ✦</textPath></text>
-      <text x="100" y="94" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="27" fill="currentColor">ОТКРЫТЬ</text>
-      <text x="100" y="124" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="27" fill="currentColor">ДЕЛА</text></svg></a>
+    <button class="envelope duo-env ids-env" type="button" data-env="duo" aria-label="Конверт «Материалы»: общие старты на видеокассетах">
+      <span class="env-peek" aria-hidden="true"><i class="pk-tape a"></i><i class="pk-tape b"></i><i class="pk-photo"></i></span>
+      <span class="env-body" aria-hidden="true">
+        <span class="env-flap"></span>
+        <span class="env-stamp">Материалы<br>«Почти честные»</span>
+        <span class="env-hw" id="duoCount">Общие старты</span>
+        <span class="env-open">Открыть конверт</span>
+      </span>
+    </button>
+    <a class="ids-stamp seal" href="#/bots" aria-label="Открыть дела"><svg viewBox="0 0 200 250" aria-hidden="true">
+      <defs>
+        <linearGradient id="slWood" x1="0" x2="1"><stop offset="0" stop-color="#3a1d0f"/><stop offset=".35" stop-color="#8a4a24"/><stop offset=".55" stop-color="#a35b2e"/><stop offset="1" stop-color="#2c160b"/></linearGradient>
+        <radialGradient id="slKnob" cx=".38" cy=".3" r=".75"><stop offset="0" stop-color="#c8783f"/><stop offset=".5" stop-color="#7d3f1d"/><stop offset="1" stop-color="#2b150a"/></radialGradient>
+        <linearGradient id="slBrass" x1="0" x2="1"><stop offset="0" stop-color="#6d5521"/><stop offset=".4" stop-color="#e2c27a"/><stop offset=".6" stop-color="#c9a453"/><stop offset="1" stop-color="#5a4419"/></linearGradient>
+        <linearGradient id="slBase" x1="0" x2="1"><stop offset="0" stop-color="#1c1c1c"/><stop offset=".4" stop-color="#4a4a4a"/><stop offset="1" stop-color="#121212"/></linearGradient>
+      </defs>
+      <ellipse class="sl-shadow" cx="100" cy="236" rx="74" ry="11" fill="rgba(0,0,0,.45)"/>
+      <g class="sl-body">
+        <ellipse cx="100" cy="58" rx="46" ry="44" fill="url(#slKnob)"/>
+        <ellipse cx="86" cy="40" rx="14" ry="9" fill="rgba(255,220,180,.22)"/>
+        <path d="M80 92 C84 112 84 128 76 150 L124 150 C116 128 116 112 120 92 Z" fill="url(#slWood)"/>
+        <path d="M84 100 C87 116 87 130 81 148" stroke="rgba(255,210,170,.18)" stroke-width="3" fill="none"/>
+        <rect x="58" y="150" width="84" height="16" rx="3" fill="url(#slBrass)"/>
+        <path d="M48 166 h104 v36 a6 6 0 0 1 -6 6 h-92 a6 6 0 0 1 -6 -6z" fill="url(#slBase)"/>
+        <rect x="62" y="174" width="76" height="24" rx="2" fill="#efe3c4" stroke="#8a7440" stroke-width="1"/>
+        <text x="100" y="185" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" letter-spacing="1" fill="#3a2a14">ОТКРЫТЬ</text>
+        <text x="100" y="195" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" letter-spacing="1" fill="#3a2a14">ДЕЛА</text>
+        <rect x="46" y="208" width="108" height="10" rx="3" fill="#a8261f"/>
+        <rect x="46" y="208" width="108" height="3" rx="1.5" fill="rgba(255,255,255,.18)"/>
+      </g>
+    </svg><span class="sl-ink" aria-hidden="true"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="3"/><text x="100" y="96" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="28" fill="currentColor">ОТКРЫТЬ</text><text x="100" y="128" text-anchor="middle" font-family="Ruslan Display, PT Serif, serif" font-size="28" fill="currentColor">ДЕЛА</text></svg></span><span class="sl-hint" aria-hidden="true">открыть дела</span></a>
   </div>`;
   // on touch screens the first tap opens the ID, the second follows the link
   if (!matchMedia('(hover:hover)').matches) document.querySelectorAll('.ksiva').forEach(k => k.addEventListener('click', e => {
@@ -2431,7 +2485,7 @@ body.splash-on{overflow:hidden}
   }
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/gorod':'Город · Лихие','/archive':'Фотоархив · Лихие','/start':'Как подключить · Лихие'};
+  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/lyudi':'Люди района · Лихие','/gorod':'Город · Лихие','/archive':'Фотоархив · Лихие','/start':'Как подключить · Лихие'};
   BOTS.forEach(b => titles['/' + b.id] = b.name + ' · Лихие');
   const botIds = new Set(BOTS.map(b => '/' + b.id));
 
@@ -3301,6 +3355,13 @@ body.splash-on{overflow:hidden}
     addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     addEventListener('hashchange', close);
   })();
+
+  /* ---------- the rubber stamp: press, leave ink, then open the files ---------- */
+  document.addEventListener('click', e => {
+    const s = e.target.closest('.seal'); if (!s || s.classList.contains('press')) return;
+    e.preventDefault(); s.classList.add('press');
+    setTimeout(() => { location.hash = '#/bots'; s.classList.remove('press'); }, reduce ? 0 : 420);
+  });
 
   route();
 })();
