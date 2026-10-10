@@ -1399,6 +1399,43 @@ body.splash-on{overflow:hidden}
   .vr-hint{font-size:19px}
 }
 @media (prefers-reduced-motion:reduce){ .vr-screen.play .vr-show, .vr-screen.play .vr-show::after{animation:none} .tape.fly{transition:none} }
+
+/* ---------- drawers lead to the starts ---------- */
+.drawer .tag{position:absolute; z-index:3; left:50%; bottom:-38%; transform:translateX(-50%) rotate(-3deg); white-space:nowrap; font:400 1.5cqw/1 var(--hand); color:#22357a;
+  background:#f4ecd2; padding:.3cqw .7cqw .4cqw; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .3s .35s}
+.drawer.open .tag{opacity:1}
+.duo-env{margin-top:40px}
+/* ---------- NPC board ---------- */
+.npc-board{display:grid; gap:34px}
+.npc-group h3{font:400 26px/1 var(--hand); color:#e3c98f; margin:0 0 16px}
+.npc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:30px 22px}
+.npc{position:relative; border:0; padding:10px 10px 12px; background:#f6f0e1; color:var(--ink); text-align:left; cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.45); transform:rotate(var(--r,0deg)); transition:transform .3s cubic-bezier(.3,1.3,.5,1), box-shadow .3s}
+.npc:hover,.npc:focus-visible{transform:rotate(0deg) translateY(-6px) scale(1.03); box-shadow:0 18px 30px rgba(0,0,0,.5); z-index:2}
+.npc::before{content:""; position:absolute; left:50%; top:-10px; width:70px; height:20px; margin-left:-35px; background:rgba(238,232,206,.7); transform:rotate(var(--tr,-3deg)); box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.npc img{width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.18) contrast(1.05)}
+.npc .nm{display:block; margin-top:8px; font:700 21px/1.05 'Caveat',var(--hand); color:#22357a}
+.npc .rl{display:block; margin-top:3px; font:12px/1.3 var(--mono); color:var(--ink-soft)}
+.npc .ln{display:block; margin-top:6px; font-size:14px; line-height:1.4}
+.npc-modal{position:fixed; inset:0; z-index:210; display:grid; place-items:center; padding:20px; background:rgba(12,8,5,.86); overflow:auto}
+.npc-modal[hidden]{display:none}
+.npc-sheet{position:relative; width:min(860px,100%); display:grid; grid-template-columns:minmax(0,300px) 1fr; gap:28px; padding:clamp(18px,4vw,34px);
+  background:var(--paper); color:var(--ink); box-shadow:0 20px 50px rgba(0,0,0,.6); animation:lbIn .3s ease}
+.npc-sheet .ph{background:#f8f3e6; padding:10px 10px 30px; box-shadow:0 6px 14px rgba(0,0,0,.3); transform:rotate(-2deg); align-self:start}
+.npc-sheet .ph img{width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.18) contrast(1.05)}
+.npc-sheet .kick{font:13px var(--mono); letter-spacing:.06em; color:var(--stamp); text-transform:uppercase; margin:0 0 6px}
+.npc-sheet h3{font-family:var(--display); font-weight:400; font-size:clamp(24px,3.4vw,32px); line-height:1.1; margin:0 0 4px}
+.npc-sheet .rl{font:15px var(--mono); color:var(--ink-soft); margin:0 0 16px}
+.npc-sheet p{font-size:17px}
+.npc-sheet .pen{font:22px/1.2 var(--hand); color:var(--pen); transform:rotate(-1.5deg); margin:6px 0 0}
+.npc-sheet .x{position:absolute; right:10px; top:6px; border:0; background:none; font-size:30px; line-height:1; color:var(--ink-soft); cursor:pointer}
+@media (max-width:640px){
+  .npc-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 14px}
+  .npc .ln{display:none}
+  .npc-sheet{grid-template-columns:1fr} .npc-sheet .ph{width:min(240px,70%); margin:0 auto}
+  .npc-modal{place-items:start center}
+}
+@media (prefers-reduced-motion:reduce){.npc,.npc-sheet{transition:none; animation:none}}
 </style>
 </head>
 <body>
@@ -1790,12 +1827,27 @@ body.splash-on{overflow:hidden}
       <h2>Персонажи</h2>
       <div data-pile></div>
     </section>
+    <section class="section on-wall" id="people">
+      <h2>Люди района</h2>
+      <p class="muted prose">Кого встретишь в отделе, во дворе и в чужом «мерседесе». Нажми на фото, чтобы открыть дело.</p>
+      <div class="npc-board" id="npcBoard"></div>
+    </section>
+
 
     <section class="section on-wall">
       <p class="story-kicker">Первая история</p>
       <h2>Почти честные</h2>
       <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя не терпит вранья. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
       <p class="muted prose">У них общие старты: сцена та же, а мысли у каждого свои.</p>
+      <button class="envelope duo-env" type="button" data-env="duo" aria-label="Конверт «Материалы»: общие старты на видеокассетах">
+        <span class="env-peek" aria-hidden="true"><i class="pk-tape a"></i><i class="pk-tape b"></i><i class="pk-photo"></i></span>
+        <span class="env-body" aria-hidden="true">
+          <span class="env-flap"></span>
+          <span class="env-stamp">Материалы<br>«Почти честные»</span>
+          <span class="env-hw" id="duoCount">Общие старты</span>
+          <span class="env-open">Открыть конверт</span>
+        </span>
+      </button>
 
       <div class="night">
         <p class="when">02:15–02:40, двор на улице Зайцева</p>
@@ -2175,9 +2227,11 @@ body.splash-on{overflow:hidden}
   </div>
   <p class="vr-hint">Выберите кассету, она сама встанет в магнитофон.</p>
 </div>
+<div class="npc-modal" id="npcModal" hidden role="dialog" aria-modal="true" aria-label="Дело"></div>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Фотография крупно"><figure><figcaption></figcaption></figure><button class="lb-x" type="button" aria-label="Закрыть">×</button></div>
 <script src="bots.js"></script>
 <script src="music.js"></script>
+<script src="npcs.js"></script>
 <script>
 (() => {
   const BOTS = window.BOTS || [];
@@ -2909,8 +2963,19 @@ body.splash-on{overflow:hidden}
       tick = setInterval(() => { sec++; cnt.textContent = `0:${String(sec / 60 | 0).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; led.textContent = `${String(sec / 60 | 0).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; }, 1000); };
     const tapeHTML = (st, k) => `<button class="tape" type="button" data-i="${k}" style="--tr:${[-3, 2.5, 1.5, -2, 3, -1.5][k % 6]}deg" aria-label="Кассета: ${st.h}, ${st.t}">
       <span class="tp-label"><b>${st.h}</b><i>${st.t}</i></span><span class="tp-win"><i></i><i></i></span>${k === 0 ? '<span class="tp-first">первый</span>' : ''}</button>`;
+    // all starts of every bot on one shelf: shared scenes become one tape
+    const SHORT = {viktor:'Витя', lesha:'Лёша'};
+    const DUO = {id:'duo', starts:[]}; const seen = {};
+    BOTS.forEach(b => (b.starts || []).forEach(s => {
+      if (s.h === 'Ваш старт') return;
+      if (seen[s.h]){ seen[s.h].who.push(SHORT[b.id] || b.name); return; }
+      const st = {t:s.t, h:s.h, p:s.p, who:[SHORT[b.id] || b.name]}; seen[s.h] = st; DUO.starts.push(st);
+    }));
+    DUO.starts.forEach(s => s.t = `${s.t} · ${s.who.join(' / ')}`);
+    DUO.starts.push({t:'для любого', h:'Ваш старт', p:'Пустое первое сообщение у каждого персонажа: напишите начало сами.'});
+    const dc = document.getElementById('duoCount'); if (dc) dc.textContent = `Общие: ${DUO.starts.length}\u00a0${typeof plural === 'function' ? plural(DUO.starts.length, 'кассета', 'кассеты', 'кассет') : 'кассет'}`;
     const open = env => {
-      bot = BOTS.find(b => b.id === env.dataset.env); if (!bot) return;
+      bot = env.dataset.env === 'duo' ? DUO : BOTS.find(b => b.id === env.dataset.env); if (!bot) return;
       opener = env; cur = null; busy = false;
       tapesEl.innerHTML = bot.starts.map(tapeHTML).join('');
       scr.classList.remove('play'); noise(false); led.textContent = '--:--'; ej.disabled = true;
@@ -2979,12 +3044,20 @@ body.splash-on{overflow:hidden}
     });
     addEventListener('keydown', e => { if (e.key === 'Escape' && !room.hidden) close(); });
     addEventListener('hashchange', close);
+    window.openStarts = open;
   })();
 
   /* ---------- drawers under the TV ---------- */
-  document.querySelectorAll('.drawer').forEach(d => d.addEventListener('click', () => {
-    const open = d.classList.toggle('open'); d.setAttribute('aria-expanded', String(open));
-  }));
+  // first click opens a drawer with a «старты» note, the second one puts every start on the VCR table
+  document.querySelectorAll('.drawer').forEach(d => {
+    d.dataset.env = 'duo';
+    d.insertAdjacentHTML('beforeend', '<span class="tag" aria-hidden="true">старты ▸</span>');
+    d.addEventListener('click', () => {
+      const wasOpen = d.classList.contains('open');
+      const open = d.classList.toggle('open'); d.setAttribute('aria-expanded', String(open));
+      if (wasOpen && window.openStarts) window.openStarts(d);
+    });
+  });
 
   /* ---------- record player ---------- */
   const TRACKS = window.TRACKS || [];
@@ -3198,6 +3271,36 @@ body.splash-on{overflow:hidden}
     })(performance.now());
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) startAir(); });
+
+  /* ---------- NPC board ---------- */
+  (() => {
+    const board = document.getElementById('npcBoard'), modal = document.getElementById('npcModal');
+    if (!board || !modal) return;
+    const list = window.NPCS || [], groups = window.NPC_GROUPS || [];
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const rots = [-2.5,1.5,-1,2,-1.8,1,2.4,-1.4];
+    let k = 0;
+    board.innerHTML = groups.map(([g, title]) => {
+      const items = list.map((n, i) => [n, i]).filter(([n]) => n.group === g);
+      if (!items.length) return '';
+      return `<div class="npc-group"><h3>${esc(title)}</h3><div class="npc-grid">` + items.map(([n, i]) => {
+        const r = rots[k++ % rots.length];
+        return `<button class="npc" type="button" data-i="${i}" style="--r:${r}deg; --tr:${-r * 1.5}deg" aria-label="Открыть дело: ${esc(n.name)}"><img src="${esc(n.photo)}" alt="" loading="lazy" style="object-position:${esc(n.pos || '50% 20%')}"><span class="nm">${esc(n.name)}${n.nick ? ` «${esc(n.nick)}»` : ''}</span><span class="rl">${esc(n.role)}</span><span class="ln">${esc(n.line)}</span></button>`;
+      }).join('') + `</div></div>`;
+    }).join('');
+    let back = null;
+    const close = () => { if (modal.hidden) return; modal.hidden = true; modal.innerHTML = ''; document.body.style.overflow = ''; if (back) back.focus(); };
+    board.addEventListener('click', e => {
+      const b = e.target.closest('.npc'); if (!b) return;
+      const n = list[+b.dataset.i]; back = b;
+      modal.innerHTML = `<div class="npc-sheet"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph"><img src="${esc(n.photo)}" alt="${esc(n.name)}" style="object-position:${esc(n.pos || '50% 20%')}"></div><div><p class="kick">Дело · ${esc(n.who === 'оба' ? 'Витя и Лёша' : n.who)}</p><h3>${esc(n.name)}${n.nick ? ` «${esc(n.nick)}»` : ''}</h3><p class="rl">${esc(n.role)}</p>${(n.about || []).map(p => `<p>${esc(p)}</p>`).join('')}${n.note ? `<p class="pen">${esc(n.note)}</p>` : ''}</div></div>`;
+      modal.hidden = false; document.body.style.overflow = 'hidden';
+      modal.querySelector('.x').focus();
+    });
+    modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.x')) close(); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    addEventListener('hashchange', close);
+  })();
 
   route();
 })();
