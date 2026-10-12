@@ -1537,7 +1537,7 @@ body.splash-on{overflow:hidden}
 .cork-scroll{overflow-x:auto; overflow-y:hidden; margin:0 calc(50% - 50vw); padding:0 34px 18px; scrollbar-width:thin}
 .npc-board.pans .cork-scroll{cursor:var(--cur-grab)}
 .cork-size{position:relative; margin:0 auto}
-.cork{position:absolute; left:0; top:0; width:1960px; height:2380px; transform-origin:0 0; border-radius:6px; overflow:hidden;
+.cork{position:absolute; left:0; top:0; width:1960px; height:1880px; transform-origin:0 0; border-radius:6px; overflow:hidden;
   background:
     radial-gradient(circle at 20% 30%, rgba(60,30,8,.25) 0 1px, transparent 1.5px) 0 0/7px 9px,
     radial-gradient(circle at 70% 60%, rgba(255,226,170,.22) 0 1px, transparent 1.6px) 0 0/11px 8px,
@@ -1553,7 +1553,7 @@ body.splash-on{overflow:hidden}
 .cork-title{position:absolute; left:560px; top:300px; width:320px; transform:rotate(-1.5deg); padding:10px 14px 12px; background:#f3ead2; box-shadow:0 4px 8px rgba(0,0,0,.35); text-align:center}
 .cork-title b{display:block; font:700 18px/1.2 var(--mono); letter-spacing:.12em; color:#2a2418}
 .cork-title span{font:24px/1 'Caveat',var(--hand); color:#1f2f6b}
-.cork-legend{position:absolute; left:1560px; top:2060px; width:208px; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
+.cork-legend{position:absolute; left:1372px; top:1290px; width:208px; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
 .cork-legend b{font:22px/1 'Caveat',var(--hand); color:#1f2f6b; font-weight:700}
 .cork-legend i{display:inline-block; width:26px; height:4px; margin-right:8px; vertical-align:middle; border-radius:2px; box-shadow:0 1px 1px rgba(0,0,0,.4)}
 .cork-yarn{position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none}
@@ -1656,6 +1656,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:var(--paper); color:var(--ink); box-shadow:0 20px 50px rgba(0,0,0,.6); animation:lbIn .3s ease}
 .npc-sheet .ph{background:#f8f3e6; padding:10px 10px 30px; box-shadow:0 6px 14px rgba(0,0,0,.3); transform:rotate(-2deg); align-self:start}
 .npc-sheet .ph img{width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.18) contrast(1.05)}
+.npc-sheet.wide-ph{grid-template-columns:minmax(0,380px) 1fr}
 .npc-sheet .kick{font:13px var(--mono); letter-spacing:.06em; color:var(--stamp); text-transform:uppercase; margin:0 0 6px}
 .npc-sheet h3{font-family:var(--display); font-weight:400; font-size:clamp(24px,3.4vw,32px); line-height:1.1; margin:0 0 4px}
 .npc-sheet .rl{font:15px var(--mono); color:var(--ink-soft); margin:0 0 16px}
@@ -3690,7 +3691,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (!board || !modal) return;
     const list = window.NPCS || [], B = window.NPC_BOARD || {pos:{}, links:[], notes:[]};
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const W = 1960, H = 2380;
+    const W = 1960, H = 1880;
     // people: NPCs from npcs.js plus the two heroes and their animals from bots.js
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
@@ -3698,12 +3699,12 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (vb) people.viktor = {id:'viktor', name:'Виктор Громов', role:'майор, убойный отдел ГУВД', photo:vb.photo, pos:vb.pos, hero:'#/' + vb.id};
     if (lb) people.lesha = {id:'lesha', name:'Алексей Тихонов', role:'майор, угрозыск Кировского ОВД', photo:lb.photo, pos:lb.pos, hero:'#/' + lb.id};
     const gal = (b, k) => ((b && b.gallery) || [])[k] || [];
-    people.naida = {id:'naida', name:'Найда', role:'служебная собака на пенсии', photo:'assets/archive/naida-home.webp', pos:'40% 45%', line:gal(vb, 3)[3] || '', animal:true, who:'Витя', about:[gal(vb, 3)[3] || '']};
-    people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:'assets/archive/pirat-window.webp', pos:'62% 22%', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
+    people.naida = {id:'naida', name:'Найда', role:'служебная собака на пенсии', photo:'assets/archive/naida-home.webp', pos:'40% 45%', ar:'4/3', line:gal(vb, 3)[3] || '', animal:true, who:'Витя', about:[gal(vb, 3)[3] || '']};
+    people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:'assets/archive/pirat-window.webp', pos:'60% 30%', ar:'3/4', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
     const pins = ['#b3261e', '#2b4a8b', '#d9a12b', '#2f7a4a', '#e9e2cf', '#7a3fa0'];
     const ids = Object.keys(B.pos).filter(id => people[id]);
     const decor = {}; (B.decor || []).forEach(d => decor[d.id] = d);
-    const size = id => decor[id] ? [decor[id].w, decor[id].h] : people[id].hero ? [196, 276] : people[id].animal ? [150, 132] : [126, 186];
+    const size = id => decor[id] ? [decor[id].w, decor[id].h] : people[id].hero ? [196, 276] : people[id].animal ? (people[id].ar === '3/4' ? [134, 200] : [184, 162]) : [126, 186];
     const where = id => decor[id] ? [decor[id].x, decor[id].y] : B.pos[id];
     const pinAt = id => { const [x, y] = where(id), [, h] = size(id); return [x, y - h / 2 + 9]; };
     const yarn = {red:'#b3261e', blue:'#2c4f96', gold:'#c99a2e', white:'#efe8d4'};
@@ -3716,9 +3717,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     }).join('');
     const LABEL = {shevchuk:'Пал Палыч', lapin:'Лапин «Профессор»', zhora:'Жора Сапог', korney:'Дед Корней', valya:'Баба Валя', kot:'Кот', mama:'Мама Лёши', kids:'Петька и Анютка', lysy:'Лысый', viktor:'Виктор Громов', lesha:'Алексей Тихонов', kornilov:'Дима Корнилов', zhanna:'Жанна', marina:'Марина', irina:'Ирина', gena:'Гена'};
     const label = id => LABEL[id] || people[id].name.replace(/^(Подполковник|Майор|Капитан|Лейтенант)\s+/, '').split(' ').slice(-1)[0];
+    const thumb = src => /^assets\/.+\.webp$/.test(src || '') ? src.replace(/^assets\//, 'assets/thumbs/') : src;
     const card = id => {
       const p = people[id], [x, y, r] = B.pos[id], [w, h] = size(id);
-      const ph = p.photo ? `<img src="${esc(p.photo)}" alt="" loading="lazy" draggable="false" style="object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото нет</b></span>`;
+      const ph = p.photo ? `<img src="${esc(thumb(p.photo))}" alt="" loading="lazy" draggable="false" style="object-position:${esc(p.pos || '50% 20%')}" onerror="if(this.dataset.f!=='1'){this.dataset.f='1'; this.src='${esc(p.photo)}'}">` : `<span class="pc-none" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото нет</b></span>`;
       return `<button class="pc${p.hero ? ' hero' : ''}${p.animal ? ' animal' : ''}${p.photo ? '' : ' nophoto'}" type="button" data-id="${id}" style="left:${x}px; top:${y}px; width:${w}px; height:${h}px; --r:${r}deg" aria-label="${p.hero ? 'Личное дело' : 'Открыть дело'}: ${esc(p.name)}">
         <i class="pc-pin" style="--pc:${pins[(x + y) % pins.length]}" aria-hidden="true"></i>
         <span class="pc-ph">${ph}</span><span class="pc-nm">${esc(label(id))}</span>${p.hero ? `<span class="pc-rl">${esc(p.role)}</span>` : ''}</button>`;
@@ -3748,14 +3750,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const penHTML = d => [d.pen, d.pen2].filter(Boolean).map(penOne).join('');
     const penBig = d => [d.pen, d.pen2].filter(Boolean).map(t => `<p class="pen${/— Л\.?$/.test(t) ? ' l' : ''}">${esc(t)}</p>`).join('');
     const noPhoto = '<span class="pc-none" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото нет</b></span>';
-    const photoBox = src => `<span class="cd-ph">${noPhoto}<img src="${esc(src)}" alt="" loading="lazy" onload="this.previousElementSibling.remove()" onerror="this.remove()"></span>`;
+    const photoBox = (src, small) => `<span class="cd-ph">${noPhoto}<img src="${esc(small ? thumb(src) : src)}" alt="" loading="lazy" onload="this.previousElementSibling && this.previousElementSibling.remove()" onerror="if(${small ? 1 : 0} && this.dataset.f!=='1'){this.dataset.f='1'; this.src='${esc(src)}'} else this.remove()"></span>`;
     const decorHTML = d => {
       const st = `left:${d.x - d.w / 2}px; top:${d.y - d.h / 2}px; width:${d.w}px; --r:${d.r || 0}deg`;
       const pin = (c, two) => `<i class="pc-pin${two ? ' two' : ''}" style="--pc:${c}" aria-hidden="true"></i>`;
       if (d.type === 'map') return `<div class="cd map" data-id="${d.id}" style="${st}; height:${d.h}px">${pin('#2b4a8b')}${pin('#b3261e', 1)}${MAP}</div>`;
-      if (d.type === 'photo') return `<button type="button" class="cd photo" data-id="${d.id}" style="${st}" aria-label="Снимок: ${esc(d.cap)}">${pin('#d9a12b')}<span class="cd-print">${photoBox(d.src)}<span class="cd-cap">${esc(d.cap)}</span>${penHTML(d)}</span></button>`;
+      if (d.type === 'photo') return `<button type="button" class="cd photo" data-id="${d.id}" style="${st}" aria-label="Снимок: ${esc(d.cap)}">${pin('#d9a12b')}<span class="cd-print">${photoBox(d.src, 1)}<span class="cd-cap">${esc(d.cap)}</span>${penHTML(d)}</span></button>`;
       if (d.type === 'ad') return `<button type="button" class="cd ad" data-id="${d.id}" style="${st}" aria-label="Объявление: ${esc(d.head)}">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(2.4)}"><span class="ad-top">${esc(d.paper)}</span><span class="ad-box"><b>${esc(d.head)}</b>${(d.body || []).map(t => `<span>${esc(t)}</span>`).join('')}</span>${penHTML(d)}</span></button>`;
-      return `<button type="button" class="cd news${d.wide ? ' wide' : ''}" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
+      return `<button type="button" class="cd news${d.wide ? ' wide' : ''}" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo, 1) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
     };
     const decorBig = d => {
       if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(d.src)}</div><p class="bp-cap">${esc(d.cap)}</p>${penBig(d)}</div>`;
@@ -3824,8 +3826,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const p = people[c.dataset.id];
       if (p.hero){ location.hash = p.hero; return; }
       back_ = c;
-      const ph = p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" style="object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
-      modal.innerHTML = `<div class="npc-sheet"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">Дело · ${esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}</div></div>`;
+      const ph = p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ar || '3/4'}; object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
+      modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">Дело · ${esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}</div></div>`;
       modal.hidden = false; document.body.style.overflow = 'hidden';
       modal.querySelector('.x').focus();
     });
