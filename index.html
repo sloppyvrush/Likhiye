@@ -3638,7 +3638,7 @@ body.splash-on{overflow:hidden}
       const s = Math.max(.56, Math.min(1, (scroller.clientWidth - 68) / W));
       cork.style.transform = `scale(${s})`; sizer.style.width = W * s + 'px'; sizer.style.height = H * s + 'px';
       board.classList.toggle('pans', W * s > scroller.clientWidth - 60);
-      if (!fit.centered && scroller.clientWidth){ fit.centered = true; scroller.scrollLeft = (scroller.scrollWidth - scroller.clientWidth) / 2; }
+      if (!fit.centered && scroller.clientWidth){ fit.centered = true; scroller.scrollLeft = Math.max(0, 34 + 800 * s - scroller.clientWidth / 2); }
     };
     fit(); new ResizeObserver(fit).observe(scroller);
     // hover a person: their yarn lights up, everyone they know comes forward
