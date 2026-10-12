@@ -1037,13 +1037,13 @@ p{margin:0 0 1em}
 .cover .back{transform:rotateY(180deg)}
 .cover .back .slot{position:absolute; inset:0; visibility:visible !important}
 .cover .org{font:14px/1.3 var(--mono); letter-spacing:.12em; opacity:.8}
-.cover .no{font:400 clamp(34px,4.6vw,56px)/1 var(--display); margin-top:auto}
+.cover .no{position:relative; z-index:2; font:400 clamp(34px,4.6vw,56px)/1 var(--display); margin-top:auto}
 .cover .who{font:21px/1.3 var(--mono); border-bottom:2px solid rgba(59,42,28,.6); padding:0 4px 4px; min-width:70%}
 .cover .dates{font:15px/1.7 var(--mono); margin-bottom:auto}
 .cover .tie{position:absolute; right:-6px; top:50%; width:46px; height:8px; margin-top:-4px; background:#ece4d0; border-radius:2px; box-shadow:0 1px 2px rgba(0,0,0,.3)}
 /* a photo clipped to the folder cover, and the surveillance page */
-.cv-photo{position:absolute; right:9%; top:13%; width:30%; padding:6px 6px 18px; background:#f4eedf; box-shadow:0 6px 14px rgba(0,0,0,.4); transform:rotate(5deg)}
-.cv-photo img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.15) contrast(1.04)}
+.cv-photo{position:absolute; right:8%; top:6%; width:26%; z-index:1; padding:6px 6px 18px; background:#f4eedf; box-shadow:0 6px 14px rgba(0,0,0,.4); transform:rotate(5deg)}
+.cv-photo img{display:block; width:100%; aspect-ratio:3/4.2; object-fit:cover; object-position:50% 20%; filter:sepia(.15) contrast(1.04)}
 .cv-clip{position:absolute; left:18%; top:-14px; width:14px; height:40px; border:3px solid #b9bcc2; border-radius:10px; z-index:2; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
 .nn{display:grid; gap:16px}
 .nn-ph{margin:0; padding:8px 8px 6px; background:#f6f1e4; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(var(--r))}
@@ -4411,7 +4411,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (d.type === 'ad') return `<button type="button" class="cd ad" data-id="${d.id}" style="${st}" aria-label="Объявление: ${esc(d.head)}">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(2.4)}"><span class="ad-top">${esc(d.paper)}</span><span class="ad-box"><b>${esc(d.head)}</b>${(d.body || []).map(t => `<span>${esc(t)}</span>`).join('')}</span>${penHTML(d)}</span></button>`;
       return `<button type="button" class="cd news${d.wide ? ' wide' : ''}" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo, 1) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
     };
-    const hi = src => /^assets\/board\/[\w-]+\.webp$/.test(src || '') && ['gusev-kot','irina-kot','lysy-charity','viktor-press'].some(n => src.includes(n)) ? src.replace(/board\/([\w-]+)\.webp$/, 'board/hi/$1.jpg') : src;
+    const hi = src => /^assets\/board\/[\w-]+\.webp$/.test(src || '') && ['gusev-kot','irina-kot','lysy-charity','viktor-press','lesha-zhora'].some(n => src.includes(n)) ? src.replace(/board\/([\w-]+)\.webp$/, 'board/hi/$1.jpg') : src;
     const decorBig = d => {
       if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(hi(d.src))}</div><p class="bp-cap">${esc(d.cap)}</p>${penBig(d)}</div>`;
       const body = (d.body || []).map(t => `<p>${esc(t)}</p>`).join('');

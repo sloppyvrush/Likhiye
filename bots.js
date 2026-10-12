@@ -41,6 +41,12 @@ window.BOTS = [
     "photo": "assets/viktor.webp",
     "pos": "50% 20%",
     "idPhoto": "assets/id/viktor.webp",
+    "coverPhoto": "assets/case/viktor-cover.webp",
+    "cardPhoto": "assets/case/viktor-card.webp",
+    "watch": [
+      ["assets/case/viktor-watch-market.webp", "Объект у ларька на Автовском рынке, 12.10, 15:20. Покупает «Мальборо», считает мелочь. Сдачу не взял."],
+      ["assets/case/viktor-watch-naida.webp", "Объект во дворе у дома, 21:40. Кормит собаку сушками. Простоял 40 минут. Наблюдение демаскировано собакой."]
+    ],
     "boardPhoto": "assets/portrait/viktor.webp",
     "boardPos": "48% 24%",
     "alt": "Виктор Громов: пепельные волосы, шрамы на левой щеке, кожаная куртка",
@@ -238,6 +244,12 @@ window.BOTS = [
     "photo": "assets/lesha.webp",
     "pos": "50% 18%",
     "idPhoto": "assets/id/lesha.webp",
+    "coverPhoto": "assets/case/lesha-cover.webp",
+    "cardPhoto": "assets/case/lesha-card.webp",
+    "watch": [
+      ["assets/board/lesha-zhora.webp", "Объект и Сапог Г. у бани, четверг, 19:10. Разговор короткий, без улыбок."],
+      ["assets/case/lesha-watch-banya.webp", "Объект в комнате отдыха, 22:30. Нарды. Выигрывает. Сапог проигрывает с видом, будто так и задумано."]
+    ],
     "boardPhoto": "assets/portrait/lesha.webp",
     "boardPos": "46% 22%",
     "alt": "Алексей Тихонов: рыжие волосы, кожаная куртка, тёмная водолазка",
