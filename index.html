@@ -231,7 +231,7 @@ a{color:inherit}
 .room.dark .lamp .bulb{opacity:0}
 .room.dark .moth{filter:none}
 /* the wastebasket for whatever is lying on the floor */
-.bin{left:3.2%; width:3.6%; bottom:2%; z-index:2; filter:drop-shadow(.3cqw .4cqw .4cqw rgba(0,0,0,.5))}
+.bin{left:16.6%; width:5.2%; bottom:10.4%; z-index:2; filter:drop-shadow(.2cqw .2cqw .3cqw rgba(0,0,0,.45))}
 .bin svg{display:block; width:100%; overflow:visible}
 .bin .bin-fill{opacity:0; transition:opacity .3s}
 .bin.has .bin-fill{opacity:1}
@@ -414,8 +414,8 @@ a{color:inherit}
 /* painted frames are already lit: only a kinescope grade (a touch of blue, soft bloom) and a dark side for the caption */
 .screen .ch img.frame{filter:saturate(1.02) contrast(1.06) brightness(1.08) hue-rotate(-4deg) blur(.25px)}
 .screen .ch:has(img.frame)::after{background:linear-gradient(90deg, rgba(5,8,8,.62), rgba(5,8,8,.25) 48%, transparent 70%), linear-gradient(transparent 40%, rgba(5,8,8,.7))}
-.screen .osd{position:absolute; top:6%; left:7%; z-index:3; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
-.screen .cap{position:absolute; left:7%; right:7%; top:18%; bottom:17%; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
+.screen .osd{position:absolute; top:7%; right:9%; z-index:3; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
+.screen .cap{position:absolute; left:7%; right:7%; top:8%; bottom:17%; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
 .screen h1,.screen .cap .t{font-family:var(--display); font-weight:400; font-size:2.1cqw; line-height:1.02; margin:0 0 .45cqw; letter-spacing:.02em}
 .screen .cap p{margin:0 0 .7cqw; font-size:.98cqw; line-height:1.3; max-width:34ch}
 .screen .cap .prog{position:absolute; left:-8.2%; right:-8.2%; bottom:-14%; display:block; white-space:nowrap; overflow:hidden; margin:0; padding:.3cqw 0; border-top:.12cqw solid rgba(255,220,180,.55); background:rgba(179,38,30,.9); color:#fff3da; font:700 .78cqw/1.2 var(--mono); letter-spacing:.08em; text-shadow:none}
@@ -606,7 +606,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 .sv-in{position:absolute; inset:0; overflow:hidden; border-radius:.15cqw; background:linear-gradient(#120a05, #24150b 40%, #2e1b0e); box-shadow:inset 0 .5cqw .9cqw rgba(0,0,0,.85)}
 .sv-in::after{content:""; position:absolute; left:0; right:0; top:52%; height:.35cqw; background:#3a2212; box-shadow:0 .2cqw .3cqw rgba(0,0,0,.6)}
 .sv-stash{position:absolute; inset:0; width:100%; height:100%}
-.sv-girl{position:absolute; z-index:2; left:2%; right:2%; bottom:1%; width:96%; height:93%; object-fit:contain; object-position:50% 100%;
+.sv-girl{position:absolute; z-index:2; left:-11%; right:auto; bottom:-7%; width:122%; height:113%; object-fit:contain; object-position:50% 100%;
   filter:brightness(.9) saturate(.95) sepia(.1) contrast(1.04) drop-shadow(0 .35cqw .45cqw rgba(0,0,0,.75))}
 .sv-in.has-png .sv-stash{opacity:.0}
 /* someone is sitting in there: no middle shelf, a dark box with light only from the open door */
@@ -616,6 +616,9 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 .sv-cell.l .sv-in.has-png::after{background:radial-gradient(ellipse 75% 70% at 50% 62%, transparent 50%, rgba(6,3,1,.5) 100%), linear-gradient(rgba(0,0,0,.5), transparent 22%), linear-gradient(90deg, rgba(255,214,150,.10), transparent 40%)}
 .sv-cell.r .sv-in.has-png::after{background:radial-gradient(ellipse 75% 70% at 50% 62%, transparent 50%, rgba(6,3,1,.5) 100%), linear-gradient(rgba(0,0,0,.5), transparent 22%), linear-gradient(270deg, rgba(255,214,150,.10), transparent 40%)}
 .sv-cell .sv-door{z-index:4}
+/* they barely fit: the front rail of the cabinet hides their feet, knees press against the sides */
+.sv-in.has-png::before{content:""; position:absolute; z-index:3; left:-2%; right:-2%; bottom:0; height:8%; background:linear-gradient(#5a311a, #3d2010 60%, #2a160b); box-shadow:0 -.25cqw .4cqw rgba(0,0,0,.55), inset 0 .1cqw 0 rgba(255,255,255,.12)}
+.sv-cell.l .sv-girl{left:-14%} .sv-cell.r .sv-girl{left:-8%}
 .sv-door{position:absolute; inset:0; z-index:3; border-radius:.2cqw; background:linear-gradient(100deg,#6a3a1f,#3f2110 55%,#53301a);
   box-shadow:inset 0 0 0 .15cqw rgba(0,0,0,.45), inset .2cqw .2cqw .4cqw rgba(255,255,255,.07); transition:transform .7s cubic-bezier(.3,1.15,.4,1)}
 .sv-door::before{content:""; position:absolute; inset:12% 14%; border:.2cqw solid rgba(0,0,0,.28); box-shadow:.1cqw .1cqw 0 rgba(255,255,255,.06); border-radius:.15cqw}
@@ -687,7 +690,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
   html.room-pan .tv .case{grid-template-columns:1fr 22%}
   html.room-pan .screen h1, html.room-pan .screen .cap .t{font-size:1.95cqw}
-  html.room-pan .screen .cap{top:18%}
+  html.room-pan .screen .cap{top:8%}
   html.room-pan .screen .cap p{font-size:1cqw; max-width:34ch; margin-bottom:.55cqw}
   html.room-pan .screen .cap a{font-size:1.15cqw; padding:.45cqw .9cqw}
   html.room-pan .screen .cap .prog{font-size:.74cqw}
@@ -975,6 +978,14 @@ p{margin:0 0 1em}
 .cover .who{font:21px/1.3 var(--mono); border-bottom:2px solid rgba(59,42,28,.6); padding:0 4px 4px; min-width:70%}
 .cover .dates{font:15px/1.7 var(--mono); margin-bottom:auto}
 .cover .tie{position:absolute; right:-6px; top:50%; width:46px; height:8px; margin-top:-4px; background:#ece4d0; border-radius:2px; box-shadow:0 1px 2px rgba(0,0,0,.3)}
+/* a photo clipped to the folder cover, and the surveillance page */
+.cv-photo{position:absolute; right:9%; top:13%; width:30%; padding:6px 6px 18px; background:#f4eedf; box-shadow:0 6px 14px rgba(0,0,0,.4); transform:rotate(5deg)}
+.cv-photo img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; filter:sepia(.15) contrast(1.04)}
+.cv-clip{position:absolute; left:18%; top:-14px; width:14px; height:40px; border:3px solid #b9bcc2; border-radius:10px; z-index:2; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
+.nn{display:grid; gap:16px}
+.nn-ph{margin:0; padding:8px 8px 6px; background:#f6f1e4; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(var(--r))}
+.nn-ph img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; filter:grayscale(.35) sepia(.2) contrast(1.08)}
+.nn-ph figcaption{margin-top:5px; font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
@@ -1977,7 +1988,20 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           </g>
         </svg>
       </div>
-      <div class="bin" id="bin" aria-hidden="true"><svg viewBox="0 0 60 70"><ellipse cx="30" cy="9" rx="24" ry="6" fill="#1c140d"/><path d="M6 9l6 56c.4 3 3 4.6 6 4.6h24c3 0 5.6-1.6 6-4.6l6-56" fill="#4a5a3a"/><path d="M6 9l6 56c.4 3 3 4.6 6 4.6h24c3 0 5.6-1.6 6-4.6l6-56" fill="url(#binMesh)"/><ellipse cx="30" cy="9" rx="24" ry="6" fill="none" stroke="#7d8a62" stroke-width="2.4"/><path d="M12 66h36" stroke="#2c3522" stroke-width="2"/><defs><pattern id="binMesh" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0l5 5M5 0l-5 5" stroke="#2c3522" stroke-width=".9"/></pattern></defs><g class="bin-fill"><path d="M14 10l8-6 8 5 9-4 8 6z" fill="#e8dfc8"/><path d="M20 9l6-4 6 3z" fill="#b9b2a0"/></g></svg></div>
+      <div class="bin" id="bin" aria-hidden="true"><svg viewBox="0 0 80 96"><defs>
+          <linearGradient id="binBody" x1="0" x2="1"><stop offset="0" stop-color="#1f2a1c"/><stop offset=".22" stop-color="#4e6243"/><stop offset=".45" stop-color="#5f7552"/><stop offset=".75" stop-color="#3a4a33"/><stop offset="1" stop-color="#1a2317"/></linearGradient>
+          <linearGradient id="binRim" x1="0" x2="1"><stop offset="0" stop-color="#2a3524"/><stop offset=".4" stop-color="#8fa07c"/><stop offset="1" stop-color="#2a3524"/></linearGradient>
+          <pattern id="binHoles" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.15" fill="#0d120b"/></pattern>
+          <clipPath id="binClip"><path d="M8 14 L15 90 Q40 95 65 90 L72 14 Z"/></clipPath></defs>
+          <ellipse cx="40" cy="91" rx="30" ry="4.5" fill="#000" opacity=".45"/>
+          <path d="M8 14 L15 90 Q40 95 65 90 L72 14 Z" fill="url(#binBody)"/>
+          <g clip-path="url(#binClip)"><rect x="0" y="24" width="80" height="58" fill="url(#binHoles)" opacity=".85"/><rect x="0" y="0" width="80" height="96" fill="url(#binBody)" opacity=".35"/></g>
+          <path d="M9.6 24 Q40 29 70.4 24 M14 80 Q40 85 66 80" fill="none" stroke="#2a3524" stroke-width="1.6"/>
+          <path d="M15 90 Q40 95 65 90" fill="none" stroke="#10160d" stroke-width="2"/>
+          <ellipse cx="40" cy="14" rx="32" ry="7.5" fill="#141a11"/>
+          <g class="bin-fill"><path d="M14 15 C16 6 24 4 29 9 C31 3 40 2 43 8 C47 2 57 4 58 10 C63 7 68 10 66 16 Q40 20 14 15Z" fill="#ece3cc"/><path d="M24 12 C26 8 31 8 33 11 M44 10 C47 7 52 8 53 11" fill="none" stroke="#b9ae94" stroke-width="1.2"/><path d="M50 13 L60 5 L64 9 L55 15Z" fill="#26262a"/><rect x="52.5" y="8.3" width="4" height="2.2" fill="#d8cfb8" transform="rotate(-38 54.5 9.4)"/></g>
+          <ellipse cx="40" cy="14" rx="32" ry="7.5" fill="none" stroke="url(#binRim)" stroke-width="3"/>
+        </svg></div>
       <div class="floor-thing news1" aria-hidden="true">
         <svg viewBox="0 0 120 90"><g transform="rotate(-8 60 45)"><rect x="6" y="8" width="108" height="74" fill="#d8d1be"/><rect x="12" y="13" width="70" height="7" fill="#33302b"/><rect x="12" y="23" width="40" height="2.6" fill="#6b655a"/><rect x="86" y="13" width="22" height="30" fill="#8a8476"/><g fill="#a39c8c"><rect x="12" y="30" width="70" height="1.5"/><rect x="12" y="35" width="76" height="1.5"/><rect x="12" y="40" width="64" height="1.5"/><rect x="12" y="45" width="76" height="1.5"/><rect x="12" y="50" width="58" height="1.5"/><rect x="12" y="55" width="76" height="1.5"/><rect x="12" y="60" width="70" height="1.5"/><rect x="12" y="65" width="50" height="1.5"/></g><path d="M60,8 V82" stroke="#000" stroke-opacity=".15"/></g></svg>
       </div>
@@ -2686,7 +2710,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const P = [];
     const head = (t) => `<p class="pg-head"><span>${b.unit}</span><span>Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}</span></p><h2 class="pg-title">${t}</h2>`;
     P.push(`<div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
-      <div class="mug"><span class="clip"></span><img src="${b.photo}" alt="${b.alt}" style="object-position:${b.pos}">${stampSvg(b)}</div>
+      <div class="mug"><span class="clip"></span><img src="${b.cardPhoto || b.photo}" alt="${b.alt}" style="object-position:${b.cardPhoto ? '50% 25%' : b.pos}">${stampSvg(b)}</div>
       <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>`);
     const half = Math.ceil(b.prose.length / 2);
     P.push(`<h1 class="pg-name">${b.name}</h1><p class="sub">${b.sub}</p>
@@ -2694,21 +2718,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       <div class="prose">${list(b.prose.slice(0, half), p => `<p>${p}</p>`)}</div>`);
     P.push(`${head('Характеристика, продолжение')}<div class="prose">${list(b.prose.slice(half), p => `<p>${p}</p>`)}</div>`);
     P.push(`${head('Как говорит')}<ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul>`);
-    if (b.gallery && b.gallery.length){
-      const num = String(i + 1).padStart(3, '0'), notes = b.galleryNotes || [];
-      const ph = ([src, cap, bg, back], k) => {
-        const wide = k === 3, extra = sceneExtra(bg, num);
-        return `<div class="ft-ph${wide ? ' wide' : ''}${bg === 'plaid' ? ' pet-cat' : ''}" style="--r:${[-1.6, 1.2, 1.4, -.8][k % 4]}deg" data-cap="${cap}">
-          <button class="ft-flip" type="button" aria-pressed="false" aria-label="${cap}. Перевернуть снимок">
-            <span class="ft-front"><span class="scene bg-${bg}">${extra}<img src="${src}" alt="" loading="lazy"></span><span class="cap">${cap}</span></span>
-            <span class="ft-back"><span class="ft-lab">Фотолаборатория ${b.unit}<br>№&nbsp;${num}-${k + 1}</span><span class="ft-hw">${back || ''}</span></span>
-          </button>
-          <button class="ft-zoom" type="button" aria-label="${cap}, открыть крупно"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
-        </div>`;
-      };
-      P.push(`${head('Фототаблица')}<p class="ft-hint">Снимки переворачиваются, на обороте подписи.</p><div class="ft-grid">${b.gallery.slice(0, 2).map((g, k) => ph(g, k)).join('')}</div>${notes[0] ? `<p class="ft-note">${notes[0]}</p>` : ''}`);
-      P.push(`${head('Фототаблица, продолжение')}<div class="ft-grid">${ph(b.gallery[2], 2)}<div class="ft-side">${notes[1] ? `<p class="ft-note">${notes[1]}</p>` : ''}${b.gallery[3] ? ph(b.gallery[3], 3) : ''}</div></div>`);
-    }
+    if (b.watch && b.watch.length) P.push(`${head('Наружное наблюдение')}<div class="nn">${list(b.watch, ([src, cap], k) => `<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`)}</div>`);
     P.push(`${head('Связи')}<ul class="links">${list(b.links, ([n, d]) => `<li><b>${n}</b>, ${d}</li>`)}</ul>`);
     P.push(`${head('Скачать')}${(b.files.png || b.files.json || b.files.lore) ? `
       <div class="dl">
@@ -2739,6 +2749,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
             <span class="who">${b.fields[0][1]}</span>
             <span class="dates">Начато: ноябрь 1996 г.<br>Окончено: ______________</span>
             <i class="tie"></i>
+            ${b.coverPhoto ? `<span class="cv-photo"><i class="cv-clip"></i><img src="${b.coverPhoto}" alt="" loading="lazy"></span>` : ''}
           </div>
           <div class="face back"></div>
         </div>
@@ -3546,7 +3557,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const say = document.querySelector('.sv-say'); let sayT = 0, sayN = 0;
   const LINES = {
     l: ['А ну-ка закрой быстро!', 'Закрой! Нас тут нет.', 'Ты нас не видела. Закрывай!', 'Чипсов не дам. Закрой.'],
-    r: ['Тсс! Витя дома?', 'Закрой, а то Лёша услышит!', 'Мы тут… пыль проверяем. Закрой.', 'Пиво не моё. Закрывай!']
+    r: ['Мы тут… пыль проверяем. Закрой.', 'Пиво не моё. Закрывай!']
   };
   document.querySelectorAll('.sv-cell').forEach(c => c.addEventListener('click', () => {
     const o = c.classList.toggle('open'); c.setAttribute('aria-expanded', String(o));
