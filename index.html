@@ -1700,6 +1700,18 @@ body.splash-on{overflow:hidden}
 .abh[hidden]{display:none}
 .abh .ap-veil{position:absolute}
 .abh .ap{z-index:1001}
+/* a torn print: no paper rectangle around it, the back is cut to the same shape */
+.ab-pr.torn{background:none; padding:0; box-shadow:none; filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5)) drop-shadow(0 4px 7px rgba(0,0,0,.22))}
+.ab-pr.torn::after,.ab-pr.torn .ab-cn{display:none}
+.ab-it.torn .ab-cap{padding-left:40%}
+.ap.torn .ap-front,.ap.exam.torn .ap-front{background:none; padding:0; box-shadow:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.ap.torn .ap-front::after,.ap.torn .scene::after{display:none}
+.ap.torn .ap-back,.ap.exam.torn .ap-back{-webkit-mask:var(--mask) 0 0/100% 100% no-repeat; mask:var(--mask) 0 0/100% 100% no-repeat; box-shadow:none; padding-right:46%}
+.ap.torn .ap-back::after{right:46%}
+.abh-tear{position:fixed; left:50%; bottom:calc(max(18px, env(safe-area-inset-bottom)) + 42px); z-index:1002; transform:translateX(-50%) rotate(-1.5deg); padding:6px 16px 8px; border:0; border-radius:2px;
+  background:#f1e8d2; color:#1f2f6b; font:700 22px/1 'Caveat',var(--hand); white-space:nowrap; box-shadow:0 3px 10px rgba(0,0,0,.5); cursor:var(--cur-hover)}
+.abh-tear:hover{background:#fff6dc} .abh-tear:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
+@media (max-width:640px){ .abh-tear{bottom:calc(max(18px, env(safe-area-inset-bottom)) + 104px); font-size:19px} }
 
 /* a photo on the desk: .ap positions, .ap-lift rotates and lifts, .ap-card turns over */
 .ap{--w:clamp(112px, 14vw, 196px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:var(--cur-grab)}
@@ -3698,10 +3710,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (!pg) return `<div class="${cls}"><span class="ab-first blank"></span></div>`;
       if (pg.items == null) return `<div class="${cls}"><span class="ab-first">${esc(pg.first)}</span></div>`;
       const its = pg.items.map(([k, cap], j) => {
-        const [src, shape, , date] = PHOTOS[k], [f, tone] = String(shape).split(' ');
+        const [src, shape, , date] = PHOTOS[k], [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
         const seed = (n * 7 + j * 13) % 5, ox = pg.k === 'pp' ? 0 : [-7, 6, -3, 8, -5][seed] * (j ? -1 : 1);
         const rr = [-2.2, 1.6, -1, 2.4, .8][seed];
-        return `<button type="button" class="ab-it" data-k="${k}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
+        return `<button type="button" class="ab-it${/torn/.test(tone) ? ' torn' : ''}" data-k="${k}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
           <span class="ab-pr${tone ? ' ' + tone : ''}"><img src="${src}" alt="" style="--ar:${AR[f] || '3/4'}" draggable="false">${date ? `<span class="ap-date">${date}</span>` : ''}<i class="ab-cn"></i></span>
           ${cap ? `<span class="ab-cap">${esc(cap)}</span>` : ''}</button>`;
       }).join('');
@@ -3797,15 +3809,24 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     document.body.appendChild(hand);
     let held = null, spin = null;
     const takeOut = it => {
-      const k = it.dataset.k, [src, shape, back, date] = PHOTOS[k], [f, tone] = String(shape).split(' ');
+      const k = it.dataset.k, [src, shape, back, date, whole] = PHOTOS[k], [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
       const el = document.createElement('div');
       el.className = `ap ${/^h/.test(f) ? 'h' : f === 'sq' ? 'sq' : 'v'} ${f}${tone ? ' ' + tone : ''} color exam`;
       el.tabIndex = 0; el.setAttribute('role', 'button'); el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape вкладывает обратно');
       el.innerHTML = `<div class="ap-lift"><div class="ap-card">
         <div class="ap-face ap-front"><i class="ap-deco" aria-hidden="true"></i><span class="scene full"><img src="${src}" alt="" draggable="false"></span>${date ? `<span class="ap-date">${date}</span>` : ''}</div>
-        <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"><span class="ft-hw">${esc(back)}</span></div>
+        <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"${/torn/.test(tone) ? ` style="--mask:url('${src.replace(/\.webp$/, '-back.png')}')"` : ''}><span class="ft-hw">${esc(back)}</span></div>
       </div></div>`;
       hand.appendChild(el); hand.hidden = false;
+      // a torn print: the other half can be held up against it
+      if (whole){
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'abh-tear'; b.textContent = 'приложить оторванную половину';
+        b.addEventListener('click', () => {
+          const torn = el.classList.toggle('torn'); el.querySelector('.scene img').src = torn ? src : whole;
+          b.textContent = torn ? 'приложить оторванную половину' : 'убрать обратно';
+        });
+        hand.appendChild(b);
+      }
       const lift = el.firstElementChild, card = el.querySelector('.ap-card');
       const pr = it.querySelector('.ab-pr').getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
       // the print's own proportions decide how big it can be in hand
@@ -3839,13 +3860,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const turn = () => { if (!held) return; held.el.classList.toggle('flip'); held.card.style.removeProperty('--ry'); };
     const dropHand = now => {
       if (!held) return; const h = held; held = null; spin = null;
-      const finish = () => { h.el.remove(); h.it.classList.remove('away'); if (!held) hand.hidden = true; };
+      const finish = () => { h.el.remove(); h.it.classList.remove('away'); if (!held){ hand.hidden = true; hand.querySelectorAll('.abh-tear').forEach(b => b.remove()); } };
       if (now || !h.it.isConnected){ finish(); return; }
       const pr = h.it.querySelector('.ab-pr').getBoundingClientRect();
       h.el.classList.remove('flip', 'tilt'); h.card.style.setProperty('--tx', '0deg'); h.card.style.setProperty('--ty', '0deg');
       h.lift.style.setProperty('--ew', pr.width + 'px');
       h.lift.style.setProperty('--dx', (pr.left + pr.width / 2 - innerWidth / 2) + 'px'); h.lift.style.setProperty('--dy', (pr.top + pr.height / 2 - innerHeight / 2) + 'px');
-      hand.querySelector('.ap-veil').style.opacity = '0';
+      hand.querySelector('.ap-veil').style.opacity = '0'; hand.querySelectorAll('.abh-tear').forEach(b => b.remove());
       setTimeout(() => { finish(); hand.querySelector('.ap-veil').style.opacity = ''; h.it.focus({preventScroll: true}); }, 480);
     };
     hand.querySelector('.ap-veil').style.transition = 'opacity .4s';
