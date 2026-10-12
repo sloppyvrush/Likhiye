@@ -1485,7 +1485,7 @@ body.splash-on{overflow:hidden}
 .cork-scroll{overflow-x:auto; overflow-y:hidden; margin:0 calc(50% - 50vw); padding:0 34px 18px; scrollbar-width:thin}
 .npc-board.pans .cork-scroll{cursor:grab}
 .cork-size{position:relative; margin:0 auto}
-.cork{position:absolute; left:0; top:0; width:1600px; height:1500px; transform-origin:0 0; border-radius:6px; overflow:hidden;
+.cork{position:absolute; left:0; top:0; width:1960px; height:1500px; transform-origin:0 0; border-radius:6px; overflow:hidden;
   background:
     radial-gradient(circle at 20% 30%, rgba(60,30,8,.25) 0 1px, transparent 1.5px) 0 0/7px 9px,
     radial-gradient(circle at 70% 60%, rgba(255,226,170,.22) 0 1px, transparent 1.6px) 0 0/11px 8px,
@@ -1509,6 +1509,21 @@ body.splash-on{overflow:hidden}
 .cork-yarn .ys{stroke:rgba(0,0,0,.28); stroke-width:3.4; transform:translate(2px,4px)}
 .cork-yarn .yl{stroke-width:2.4}
 .cork.focus .cork-yarn g{opacity:.14} .cork.focus .cork-yarn g.on{opacity:1} .cork.focus .cork-yarn g.on .yl{stroke-width:3.6}
+.cd{position:absolute; z-index:3; translate:-50% -50%; rotate:var(--r); box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.cd .pc-pin.two{left:auto; right:14px; top:auto; bottom:12px}
+.cd.map svg{display:block; width:100%; height:100%}
+.mp-t{font:700 11px 'PT Sans',Arial,sans-serif; fill:#5a4a30; letter-spacing:.04em}
+.mp-w{font:italic 10px 'PT Serif',serif; fill:#5d7f8f}
+.mp-h{font:700 19px 'Caveat',cursive; fill:#b3261e}
+.cd.news{padding:12px 14px 10px; overflow:hidden; color:#1d1a16; text-align:left;
+  background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.35), transparent 60%), #e6dfcb;
+  clip-path:polygon(0 2%, 6% 0, 14% 1.5%, 25% 0, 40% 2%, 55% 0, 70% 1.4%, 86% 0, 100% 2%, 99% 30%, 100% 62%, 98.6% 100%, 82% 98.4%, 64% 100%, 46% 98.6%, 28% 100%, 12% 98.4%, 0 100%, 1.2% 66%, 0 34%)}
+.nw-top{display:flex; justify-content:space-between; gap:8px; margin:0 0 6px; padding-bottom:4px; border-bottom:2px solid #1d1a16; font:10px/1 var(--mono); text-transform:uppercase; letter-spacing:.06em}
+.nw-top b{font:700 13px/1 'PT Serif',serif; letter-spacing:0; text-transform:none}
+.cd.news h4{margin:0 0 6px; font:700 21px/1.02 'PT Serif',serif; text-transform:uppercase; letter-spacing:-.01em}
+.cd.news img{float:right; width:46%; aspect-ratio:4/3; object-fit:cover; margin:2px 0 4px 8px; filter:grayscale(1) contrast(1.35) brightness(1.05)}
+.nw-sub{margin:0 0 6px; font:13px/1.25 'PT Serif',serif}
+.nw-lines{display:block; height:60px; background:repeating-linear-gradient(transparent 0 6px, rgba(40,35,28,.35) 6px 8px); column-count:2}
 .pc{position:absolute; z-index:3; translate:-50% -50%; rotate:var(--r); display:flex; flex-direction:column; padding:8px 8px 6px; border:0; background:#f4eedf; color:var(--ink); cursor:pointer; font:inherit; text-align:center;
   box-shadow:0 6px 12px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.4); transition:transform .25s cubic-bezier(.3,1.3,.5,1), box-shadow .25s, filter .25s, opacity .25s}
 .pc:hover,.pc:focus-visible{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)}
@@ -1535,9 +1550,10 @@ body.splash-on{overflow:hidden}
 .cn.big{background:linear-gradient(#fbe3cf, #f3cfb4); color:#8e1d16; font-weight:700}
 .cn:hover{transform:rotate(-2deg) scale(1.04)}
 .cn:focus-visible{outline:3px solid #e3c98f; outline-offset:2px}
-.cn-under{position:absolute; inset:0; display:grid; align-content:center; gap:6px; padding:12px 10px; visibility:hidden; text-align:center;
+.cn-under{position:absolute; left:-6px; right:-6px; top:0; min-height:100%; display:grid; align-content:center; gap:6px; padding:16px 10px 10px; visibility:hidden; text-align:center;
   background:#e9dfc6; clip-path:polygon(0 6%, 12% 0, 30% 5%, 52% 0, 70% 6%, 88% 0, 100% 5%, 98% 100%, 0 96%); box-shadow:0 3px 6px rgba(0,0,0,.3)}
-.cn-under p{margin:0; font:19px/1.05 'Caveat',var(--hand); color:#2a2418}
+.cn-under p{margin:0; font:18px/1.05 'Caveat',var(--hand); color:#2a2418}
+.cn-spot.torn{z-index:6}
 .cn-under.big p{color:#a8261f; font-weight:700; font-size:21px}
 .cn-back{justify-self:center; border:0; background:none; padding:2px 4px; font:12px var(--mono); color:#1f2f6b; text-decoration:underline; cursor:pointer}
 .cn-spot.torn .cn-under{visibility:visible}
@@ -3558,7 +3574,7 @@ body.splash-on{overflow:hidden}
     if (!board || !modal) return;
     const list = window.NPCS || [], B = window.NPC_BOARD || {pos:{}, links:[], notes:[]};
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const W = 1600, H = 1500;
+    const W = 1960, H = 1500;
     // people: NPCs from npcs.js plus the two heroes and their animals from bots.js
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
@@ -3570,10 +3586,13 @@ body.splash-on{overflow:hidden}
     people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:gal(lb, 3)[0] || '', pos:'50% 50%', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
     const pins = ['#b3261e', '#2b4a8b', '#d9a12b', '#2f7a4a', '#e9e2cf', '#7a3fa0'];
     const ids = Object.keys(B.pos).filter(id => people[id]);
-    const size = id => people[id].hero ? [196, 276] : people[id].animal ? [150, 132] : [126, 186];
-    const pinAt = id => { const [x, y] = B.pos[id], [, h] = size(id); return [x, y - h / 2 + 9]; };
+    const decor = {}; (B.decor || []).forEach(d => decor[d.id] = d);
+    const size = id => decor[id] ? [decor[id].w, decor[id].h] : people[id].hero ? [196, 276] : people[id].animal ? [150, 132] : [126, 186];
+    const where = id => decor[id] ? [decor[id].x, decor[id].y] : B.pos[id];
+    const pinAt = id => { const [x, y] = where(id), [, h] = size(id); return [x, y - h / 2 + 9]; };
     const yarn = {red:'#b3261e', blue:'#2c4f96', gold:'#c99a2e', white:'#efe8d4'};
-    const lines = (B.links || []).filter(([a, b]) => people[a] && people[b] && B.pos[a] && B.pos[b]).map(([a, b, c], k) => {
+    const ok = id => (people[id] && B.pos[id]) || decor[id];
+    const lines = (B.links || []).filter(([a, b]) => ok(a) && ok(b)).map(([a, b, c], k) => {
       const [x1, y1] = pinAt(a), [x2, y2] = pinAt(b), d = Math.hypot(x2 - x1, y2 - y1);
       const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 + Math.min(70, d * .09);
       const path = `M${x1},${y1} Q${mx},${my} ${x2},${y2}`;
@@ -3588,6 +3607,21 @@ body.splash-on{overflow:hidden}
         <i class="pc-pin" style="--pc:${pins[(x + y) % pins.length]}" aria-hidden="true"></i>
         <span class="pc-ph">${ph}</span><span class="pc-nm">${esc(label(id))}</span>${p.hero ? `<span class="pc-rl">${esc(p.role)}</span>` : ''}</button>`;
     };
+    const MAP = `<svg viewBox="0 0 300 400" aria-hidden="true"><rect width="300" height="400" fill="#efe7cf"/>
+      <path d="M0 120 C60 128 120 110 190 132 S280 150 300 146" stroke="#8fb3c4" stroke-width="22" fill="none" opacity=".7"/><text x="214" y="128" class="mp-w">Морской канал</text>
+      <path d="M40 400 L120 230 L170 140 L196 0" stroke="#d9a75e" stroke-width="9" fill="none"/><text x="130" y="300" class="mp-t" transform="rotate(-62 130 300)">пр. Стачек</text>
+      <path d="M0 290 L300 250" stroke="#d6c7a4" stroke-width="6" fill="none"/><text x="18" y="282" class="mp-t" transform="rotate(-7 18 282)">ул. Зайцева</text>
+      <path d="M0 360 L300 330" stroke="#d6c7a4" stroke-width="5" fill="none"/><path d="M220 400 L250 0" stroke="#d6c7a4" stroke-width="5" fill="none"/>
+      <g fill="#cdbf9f" opacity=".8"><rect x="20" y="180" width="38" height="24"/><rect x="66" y="176" width="30" height="34"/><rect x="190" y="200" width="44" height="30"/><rect x="246" y="190" width="40" height="40"/><rect x="40" y="310" width="50" height="22"/><rect x="170" y="300" width="40" height="22"/><rect x="250" y="290" width="40" height="30"/></g>
+      <g><circle cx="106" cy="262" r="9" fill="#b3261e"/><text x="106" y="266" text-anchor="middle" font-family="PT Sans,Arial" font-weight="700" font-size="11" fill="#fff">М</text><text x="120" y="258" class="mp-t">Автово</text></g>
+      <g fill="none" stroke="#b3261e" stroke-width="3"><circle cx="78" cy="286" r="18"/><path d="M175 224l16 16M191 224l-16 16"/><circle cx="214" cy="226" r="20" stroke-dasharray="5 4"/></g>
+      <text x="40" y="330" class="mp-h" transform="rotate(-8 40 330)">двор! 02:40</text><text x="196" y="262" class="mp-h">рынок</text><text x="150" y="60" class="mp-h">порт ?</text>
+      <rect x="2" y="2" width="296" height="396" fill="none" stroke="#b9a983"/><text x="12" y="390" class="mp-w">лист 14 · Кировский р-н</text></svg>`;
+    const decorHTML = d => {
+      const st = `left:${d.x}px; top:${d.y}px; width:${d.w}px; height:${d.h}px; --r:${d.r || 0}deg`;
+      if (d.type === 'map') return `<div class="cd map" style="${st}"><i class="pc-pin" style="--pc:#2b4a8b" aria-hidden="true"></i><i class="pc-pin two" style="--pc:#b3261e" aria-hidden="true"></i>${MAP}</div>`;
+      return `<div class="cd news" style="${st}"><i class="pc-pin" style="--pc:#e9e2cf" aria-hidden="true"></i><p class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h4>${esc(d.head)}</h4>${d.photo ? `<img src="${esc(d.photo)}" alt="" loading="lazy">` : ''}<p class="nw-sub">${esc(d.sub)}</p><i class="nw-lines" aria-hidden="true"></i></div>`;
+    };
     const note = (n, k) => `<div class="cn-spot" style="left:${n.x}px; top:${n.y}px; --r:${[-4, 3, -2, 5, -3, 2][k % 6]}deg">
       <div class="cn-under${n.big ? ' big' : ''}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
       <button type="button" class="cn ${n.w === 'l' ? 'l' : 'v'}${n.big ? ' big' : ''}" aria-label="Записка: ${esc(n.t)}. Нажми, чтобы сорвать"><i class="pc-pin" style="--pc:${n.big ? '#b3261e' : '#d9a12b'}" aria-hidden="true"></i>${esc(n.t)}</button></div>`;
@@ -3595,6 +3629,7 @@ body.splash-on{overflow:hidden}
       <div class="cork-title"><b>КИРОВСКИЙ РАЙОН · 1996</b><span>кто кого знает</span></div>
       <div class="cork-legend"><b>Нитки:</b><span><i style="background:${yarn.red}"></i>враги</span><span><i style="background:${yarn.blue}"></i>свои, служба</span><span><i style="background:${yarn.gold}"></i>деньги, дела</span><span><i style="background:${yarn.white}"></i>личное</span></div>
       <svg class="cork-yarn" viewBox="0 0 ${W} ${H}" aria-hidden="true">${lines}</svg>
+      ${(B.decor || []).map(decorHTML).join('')}
       ${ids.map(card).join('')}
       ${(B.notes || []).map(note).join('')}
     </div></div></div>`;

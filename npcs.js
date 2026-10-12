@@ -460,8 +460,9 @@ window.NPCS = [
 
 /*
   Пробковая доска на вкладке «Люди».
-  pos     где висит карточка: x и y центра на доске 1600×1500, r наклон в градусах
-  links   ниточки: [кто, с кем, цвет]; цвета: red враги, blue свои и служба, gold деньги и сделки, white личное
+  pos     где висит карточка: x и y центра на доске 1960×1500, r наклон в градусах
+  decor   карта и газетные вырезки: map или news, x, y, ширина w, высота h, наклон r; у вырезок газета, дата, заголовок, подзаголовок и фото
+  links   ниточки: [кто, с кем, цвет], можно тянуть и к вырезкам по их id; цвета: red враги, blue свои и служба, gold деньги и сделки, white личное
   notes   записки ручкой: x, y, текст, кто писал (v Витя, l Лёша), что написано под ней, если сорвать; big: true для важных
   viktor, lesha, naida, pirat — герои и звери из bots.js, их фото берутся оттуда.
 */
@@ -486,7 +487,23 @@ window.NPC_BOARD = {
     ['viktor','barinov','white'], ['viktor','mikhalych','blue'], ['lesha','mikhalych','blue'], ['viktor','pestov','gold'],
     ['lesha','kravets','gold'], ['kravets','zhora','gold'], ['kravets','lysy','red'], ['lesha','zhora','gold'], ['viktor','zhora','blue'],
     ['zhora','lyonin','red'], ['lesha','lyonin','blue'], ['lesha','moshkin','blue'], ['moshkin','lysy','red'], ['moshkin','lyonin','white'],
-    ['viktor','korney','blue'], ['lesha','korney','blue'], ['lesha','mama','white'], ['mama','viktor','white'], ['lesha','pirat','white']
+    ['viktor','korney','blue'], ['lesha','korney','blue'], ['lesha','mama','white'], ['mama','viktor','white'], ['lesha','pirat','white'],
+    ['korney','lysy','red'], ['korney','zhora','gold'], ['korney','kot','red'],
+    ['zhora','lysy','red'], ['zhora','kot','red'],
+    ['gusev','kot','gold'], ['gusev','bondar','blue'], ['gusev','trofimov','blue'], ['rogov','trofimov','blue'], ['rogov','bondar','blue'], ['rogov','kravets','gold'],
+    ['bondar','kravets','red'], ['berezhnoy','ershov','blue'], ['berezhnoy','zorin','blue'], ['berezhnoy','lysy','gold'],
+    ['zhanna','shevchuk','blue'], ['kornilov','lapin','blue'], ['lapin','shevchuk','blue'], ['kornilov','shevchuk','blue'],
+    ['zorin','barinov','gold'], ['barinov','lysy','gold'], ['pestov','mikhalych','gold'], ['lesha','pestov','gold'],
+    ['irina','marina','red'], ['irina','lysy','white'], ['valya','marina','white'],
+    ['kot','kravets','red'], ['kot','moshkin','red'], ['lyonin','kravets','gold'],
+    ['n_yard','viktor','blue'], ['n_yard','lesha','blue'], ['n_fire','lesha','blue'], ['n_fire','kravets','gold'], ['n_canal','lyonin','red'], ['n_road','lysy','red'], ['n_road','mikhalych','blue']
+  ],
+  decor: [
+    {id:'map', type:'map', x:1800, y:320, w:300, h:400, r:2},
+    {id:'n_yard', type:'news', x:1790, y:760, w:290, h:230, r:-3, paper:'Вечерний город', date:'5 ноября 1996', head:'Труп у гаражей на Зайцева', sub:'Ножевое ранение. Свидетелей двенадцать, и все видели разное.', photo:'assets/yard.webp'},
+    {id:'n_fire', type:'news', x:1810, y:1030, w:270, h:190, r:3, paper:'Вечерний город', date:'19 ноября 1996', head:'Пожар на Автовском рынке', sub:'Сгорел мясной павильон, погиб сторож. Поджог не исключается.'},
+    {id:'n_canal', type:'news', x:1785, y:1290, w:260, h:180, r:-2, paper:'Смена', date:'28 ноября 1995', head:'Тело в Обводном канале', sub:'Торговец с рынка. Следствие: несчастный случай.'},
+    {id:'n_road', type:'news', x:1500, y:1105, w:220, h:150, r:4, paper:'Деловой Петербург', date:'октябрь 1996', head:'Кто держит Таллинское шоссе?', sub:'Автосервисы, заправки, мойки: новые хозяева трассы.'}
   ],
   notes: [
     {x:1180, y:290, t:'Гусь → Лысый. Сливает рейды. Доказать!', w:'v', big:true, under:'Эй! Это главная улика. Повесь на место. — В.'},
@@ -505,6 +522,7 @@ window.NPC_BOARD = {
     {x:880, y:1265, t:'Обещал «убрать». Посмотрим.', w:'v', under:'Это не тебе обещали. Верни. — В.'},
     {x:130, y:290, t:'Звонить только из автомата.', w:'v', under:'Ну вот. Теперь все знают, откуда я звоню. — В.'},
     {x:1010, y:330, t:'Лёха, это ты кнопки ворованные взял? — В.', w:'v', under:'Я. — Л.'},
-    {x:800, y:1440, t:'ДОСКУ НЕ ТРОГАТЬ. Витя.', w:'v', big:true, under:'Я же написал. Не трогать. — В.'}
+    {x:800, y:1440, t:'ДОСКУ НЕ ТРОГАТЬ. Витя.', w:'v', big:true, under:'Я же написал. Не трогать. — В.'},
+    {x:1640, y:580, t:'Все три — в одном районе. Совпадение?', w:'l', under:'Сорвала? Теперь сама и думай, совпадение или нет. — Л.'}
   ]
 };
