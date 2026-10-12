@@ -1485,7 +1485,7 @@ body.splash-on{overflow:hidden}
 .cork-scroll{overflow-x:auto; overflow-y:hidden; margin:0 calc(50% - 50vw); padding:0 34px 18px; scrollbar-width:thin}
 .npc-board.pans .cork-scroll{cursor:grab}
 .cork-size{position:relative; margin:0 auto}
-.cork{position:absolute; left:0; top:0; width:1960px; height:1500px; transform-origin:0 0; border-radius:6px; overflow:hidden;
+.cork{position:absolute; left:0; top:0; width:1960px; height:1850px; transform-origin:0 0; border-radius:6px; overflow:hidden;
   background:
     radial-gradient(circle at 20% 30%, rgba(60,30,8,.25) 0 1px, transparent 1.5px) 0 0/7px 9px,
     radial-gradient(circle at 70% 60%, rgba(255,226,170,.22) 0 1px, transparent 1.6px) 0 0/11px 8px,
@@ -1509,21 +1509,54 @@ body.splash-on{overflow:hidden}
 .cork-yarn .ys{stroke:rgba(0,0,0,.28); stroke-width:3.4; transform:translate(2px,4px)}
 .cork-yarn .yl{stroke-width:2.4}
 .cork.focus .cork-yarn g{opacity:.14} .cork.focus .cork-yarn g.on{opacity:1} .cork.focus .cork-yarn g.on .yl{stroke-width:3.6}
-.cd{position:absolute; z-index:3; translate:-50% -50%; rotate:var(--r); box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.cd{position:absolute; z-index:3; rotate:var(--r); display:block; padding:0; border:0; background:none; font:inherit; color:#1d1a16; text-align:left; cursor:pointer;
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.38)); transition:transform .25s cubic-bezier(.3,1.3,.5,1), filter .25s}
+.cd.map{cursor:default; box-shadow:0 6px 14px rgba(0,0,0,.4); filter:none}
+button.cd:hover,button.cd:focus-visible{transform:scale(1.05); z-index:5}
+button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
+.cork.focus .cd:not(.near){filter:saturate(.4) brightness(.72) drop-shadow(0 6px 8px rgba(0,0,0,.38))}
+.cork.focus .cd.near{z-index:4}
+.cd .pc-pin{z-index:7; top:-4px}
 .cd .pc-pin.two{left:auto; right:14px; top:auto; bottom:12px}
 .cd.map svg{display:block; width:100%; height:100%}
 .mp-t{font:700 11px 'PT Sans',Arial,sans-serif; fill:#5a4a30; letter-spacing:.04em}
 .mp-w{font:italic 10px 'PT Serif',serif; fill:#5d7f8f}
 .mp-h{font:700 19px 'Caveat',cursive; fill:#b3261e}
-.cd.news{padding:12px 14px 10px; overflow:hidden; color:#1d1a16; text-align:left;
-  background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.35), transparent 60%), #e6dfcb;
-  clip-path:polygon(0 2%, 6% 0, 14% 1.5%, 25% 0, 40% 2%, 55% 0, 70% 1.4%, 86% 0, 100% 2%, 99% 30%, 100% 62%, 98.6% 100%, 82% 98.4%, 64% 100%, 46% 98.6%, 28% 100%, 12% 98.4%, 0 100%, 1.2% 66%, 0 34%)}
-.nw-top{display:flex; justify-content:space-between; gap:8px; margin:0 0 6px; padding-bottom:4px; border-bottom:2px solid #1d1a16; font:10px/1 var(--mono); text-transform:uppercase; letter-spacing:.06em}
+.cd-paper{display:block; padding:14px 15px 14px; background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.35), transparent 60%), repeating-linear-gradient(0deg, transparent 0 3px, rgba(120,100,70,.04) 3px 4px), #e6dfcb}
+.nw-top{display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin:0 0 6px; padding-bottom:4px; border-bottom:2px solid #1d1a16; font:10px/1 var(--mono); text-transform:uppercase; letter-spacing:.06em}
 .nw-top b{font:700 13px/1 'PT Serif',serif; letter-spacing:0; text-transform:none}
-.cd.news h4{margin:0 0 6px; font:700 21px/1.02 'PT Serif',serif; text-transform:uppercase; letter-spacing:-.01em}
-.cd.news img{float:right; width:46%; aspect-ratio:4/3; object-fit:cover; margin:2px 0 4px 8px; filter:grayscale(1) contrast(1.35) brightness(1.05)}
-.nw-sub{margin:0 0 6px; font:13px/1.25 'PT Serif',serif}
-.nw-lines{display:block; height:60px; background:repeating-linear-gradient(transparent 0 6px, rgba(40,35,28,.35) 6px 8px); column-count:2}
+.nw-h{display:block; margin:0 0 6px; font:700 20px/1.02 'PT Serif',serif; text-transform:uppercase; letter-spacing:-.01em}
+.cd .cd-ph{float:right; width:46%; margin:2px 0 4px 8px}
+.cd-ph{position:relative; display:block; aspect-ratio:4/3; overflow:hidden; background:#2c2620}
+.cd-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.cd.news .cd-ph img,.big-news .cd-ph img{filter:grayscale(1) contrast(1.35) brightness(1.05)}
+.nw-sub{display:block; margin:0 0 6px; font:13px/1.25 'PT Serif',serif}
+.nw-lines{display:block; clear:both; height:34px; background:repeating-linear-gradient(transparent 0 6px, rgba(40,35,28,.32) 6px 8px)}
+.cd-pen{display:block; clear:both; margin:6px 0 0; font:700 18px/1 'Caveat',var(--hand); color:#1d3a9a; transform:rotate(-2.5deg); transform-origin:0 50%}
+.cd-pen.l{color:#9a1f17}
+.cd.ad .cd-paper{padding:10px 12px 18px}
+.ad-top{display:block; margin:0 0 6px; font:10px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase; color:#5a5040}
+.ad-box{display:block; padding:8px 10px; border:2px solid #1d1a16; outline:1px solid #1d1a16; outline-offset:3px; text-align:center}
+.ad-box b{display:block; margin-bottom:4px; font:700 19px/1.05 'PT Serif',serif; letter-spacing:.02em}
+.ad-box span{display:block; font:12px/1.3 'PT Serif',serif}
+.cd.photo .cd-print{display:block; padding:9px 9px 8px; background:#f6f1e4}
+.cd.photo .cd-ph{float:none; width:100%; margin:0}
+.cd.photo .cd-ph img{filter:sepia(.25) contrast(1.05)}
+.cd-cap{display:block; margin-top:6px; font:16px/1.05 'Caveat',var(--hand); color:#1f2f6b}
+/* opened scraps */
+.npc-sheet.big-news{width:min(640px,100%); display:block; background:#e6dfcb; font-family:'PT Serif',serif}
+.big-news .bn-top{margin-right:36px !important; display:flex; justify-content:space-between; gap:10px; margin:0 0 10px; padding-bottom:6px; border-bottom:3px double #1d1a16; font:13px var(--mono); text-transform:uppercase}
+.big-news .bn-top b{font:700 22px 'PT Serif',serif; text-transform:none}
+.big-news h3{font:700 clamp(26px,4vw,36px)/1.02 'PT Serif',serif; text-transform:uppercase; margin:0 0 8px}
+.big-news .bn-sub{font-style:italic; font-size:17px; margin:0 0 12px}
+.bn-ph{margin:0 0 12px} .bn-ph .cd-ph{aspect-ratio:16/10}
+.bn-body{column-count:2; column-gap:22px; font-size:15.5px; line-height:1.45} .bn-body p{margin:0 0 10px; font-size:15.5px}
+.big-news .pen,.big-ph .pen{font:28px/1.1 'Caveat',var(--hand); color:#1f2f6b; transform:rotate(-2deg); margin:14px 0 0}
+.ad-box.big{padding:18px} .ad-box.big b{font-size:28px} .ad-box.big p{font-size:16px; margin:6px 0 0}
+.npc-sheet.big-ph{width:min(560px,100%); display:block; background:#f6f1e4; padding:16px}
+.bp-print .cd-ph{aspect-ratio:4/3} .bp-print .cd-ph img{filter:sepia(.25) contrast(1.05)}
+.bp-cap{margin:10px 0 0; font:24px/1.1 'Caveat',var(--hand); color:#1f2f6b}
+@media (max-width:640px){ .bn-body{column-count:1} }
 .pc{position:absolute; z-index:3; translate:-50% -50%; rotate:var(--r); display:flex; flex-direction:column; padding:8px 8px 6px; border:0; background:#f4eedf; color:var(--ink); cursor:pointer; font:inherit; text-align:center;
   box-shadow:0 6px 12px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.4); transition:transform .25s cubic-bezier(.3,1.3,.5,1), box-shadow .25s, filter .25s, opacity .25s}
 .pc:hover,.pc:focus-visible{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)}
@@ -1609,6 +1642,21 @@ body.splash-on{overflow:hidden}
   .seal .sl-hint{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){.seal,.seal .sl-top,.seal .sl-ink{transition:none}}
+/* desktop: the two IDs at opposite corners, envelope and stamp between them; Lyosha's opens to the right */
+@media (min-width:641px){
+  .ids{max-width:1080px; height:clamp(470px, 44vw, 540px)}
+  .ksiva{width:min(330px, 31%)}
+  .k0{left:66%; top:1%; --r:5deg}
+  .k1{left:2%; top:52%; --r:-5deg}
+  .k1 .k-cover{transform-origin:100% 50%}
+  .k1:hover .k-cover,.k1:focus-visible .k-cover,.k1.open .k-cover{transform:rotateY(178deg)}
+  .k1 .k-front{border-radius:7px 2px 2px 7px}
+  .k1 .k-stamp{left:50%; top:42%}
+  .ids .ids-env{left:33%; top:0; width:min(330px, 31%); transform:rotate(-3deg)}
+  .ids .ids-env:hover{transform:rotate(-1deg) translateY(-4px)}
+  .ids-stamp.seal{left:53%; top:54%}
+}
+
 </style>
 </head>
 <body>
@@ -3574,7 +3622,7 @@ body.splash-on{overflow:hidden}
     if (!board || !modal) return;
     const list = window.NPCS || [], B = window.NPC_BOARD || {pos:{}, links:[], notes:[]};
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const W = 1960, H = 1500;
+    const W = 1960, H = 1850;
     // people: NPCs from npcs.js plus the two heroes and their animals from bots.js
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
@@ -3617,13 +3665,36 @@ body.splash-on{overflow:hidden}
       <g fill="none" stroke="#b3261e" stroke-width="3"><circle cx="78" cy="286" r="18"/><path d="M175 224l16 16M191 224l-16 16"/><circle cx="214" cy="226" r="20" stroke-dasharray="5 4"/></g>
       <text x="40" y="330" class="mp-h" transform="rotate(-8 40 330)">двор! 02:40</text><text x="196" y="262" class="mp-h">рынок</text><text x="150" y="60" class="mp-h">порт ?</text>
       <rect x="2" y="2" width="296" height="396" fill="none" stroke="#b9a983"/><text x="12" y="390" class="mp-w">лист 14 · Кировский р-н</text></svg>`;
+    // torn paper: a jagged edge drawn as a clip-path, different for every scrap
+    let rs = 7;
+    const rr = () => { rs = (rs * 16807) % 2147483647; return rs / 2147483647; };
+    const torn = (amp = 2.2, n = 26) => {
+      const p = [];
+      for (let i = 0; i <= n; i++) p.push(`${(i / n * 100).toFixed(1)}% ${(rr() * amp).toFixed(2)}%`);
+      for (let i = 1; i <= n * .6; i++) p.push(`${(100 - rr() * amp * .7).toFixed(2)}% ${(i / (n * .6) * 100).toFixed(1)}%`);
+      for (let i = n; i >= 0; i--) p.push(`${(i / n * 100).toFixed(1)}% ${(100 - rr() * amp).toFixed(2)}%`);
+      for (let i = Math.floor(n * .6) - 1; i > 0; i--) p.push(`${(rr() * amp * .7).toFixed(2)}% ${(i / (n * .6) * 100).toFixed(1)}%`);
+      return `clip-path:polygon(${p.join(',')})`;
+    };
+    const penHTML = d => d.pen ? `<span class="cd-pen${/— Л\.?$/.test(d.pen) ? ' l' : ''}">${esc(d.pen)}</span>` : '';
+    const noPhoto = '<span class="pc-none" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото нет</b></span>';
+    const photoBox = src => `<span class="cd-ph">${noPhoto}<img src="${esc(src)}" alt="" loading="lazy" onload="this.previousElementSibling.remove()" onerror="this.remove()"></span>`;
     const decorHTML = d => {
-      const st = `left:${d.x}px; top:${d.y}px; width:${d.w}px; height:${d.h}px; --r:${d.r || 0}deg`;
-      if (d.type === 'map') return `<div class="cd map" style="${st}"><i class="pc-pin" style="--pc:#2b4a8b" aria-hidden="true"></i><i class="pc-pin two" style="--pc:#b3261e" aria-hidden="true"></i>${MAP}</div>`;
-      return `<div class="cd news" style="${st}"><i class="pc-pin" style="--pc:#e9e2cf" aria-hidden="true"></i><p class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h4>${esc(d.head)}</h4>${d.photo ? `<img src="${esc(d.photo)}" alt="" loading="lazy">` : ''}<p class="nw-sub">${esc(d.sub)}</p><i class="nw-lines" aria-hidden="true"></i></div>`;
+      const st = `left:${d.x - d.w / 2}px; top:${d.y - d.h / 2}px; width:${d.w}px; --r:${d.r || 0}deg`;
+      const pin = (c, two) => `<i class="pc-pin${two ? ' two' : ''}" style="--pc:${c}" aria-hidden="true"></i>`;
+      if (d.type === 'map') return `<div class="cd map" data-id="${d.id}" style="${st}; height:${d.h}px">${pin('#2b4a8b')}${pin('#b3261e', 1)}${MAP}</div>`;
+      if (d.type === 'photo') return `<button type="button" class="cd photo" data-id="${d.id}" style="${st}" aria-label="Снимок: ${esc(d.cap)}">${pin('#d9a12b')}<span class="cd-print">${photoBox(d.src)}<span class="cd-cap">${esc(d.cap)}</span>${penHTML(d)}</span></button>`;
+      if (d.type === 'ad') return `<button type="button" class="cd ad" data-id="${d.id}" style="${st}" aria-label="Объявление: ${esc(d.head)}">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(2.4)}"><span class="ad-top">${esc(d.paper)}</span><span class="ad-box"><b>${esc(d.head)}</b>${(d.body || []).map(t => `<span>${esc(t)}</span>`).join('')}</span>${penHTML(d)}</span></button>`;
+      return `<button type="button" class="cd news" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
+    };
+    const decorBig = d => {
+      if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(d.src)}</div><p class="bp-cap">${esc(d.cap)}</p>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
+      const body = (d.body || []).map(t => `<p>${esc(t)}</p>`).join('');
+      if (d.type === 'ad') return `<div class="npc-sheet big-news ad"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b></p><div class="ad-box big"><b>${esc(d.head)}</b>${body}</div>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
+      return `<div class="npc-sheet big-news"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h3>${esc(d.head)}</h3><p class="bn-sub">${esc(d.sub)}</p>${d.photo ? `<div class="bn-ph">${photoBox(d.photo)}</div>` : ''}<div class="bn-body">${body}</div>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
     };
     const note = (n, k) => `<div class="cn-spot" style="left:${n.x}px; top:${n.y}px; --r:${[-4, 3, -2, 5, -3, 2][k % 6]}deg">
-      <div class="cn-under${n.big ? ' big' : ''}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
+      <div class="cn-under${n.big ? ' big' : ''}" style="${torn(3.4, 18)}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
       <button type="button" class="cn ${n.w === 'l' ? 'l' : 'v'}${n.big ? ' big' : ''}" aria-label="Записка: ${esc(n.t)}. Нажми, чтобы сорвать"><i class="pc-pin" style="--pc:${n.big ? '#b3261e' : '#d9a12b'}" aria-hidden="true"></i>${esc(n.t)}</button></div>`;
     board.innerHTML = `<div class="cork-scroll"><div class="cork-size"><div class="cork">
       <div class="cork-title"><b>КИРОВСКИЙ РАЙОН · 1996</b><span>кто кого знает</span></div>
@@ -3642,16 +3713,16 @@ body.splash-on{overflow:hidden}
     };
     fit(); new ResizeObserver(fit).observe(scroller);
     // hover a person: their yarn lights up, everyone they know comes forward
-    const gs = [...cork.querySelectorAll('.cork-yarn g')], cards = [...cork.querySelectorAll('.pc')];
+    const gs = [...cork.querySelectorAll('.cork-yarn g')], cards = [...cork.querySelectorAll('.pc, .cd')];
     const light = id => {
       cork.classList.toggle('focus', !!id);
       const near = new Set([id]);
       gs.forEach(g => { const on = id && (g.dataset.a === id || g.dataset.b === id); g.classList.toggle('on', !!on); if (on){ near.add(g.dataset.a); near.add(g.dataset.b); } });
       cards.forEach(c => c.classList.toggle('near', !!id && near.has(c.dataset.id)));
     };
-    cork.addEventListener('pointerover', e => { const c = e.target.closest('.pc'); if (c) light(c.dataset.id); });
-    cork.addEventListener('pointerout', e => { const c = e.target.closest('.pc'); if (c && !c.contains(e.relatedTarget)) light(null); });
-    cork.addEventListener('focusin', e => { const c = e.target.closest('.pc'); light(c ? c.dataset.id : null); });
+    cork.addEventListener('pointerover', e => { const c = e.target.closest('.pc, .cd'); if (c) light(c.dataset.id); });
+    cork.addEventListener('pointerout', e => { const c = e.target.closest('.pc, .cd'); if (c && !c.contains(e.relatedTarget)) light(null); });
+    cork.addEventListener('focusin', e => { const c = e.target.closest('.pc, .cd'); light(c ? c.dataset.id : null); });
     cork.addEventListener('focusout', () => light(null));
     // notes tear off; under each one somebody left a word for whoever did it
     const tear = n => {
@@ -3677,6 +3748,8 @@ body.splash-on{overflow:hidden}
       const back = e.target.closest('.cn-back');
       if (back){ const spot = back.closest('.cn-spot'), n = spot.querySelector('.cn'); n.getAnimations().forEach(a => a.cancel()); spot.classList.remove('torn');
         if (!reduce) n.animate([{transform:'translateY(-30px) scale(1.1)', opacity:0}, {opacity:1}], {duration:350, easing:'cubic-bezier(.3,1.4,.5,1)'}); n.focus({preventScroll:true}); return; }
+      const dc = e.target.closest('button.cd');
+      if (dc){ back_ = dc; modal.innerHTML = decorBig(decor[dc.dataset.id]); modal.hidden = false; document.body.style.overflow = 'hidden'; modal.querySelector('.x').focus(); return; }
       const c = e.target.closest('.pc'); if (!c) return;
       const p = people[c.dataset.id];
       if (p.hero){ location.hash = p.hero; return; }
