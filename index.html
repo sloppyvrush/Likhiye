@@ -1063,6 +1063,20 @@ p{margin:0 0 1em}
   .dossier > .envelope .env-open{right:auto; left:7%; bottom:10%; font-size:12px}
   .dossier > .envelope .env-stamp{left:6%; bottom:30%; font-size:10px; padding:4px 7px}
 }
+/* switch for the yarn light above the board */
+.trace-btn{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px; padding:9px 14px 9px 10px; border:0; border-radius:4px; cursor:var(--cur-hover); color:#2a2418; text-align:left;
+  background:#efe6c9; box-shadow:0 3px 0 #9c8f70, 0 6px 12px rgba(0,0,0,.3); font:15px/1.2 var(--mono)}
+.trace-btn i{position:relative; width:38px; height:20px; border-radius:10px; background:#5a5144; box-shadow:inset 0 1px 3px rgba(0,0,0,.5); transition:background .2s}
+.trace-btn i::after{content:""; position:absolute; left:3px; top:3px; width:14px; height:14px; border-radius:50%; background:#efe6c9; transition:transform .2s}
+.trace-btn[aria-pressed="true"] i{background:#b3261e} .trace-btn[aria-pressed="true"] i::after{transform:translateX(18px)}
+.trace-btn b{color:#a8261f}
+.trace-btn em{font:18px/1 'Caveat',var(--hand); font-style:normal; color:#1f2f6b}
+.trace-btn:active{transform:translateY(2px); box-shadow:0 1px 0 #9c8f70}
+.cork .pc, .cork .cd, .cork-yarn g{transition:filter .25s, opacity .25s}
+.ref-dl{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0}
+.ref-btn{display:inline-flex; align-items:center; gap:7px; padding:8px 13px 8px 10px; border-radius:3px; background:#2a2418; color:#efe6c9; text-decoration:none; font:14px/1 var(--mono); letter-spacing:.03em; box-shadow:0 3px 0 #0f0c08; cursor:var(--cur-hover)}
+.ref-btn svg{width:17px; height:17px}
+.ref-btn:hover{background:#3d3424} .ref-btn:active{transform:translateY(2px); box-shadow:0 1px 0 #0f0c08}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
@@ -1743,7 +1757,7 @@ body.splash-on{overflow:hidden}
 .cork-scroll{overflow-x:auto; overflow-y:hidden; margin:0 calc(50% - 50vw); padding:0 34px 18px; scrollbar-width:thin}
 .npc-board.pans .cork-scroll{cursor:var(--cur-grab)}
 .cork-size{position:relative; margin:0 auto}
-.cork{position:absolute; left:0; top:0; width:1960px; height:1610px; transform-origin:0 0; border-radius:6px; overflow:hidden;
+.cork{position:absolute; left:0; top:0; width:1960px; height:1540px; transform-origin:0 0; border-radius:6px; overflow:hidden;
   background:
     radial-gradient(circle at 20% 30%, rgba(60,30,8,.25) 0 1px, transparent 1.5px) 0 0/7px 9px,
     radial-gradient(circle at 70% 60%, rgba(255,226,170,.22) 0 1px, transparent 1.6px) 0 0/11px 8px,
@@ -1913,18 +1927,35 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .seal .sl-hint{font-size:15px; white-space:normal; width:130px; text-align:center; line-height:1.05}
 }
 @media (prefers-reduced-motion:reduce){.seal,.seal .sl-top,.seal .sl-ink{transition:none}}
-/* desktop: stamp and envelope in the left column, the two IDs on a diagonal; Vitya's opens to the right, Lyosha's to the left, into empty space */
+/* desktop: a desk with loose papers; Vitya's ID top right, Lyosha's bottom left (opens to the right), the envelope in the middle, the stamp waiting on the wanted notice */
+.ids-desk{display:none}
 @media (min-width:641px){
-  .ids{max-width:1080px; height:clamp(480px, 46vw, 560px)}
+  .ids{max-width:1080px; height:clamp(500px, 46vw, 570px)}
   .ksiva{width:min(330px, 30%)}
-  .k0{left:36%; top:2%; --r:-3deg}
-  .k1{left:68%; top:50%; --r:4deg}
-  .k0 .k-cover{transform-origin:100% 50%}
-  .k0:hover .k-cover,.k0:focus-visible .k-cover,.k0.open .k-cover{transform:rotateY(178deg)}
-  .k0 .k-front{border-radius:7px 2px 2px 7px}
-  .ids .ids-env{left:0; top:52%; width:min(330px, 30%); transform:rotate(-4deg)}
-  .ids .ids-env:hover{transform:rotate(-2deg) translateY(-4px)}
-  .ids-stamp.seal{left:6%; top:3%; width:clamp(150px, 16vw, 186px)}
+  .k0{left:66%; top:1%; --r:5deg}
+  .k1{left:2%; top:52%; --r:-5deg}
+  .k1 .k-cover{transform-origin:100% 50%}
+  .k1:hover .k-cover,.k1:focus-visible .k-cover,.k1.open .k-cover{transform:rotateY(178deg)}
+  .k1 .k-front{border-radius:7px 2px 2px 7px}
+  .k1 .k-stamp{left:50%; top:42%}
+  .ids .ids-env{left:35%; top:24%; width:min(330px, 30%); transform:rotate(-3deg)}
+  .ids .ids-env:hover{transform:rotate(-1deg) translateY(-4px)}
+  .ids-stamp.seal{left:70%; top:56%; width:clamp(136px, 13.5vw, 160px)}
+  .ids .seal .sl-hint{color:#1f2f6b; opacity:1; font-size:20px}
+  .ids-desk{display:block; position:absolute; inset:0; z-index:0; pointer-events:none}
+  .dk-paper{position:absolute; padding:14px 16px; background:repeating-linear-gradient(transparent 0 15px, rgba(60,80,140,.08) 15px 16px), #ebe3cc; box-shadow:0 8px 16px rgba(0,0,0,.4); color:#3a3328; font:11px/1.3 var(--mono)}
+  .dk-paper b{display:block; font:700 12px/1.2 var(--mono); letter-spacing:.14em; text-align:center; margin-bottom:4px}
+  .dk-paper span{display:block; text-align:center; margin-bottom:10px; color:#6a5f4c}
+  .dk-paper i{display:block; height:5px; margin:0 0 9px; background:rgba(40,36,30,.28); border-radius:1px}
+  .dk-paper i.s{width:64%}
+  .dk-paper i.ph{float:right; width:24%; height:auto; aspect-ratio:3/4; margin:0 0 6px 10px; background:linear-gradient(160deg,#8b8a84,#4e4c48); box-shadow:0 0 0 3px #f5f0e2}
+  .dk-paper em{display:block; margin-top:6px; font:17px/1.1 'Caveat',var(--hand); font-style:normal; color:#1f2f6b}
+  .dk-a{left:24%; top:-2%; width:22%; height:46%; transform:rotate(-7deg)}
+  .dk-b{left:63%; top:48%; width:28%; height:50%; transform:rotate(4deg)}
+  .dk-c{left:33%; top:68%; width:20%; transform:rotate(-2deg); background:#f2d5d0}
+  .dk-carbon{position:absolute; left:47%; top:58%; width:16%; height:32%; background:linear-gradient(135deg,#2b2f45,#1a1d2c); box-shadow:0 6px 12px rgba(0,0,0,.45); transform:rotate(9deg); opacity:.85}
+  .dk-clip{position:absolute; left:41%; top:66%; width:18px; transform:rotate(-24deg)}
+  .dk-ring{position:absolute; left:52%; top:6%; width:90px; height:90px; border-radius:50%; border:6px solid rgba(70,35,10,.28); filter:blur(.6px)}
 }
 
 </style>
@@ -3000,6 +3031,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     </a>`;
   };
   if (pileEl) pileEl.outerHTML = `<div class="ids">
+    <div class="ids-desk" aria-hidden="true">
+      <div class="dk-paper dk-a"><b>РАПОРТ</b><span>Начальнику ОУР ГУВД СПб</span><i></i><i></i><i></i><i class="s"></i><i></i><i class="s"></i><em>Прошу разрешить…</em></div>
+      <div class="dk-paper dk-b"><b>ОРИЕНТИРОВКА № 114</b><span>Разыскивается гр-н … 1961 г.р.</span><i class="ph"></i><i></i><i></i><i class="s"></i><i></i><i></i><i class="s"></i></div>
+      <div class="dk-paper dk-c"><b>ТЕЛЕФОНОГРАММА</b><i></i><i class="s"></i><i></i><em>Звонил Михалыч. Перезвонить!</em></div>
+      <svg class="dk-clip" viewBox="0 0 30 80"><path d="M8 70V14a7 7 0 0 1 14 0v50a4 4 0 0 1-8 0V20" fill="none" stroke="#b9bcc2" stroke-width="3" stroke-linecap="round"/></svg>
+      <i class="dk-ring"></i>
+    </div>
     ${BOTS.slice(0, 2).map(idcard).join('')}
     <button class="envelope duo-env ids-env" type="button" data-env="duo" aria-label="Конверт «Материалы»: общие старты на видеокассетах">
       <span class="env-peek" aria-hidden="true"><i class="pk-tape a"></i><i class="pk-tape b"></i><i class="pk-photo"></i></span>
@@ -4154,7 +4192,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (!board || !modal) return;
     const list = window.NPCS || [], B = window.NPC_BOARD || {pos:{}, links:[], notes:[]};
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const W = 1960, H = 1610;
+    const W = 1960, H = 1540;
     // people: NPCs from npcs.js plus the two heroes and their animals from bots.js
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
@@ -4231,7 +4269,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const note = (n, k) => `<div class="cn-spot" style="left:${n.x}px; top:${n.y}px; --r:${[-4, 3, -2, 5, -3, 2][k % 6]}deg">
       <div class="cn-under${n.big ? ' big' : ''}" style="${torn(3.4, 18)}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
       <button type="button" class="cn ${n.w === 'l' ? 'l' : 'v'}${n.big ? ' big' : ''}" aria-label="Записка: ${esc(n.t)}. Нажми, чтобы сорвать"><i class="pc-pin" style="--pc:${n.big ? '#b3261e' : '#d9a12b'}" aria-hidden="true"></i>${esc(n.t)}</button></div>`;
-    board.innerHTML = `<div class="cork-scroll"><div class="cork-size"><div class="cork">
+    board.innerHTML = `<button class="trace-btn" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>Подсветка связей: <b>выключена</b></span><em>${matchMedia('(hover:hover)').matches ? 'включи и наведи на человека — загорятся его нитки' : 'включи: первое касание — нитки, второе — дело'}</em></button><div class="cork-scroll"><div class="cork-size"><div class="cork">
       <div class="cork-title"><b>КИРОВСКИЙ РАЙОН · 1996</b><span>кто кого знает</span></div>
       <div class="cork-legend"><b>Нитки:</b><span><i style="background:${yarn.red}"></i>враги</span><span><i style="background:${yarn.blue}"></i>свои, служба</span><span><i style="background:${yarn.gold}"></i>деньги, дела</span><span><i style="background:${yarn.white}"></i>личное</span></div>
       <svg class="cork-yarn" viewBox="0 0 ${W} ${H}" aria-hidden="true">${lines}</svg>
@@ -4255,10 +4293,16 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       gs.forEach(g => { const on = id && (g.dataset.a === id || g.dataset.b === id); g.classList.toggle('on', !!on); if (on){ near.add(g.dataset.a); near.add(g.dataset.b); } });
       cards.forEach(c => c.classList.toggle('near', !!id && near.has(c.dataset.id)));
     };
-    cork.addEventListener('pointerover', e => { if (e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (c) light(c.dataset.id); });
-    cork.addEventListener('pointerout', e => { if (e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (c && !c.contains(e.relatedTarget)) light(null); });
-    cork.addEventListener('focusin', e => { const c = e.target.closest('.pc, .cd'); light(c && c.matches(':focus-visible') ? c.dataset.id : null); });
-    cork.addEventListener('focusout', () => light(null));
+    // the yarn lights up only when the "магнитный фонарик" is switched on; off by default, remembered per browser
+    let hoverT = 0, pinned = null;
+    let traceOn = false; try { traceOn = localStorage.getItem('lihie-trace') === '1'; } catch (e) {}
+    const tb = board.querySelector('.trace-btn');
+    const setTrace = on => { traceOn = on; board.classList.toggle('trace', on); tb.setAttribute('aria-pressed', String(on)); tb.querySelector('b').textContent = on ? 'включена' : 'выключена'; if (!on){ light(null); pinned = null; } try { localStorage.setItem('lihie-trace', on ? '1' : '0'); } catch (e) {} };
+    tb.addEventListener('click', () => setTrace(!traceOn)); setTrace(traceOn);
+    cork.addEventListener('pointerover', e => { if (!traceOn || e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (!c) return; clearTimeout(hoverT); hoverT = setTimeout(() => light(c.dataset.id), 140); });
+    cork.addEventListener('pointerout', e => { if (!traceOn || e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (c && !c.contains(e.relatedTarget)){ clearTimeout(hoverT); hoverT = setTimeout(() => light(null), 160); } });
+    cork.addEventListener('focusin', e => { if (!traceOn) return; const c = e.target.closest('.pc, .cd'); light(c && c.matches(':focus-visible') ? c.dataset.id : null); });
+    cork.addEventListener('focusout', () => { if (traceOn) light(null); });
     // notes tear off; under each one somebody left a word for whoever did it
     const tear = n => {
       const spot = n.closest('.cn-spot'); if (spot.classList.contains('torn')) return;
@@ -4283,17 +4327,34 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const back = e.target.closest('.cn-back');
       if (back){ const spot = back.closest('.cn-spot'), n = spot.querySelector('.cn'); n.getAnimations().forEach(a => a.cancel()); spot.classList.remove('torn');
         if (!reduce) n.animate([{transform:'translateY(-30px) scale(1.1)', opacity:0}, {opacity:1}], {duration:350, easing:'cubic-bezier(.3,1.4,.5,1)'}); n.focus({preventScroll:true}); return; }
+      { const tc = e.target.closest('.pc, button.cd');
+        if (traceOn && tc && !matchMedia('(hover:hover)').matches && pinned !== tc.dataset.id){ pinned = tc.dataset.id; light(pinned); return; } }
       const dc = e.target.closest('button.cd');
       if (dc){ back_ = dc; modal.innerHTML = decorBig(decor[dc.dataset.id]); modal.hidden = false; document.body.style.overflow = 'hidden'; modal.querySelector('.x').focus(); return; }
+      // touch screens with the light on: the first tap shows the person's yarn, the second opens the case
+      const tc = e.target.closest('.pc, button.cd');
+      if (traceOn && tc && !matchMedia('(hover:hover)').matches && pinned !== tc.dataset.id){ pinned = tc.dataset.id; light(pinned); return; }
       const c = e.target.closest('.pc'); if (!c) return;
       const p = people[c.dataset.id];
       back_ = c;
       const ph = p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ar || '3/4'}; object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
-      modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">${p.hero ? 'Личное дело' : 'Дело · ' + esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}${p.hero ? `<a class="sheet-seal" href="${p.hero}" aria-label="Открыть личное дело">${stampSvg(p.bot)}<span>личное дело →</span></a>` : ''}</div></div>`;
+      const refs = refsOf(c.dataset.id, p);
+      const refHTML = refs.length ? `<div class="ref-dl">${refs.map(([u, n]) => `<a class="ref-btn" href="${esc(u)}" download="${esc('Референс — ' + n + u.slice(u.lastIndexOf('.')))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Скачать реф${refs.length > 1 ? ': ' + esc(n.split(' ')[0]) : ''}</a>`).join('')}</div>` : '';
+      modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">${p.hero ? 'Личное дело' : 'Дело · ' + esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}${refHTML}${p.hero ? `<a class="sheet-seal" href="${p.hero}" aria-label="Открыть личное дело">${stampSvg(p.bot)}<span>личное дело →</span></a>` : ''}</div></div>`;
       modal.hidden = false; document.body.style.overflow = 'hidden';
       modal.querySelector('.x').focus();
     });
     let back_ = null;
+    // full-size reference pictures for download, named after the person
+    const REF_FILES = new Set(['viktor', 'lesha', 'korney', 'mikhalych', 'mama', 'rogov', 'bondar', 'pestov', 'valya', 'lapin', 'shevchuk']);
+    const FULL = {valya:'Валентина Петровна (Баба Валя)', shevchuk:'Павел Павлович Шевчук (Пал Палыч)', lapin:'Сергей Лапин «Профессор»', mama:'Мама Алексея Тихонова',
+      kot:'Вадим Котельников «Кот»', zhora:'Жора Сапог', korney:'Дед Корней', mikhalych:'Михалыч', berezhnoy:'Николай Фёдорович Бережной', trofimov:'Геннадий Ильич Трофимов'};
+    const refsOf = (id, p) => {
+      if (id === 'kids') return [['assets/ref/petka.jpg', 'Петька, племянник Виктора Громова'], ['assets/ref/anyutka.jpg', 'Анютка, племянница Виктора Громова']];
+      const name = p.hero && p.bot ? p.bot.fields[0][1] : (FULL[id] || p.name);
+      if (REF_FILES.has(id)) return [[`assets/ref/${id}.jpg`, name]];
+      return p.photo && !p.animal ? [[p.photo, name]] : [];
+    };
     const close = () => { if (modal.hidden) return; modal.hidden = true; modal.innerHTML = ''; document.body.style.overflow = ''; if (back_) back_.focus({preventScroll:true}); };
     modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.x')) close(); });
     addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
