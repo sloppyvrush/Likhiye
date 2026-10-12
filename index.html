@@ -43,7 +43,7 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%; -webkit-tap-highlight-color:transparent}
 button{-webkit-tap-highlight-color:transparent; touch-action:manipulation}
 body{
   margin:0; color:var(--ink); font:18px/1.62 var(--serif);
@@ -451,7 +451,7 @@ a{color:inherit}
 .screen .ch img{width:100%; height:100%; object-fit:cover; filter:saturate(.95) contrast(1.05) brightness(1.4)}
 .screen .ch::after{content:""; position:absolute; inset:0; background:linear-gradient(transparent 45%, rgba(5,8,8,.72))}
 /* painted frames are already lit: only a kinescope grade (a touch of blue, soft bloom) and a dark side for the caption */
-.screen .ch img.frame{filter:saturate(1.02) contrast(1.06) brightness(1.08) hue-rotate(-4deg) blur(.25px)}
+.screen .ch img.frame{filter:saturate(1.02) contrast(1.06) brightness(1.08) hue-rotate(-4deg)}
 .screen .ch:has(img.frame)::after{background:linear-gradient(90deg, rgba(5,8,8,.62), rgba(5,8,8,.25) 48%, transparent 70%), linear-gradient(transparent 40%, rgba(5,8,8,.7))}
 .screen .osd{position:absolute; top:7%; right:9%; z-index:3; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
 .screen .cap{position:absolute; left:7%; right:7%; top:8%; bottom:17%; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
@@ -735,6 +735,10 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .screen .cap a{font-size:1.15cqw; padding:.45cqw .9cqw}
   html.room-pan .screen .cap .prog{font-size:.74cqw}
   html.room-pan .screen .osd{font-size:2.1cqw}
+  html.room-pan .tv .bezel{border-radius:2.6cqw/3cqw; padding:.85cqw}
+  html.room-pan .screen{border-radius:16%/20%}
+  html.room-pan .screen .scan{background:repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 4px)}
+  html.room-pan .screen .ch img{image-rendering:auto}
   html.room-pan .tv .plate{font-size:1.05cqw}
   html.room-pan .dial .n{width:30px; height:30px; margin:-15px; font-size:12px; line-height:30px}
   html.room-pan .tv .note{font-size:1.25cqw; padding:.45cqw .8cqw; top:-7%}
@@ -912,7 +916,7 @@ h3{font-size:21px; line-height:1.3; margin:0 0 .3em}
 p{margin:0 0 1em}
 .lede{font-size:21px; line-height:1.55}
 .prose{max-width:66ch}
-.section{padding:72px 0}
+.section{padding-top:72px; padding-bottom:72px}
 .section + .section{padding-top:0}
 .on-wall{color:var(--cream)}
 .on-wall .muted{color:#c9bc98}
@@ -1666,6 +1670,17 @@ body.splash-on{overflow:hidden}
   .vr-hint{font-size:19px}
 }
 @media (prefers-reduced-motion:reduce){ .vr-screen.play .vr-show, .vr-screen.play .vr-show::after{animation:none} .tape.fly{transition:none} }
+/* phones: the TV stays put, only the shelf of tapes scrolls under it */
+.vr-scrollhint{display:none}
+@media (max-width:820px){
+  .vhs-room{overflow:hidden; padding:48px 12px 10px}
+  .vr-stage{flex:1; min-height:0; display:flex; flex-direction:column; gap:10px; margin:0}
+  .vr-set{flex:none; width:100%; max-width:440px; margin:0 auto}
+  .vr-scrollhint{display:block; flex:none; margin:2px 0 0; text-align:center; font:19px/1 'Caveat',var(--hand); color:#e3c98f}
+  .vr-tapes{flex:1; min-height:0; width:100%; max-width:440px; margin:0 auto; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:14px 4px 30px;
+    -webkit-mask:linear-gradient(transparent, #000 14px, #000 calc(100% - 26px), transparent); mask:linear-gradient(transparent, #000 14px, #000 calc(100% - 26px), transparent)}
+  .vr-hint{display:none}
+}
 
 
 /* ---------- starts page and the split shelf of tapes ---------- */
@@ -1781,7 +1796,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 @media (max-width:640px){ .bn-body{column-count:1} }
 .pc{position:absolute; z-index:3; translate:-50% -50%; rotate:var(--r); display:flex; flex-direction:column; padding:8px 8px 6px; border:0; background:#f4eedf; color:var(--ink); cursor:var(--cur-hover); font:inherit; text-align:center;
   box-shadow:0 6px 12px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.4); transition:transform .25s cubic-bezier(.3,1.3,.5,1), box-shadow .25s, filter .25s, opacity .25s}
-.pc:hover,.pc:focus-visible{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)}
+@media (hover:hover){ .pc:hover{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)} }
+.pc:focus-visible{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)}
 .pc:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
 .cork.focus .pc:not(.near){filter:saturate(.4) brightness(.72)}
 .cork.focus .pc.near{z-index:4}
@@ -2693,6 +2709,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <button class="vr-eject" type="button" disabled>Извлечь</button>
       </div>
     </div>
+    <p class="vr-scrollhint" aria-hidden="true">кассеты листаются вниз ↓</p>
     <div class="vr-tapes"></div>
   </div>
   <p class="vr-hint">Выберите кассету, она сама встанет в магнитофон.</p>
@@ -3895,6 +3912,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const motes = Array.from({length: 46}, () => ({x: Math.random() * DW, y: Math.random() * DH, r: Math.random() * 1.3 + .4,
     vx: (Math.random() - .5) * .08, vy: (Math.random() - .5) * .06 - .015, ph: Math.random() * 6.28}));
   let airOn = false, t0 = performance.now(), stW = 0, stH = 0;
+  const mothLow = matchMedia('(max-width:760px)');
   new ResizeObserver(([e]) => { stW = e.contentRect.width; stH = e.contentRect.height; }).observe(moth.parentElement);
   const hiss = document.getElementById('hiss'), hctx = hiss.getContext('2d'); let hissF = 0;
   function drawAir(now){
@@ -3906,7 +3924,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     }
     // moth: a lazy loop under the shade with small jittery detours
     const mx = 51.5 + Math.cos(t * 1.7) * 3.2 + Math.sin(t * 5.3) * .7 + Math.sin(t * 11) * .25;
-    const my = 16.5 + Math.sin(t * 2.3) * 2.2 + Math.cos(t * 6.1) * .6;
+    const my = (mothLow.matches ? 27 : 16.5) + Math.sin(t * 2.3) * 2.2 + Math.cos(t * 6.1) * .6;
     // transform only: moving left/top would re-lay out the whole room every frame and make phones stutter
     if (!mothDown) moth.style.transform = `translate(${(mx - 51) * stW / 100}px, ${(my - 16) * stH / 100}px) rotate(${Math.cos(t * 1.7) * 25 + Math.sin(t * 9) * 8}deg)`;
     // dust: slow drifting motes, brighter inside the cone of light
@@ -4143,9 +4161,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       gs.forEach(g => { const on = id && (g.dataset.a === id || g.dataset.b === id); g.classList.toggle('on', !!on); if (on){ near.add(g.dataset.a); near.add(g.dataset.b); } });
       cards.forEach(c => c.classList.toggle('near', !!id && near.has(c.dataset.id)));
     };
-    cork.addEventListener('pointerover', e => { const c = e.target.closest('.pc, .cd'); if (c) light(c.dataset.id); });
-    cork.addEventListener('pointerout', e => { const c = e.target.closest('.pc, .cd'); if (c && !c.contains(e.relatedTarget)) light(null); });
-    cork.addEventListener('focusin', e => { const c = e.target.closest('.pc, .cd'); light(c ? c.dataset.id : null); });
+    cork.addEventListener('pointerover', e => { if (e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (c) light(c.dataset.id); });
+    cork.addEventListener('pointerout', e => { if (e.pointerType !== 'mouse') return; const c = e.target.closest('.pc, .cd'); if (c && !c.contains(e.relatedTarget)) light(null); });
+    cork.addEventListener('focusin', e => { const c = e.target.closest('.pc, .cd'); light(c && c.matches(':focus-visible') ? c.dataset.id : null); });
     cork.addEventListener('focusout', () => light(null));
     // notes tear off; under each one somebody left a word for whoever did it
     const tear = n => {
