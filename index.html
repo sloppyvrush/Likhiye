@@ -415,12 +415,16 @@ a{color:inherit}
 .screen .ch img.frame{filter:saturate(1.02) contrast(1.06) brightness(1.08) hue-rotate(-4deg) blur(.25px)}
 .screen .ch:has(img.frame)::after{background:linear-gradient(90deg, rgba(5,8,8,.62), rgba(5,8,8,.25) 48%, transparent 70%), linear-gradient(transparent 40%, rgba(5,8,8,.7))}
 .screen .osd{position:absolute; top:6%; left:7%; z-index:3; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
-.screen .cap{position:absolute; left:7%; right:7%; top:19%; bottom:7%; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; overflow:hidden; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
+.screen .cap{position:absolute; left:7%; right:7%; top:18%; bottom:17%; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
 .screen h1,.screen .cap .t{font-family:var(--display); font-weight:400; font-size:2.1cqw; line-height:1.02; margin:0 0 .45cqw; letter-spacing:.02em}
 .screen .cap p{margin:0 0 .7cqw; font-size:.98cqw; line-height:1.3; max-width:34ch}
-.screen .cap .prog{display:inline-block; white-space:nowrap; max-width:100%; overflow:hidden; text-overflow:ellipsis; margin:0 0 .6cqw; padding:.15cqw .5cqw; background:rgba(179,38,30,.9); color:#fff3da; font:700 .78cqw/1.2 var(--mono); letter-spacing:.08em; text-shadow:none}
+.screen .cap .prog{position:absolute; left:-8.2%; right:-8.2%; bottom:-14%; display:block; white-space:nowrap; overflow:hidden; margin:0; padding:.3cqw 0; border-top:.12cqw solid rgba(255,220,180,.55); background:rgba(179,38,30,.9); color:#fff3da; font:700 .78cqw/1.2 var(--mono); letter-spacing:.08em; text-shadow:none}
 .screen .cap a{display:inline-block; font-size:1.05cqw; padding:.35cqw .8cqw; background:rgba(231,214,176,.92); color:#1c140d; text-decoration:none; border-radius:.2cqw; text-shadow:none}
 .screen .cap a:hover{background:#fff3d6}
+/* the red plate is a news ticker along the bottom of the screen */
+.screen .cap .prog span{display:inline-block; padding-left:100%; animation:ticker 14s linear infinite}
+@keyframes ticker{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){ .screen .cap .prog span{animation:none; padding-left:6%} }
 .screen .scan{position:absolute; inset:0; z-index:5; pointer-events:none;
   background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px);
   animation:flicker 6s infinite steps(1)}
@@ -683,7 +687,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
   html.room-pan .tv .case{grid-template-columns:1fr 22%}
   html.room-pan .screen h1, html.room-pan .screen .cap .t{font-size:1.95cqw}
-  html.room-pan .screen .cap{top:20%}
+  html.room-pan .screen .cap{top:18%}
   html.room-pan .screen .cap p{font-size:1cqw; max-width:34ch; margin-bottom:.55cqw}
   html.room-pan .screen .cap a{font-size:1.15cqw; padding:.45cqw .9cqw}
   html.room-pan .screen .cap .prog{font-size:.74cqw}
@@ -2872,6 +2876,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const chs = document.querySelector('.chs');
   const cityCh = chs.querySelector('[data-ch="city"]');
   BOTS.forEach(b => cityCh.insertAdjacentHTML('beforebegin', `<div class="ch" data-ch="bot"><img src="${b.tvPhoto || b.photo}" alt="${b.name}" style="object-position:${b.tvPos || b.pos}"><span class="osd" aria-hidden="true"></span><div class="cap">${b.tvShow ? `<span class="prog">${b.tvShow}</span>` : ''}<p class="t">${b.tvTitle || b.name}</p><p>${b.tv}</p><a href="#/${b.id}">Личное дело</a></div></div>`));
+  document.querySelectorAll('.screen .cap .prog').forEach(p => { const t = p.textContent.trim(); p.innerHTML = `<span>${t} &nbsp;·&nbsp; ${t} &nbsp;·&nbsp; ${t}</span>`; });
   // new frames dropped into assets/tv/ (title, viktor, lesha, city, tapes .webp) replace the old pictures by themselves
   [...chs.children].forEach((c, i) => {
     const key = c.dataset.ch === 'bot' ? BOTS[i - 1]?.id : c.dataset.ch, img = c.querySelector('img');
