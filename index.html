@@ -1414,6 +1414,9 @@ body.splash-on{overflow:hidden}
 .vr-grille{flex:1; width:70%; margin-bottom:34%; background:repeating-linear-gradient(transparent 0 4px, rgba(0,0,0,.45) 4px 6px)}
 .vr-make{position:absolute; bottom:6%; font:700 clamp(6px, 1.1vw, 9px) var(--mono); color:#4a463e; letter-spacing:.1em}
 
+.vr-show::before{content:""; position:absolute; inset:-6%; z-index:-1; background:var(--bg) center/cover no-repeat; filter:blur(3px) brightness(.5) saturate(.85); opacity:0; transition:opacity .4s}
+.vr-show.has-bg::before{opacity:1}
+.vr-show{isolation:isolate}
 /* the video recorder under it */
 .vr-vcr{position:relative; display:flex; align-items:center; gap:4%; margin:10px 3% 0; padding:3.2% 4%; border-radius:4px;
   background:linear-gradient(#3a3a3e, #1f1f22 60%, #18181a); box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 12px 24px rgba(0,0,0,.55)}
@@ -3315,12 +3318,21 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       }
       f.remove();
     };
+    // a still behind the text for each start: assets/starts/<name>.webp, used only if the file is there
+    const START_BG = {'Убийство во дворе':'yard', 'Гроза и Найда':'storm', 'Нарды и «Пшеничная»':'kitchen', '«Крылья» есть?':'kiosk', 'Автосервис на трассе':'garage', 'Пожар на рынке':'market'};
+    const showEl = room.querySelector('.vr-show');
+    const setBg = h => {
+      showEl.style.removeProperty('--bg'); showEl.classList.remove('has-bg');
+      const k = START_BG[h]; if (!k) return;
+      const im = new Image(); im.onload = () => { showEl.style.setProperty('--bg', `url('${im.src}')`); showEl.classList.add('has-bg'); }; im.src = `assets/starts/${k}.webp`;
+    };
     const play = async (t) => {
       busy = true; const k = +t.dataset.i, st = bot.starts[k];
       if (room.scrollTop > 40){ room.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}); await wait(420); }
       t.classList.add('gone'); await fly(t, true);
       cur = t; ej.disabled = false; led.textContent = 'PLAY';
       noise(true); await wait(650);
+      setBg(st.h);
       T.textContent = (st.who ? st.who + ' · ' : '') + st.t; H.textContent = st.h; Pp.textContent = st.p; first.hidden = !st.first && !(bot !== DUO && k === 0);
       scr.classList.add('play'); noise(false); clock();
       busy = false;
