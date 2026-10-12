@@ -295,6 +295,8 @@ a{color:inherit}
 .as-marks i{min-width:26px; height:26px; padding:0 4px; display:grid; place-items:center; border:1.5px dashed rgba(31,47,107,.35); border-radius:50%; font:700 12px/1 var(--mono); font-style:normal; color:#a99e88}
 .as-marks i.on{border:2px solid #a8261f; color:#a8261f; transform:rotate(-8deg); background:rgba(168,38,31,.06)}
 .as-sum{margin:10px 0 4px 40px; font:700 15px/1.3 var(--mono); color:#a8261f}
+.as-reset{display:block; margin:12px 0 0 40px; padding:6px 10px; border:1.5px dashed rgba(168,38,31,.6); background:none; color:#a8261f; font:13px/1.2 var(--mono); cursor:var(--cur-hover)}
+.as-reset:hover{background:rgba(168,38,31,.08)} .as-reset.sure{background:#a8261f; color:#f6ecd6; border-style:solid}
 .as-foot{margin:6px 0 0 40px; font:11px/1.3 var(--mono); color:#8a7f6c}
 
 /* touch screens: cheaper versions of the heaviest effects (reflections, blurred shadows, filtered PNGs) */
@@ -2786,6 +2788,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <ol class="as-list"></ol>
     <p class="as-sum"></p>
     <p class="as-foot">Ведомость хранится только в вашем браузере. Другие гости ведут свою.</p>
+    <button class="as-reset" type="button">Сжечь ведомость и начать заново</button>
   </div>
 </div>
 <div class="npc-modal" id="npcModal" hidden role="dialog" aria-modal="true" aria-label="Дело"></div>
@@ -4165,6 +4168,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const close = () => { wallBox.hidden = true; document.body.style.overflow = ''; wallBtn.focus(); };
     wallBtn.addEventListener('click', open);
     wallBox.addEventListener('click', e => { if (e.target === wallBox || e.target.closest('.as-x')) close(); });
+    // wipe everything this browser remembers about the visit: achievements, moths, records heard, notes, the yarn switch
+    const rs = wallBox.querySelector('.as-reset');
+    rs.addEventListener('click', () => {
+      if (!rs.classList.contains('sure')){ rs.classList.add('sure'); rs.textContent = 'Точно? Нажми ещё раз — всё обнулится'; setTimeout(() => { rs.classList.remove('sure'); rs.textContent = 'Сжечь ведомость и начать заново'; }, 4000); return; }
+      try { Object.keys(localStorage).filter(k => k.startsWith('lihie') || k === 'introSeen').forEach(k => localStorage.removeItem(k)); sessionStorage.clear(); } catch (e) {}
+      location.href = location.pathname + '#/'; location.reload();
+    });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && !wallBox.hidden) close(); });
   }
   const swat = e => {
