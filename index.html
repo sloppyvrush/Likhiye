@@ -326,6 +326,9 @@ a{color:inherit}
 .screen .ch.on{opacity:1; visibility:visible}
 .screen .ch img{width:100%; height:100%; object-fit:cover; filter:saturate(.95) contrast(1.05) brightness(1.4)}
 .screen .ch::after{content:""; position:absolute; inset:0; background:linear-gradient(transparent 45%, rgba(5,8,8,.72))}
+/* painted frames are already lit: only a kinescope grade (a touch of blue, soft bloom) and a dark side for the caption */
+.screen .ch img.frame{filter:saturate(1.02) contrast(1.06) brightness(1.08) hue-rotate(-4deg) blur(.25px)}
+.screen .ch:has(img.frame)::after{background:linear-gradient(90deg, rgba(5,8,8,.62), rgba(5,8,8,.25) 48%, transparent 70%), linear-gradient(transparent 40%, rgba(5,8,8,.7))}
 .screen .osd{position:absolute; top:6%; left:7%; z-index:2; font:600 2.1cqw/1 var(--mono); color:#8ef08a; text-shadow:0 0 .6cqw #3fd04a}
 .screen .cap{position:absolute; left:7%; right:7%; bottom:7%; z-index:2; color:#f1ead6; text-shadow:0 .1cqw .4cqw #000}
 .screen h1,.screen .cap .t{font-family:var(--display); font-weight:400; font-size:2.5cqw; line-height:1.05; margin:0 0 .5cqw; letter-spacing:.02em}
@@ -481,8 +484,16 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .servant .shelf{position:relative; display:flex; align-items:flex-end; justify-content:space-around; padding:0 4%;
   border-bottom:.3cqw solid rgba(170,215,205,.55); box-shadow:0 .35cqw .5cqw -.1cqw rgba(0,0,0,.6), inset 0 -.6cqw .8cqw -.4cqw rgba(255,240,210,.12)}
 .servant .shelf svg{width:100%; height:86%; display:block}
-.servant .sv-png{position:absolute; left:3%; right:3%; bottom:2%; width:94%; height:88%; object-fit:contain; object-position:50% 100%}
+.servant .sv-png{position:absolute; left:4%; bottom:3%; width:92%; height:auto; max-height:80%; object-fit:contain; object-position:50% 100%;
+  -webkit-box-reflect:below -.2cqw linear-gradient(transparent 78%, rgba(255,255,255,.16))}
+.servant .sh1 .sv-png{filter:saturate(.5) sepia(.16) hue-rotate(-6deg) brightness(.9) contrast(1.1) drop-shadow(0 .3cqw .35cqw rgba(0,0,0,.6)) drop-shadow(0 0 .25cqw rgba(255,226,180,.18))}
+.servant .sh2 .sv-png{left:3%; width:94%; filter:saturate(.8) sepia(.12) brightness(.86) contrast(1.06) drop-shadow(0 .3cqw .4cqw rgba(0,0,0,.65))}
 .servant .shelf.has-png svg{display:none}
+/* the inside of the cabinet: dark corners, warm lamp light falling from the top-left, a pane of old glass in front */
+.servant .glasspart::after{content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse 85% 65% at 38% 30%, transparent 35%, rgba(12,6,2,.42) 100%), linear-gradient(rgba(0,0,0,.35), transparent 14%, transparent 86%, rgba(0,0,0,.25));
+  box-shadow:inset 0 0 2.2cqw rgba(0,0,0,.6)}
+.servant .doors, .servant .glint{z-index:2}
 .servant .doors{position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; pointer-events:none}
 .servant .doors i{border:.35cqw solid #4a2814; box-shadow:inset 0 0 0 .1cqw rgba(255,255,255,.08);
   background:linear-gradient(115deg, rgba(255,255,255,.10) 0 18%, transparent 22% 60%, rgba(255,255,255,.06) 64% 70%, transparent 74%)}
@@ -493,6 +504,10 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .servant .photo{position:absolute; right:10%; bottom:5%; width:26%; aspect-ratio:3/4; transform:rotate(4deg);
   background:#f2ead7; padding:5%; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.6)}
 .servant .photo img{width:100%; height:100%; object-fit:cover; object-position:50% 30%; filter:grayscale(1) sepia(.35) contrast(1.1)}
+/* a real framed print (PNG): stands on the lower shelf, leaning on the plates, lit by the room lamp */
+.servant .photo.png{right:3%; bottom:3.5%; width:23%; aspect-ratio:auto; padding:0; background:none; box-shadow:none; transform:rotate(-2.5deg); transform-origin:50% 100%; z-index:1}
+.servant .photo.png img{display:block; height:auto; object-fit:contain;
+  filter:sepia(.22) saturate(.85) brightness(.88) contrast(1.06) drop-shadow(-.35cqw .3cqw .35cqw rgba(0,0,0,.65))}
 .servant .mid{flex:0 0 7%; margin:4% 0; background:linear-gradient(#4a2814,#2a160b); border-radius:.15cqw; box-shadow:inset 0 .1cqw 0 rgba(255,255,255,.1)}
 .servant .lower{flex:1; display:grid; grid-template-columns:1fr 1fr; gap:4%}
 .sv-cell{position:relative; padding:0; border:0; background:none; cursor:pointer; perspective:30cqw; -webkit-tap-highlight-color:transparent}
@@ -500,8 +515,16 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:pointer}
 .sv-in{position:absolute; inset:0; overflow:hidden; border-radius:.15cqw; background:linear-gradient(#120a05, #24150b 40%, #2e1b0e); box-shadow:inset 0 .5cqw .9cqw rgba(0,0,0,.85)}
 .sv-in::after{content:""; position:absolute; left:0; right:0; top:52%; height:.35cqw; background:#3a2212; box-shadow:0 .2cqw .3cqw rgba(0,0,0,.6)}
 .sv-stash{position:absolute; inset:0; width:100%; height:100%}
-.sv-girl{position:absolute; z-index:2; left:2%; right:2%; bottom:0; width:96%; height:96%; object-fit:contain; object-position:50% 100%}
+.sv-girl{position:absolute; z-index:2; left:2%; right:2%; bottom:1%; width:96%; height:93%; object-fit:contain; object-position:50% 100%;
+  filter:brightness(.9) saturate(.95) sepia(.1) contrast(1.04) drop-shadow(0 .35cqw .45cqw rgba(0,0,0,.75))}
 .sv-in.has-png .sv-stash{opacity:.0}
+/* someone is sitting in there: no middle shelf, a dark box with light only from the open door */
+.sv-in.has-png{background:radial-gradient(ellipse 48% 7% at 50% 97%, rgba(0,0,0,.85), transparent 100%), linear-gradient(#0d0703, #1c1009 45%, #2b190d)}
+.sv-in.has-png::after{top:0; bottom:0; height:auto; z-index:3; background:radial-gradient(ellipse 75% 70% at 50% 62%, transparent 50%, rgba(6,3,1,.5) 100%), linear-gradient(rgba(0,0,0,.5), transparent 22%);
+  box-shadow:inset 0 0 1.4cqw rgba(0,0,0,.9)}
+.sv-cell.l .sv-in.has-png::after{background:radial-gradient(ellipse 75% 70% at 50% 62%, transparent 50%, rgba(6,3,1,.5) 100%), linear-gradient(rgba(0,0,0,.5), transparent 22%), linear-gradient(90deg, rgba(255,214,150,.10), transparent 40%)}
+.sv-cell.r .sv-in.has-png::after{background:radial-gradient(ellipse 75% 70% at 50% 62%, transparent 50%, rgba(6,3,1,.5) 100%), linear-gradient(rgba(0,0,0,.5), transparent 22%), linear-gradient(270deg, rgba(255,214,150,.10), transparent 40%)}
+.sv-cell .sv-door{z-index:4}
 .sv-door{position:absolute; inset:0; z-index:3; border-radius:.2cqw; background:linear-gradient(100deg,#6a3a1f,#3f2110 55%,#53301a);
   box-shadow:inset 0 0 0 .15cqw rgba(0,0,0,.45), inset .2cqw .2cqw .4cqw rgba(255,255,255,.07); transition:transform .7s cubic-bezier(.3,1.15,.4,1)}
 .sv-door::before{content:""; position:absolute; inset:12% 14%; border:.2cqw solid rgba(0,0,0,.28); box-shadow:.1cqw .1cqw 0 rgba(255,255,255,.06); border-radius:.15cqw}
@@ -1414,7 +1437,10 @@ body.splash-on{overflow:hidden}
 .vr-grille{flex:1; width:70%; margin-bottom:34%; background:repeating-linear-gradient(transparent 0 4px, rgba(0,0,0,.45) 4px 6px)}
 .vr-make{position:absolute; bottom:6%; font:700 clamp(6px, 1.1vw, 9px) var(--mono); color:#4a463e; letter-spacing:.1em}
 
-.vr-show::before{content:""; position:absolute; inset:-6%; z-index:-1; background:var(--bg) center/cover no-repeat; filter:blur(3px) brightness(.5) saturate(.85); opacity:0; transition:opacity .4s}
+.vr-show::before{content:""; position:absolute; inset:-6%; z-index:-1; background:linear-gradient(100deg, rgba(8,8,14,.62), rgba(8,8,14,.38) 55%, rgba(8,8,14,.18)), var(--bg) center/cover no-repeat; filter:blur(1.6px) brightness(.8) saturate(.9) contrast(1.06); opacity:0; transition:opacity .4s}
+/* tape grain over the still: a soft roll bar and a cold kinescope tint */
+.vr-show.has-bg::after{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; mix-blend-mode:soft-light;
+  background:linear-gradient(rgba(60,110,170,.25), rgba(170,90,60,.12)), linear-gradient(transparent 62%, rgba(255,255,255,.09) 66%, transparent 71%)}
 .vr-show.has-bg::before{opacity:1}
 .vr-show{isolation:isolate}
 /* the video recorder under it */
@@ -1488,7 +1514,7 @@ body.splash-on{overflow:hidden}
 .cork-scroll{overflow-x:auto; overflow-y:hidden; margin:0 calc(50% - 50vw); padding:0 34px 18px; scrollbar-width:thin}
 .npc-board.pans .cork-scroll{cursor:grab}
 .cork-size{position:relative; margin:0 auto}
-.cork{position:absolute; left:0; top:0; width:1960px; height:1850px; transform-origin:0 0; border-radius:6px; overflow:hidden;
+.cork{position:absolute; left:0; top:0; width:1960px; height:2380px; transform-origin:0 0; border-radius:6px; overflow:hidden;
   background:
     radial-gradient(circle at 20% 30%, rgba(60,30,8,.25) 0 1px, transparent 1.5px) 0 0/7px 9px,
     radial-gradient(circle at 70% 60%, rgba(255,226,170,.22) 0 1px, transparent 1.6px) 0 0/11px 8px,
@@ -1504,7 +1530,7 @@ body.splash-on{overflow:hidden}
 .cork-title{position:absolute; left:560px; top:300px; width:320px; transform:rotate(-1.5deg); padding:10px 14px 12px; background:#f3ead2; box-shadow:0 4px 8px rgba(0,0,0,.35); text-align:center}
 .cork-title b{display:block; font:700 18px/1.2 var(--mono); letter-spacing:.12em; color:#2a2418}
 .cork-title span{font:24px/1 'Caveat',var(--hand); color:#1f2f6b}
-.cork-legend{position:absolute; left:1372px; top:1290px; width:208px; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
+.cork-legend{position:absolute; left:1560px; top:2060px; width:208px; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
 .cork-legend b{font:22px/1 'Caveat',var(--hand); color:#1f2f6b; font-weight:700}
 .cork-legend i{display:inline-block; width:26px; height:4px; margin-right:8px; vertical-align:middle; border-radius:2px; box-shadow:0 1px 1px rgba(0,0,0,.4)}
 .cork-yarn{position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none}
@@ -1532,7 +1558,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .cd .cd-ph{float:right; width:46%; margin:2px 0 4px 8px}
 .cd-ph{position:relative; display:block; aspect-ratio:4/3; overflow:hidden; background:#2c2620}
 .cd-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
-.cd.news .cd-ph img,.big-news .cd-ph img{filter:grayscale(1) contrast(1.35) brightness(1.05)}
+.cd.news .cd-ph img,.big-news .cd-ph img{filter:grayscale(1) sepia(.18) contrast(1.3) brightness(1.04)}
+/* newsprint: a fine halftone screen and a little ink bleed over the photo */
+.cd.news .cd-ph::after,.big-news .cd-ph::after{content:""; position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply;
+  background:radial-gradient(circle, rgba(40,32,22,.28) 32%, transparent 36%) 0 0/3px 3px, linear-gradient(rgba(233,224,203,.12), rgba(233,224,203,.12)); box-shadow:inset 0 0 6px rgba(40,30,18,.45)}
+.cd.news.wide .cd-ph{float:none; width:100%; margin:4px 0 7px}
 .nw-sub{display:block; margin:0 0 6px; font:13px/1.25 'PT Serif',serif}
 .nw-lines{display:block; clear:both; height:34px; background:repeating-linear-gradient(transparent 0 6px, rgba(40,35,28,.32) 6px 8px)}
 .cd-pen{display:block; clear:both; margin:6px 0 0; font:700 18px/1 'Caveat',var(--hand); color:#1d3a9a; transform:rotate(-2.5deg); transform-origin:0 50%}
@@ -1555,6 +1585,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .bn-ph{margin:0 0 12px} .bn-ph .cd-ph{aspect-ratio:16/10}
 .bn-body{column-count:2; column-gap:22px; font-size:15.5px; line-height:1.45} .bn-body p{margin:0 0 10px; font-size:15.5px}
 .big-news .pen,.big-ph .pen{font:28px/1.1 'Caveat',var(--hand); color:#1f2f6b; transform:rotate(-2deg); margin:14px 0 0}
+.big-news .pen.l,.big-ph .pen.l{color:#9a1f17; transform:rotate(1.2deg)}
+.cd-pen + .cd-pen{margin-top:8px; transform:rotate(1.8deg)}
 .ad-box.big{padding:18px} .ad-box.big b{font-size:28px} .ad-box.big p{font-size:16px; margin:6px 0 0}
 .npc-sheet.big-ph{width:min(560px,100%); display:block; background:#f6f1e4; padding:16px}
 .bp-print .cd-ph{aspect-ratio:4/3} .bp-print .cd-ph img{filter:sepia(.25) contrast(1.05)}
@@ -2017,7 +2049,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
               </svg>
               <img class="sv-png" src="assets/room/servis.webp" alt="" onload="this.parentNode.classList.add('has-png')" onerror="this.remove()">
             </div>
-            <div class="photo"><img src="assets/room/army.webp" alt="" onerror="this.onerror=null; this.src='assets/duo.webp'"></div>
+            <div class="photo"><img src="assets/room/army.webp" alt="" onload="if(/army/.test(this.src)) this.parentNode.classList.add('png')" onerror="this.onerror=null; this.src='assets/duo.webp'"></div>
             <div class="doors"><i></i><i></i></div>
             <div class="glint"></div>
           </div>
@@ -2712,7 +2744,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   // new frames dropped into assets/tv/ (title, viktor, lesha, city, tapes .webp) replace the old pictures by themselves
   [...chs.children].forEach((c, i) => {
     const key = c.dataset.ch === 'bot' ? BOTS[i - 1]?.id : c.dataset.ch, img = c.querySelector('img');
-    if (key && img){ const probe = new Image(); probe.onload = () => { img.src = probe.src; img.style.objectPosition = '50% 40%'; img.style.objectFit = 'cover'; }; probe.src = `assets/tv/${key}.webp`; }
+    if (key && img){ const probe = new Image(); probe.onload = () => { img.src = probe.src; img.style.objectPosition = '50% 40%'; img.style.objectFit = 'cover'; img.classList.add('frame'); }; probe.src = `assets/tv/${key}.webp`; }
   });
   [...chs.children].forEach((c, i) => { c.dataset.ch = i + 1; c.querySelector('.osd').textContent = i + 1; });
   const total = chs.children.length;
@@ -3634,7 +3666,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (!board || !modal) return;
     const list = window.NPCS || [], B = window.NPC_BOARD || {pos:{}, links:[], notes:[]};
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const W = 1960, H = 1850;
+    const W = 1960, H = 2380;
     // people: NPCs from npcs.js plus the two heroes and their animals from bots.js
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
@@ -3688,7 +3720,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       for (let i = Math.floor(n * .6) - 1; i > 0; i--) p.push(`${(rr() * amp * .7).toFixed(2)}% ${(i / (n * .6) * 100).toFixed(1)}%`);
       return `clip-path:polygon(${p.join(',')})`;
     };
-    const penHTML = d => d.pen ? `<span class="cd-pen${/— Л\.?$/.test(d.pen) ? ' l' : ''}">${esc(d.pen)}</span>` : '';
+    const penOne = t => `<span class="cd-pen${/— Л\.?$/.test(t) ? ' l' : ''}">${esc(t)}</span>`;
+    const penHTML = d => [d.pen, d.pen2].filter(Boolean).map(penOne).join('');
+    const penBig = d => [d.pen, d.pen2].filter(Boolean).map(t => `<p class="pen${/— Л\.?$/.test(t) ? ' l' : ''}">${esc(t)}</p>`).join('');
     const noPhoto = '<span class="pc-none" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото нет</b></span>';
     const photoBox = src => `<span class="cd-ph">${noPhoto}<img src="${esc(src)}" alt="" loading="lazy" onload="this.previousElementSibling.remove()" onerror="this.remove()"></span>`;
     const decorHTML = d => {
@@ -3697,13 +3731,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (d.type === 'map') return `<div class="cd map" data-id="${d.id}" style="${st}; height:${d.h}px">${pin('#2b4a8b')}${pin('#b3261e', 1)}${MAP}</div>`;
       if (d.type === 'photo') return `<button type="button" class="cd photo" data-id="${d.id}" style="${st}" aria-label="Снимок: ${esc(d.cap)}">${pin('#d9a12b')}<span class="cd-print">${photoBox(d.src)}<span class="cd-cap">${esc(d.cap)}</span>${penHTML(d)}</span></button>`;
       if (d.type === 'ad') return `<button type="button" class="cd ad" data-id="${d.id}" style="${st}" aria-label="Объявление: ${esc(d.head)}">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(2.4)}"><span class="ad-top">${esc(d.paper)}</span><span class="ad-box"><b>${esc(d.head)}</b>${(d.body || []).map(t => `<span>${esc(t)}</span>`).join('')}</span>${penHTML(d)}</span></button>`;
-      return `<button type="button" class="cd news" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
+      return `<button type="button" class="cd news${d.wide ? ' wide' : ''}" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
     };
     const decorBig = d => {
-      if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(d.src)}</div><p class="bp-cap">${esc(d.cap)}</p>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
+      if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(d.src)}</div><p class="bp-cap">${esc(d.cap)}</p>${penBig(d)}</div>`;
       const body = (d.body || []).map(t => `<p>${esc(t)}</p>`).join('');
-      if (d.type === 'ad') return `<div class="npc-sheet big-news ad"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b></p><div class="ad-box big"><b>${esc(d.head)}</b>${body}</div>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
-      return `<div class="npc-sheet big-news"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h3>${esc(d.head)}</h3><p class="bn-sub">${esc(d.sub)}</p>${d.photo ? `<div class="bn-ph">${photoBox(d.photo)}</div>` : ''}<div class="bn-body">${body}</div>${d.pen ? `<p class="pen">${esc(d.pen)}</p>` : ''}</div>`;
+      if (d.type === 'ad') return `<div class="npc-sheet big-news ad"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b></p><div class="ad-box big"><b>${esc(d.head)}</b>${body}</div>${penBig(d)}</div>`;
+      return `<div class="npc-sheet big-news"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h3>${esc(d.head)}</h3><p class="bn-sub">${esc(d.sub)}</p>${d.photo ? `<div class="bn-ph">${photoBox(d.photo)}</div>` : ''}<div class="bn-body">${body}</div>${penBig(d)}</div>`;
     };
     const note = (n, k) => `<div class="cn-spot" style="left:${n.x}px; top:${n.y}px; --r:${[-4, 3, -2, 5, -3, 2][k % 6]}deg">
       <div class="cn-under${n.big ? ' big' : ''}" style="${torn(3.4, 18)}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
