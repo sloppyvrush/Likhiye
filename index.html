@@ -263,6 +263,40 @@ a{color:inherit}
 .sv-say::after{content:""; position:absolute; top:100%; left:var(--sx, 30%); border:.7cqw solid transparent; border-top-color:#fffaf0; margin-left:-.7cqw}
 .sv-say.on{opacity:1; transform:scale(1)}
 
+/* the record of merit pinned to the wall right of the cabinet */
+.ach-wall{right:1.1%; top:27%; width:4.6%; aspect-ratio:3/4.3; z-index:3; padding:.9cqw .4cqw .4cqw; border:0; display:flex; flex-direction:column; align-items:center; text-align:center; cursor:var(--cur-hover);
+  background:linear-gradient(transparent 0 0), repeating-linear-gradient(transparent 0 .62cqw, rgba(60,80,140,.22) .62cqw .68cqw), #efe7d0;
+  box-shadow:.25cqw .35cqw .5cqw rgba(0,0,0,.45); transform:rotate(2.5deg); transform-origin:50% 0; transition:transform .25s; -webkit-tap-highlight-color:transparent}
+.ach-wall:hover{transform:rotate(0deg) scale(1.05)} .ach-wall:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
+.ach-wall b{font:700 .62cqw/1 var(--mono); letter-spacing:.06em; color:#2a2418}
+.ach-wall span{font:.95cqw/1 'Caveat',var(--hand); color:#1f2f6b; margin-top:.15cqw}
+.aw-lines{flex:1; width:80%; margin:.3cqw 0; background:repeating-linear-gradient(transparent 0 .45cqw, rgba(30,40,90,.55) .45cqw .55cqw); mask:linear-gradient(90deg,#000 60%,transparent)}
+.aw-n{font:700 1.1cqw/1 'Caveat',var(--hand); color:#a8261f; font-style:normal}
+.aw-pin{position:absolute; left:50%; top:-.35cqw; width:.75cqw; height:.75cqw; margin-left:-.37cqw; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a7a, #a8261f 60%, #5a0f0a); box-shadow:0 .1cqw .15cqw rgba(0,0,0,.5)}
+.ach-sheet-wrap{position:fixed; inset:0; z-index:300; display:grid; place-items:center; padding:16px; background:rgba(12,8,5,.78); overflow:auto}
+.ach-sheet-wrap[hidden]{display:none}
+.ach-sheet{position:relative; width:min(560px, 100%); padding:28px clamp(18px,4vw,34px) 22px; color:#2a2418; transform:rotate(-.8deg);
+  background:repeating-linear-gradient(transparent 0 29px, rgba(60,80,140,.18) 29px 30px), linear-gradient(90deg, transparent 52px, rgba(179,38,30,.35) 52px 54px, transparent 54px), #f1e9d3;
+  box-shadow:0 24px 50px rgba(0,0,0,.55)}
+.as-x{position:absolute; right:10px; top:6px; border:0; background:none; font:28px/1 var(--serif); color:#5a5144; cursor:var(--cur-hover)}
+.as-top{margin:0 0 8px 40px; font:12px/1.3 var(--mono); letter-spacing:.06em; color:#6a5f4c}
+.ach-sheet h3{margin:0 0 6px 40px; font:700 24px/1.05 var(--mono); letter-spacing:.14em}
+.ach-sheet h3 span{font:400 26px/1 'Caveat',var(--hand); letter-spacing:0; color:#1f2f6b}
+.as-pen{margin:0 0 12px 40px; font:19px/1.2 'Caveat',var(--hand); color:#9a1f17; transform:rotate(-1deg)}
+.as-moth{margin:0 0 10px 40px; font:21px/1.25 'Caveat',var(--hand); color:#1f2f6b}
+.as-moth .tl{display:inline-block; position:relative; margin-left:8px; font:700 20px/1 var(--mono); letter-spacing:1px; color:#1f2f6b}
+.as-moth .tl s{position:absolute; left:-2px; right:-4px; top:50%; height:2px; background:#1f2f6b; transform:rotate(-20deg)}
+.as-list{margin:0 0 10px 40px; padding:0 0 0 22px; display:grid; gap:6px}
+.as-list li{font:13px/1.3 var(--mono); color:#8a7f6c}
+.as-list li b{display:block; font:700 14px/1.2 var(--mono); letter-spacing:.06em; color:#a99e88}
+.as-list li span{font:17px/1.15 'Caveat',var(--hand)}
+.as-list li.on{color:#1f2f6b} .as-list li.on b{color:#2a2418} .as-list li.on::marker{content:"✓  "; color:#a8261f; font-weight:700}
+.as-marks{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+.as-marks i{min-width:26px; height:26px; padding:0 4px; display:grid; place-items:center; border:1.5px dashed rgba(31,47,107,.35); border-radius:50%; font:700 12px/1 var(--mono); font-style:normal; color:#a99e88}
+.as-marks i.on{border:2px solid #a8261f; color:#a8261f; transform:rotate(-8deg); background:rgba(168,38,31,.06)}
+.as-sum{margin:10px 0 4px 40px; font:700 15px/1.3 var(--mono); color:#a8261f}
+.as-foot{margin:6px 0 0 40px; font:11px/1.3 var(--mono); color:#8a7f6c}
+
 /* lighting and depth */
 .light-shade{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:multiply;
   background:
@@ -639,7 +673,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.ach-wall{display:none}
   .lamp{left:40%; width:20%; height:9%}
   .moth{width:3.4cqw}
   .dust{left:10%; width:80%; top:4%; height:60%}
@@ -690,6 +724,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .stage{width:var(--stageW); aspect-ratio:16/9; margin:0}
   html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
   html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
+  html.room-pan .ach-wall{display:flex}
   html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
   html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
@@ -991,6 +1026,12 @@ p{margin:0 0 1em}
 .nn-ph{margin:0; padding:8px 8px 6px; background:#f6f1e4; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(var(--r))}
 .nn-ph img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; filter:grayscale(.35) sepia(.2) contrast(1.08)}
 .nn-ph figcaption{margin-top:5px; font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+/* on a hero's card the stamp is the way into the full case file */
+.sheet-seal{position:absolute; right:44px; bottom:30px; width:104px; display:grid; justify-items:center; gap:2px; text-decoration:none; transform:rotate(-9deg); transition:transform .2s; cursor:var(--cur-hover)}
+.sheet-seal svg{width:100%; height:auto; display:block; opacity:.9; mix-blend-mode:multiply}
+.sheet-seal span{order:-1; font:700 18px/1 'Caveat',var(--hand); color:#a8261f; white-space:nowrap}
+.sheet-seal:hover{transform:rotate(-4deg) scale(1.06)}
+.npc-sheet:has(.sheet-seal){padding-bottom:110px}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
@@ -1676,7 +1717,7 @@ body.splash-on{overflow:hidden}
 .cork-title{position:absolute; left:560px; top:300px; width:320px; transform:rotate(-1.5deg); padding:10px 14px 12px; background:#f3ead2; box-shadow:0 4px 8px rgba(0,0,0,.35); text-align:center}
 .cork-title b{display:block; font:700 18px/1.2 var(--mono); letter-spacing:.12em; color:#2a2418}
 .cork-title span{font:24px/1 'Caveat',var(--hand); color:#1f2f6b}
-.cork-legend{position:absolute; left:1372px; top:1290px; width:208px; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
+.cork-legend{position:absolute; left:1742px; top:24px; width:200px; z-index:6; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
 .cork-legend b{font:22px/1 'Caveat',var(--hand); color:#1f2f6b; font-weight:700}
 .cork-legend i{display:inline-block; width:26px; height:4px; margin-right:8px; vertical-align:middle; border-radius:2px; box-shadow:0 1px 1px rgba(0,0,0,.4)}
 .cork-yarn{position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none}
@@ -1996,6 +2037,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           </g>
         </svg>
       </div>
+      <button class="ach-wall" id="achWall" type="button" aria-label="Ведомость заслуг на стене: ваши достижения"><i class="aw-pin" aria-hidden="true"></i><b>ВЕДОМОСТЬ</b><span>заслуг</span><i class="aw-lines" aria-hidden="true"></i><em class="aw-n">0/17</em></button>
       <div class="bin" id="bin" aria-hidden="true"><svg viewBox="0 0 80 96"><defs>
           <linearGradient id="binBody" x1="0" x2="1"><stop offset="0" stop-color="#1f2a1c"/><stop offset=".22" stop-color="#4e6243"/><stop offset=".45" stop-color="#5f7552"/><stop offset=".75" stop-color="#3a4a33"/><stop offset="1" stop-color="#1a2317"/></linearGradient>
           <linearGradient id="binRim" x1="0" x2="1"><stop offset="0" stop-color="#2a3524"/><stop offset=".4" stop-color="#8fa07c"/><stop offset="1" stop-color="#2a3524"/></linearGradient>
@@ -2654,6 +2696,18 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <div class="vr-tapes"></div>
   </div>
   <p class="vr-hint">Выберите кассету, она сама встанет в магнитофон.</p>
+</div>
+<div class="ach-sheet-wrap" id="achSheet" hidden role="dialog" aria-modal="true" aria-label="Ведомость заслуг">
+  <div class="ach-sheet">
+    <button class="as-x" type="button" aria-label="Закрыть">×</button>
+    <p class="as-top">Квартира Громова В. С. · ул. Зайцева</p>
+    <h3>ВЕДОМОСТЬ<br><span>личных заслуг гостя</span></h3>
+    <p class="as-pen">Заполняет: В. Громов. Исправлять ручкой не надо, я всё вижу.</p>
+    <p class="as-moth"></p>
+    <ol class="as-list"></ol>
+    <p class="as-sum"></p>
+    <p class="as-foot">Ведомость хранится только в вашем браузере. Другие гости ведут свою.</p>
+  </div>
 </div>
 <div class="npc-modal" id="npcModal" hidden role="dialog" aria-modal="true" aria-label="Дело"></div>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Фотография крупно"><figure><figcaption></figcaption></figure><button class="lb-x" type="button" aria-label="Закрыть">×</button></div>
@@ -3605,8 +3659,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     anim.onfinish = () => {
       el.classList.add('binned'); delete el.dataset.fly;
       bin.classList.add('has'); bin.classList.remove('bump'); void bin.offsetWidth; bin.classList.add('bump');
-      if (litter.every(x => x.classList.contains('binned')) && window.lihieAchieve)
-        window.lihieAchieve('Генеральная уборка', 'Пол чистый. Витя впервые видит, какого он цвета.', `убрано: ${litter.length} из ${litter.length}`);
+      if (litter.every(x => x.classList.contains('binned')) && window.lihieOnce)
+        window.lihieOnce('clean', '', '', `убрано: ${litter.length} из ${litter.length}`);
     };
   }));
   /* the left drawer stays a little open, so it begs to be pulled */
@@ -3916,12 +3970,53 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     } catch (e) {}
   };
   window.lihieAchieve = achieve;
-  const once = (key, title, text, foot) => { let seen = false; try { seen = localStorage.getItem('lihie-ach-' + key) === '1'; localStorage.setItem('lihie-ach-' + key, '1'); } catch (err) {} if (!seen) achieve(title, text, foot); };
-  window.lihieOnce = once;
   const ACH_MORE = {25: ['Моль занесена в Красную книгу', 'Двадцать пять. Учёные из Ленинградского зоопарка просят остановиться.'],
     50: ['Пожизненное', 'Пятьдесят молей. Витя распечатал вашу фотографию и повесил на доску. Рядом с Лысым.'],
     100: ['Лихая', 'Сто. Моль во всём Кировском районе передаёт друг другу ваше описание.']};
-  const showAch = n => { const a = n <= ACH.length ? ACH[n - 1] : ACH_MORE[n]; if (a) achieve(a[0], a[1], 'убито моли: ' + n); };
+  /* every achievement in one list: what the wall sheet shows, and what this browser has already earned */
+  const REG = [
+    ...ACH.map(([t, x], i) => ({key: 'moth' + (i + 1), t, x, hint: i ? `Убить ${i + 1}-ю моль.` : 'Что-то кружит у лампы.'})),
+    ...Object.entries(ACH_MORE).map(([n, [t, x]]) => ({key: 'moth' + n, t, x, hint: `Убить ${n} молей. Да, вам не показалось.`})),
+    {key: 'clean', t: 'Генеральная уборка', x: 'Пол чистый. Витя впервые видит, какого он цвета.', hint: 'Пол давно не видел веника.'},
+    {key: 'light', t: 'Экономия электроэнергии', x: 'Свет погашен. Работает только телевизор, как и положено в девяносто шестом.', hint: 'Счёт за свет опять пришёл огромный.'},
+    {key: 'servant', t: 'Нашла', x: 'Обе прятались в серванте. Хрусталь цел, пиво нет.', hint: 'В серванте кто-то шуршит.'},
+    {key: 'records', t: 'Дискотека на Стачек', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок много, а играет всё одна.'}
+  ];
+  const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
+    REG.forEach(r => { try { if (localStorage.getItem('lihie-ach-' + r.key) === '1' && !g.includes(r.key)) g.push(r.key); } catch (e) {} });
+    return new Set(g); })();
+  const mothCount = () => { try { return +localStorage.getItem('lihie-moths') || 0; } catch (e) { return window.__moths || 0; } };
+  const grant = (key, foot) => {
+    const r = REG.find(x => x.key === key); if (!r || got.has(key)) return;
+    got.add(key); try { localStorage.setItem('lihie-got', JSON.stringify([...got])); } catch (e) {}
+    achieve(r.t, r.x, foot); drawWall();
+  };
+  window.lihieOnce = (key, t, x, foot) => grant(key, foot);
+  const showAch = n => { grant('moth' + n, 'убито моли: ' + n); drawWall(); };
+
+  /* the sheet on the wall right of the cabinet: this visitor's record of merit */
+  const wallBtn = document.getElementById('achWall'), wallBox = document.getElementById('achSheet');
+  const tally = n => { let h = ''; for (let i = 0; i < Math.min(n, 60); i += 5){ const k = Math.min(5, n - i); h += `<span class="tl">${'|'.repeat(Math.min(k, 4))}${k === 5 ? '<s></s>' : ''}</span>`; } return h + (n > 60 ? ' …' : ''); };
+  function drawWall(){
+    if (!wallBtn || !wallBox) return;
+    const n = mothCount();
+    wallBtn.querySelector('.aw-n').textContent = `${got.size}/${REG.length}`;
+    const moths = REG.filter(r => r.key.startsWith('moth')), rest = REG.filter(r => !r.key.startsWith('moth'));
+    wallBox.querySelector('.as-list').innerHTML = [...moths.filter(r => got.has(r.key)), ...rest].map(r => got.has(r.key)
+      ? `<li class="on"><b>${r.t}</b><span>${r.x}</span></li>`
+      : `<li><b>${'?'.repeat(Math.min(9, r.t.length))}</b><span>${r.hint}</span></li>`).join('');
+    wallBox.querySelector('.as-moth').innerHTML = (n ? `Моль ликвидирована: <b>${n}</b> ${tally(n)}` : 'Моль ликвидирована: <b>0</b>. Пока живёт и ест шубу.')
+      + `<span class="as-marks">${moths.map(r => `<i class="${got.has(r.key) ? 'on' : ''}" title="${got.has(r.key) ? r.t : 'ещё нет'}">${r.key.slice(4)}</i>`).join('')}</span>`;
+    wallBox.querySelector('.as-sum').textContent = got.size === REG.length ? 'Всё собрано. Витя выдаёт ключи от квартиры и просит больше не приходить.' : `Заслуг: ${got.size} из ${REG.length}`;
+  }
+  if (wallBtn && wallBox){
+    drawWall();
+    const open = () => { drawWall(); wallBox.hidden = false; document.body.style.overflow = 'hidden'; wallBox.querySelector('.as-x').focus(); };
+    const close = () => { wallBox.hidden = true; document.body.style.overflow = ''; wallBtn.focus(); };
+    wallBtn.addEventListener('click', open);
+    wallBox.addEventListener('click', e => { if (e.target === wallBox || e.target.closest('.as-x')) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !wallBox.hidden) close(); });
+  }
   const swat = e => {
     if (mothDown) return;
     e.preventDefault(); e.stopPropagation();
@@ -3952,8 +4047,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const people = {};
     list.forEach((n, i) => people[n.id] = {...n, i});
     const [vb, lb] = BOTS;
-    if (vb) people.viktor = {id:'viktor', name:'Виктор Громов', role:'майор, убойный отдел ГУВД', photo:vb.boardPhoto || vb.photo, pos:vb.boardPos || vb.pos, hero:'#/' + vb.id};
-    if (lb) people.lesha = {id:'lesha', name:'Алексей Тихонов', role:'майор, угрозыск Кировского ОВД', photo:lb.boardPhoto || lb.photo, pos:lb.boardPos || lb.pos, hero:'#/' + lb.id};
+    if (vb) people.viktor = {id:'viktor', name:'Виктор Громов', role:'майор, убойный отдел ГУВД', photo:vb.boardPhoto || vb.photo, pos:vb.boardPos || vb.pos, hero:'#/' + vb.id, bot:vb, about:[vb.sub, (vb.folder || {}).say], note:(vb.quotes || [])[0]};
+    if (lb) people.lesha = {id:'lesha', name:'Алексей Тихонов', role:'майор, угрозыск Кировского ОВД', photo:lb.boardPhoto || lb.photo, pos:lb.boardPos || lb.pos, hero:'#/' + lb.id, bot:lb, about:[lb.sub, (lb.folder || {}).say], note:(lb.quotes || [])[0]};
     const gal = (b, k) => ((b && b.gallery) || [])[k] || [];
     people.naida = {id:'naida', name:'Найда', role:'служебная собака на пенсии', photo:'assets/archive/naida-home.webp', pos:'40% 45%', ar:'4/3', line:gal(vb, 3)[3] || '', animal:true, who:'Витя', about:[gal(vb, 3)[3] || '']};
     people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:'assets/archive/pirat-window.webp', pos:'60% 30%', ar:'3/4', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
@@ -4080,10 +4175,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (dc){ back_ = dc; modal.innerHTML = decorBig(decor[dc.dataset.id]); modal.hidden = false; document.body.style.overflow = 'hidden'; modal.querySelector('.x').focus(); return; }
       const c = e.target.closest('.pc'); if (!c) return;
       const p = people[c.dataset.id];
-      if (p.hero){ location.hash = p.hero; return; }
       back_ = c;
       const ph = p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ar || '3/4'}; object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
-      modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">Дело · ${esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}</div></div>`;
+      modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">${p.hero ? 'Личное дело' : 'Дело · ' + esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}${p.hero ? `<a class="sheet-seal" href="${p.hero}" aria-label="Открыть личное дело">${stampSvg(p.bot)}<span>личное дело →</span></a>` : ''}</div></div>`;
       modal.hidden = false; document.body.style.overflow = 'hidden';
       modal.querySelector('.x').focus();
     });
