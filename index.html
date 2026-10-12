@@ -1994,7 +1994,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <h2 aria-label="Лихие"><span style="animation-delay:1.5s">Л</span><span style="animation-delay:1.62s">и</span><span style="animation-delay:1.74s">х</span><span style="animation-delay:1.86s">и</span><span style="animation-delay:1.98s">е</span></h2>
     <p class="sub">Петербург, <span class="nw">1996-й</span></p>
   </div>
-  <button class="skip" type="button">нажмите, чтобы поставить пластинку</button>
+  <button class="skip" type="button">нажмите, чтобы войти</button>
 </div>
 
 <header class="bar">
@@ -2827,7 +2827,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     let done = false;
     const finish = e => {
       if (done) return; done = true;
-      window.lihieGesture = !!(e && e.type); window.lihieAutoStart && window.lihieAutoStart();
+      window.lihieGesture = !!(e && e.type);
       introEl.classList.add('leave'); document.body.classList.remove('splash-on');
       setTimeout(bootTV, 250);
       setTimeout(() => { grainOn = false; introEl.remove(); }, 900);
@@ -4004,8 +4004,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       addEventListener('pointerdown', once, true); addEventListener('keydown', once, true);
     });
   };
+  // no music on arrival: records play only when the visitor puts one on
   window.lihieAutoStart = autoStart;
-  setTimeout(autoStart, 400);
   if (!TRACKS.length){ document.querySelector('.radio').hidden = true; document.querySelector('.records').hidden = true; }
   ui();
 
@@ -4260,11 +4260,12 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (d.type === 'ad') return `<button type="button" class="cd ad" data-id="${d.id}" style="${st}" aria-label="Объявление: ${esc(d.head)}">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(2.4)}"><span class="ad-top">${esc(d.paper)}</span><span class="ad-box"><b>${esc(d.head)}</b>${(d.body || []).map(t => `<span>${esc(t)}</span>`).join('')}</span>${penHTML(d)}</span></button>`;
       return `<button type="button" class="cd news${d.wide ? ' wide' : ''}" data-id="${d.id}" style="${st}" aria-label="Вырезка: ${esc(d.head)}. Открыть">${pin('#e9e2cf')}<span class="cd-paper" style="${torn(1.8)}"><span class="nw-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></span><span class="nw-h">${esc(d.head)}</span>${d.photo ? photoBox(d.photo, 1) : ''}<span class="nw-sub">${esc(d.sub)}</span><i class="nw-lines" aria-hidden="true"></i>${penHTML(d)}</span></button>`;
     };
+    const hi = src => /^assets\/board\/[\w-]+\.webp$/.test(src || '') && ['gusev-kot','irina-kot','lysy-charity','viktor-press'].some(n => src.includes(n)) ? src.replace(/board\/([\w-]+)\.webp$/, 'board/hi/$1.jpg') : src;
     const decorBig = d => {
-      if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(d.src)}</div><p class="bp-cap">${esc(d.cap)}</p>${penBig(d)}</div>`;
+      if (d.type === 'photo') return `<div class="npc-sheet big-ph"><button class="x" type="button" aria-label="Закрыть">×</button><div class="bp-print">${photoBox(hi(d.src))}</div><p class="bp-cap">${esc(d.cap)}</p>${penBig(d)}</div>`;
       const body = (d.body || []).map(t => `<p>${esc(t)}</p>`).join('');
       if (d.type === 'ad') return `<div class="npc-sheet big-news ad"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b></p><div class="ad-box big"><b>${esc(d.head)}</b>${body}</div>${penBig(d)}</div>`;
-      return `<div class="npc-sheet big-news"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h3>${esc(d.head)}</h3><p class="bn-sub">${esc(d.sub)}</p>${d.photo ? `<div class="bn-ph">${photoBox(d.photo)}</div>` : ''}<div class="bn-body">${body}</div>${penBig(d)}</div>`;
+      return `<div class="npc-sheet big-news"><button class="x" type="button" aria-label="Закрыть">×</button><p class="bn-top"><b>${esc(d.paper)}</b><span>${esc(d.date)}</span></p><h3>${esc(d.head)}</h3><p class="bn-sub">${esc(d.sub)}</p>${d.photo ? `<div class="bn-ph">${photoBox(hi(d.photo))}</div>` : ''}<div class="bn-body">${body}</div>${penBig(d)}</div>`;
     };
     const note = (n, k) => `<div class="cn-spot" style="left:${n.x}px; top:${n.y}px; --r:${[-4, 3, -2, 5, -3, 2][k % 6]}deg">
       <div class="cn-under${n.big ? ' big' : ''}" style="${torn(3.4, 18)}"><p>${esc(n.under)}</p><button type="button" class="cn-back">повесить обратно ↺</button></div>
@@ -4337,7 +4338,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const c = e.target.closest('.pc'); if (!c) return;
       const p = people[c.dataset.id];
       back_ = c;
-      const ph = p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ar || '3/4'}; object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
+      const big = REF_FILES.has(c.dataset.id) ? `assets/ref/${c.dataset.id}.jpg` : p.photo;
+      const ph = p.photo ? `<img src="${esc(big)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ar || '3/4'}; object-position:${esc(p.pos || '50% 20%')}">` : `<span class="pc-none big" aria-hidden="true"><svg viewBox="0 0 60 70"><circle cx="30" cy="24" r="13"/><path d="M6 70c2-18 12-26 24-26s22 8 24 26z"/></svg><b>фото пока нет</b></span>`;
       const refs = refsOf(c.dataset.id, p);
       const refHTML = refs.length ? `<div class="ref-dl">${refs.map(([u, n]) => `<a class="ref-btn" href="${esc(u)}" download="${esc('Референс — ' + n + u.slice(u.lastIndexOf('.')))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Скачать реф${refs.length > 1 ? ': ' + esc(n.split(' ')[0]) : ''}</a>`).join('')}</div>` : '';
       modal.innerHTML = `<div class="npc-sheet${p.ar === '4/3' ? ' wide-ph' : ''}"><button class="x" type="button" aria-label="Закрыть">×</button><div class="ph">${ph}</div><div><p class="kick">${p.hero ? 'Личное дело' : 'Дело · ' + esc(p.who === 'оба' ? 'Витя и Лёша' : p.who || '')}</p><h3>${esc(p.name)}${p.nick && !p.name.includes(p.nick) ? ` «${esc(p.nick)}»` : ''}</h3><p class="rl">${esc(p.role)}</p>${(p.about || []).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('')}${p.note ? `<p class="pen">${esc(p.note)}</p>` : ''}${refHTML}${p.hero ? `<a class="sheet-seal" href="${p.hero}" aria-label="Открыть личное дело">${stampSvg(p.bot)}<span>личное дело →</span></a>` : ''}</div></div>`;
@@ -4346,7 +4348,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     });
     let back_ = null;
     // full-size reference pictures for download, named after the person
-    const REF_FILES = new Set(['viktor', 'lesha', 'korney', 'mikhalych', 'mama', 'rogov', 'bondar', 'pestov', 'valya', 'lapin', 'shevchuk']);
+    const REF_FILES = new Set(['viktor', 'lesha', 'korney', 'mikhalych', 'mama', 'rogov', 'bondar', 'pestov', 'valya', 'lapin', 'shevchuk', 'barinov', 'gusev', 'irina', 'kornilov', 'zhanna', 'zorin', 'berezhnoy', 'kot', 'lysy', 'marina', 'trofimov']);
     const FULL = {valya:'Валентина Петровна (Баба Валя)', shevchuk:'Павел Павлович Шевчук (Пал Палыч)', lapin:'Сергей Лапин «Профессор»', mama:'Мама Алексея Тихонова',
       kot:'Вадим Котельников «Кот»', zhora:'Жора Сапог', korney:'Дед Корней', mikhalych:'Михалыч', berezhnoy:'Николай Фёдорович Бережной', trofimov:'Геннадий Ильич Трофимов'};
     const refsOf = (id, p) => {
