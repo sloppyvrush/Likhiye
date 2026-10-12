@@ -1271,7 +1271,7 @@ body.splash-on{overflow:hidden}
 .arc-shuffle:hover{background:#f3e8cc}
 .arc-shuffle:active{transform:translateY(2px); box-shadow:0 1px 0 #a88f5c, 0 3px 8px rgba(0,0,0,.35)}
 .arc-shuffle:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
-.desk{position:relative; height:clamp(580px, 80vh, 860px); margin-bottom:40px; border-radius:10px; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+.desk{position:relative; height:clamp(640px, 92vh, 1000px); margin-bottom:40px; border-radius:10px; touch-action:pan-y; user-select:none; -webkit-user-select:none;
   border:22px solid transparent; border-image:linear-gradient(135deg, #6b3a1c, #3a1c0c 30%, #7a4523 52%, #3a1c0c 72%, #5c3016) 1;
   box-shadow:0 0 0 2px #1e0f06, 0 30px 60px rgba(0,0,0,.55), inset 0 0 0 3px rgba(0,0,0,.4);
   background:
@@ -1317,16 +1317,16 @@ body.splash-on{overflow:hidden}
 .ap.color .ap-front{border-radius:4px; overflow:hidden}
 .ap.color .ap-front::after{content:""; position:absolute; inset:0; pointer-events:none; z-index:3; background:linear-gradient(160deg, rgba(255,255,255,.22), transparent 28%, transparent 72%, rgba(0,0,0,.08)); border-radius:inherit}
 .ap-deco{position:absolute; z-index:4; pointer-events:none; display:none}
-.ap.tape .ap-deco,.ap.tape2 .ap-deco{display:block; left:50%; top:-5%; width:42%; height:9%; margin-left:-21%; background:rgba(236,226,190,.78); transform:rotate(-4deg); box-shadow:0 1px 2px rgba(0,0,0,.25)}
-.ap.tape2 .ap-deco{left:auto; right:-8%; top:3%; margin:0; transform:rotate(38deg)}
-.ap.clip .ap-deco{display:block; left:12%; top:-7%; width:9%; height:24%; border:2.5px solid #b9bcc2; border-radius:20px; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
-.ap.clip .ap-deco::after{content:""; position:absolute; inset:16% 22% 26%; border:2px solid #9ea2a8; border-radius:20px}
-.ap.corners .ap-deco{display:block; inset:0; background:linear-gradient(135deg, #141312 0 8%, transparent 8%), linear-gradient(225deg, #141312 0 8%, transparent 8%), linear-gradient(45deg, #141312 0 8%, transparent 8%), linear-gradient(315deg, #141312 0 8%, transparent 8%)}
+.ap.d-tape .ap-deco,.ap.d-tape2 .ap-deco{display:block; left:50%; top:-5%; width:42%; height:9%; margin-left:-21%; background:rgba(236,226,190,.78); transform:rotate(-4deg); box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.ap.d-tape2 .ap-deco{left:auto; right:-8%; top:3%; margin:0; transform:rotate(38deg)}
+.ap.d-clip .ap-deco{display:block; left:12%; top:-7%; width:9%; height:24%; border:2.5px solid #b9bcc2; border-radius:20px; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
+.ap.d-clip .ap-deco::after{content:""; position:absolute; inset:16% 22% 26%; border:2px solid #9ea2a8; border-radius:20px}
+.ap.d-corners .ap-deco{display:block; inset:0; background:linear-gradient(135deg, #141312 0 8%, transparent 8%), linear-gradient(225deg, #141312 0 8%, transparent 8%), linear-gradient(45deg, #141312 0 8%, transparent 8%), linear-gradient(315deg, #141312 0 8%, transparent 8%)}
 .ap.color .ap-front{clip-path:none}
 @media (max-width:640px){ .dp-album{width:40%; top:40%} .dp-env{width:30%; right:30%} .dp-mug{width:16%} }
 /* a photo on the desk: .ap positions, .ap-lift rotates and lifts, .ap-card turns over */
-.ap{--w:clamp(112px, 14vw, 190px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:grab}
-.ap.h{--w:clamp(160px, 21vw, 290px)}
+.ap{--w:clamp(104px, 12.5vw, 172px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:grab}
+.ap.h{--w:clamp(150px, 18.5vw, 256px)}
 .ap:focus-visible{outline:none}
 .ap:focus-visible .ap-face{outline:3px solid #e3c98f; outline-offset:2px}
 .ap-lift{--r:0deg; --t:0deg; --s:1; width:var(--w); container-type:inline-size; transform:translate(-50%,-50%) rotate(calc(var(--r) + var(--t))) scale(var(--s)); transition:transform .35s cubic-bezier(.2,.8,.3,1); perspective:1600px}
@@ -1341,6 +1341,14 @@ body.splash-on{overflow:hidden}
 .ap.color .ap-front{padding:4%; background:#fbfaf6}
 .ap .scene{pointer-events:none}
 .ap.h .scene{aspect-ratio:3/2}
+.ap.sq{--w:clamp(128px, 15vw, 206px)}
+.ap.v34 .scene{aspect-ratio:3/4} .ap.h43 .scene{aspect-ratio:4/3} .ap.sq .scene{aspect-ratio:1}
+/* prints from the lab on Nevsky: warm, a little faded, a soft vignette and fine grain, so painted frames sit with the old ones */
+.ap.color .scene::after{content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(40,24,10,.32)), linear-gradient(rgba(255,236,200,.06), rgba(255,236,200,.06))}
+.ap.v34.color .scene, .ap.h43.color .scene, .ap.sq.color .scene{filter:sepia(.14) saturate(.9) contrast(1.04) brightness(.98)}
+.ap.old.color .scene{filter:sepia(.42) saturate(.7) contrast(.94) brightness(1.04)}
+.ap.old.color .scene::after{background:radial-gradient(ellipse 72% 68% at 50% 45%, transparent 50%, rgba(70,44,14,.38)), linear-gradient(rgba(255,226,170,.14), rgba(255,226,170,.14))}
 .ap.h .scene img{height:84%; bottom:3%}
 .ap .scene.full img{height:100%; bottom:0; object-fit:cover; object-position:50% 30%}
 .ap.color .scene{filter:saturate(1.08) contrast(1.04)}
@@ -2687,7 +2695,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <div class="k-face k-back">
           <p class="k-head">${b.unit}</p>
           <p class="k-no">Удостоверение № ${num}</p>
-          <div class="k-ph"><img src="${b.photo}" alt="" loading="lazy" style="object-position:${b.pos}"></div>
+          <div class="k-ph"><img src="${b.idPhoto || b.photo}" alt="" loading="lazy" style="object-position:${b.idPhoto ? '50% 30%' : b.pos}"></div>
           ${sealArt(b, i)}
         </div>
       </div>
@@ -3139,8 +3147,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const photos = ARCHIVE.map(([src, bg, shape, back, date], k) => {
       const el = document.createElement('div');
       const lab = !!bg, num = /lesha|pirat/.test(src) ? '002' : '001';
-      const deco = ['', 'tape', '', 'corners', 'clip', '', 'tape2', ''][k % 8];
-      el.className = `ap ${shape === 'h' ? 'h' : 'v'} ${lab ? 'lab' : 'color'}${deco ? ' ' + deco : ''}`;
+      const deco = ['', 'd-tape', '', 'd-corners', 'd-clip', '', 'd-tape2', ''][k % 8];
+      const [form, tone] = String(shape).split(' ');
+      el.className = `ap ${/^h/.test(form) ? 'h' : form === 'sq' ? 'sq' : 'v'}${/\d/.test(form) ? ' ' + form : ''}${tone ? ' ' + tone : ''} ${lab ? 'lab' : 'color'}${deco ? ' ' + deco : ''}`;
       el.tabIndex = 0; el.setAttribute('role', 'button');
       el.setAttribute('aria-label', `Снимок ${k + 1}. Нажмите, чтобы взять в руки`);
       el.innerHTML = `<div class="ap-lift"><div class="ap-card">
@@ -3154,7 +3163,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     // a loose grid with jitter, in random order, so every photo shows at least a corner
     const scatter = () => {
       const w = innerWidth;
-      const cols = w < 640 ? 3 : w < 1000 ? 4 : 5, rows = Math.ceil(photos.length / cols);
+      const cols = w < 640 ? 4 : w < 1000 ? 5 : 6, rows = Math.ceil(photos.length / cols);
       const order = photos.map((_, i) => i).sort(() => rand() - .5);
       order.forEach((pi, n) => {
         const p = photos[pi], c = n % cols, r = Math.floor(n / cols);
@@ -3674,8 +3683,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (vb) people.viktor = {id:'viktor', name:'Виктор Громов', role:'майор, убойный отдел ГУВД', photo:vb.photo, pos:vb.pos, hero:'#/' + vb.id};
     if (lb) people.lesha = {id:'lesha', name:'Алексей Тихонов', role:'майор, угрозыск Кировского ОВД', photo:lb.photo, pos:lb.pos, hero:'#/' + lb.id};
     const gal = (b, k) => ((b && b.gallery) || [])[k] || [];
-    people.naida = {id:'naida', name:'Найда', role:'служебная собака на пенсии', photo:gal(vb, 3)[0] || '', pos:'50% 50%', line:gal(vb, 3)[3] || '', animal:true, who:'Витя', about:[gal(vb, 3)[3] || '']};
-    people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:gal(lb, 3)[0] || '', pos:'50% 50%', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
+    people.naida = {id:'naida', name:'Найда', role:'служебная собака на пенсии', photo:'assets/archive/naida-home.webp', pos:'40% 45%', line:gal(vb, 3)[3] || '', animal:true, who:'Витя', about:[gal(vb, 3)[3] || '']};
+    people.pirat = {id:'pirat', name:'Пират', role:'одноглазый рыжий кот', photo:'assets/archive/pirat-window.webp', pos:'62% 22%', line:gal(lb, 3)[3] || '', animal:true, who:'Лёша', about:[gal(lb, 3)[3] || '']};
     const pins = ['#b3261e', '#2b4a8b', '#d9a12b', '#2f7a4a', '#e9e2cf', '#7a3fa0'];
     const ids = Object.keys(B.pos).filter(id => people[id]);
     const decor = {}; (B.decor || []).forEach(d => decor[d.id] = d);
