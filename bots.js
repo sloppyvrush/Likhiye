@@ -28,6 +28,7 @@
                        Фоны: lineup (ростомер), bricks (кирпичная стена), home-v / home-l (обои и пол), floor (паркет), plaid (плед)
   galleryNotes         две пометки ручкой на страницах фототаблицы  (фототаблица в деле больше не показывается; снимки оттуда используются только для доски «Люди»)
   coverPhoto           снимок, пристёгнутый скрепкой к обложке дела (3:4); пусто — без снимка
+  opPhoto              [картинка 3:4, подпись ручкой]: крупный снимок на отдельном листе внутри дела
   cardPhoto            фото на учётной карточке внутри дела (3:4); пусто — берётся photo
   watch                «Наружное наблюдение»: [[картинка 4:3, подпись ручкой], …]; пусто — страницы нет
   loreCount            сколько записей в лорбуке
@@ -41,7 +42,8 @@ window.BOTS = [
     "photo": "assets/viktor.webp",
     "pos": "50% 20%",
     "idPhoto": "assets/id/viktor.webp",
-    "coverPhoto": "assets/case/viktor-cover.webp",
+    "coverPhoto": "assets/portrait/viktor.webp",
+    "opPhoto": ["assets/case/viktor-cover.webp", "Набережная, октябрь. Прикуривает, смотрит в объектив. Заметил."],
     "cardPhoto": "assets/case/viktor-card.webp",
     "watch": [
       ["assets/case/viktor-watch-market.webp", "Объект у ларька на Автовском рынке, 12.10, 15:20. Покупает «Мальборо», считает мелочь. Сдачу не взял."],
@@ -244,7 +246,8 @@ window.BOTS = [
     "photo": "assets/lesha.webp",
     "pos": "50% 18%",
     "idPhoto": "assets/id/lesha.webp",
-    "coverPhoto": "assets/case/lesha-cover.webp",
+    "coverPhoto": "assets/portrait/lesha.webp",
+    "opPhoto": ["assets/case/lesha-cover.webp", "Двор на Зайцева, ночь, по рации с дежурным. Улыбается — значит, уже знает, кто."],
     "cardPhoto": "assets/case/lesha-card.webp",
     "watch": [
       ["assets/board/lesha-zhora.webp", "Объект и Сапог Г. у бани, четверг, 19:10. Разговор короткий, без улыбок."],

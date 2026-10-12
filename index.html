@@ -1155,6 +1155,11 @@ p{margin:0 0 1em}
 .dl-reset{margin:30px auto 0; display:block; padding:9px 14px; border:1.5px dashed rgba(227,201,143,.6); background:none; color:#e3c98f; font:14px var(--mono); cursor:var(--cur-hover)}
 .dl-reset.sure{background:#a8261f; color:#fff3da; border-style:solid}
 @media (max-width:640px){ .dl-ph{float:none; width:100%; margin:4px 0 12px} .dl-cover .stamp-dsp{position:static; display:inline-block; margin-bottom:12px} }
+/* a big print clipped to its own page of the case: shrinks to fit the leaf, never scrolls */
+.op-ph{position:relative; margin:10px auto 0; width:min(100%, 420px); padding:10px 10px 8px; background:#f6f1e4; box-shadow:0 6px 16px rgba(0,0,0,.32); transform:rotate(-1.5deg)}
+.op-ph img{display:block; width:100%; max-height:calc(min(100svh - 210px, 760px) - 200px); aspect-ratio:3/4; object-fit:cover; object-position:50% 20%; filter:sepia(.12) contrast(1.03)}
+.op-ph figcaption{margin-top:6px; font:20px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+.op-clip{position:absolute; left:16%; top:-16px; width:16px; height:44px; border:3px solid #b9bcc2; border-radius:10px; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
@@ -2951,6 +2956,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       it(`<div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>`),
       ...b.prose.map(p => it(`<p>${p}</p>`, 'prose'))]);
     S[1].head = ''; S[1].cont = top;
+    // the big print goes right after the card, so the open folder shows card + photo side by side
+    if (b.opPhoto){ sec('', [it(`${top}<figure class="op-ph"><span class="op-clip" aria-hidden="true"></span><img src="${b.opPhoto[0]}" alt=""><figcaption>${b.opPhoto[1] || ''}</figcaption></figure>`)], true); S.splice(1, 0, S.pop()); }
     sec('Как говорит', (b.quotes || []).map(q => it(`<li>${q}</li>`, 'quotes')));
     if (b.watch && b.watch.length) sec('Наружное наблюдение', b.watch.map(([src, cap], k) => it(`<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`, 'nn')));
     sec('Связи', (b.links || []).map(([n, d]) => it(`<li><b>${n}</b>, ${d}</li>`, 'links')));
@@ -3054,7 +3061,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 </main>`; };
   const folder = (b) => `
 <a class="folder" href="#/${b.id}">
-  <div class="ph"><span class="clip"></span><img src="${b.photo}" alt="" loading="lazy" style="object-position:${b.pos}"></div>
+  <div class="ph"><span class="clip"></span><img src="${b.boardPhoto || b.photo}" alt="" loading="lazy" style="object-position:${b.boardPhoto ? b.boardPos : b.pos}"></div>
   <div>
     <div class="print">${list([['История', '«' + b.story + '»'], ...b.folder.rows], ([k, v]) => `<div class="row"><span>${k}</span><span>${v}</span></div>`)}</div>
     <div class="name">${b.name}</div>
