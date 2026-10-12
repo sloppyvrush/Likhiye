@@ -319,7 +319,7 @@ a{color:inherit}
 .moth.dead .wing{animation:none}
 .moth.dead .wl{transform:rotate(-38deg)} .moth.dead .wr{transform:rotate(38deg)}
 .moth.dead svg{animation:mothFall 1.3s cubic-bezier(.45,0,.9,.55) forwards}
-@keyframes mothFall{0%{transform:translate(0,0) rotate(0)} 12%{transform:translate(.3cqw,-.6cqw) rotate(40deg)} 100%{transform:translate(1.4cqw, var(--fall, 30cqw)) rotate(190deg); opacity:.85}}
+@keyframes mothFall{0%{transform:translate(0,0) rotate(0); opacity:1} 12%{transform:translate(.3cqw,-.6cqw) rotate(40deg); opacity:1} 55%{opacity:.9} 100%{transform:translate(1cqw, var(--fall, 12cqw)) rotate(190deg); opacity:0}}
 .moth.gone svg{opacity:0}
 .moth.back svg{animation:mothIn 1.2s ease-out}
 @keyframes mothIn{from{opacity:0; transform:translate(-4cqw,-3cqw) scale(.6)}}
@@ -3884,20 +3884,40 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const achieve = (title, text, foot) => {
     if (!achEl){ achEl = document.createElement('button'); achEl.type = 'button'; achEl.className = 'ach'; achEl.setAttribute('role', 'status'); document.body.appendChild(achEl); achEl.addEventListener('click', () => achEl.classList.remove('on')); }
     achEl.innerHTML = `${MEDAL}<span><small>ДОСТИЖЕНИЕ ПОЛУЧЕНО</small><b>${title}</b><span>${text}</span>${foot ? `<i>${foot}</i>` : ''}</span>`;
-    achEl.classList.remove('on'); void achEl.offsetWidth; achEl.classList.add('on');
+    achEl.classList.remove('on'); void achEl.offsetWidth; achEl.classList.add('on'); ding();
     clearTimeout(achT); achT = setTimeout(() => achEl.classList.remove('on'), 6500);
+  };
+  let dingCtx = null;
+  const ding = () => {
+    try {
+      const actx = dingCtx = dingCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      const t = actx.currentTime, out = actx.createGain(); out.gain.value = .22; out.connect(actx.destination);
+      [[659.25, 0], [987.77, .09], [1318.5, .18]].forEach(([f, d]) => {
+        [1, 2.01].forEach((h, k) => {
+          const o = actx.createOscillator(), g = actx.createGain();
+          o.type = k ? 'sine' : 'triangle'; o.frequency.value = f * h;
+          g.gain.setValueAtTime(0, t + d); g.gain.linearRampToValueAtTime(k ? .12 : .5, t + d + .012);
+          g.gain.exponentialRampToValueAtTime(.0008, t + d + (k ? .35 : .9));
+          o.connect(g); g.connect(out); o.start(t + d); o.stop(t + d + 1);
+        });
+      });
+    } catch (e) {}
   };
   window.lihieAchieve = achieve;
   const once = (key, title, text, foot) => { let seen = false; try { seen = localStorage.getItem('lihie-ach-' + key) === '1'; localStorage.setItem('lihie-ach-' + key, '1'); } catch (err) {} if (!seen) achieve(title, text, foot); };
   window.lihieOnce = once;
-  const showAch = n => { const [title, text] = ACH[Math.min(n, ACH.length) - 1]; achieve(title, text, 'убито моли: ' + n); };
+  const ACH_MORE = {25: ['Моль занесена в Красную книгу', 'Двадцать пять. Учёные из Ленинградского зоопарка просят остановиться.'],
+    50: ['Пожизненное', 'Пятьдесят молей. Витя распечатал вашу фотографию и повесил на доску. Рядом с Лысым.'],
+    100: ['Лихая', 'Сто. Моль во всём Кировском районе передаёт друг другу ваше описание.']};
+  const showAch = n => { const a = n <= ACH.length ? ACH[n - 1] : ACH_MORE[n]; if (a) achieve(a[0], a[1], 'убито моли: ' + n); };
   const swat = e => {
     if (mothDown) return;
     e.preventDefault(); e.stopPropagation();
     mothDown = true;
     const st = moth.parentElement.getBoundingClientRect(), mr = moth.getBoundingClientRect();
     // fall down to the floor line of the room
-    moth.style.setProperty('--fall', Math.max(40, st.bottom - st.height * .14 - mr.bottom) + 'px');
+    moth.style.setProperty('--fall', Math.min(st.height * .22, Math.max(40, st.bottom - st.height * .14 - mr.bottom)) + 'px');
     moth.classList.remove('back'); moth.classList.add('dead');
     const sl = document.createElement('span'); sl.className = 'slap'; sl.textContent = ['ХЛОП!', 'ШЛЁП!', 'БАЦ!'][Math.random() * 3 | 0];
     sl.style.left = (mr.left + mr.width / 2 - st.left) + 'px'; sl.style.top = (mr.top - st.top) + 'px';
@@ -3905,7 +3925,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     let n = 0; try { n = (+localStorage.getItem('lihie-moths') || 0) + 1; localStorage.setItem('lihie-moths', n); } catch (err) { n = (window.__moths = (window.__moths || 0) + 1); }
     setTimeout(() => showAch(n), 650);
     // a new one finds the lamp half a minute later
-    setTimeout(() => { moth.classList.add('gone'); }, 4200);
+    setTimeout(() => { moth.classList.add('gone'); }, 1250);
     setTimeout(() => { moth.classList.remove('dead', 'gone'); moth.classList.add('back'); mothDown = false; }, 30000);
   };
   moth.addEventListener('pointerdown', swat);
