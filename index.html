@@ -1885,28 +1885,32 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 @keyframes slInk{0%,30%{opacity:0} 40%,100%{opacity:1}}
 .seal .sl-hint{position:absolute; left:50%; top:100%; margin-top:8px; transform:translateX(-50%) rotate(-3deg); white-space:nowrap; font:400 19px/1 var(--hand); color:#e3c98f; opacity:.85}
 @media (max-width:640px){
-  .ids{height:330px}
-  .ids .ids-env{width:46%; left:-1%; top:1%}
+  .ids{height:420px}
+  .ksiva{width:47%}
+  .k0{left:1%; top:40%; --r:-4deg} .k1{left:52%; top:58%; --r:4deg}
+  .k0 .k-cover{transform-origin:100% 50%}
+  .k0:hover .k-cover,.k0:focus-visible .k-cover,.k0.open .k-cover{transform:rotateY(178deg)}
+  .k0 .k-front{border-radius:7px 2px 2px 7px}
+  .ids .ids-env{width:50%; left:0; top:2%}
   .ids .ids-env .env-open{display:none}
   .ids .ids-env .env-stamp{display:none}
   .ids .ids-env .env-hw{top:auto; bottom:22%; right:auto; left:10%; font-size:16px}
-  .ids-stamp.seal{left:6%; top:47%; width:118px}
-  .seal .sl-hint{font-size:16px}
+  .ids-stamp.seal{left:62%; top:1%; width:112px}
+  .seal .sl-hint{font-size:15px; white-space:normal; width:130px; text-align:center; line-height:1.05}
 }
 @media (prefers-reduced-motion:reduce){.seal,.seal .sl-top,.seal .sl-ink{transition:none}}
-/* desktop: the two IDs at opposite corners, envelope and stamp between them; Lyosha's opens to the right */
+/* desktop: stamp and envelope in the left column, the two IDs on a diagonal; Vitya's opens to the right, Lyosha's to the left, into empty space */
 @media (min-width:641px){
-  .ids{max-width:1080px; height:clamp(470px, 44vw, 540px)}
-  .ksiva{width:min(330px, 31%)}
-  .k0{left:66%; top:1%; --r:5deg}
-  .k1{left:2%; top:52%; --r:-5deg}
-  .k1 .k-cover{transform-origin:100% 50%}
-  .k1:hover .k-cover,.k1:focus-visible .k-cover,.k1.open .k-cover{transform:rotateY(178deg)}
-  .k1 .k-front{border-radius:7px 2px 2px 7px}
-  .k1 .k-stamp{left:50%; top:42%}
-  .ids .ids-env{left:33%; top:0; width:min(330px, 31%); transform:rotate(-3deg)}
-  .ids .ids-env:hover{transform:rotate(-1deg) translateY(-4px)}
-  .ids-stamp.seal{left:53%; top:54%}
+  .ids{max-width:1080px; height:clamp(480px, 46vw, 560px)}
+  .ksiva{width:min(330px, 30%)}
+  .k0{left:36%; top:2%; --r:-3deg}
+  .k1{left:68%; top:50%; --r:4deg}
+  .k0 .k-cover{transform-origin:100% 50%}
+  .k0:hover .k-cover,.k0:focus-visible .k-cover,.k0.open .k-cover{transform:rotateY(178deg)}
+  .k0 .k-front{border-radius:7px 2px 2px 7px}
+  .ids .ids-env{left:0; top:52%; width:min(330px, 30%); transform:rotate(-4deg)}
+  .ids .ids-env:hover{transform:rotate(-2deg) translateY(-4px)}
+  .ids-stamp.seal{left:6%; top:3%; width:clamp(150px, 16vw, 186px)}
 }
 
 </style>
