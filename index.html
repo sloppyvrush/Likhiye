@@ -248,16 +248,17 @@ a{color:inherit}
 
 /* who is hiding in there: a name tag on hover (always shown on touch screens), and a line when the door opens */
 .servant .lower{position:relative}
-.sv-tag{position:absolute; z-index:6; top:-14%; width:46%; padding:.45cqw .5cqw .5cqw; background:#f3ead2; color:#1f2f6b; text-decoration:none; text-align:center;
-  box-shadow:0 .2cqw .5cqw rgba(0,0,0,.5); opacity:0; pointer-events:none; transform:translateY(.6cqw) rotate(var(--tr)); transition:opacity .25s, transform .25s; cursor:var(--cur-hover)}
+/* a note pinned to the inside of each open door: who is hiding there; the Telegram link lives on the note itself */
+.sv-tag{position:absolute; z-index:6; top:18%; width:30%; padding:.5cqw .35cqw .45cqw; background:#f3ead2; color:#1f2f6b; text-decoration:none; text-align:center;
+  box-shadow:0 .2cqw .5cqw rgba(0,0,0,.55); opacity:0; pointer-events:none; transform:scale(.6) rotate(var(--tr)); transition:opacity .2s .25s, transform .35s .25s cubic-bezier(.3,1.4,.5,1); cursor:var(--cur-hover)}
 .sv-tag::before{content:""; position:absolute; left:50%; top:-.35cqw; width:.7cqw; height:.7cqw; margin-left:-.35cqw; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a7a, #a8261f 60%, #5a0f0a); box-shadow:0 .1cqw .15cqw rgba(0,0,0,.5)}
-.sv-tag b{display:block; font:700 1.25cqw/1 'Caveat',var(--hand)}
-.sv-tag span{display:block; margin-top:.15cqw; font:.55cqw/1.1 var(--mono); letter-spacing:.04em; color:#7a6a50}
-.sv-tag.l{left:2%; --tr:-4deg} .sv-tag.r{right:2%; --tr:3deg}
-.sv-tag:hover b{text-decoration:underline}
-.lower:has(.sv-cell.l.open) .sv-tag.l, .lower:has(.sv-cell.r.open) .sv-tag.r{pointer-events:auto}
-.lower:has(.sv-cell.l.open:hover) .sv-tag.l, .lower:has(.sv-cell.r.open:hover) .sv-tag.r, .sv-tag:hover, .sv-tag:focus-visible{opacity:1; transform:translateY(0) rotate(var(--tr))}
-@media (hover:none){ .lower:has(.sv-cell.l.open) .sv-tag.l, .lower:has(.sv-cell.r.open) .sv-tag.r{opacity:1; transform:translateY(0) rotate(var(--tr))} }
+.sv-tag b{display:block; font:700 1.2cqw/1 'Caveat',var(--hand)}
+.sv-tag span{display:block; max-height:0; overflow:hidden; font:.55cqw/1.15 var(--mono); letter-spacing:.02em; color:#a8261f; transition:max-height .2s, margin .2s}
+.sv-tag.l{left:-33%; --tr:-6deg} .sv-tag.r{right:-33%; --tr:5deg}
+.lower:has(.sv-cell.l.open) .sv-tag.l, .lower:has(.sv-cell.r.open) .sv-tag.r{opacity:1; pointer-events:auto; transform:scale(1) rotate(var(--tr))}
+.sv-tag:hover, .sv-tag:focus-visible{transform:scale(1.12) rotate(0deg) !important; z-index:8}
+.sv-tag:hover span, .sv-tag:focus-visible span{max-height:3cqw; margin-top:.2cqw}
+@media (hover:none){ .sv-tag span{max-height:3cqw; margin-top:.2cqw} }
 .sv-say{position:absolute; z-index:7; left:50%; top:-48%; width:150%; margin:0 0 0 -75%; padding:.6cqw .8cqw; background:#fffaf0; color:#1c140d; border-radius:1cqw;
   font:700 1.15cqw/1.15 'Caveat',var(--hand); text-align:center; box-shadow:0 .3cqw .8cqw rgba(0,0,0,.45); opacity:0; transform:scale(.6); transform-origin:var(--sx, 30%) 110%; transition:opacity .2s, transform .3s cubic-bezier(.3,1.5,.5,1); pointer-events:none}
 .sv-say::after{content:""; position:absolute; top:100%; left:var(--sx, 30%); border:.7cqw solid transparent; border-top-color:#fffaf0; margin-left:-.7cqw}
@@ -389,7 +390,9 @@ a{color:inherit}
 .ach.on{transform:translateX(0) rotate(-1.5deg)}
 .ach svg{width:58px; height:58px}
 .ach small{display:block; font:700 10px/1 var(--mono); letter-spacing:.2em; color:#a8261f}
-.ach b{display:block; margin:5px 0 4px; font:400 22px/1.05 var(--display); color:#1c140d}
+.ach > span{min-width:0}
+.ach b{display:block; margin:5px 0 4px; font:400 20px/1.08 var(--display); color:#1c140d; overflow-wrap:anywhere; hyphens:auto}
+.ach span span{overflow-wrap:break-word}
 .ach span{display:block; font:19px/1.15 'Caveat',var(--hand); color:#1f2f6b}
 .ach i{display:block; margin-top:5px; font:10px/1 var(--mono); font-style:normal; color:#7a6a50; letter-spacing:.08em}
 @media (prefers-reduced-motion:reduce){ .ach{transition:none} .slap{animation:none; opacity:0} }
@@ -2340,8 +2343,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           </div>
           <div class="mid" aria-hidden="true"></div>
           <div class="lower">
-            <a class="sv-tag l" href="https://t.me/milkiwaywlw" target="_blank" rel="noopener"><b>Милка</b><span>телеграм-канал →</span></a>
-            <a class="sv-tag r" href="https://t.me/sillysloppy" target="_blank" rel="noopener"><b>Слопи</b><span>телеграм-канал →</span></a>
+            <a class="sv-tag l" href="https://t.me/milkiwaywlw" target="_blank" rel="noopener"><b>Милка</b><span>в телеграм →</span></a>
+            <a class="sv-tag r" href="https://t.me/sillysloppy" target="_blank" rel="noopener"><b>Слопи</b><span>в телеграм →</span></a>
             <p class="sv-say" aria-live="polite"></p>
             <button class="sv-cell l" type="button" aria-expanded="false" aria-label="Левая дверца серванта">
               <span class="sv-in" aria-hidden="true"><svg class="sv-stash" viewBox="0 0 60 80"><g><rect x="10" y="40" width="7" height="30" rx="2" fill="#5a3a12"/><rect x="11.5" y="30" width="4" height="12" rx="1.5" fill="#5a3a12"/><rect x="10" y="50" width="7" height="9" fill="#e2c27a"/></g><g><rect x="20" y="44" width="7" height="26" rx="2" fill="#3d5a2a"/><rect x="21.5" y="36" width="4" height="10" rx="1.5" fill="#3d5a2a"/><rect x="20" y="52" width="7" height="8" fill="#efe3c4"/></g><text x="34" y="66" font-family="Caveat, cursive" font-size="9" fill="#e3c98f" transform="rotate(-8 34 66)">тсс!</text></svg><img class="sv-girl" src="assets/room/hide-left.webp" alt="" onload="this.parentNode.classList.add('has-png')" onerror="this.remove()"></span>
