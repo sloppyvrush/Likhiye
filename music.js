@@ -7,17 +7,17 @@
 window.TRACKS = [
   {
     "artist": "Наутилус Помпилиус",
-    "title": "Люди на холме",
-    "src": "music/01-nautilus-lyudi-na-holme.mp3",
-    "color": "#B3261E",
-    "cover": "assets/covers/lyudi-na-holme.webp"
-  },
-  {
-    "artist": "Наутилус Помпилиус",
     "title": "Крылья",
     "src": "music/02-nautilus-krylya.mp3",
     "color": "#B3261E",
     "cover": "assets/covers/krylya.webp"
+  },
+  {
+    "artist": "Наутилус Помпилиус",
+    "title": "Люди на холме",
+    "src": "music/01-nautilus-lyudi-na-holme.mp3",
+    "color": "#B3261E",
+    "cover": "assets/covers/lyudi-na-holme.webp"
   },
   {
     "artist": "Наутилус Помпилиус",
