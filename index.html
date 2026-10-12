@@ -1039,6 +1039,16 @@ p{margin:0 0 1em}
 .leaf .pg-fit{transform-origin:0 0}
 .pg-no{position:absolute; left:0; right:0; bottom:9px; text-align:center; font:12px/1 var(--mono); color:var(--ink-soft); letter-spacing:.1em; pointer-events:none}
 .leaf .prose p.cont{text-indent:0}
+/* wide screens: the envelope with the tapes lies under the folder and sticks out at its left edge */
+@media (min-width:1280px){
+  .dossier{position:relative}
+  .dossier .book{z-index:2}
+  .dossier > .envelope{position:absolute; z-index:1; left:-128px; top:96px; width:280px; margin:0; transform:rotate(-13deg); transition:transform .45s cubic-bezier(.3,1.2,.4,1)}
+  .dossier > .envelope:hover, .dossier > .envelope:focus-visible{transform:translate(-26px,-10px) rotate(-16deg)}
+  .dossier > .envelope .env-hw{right:auto; left:6%; bottom:auto; top:22%; font-size:19px}
+  .dossier > .envelope .env-open{right:auto; left:7%; bottom:10%; font-size:12px}
+  .dossier > .envelope .env-stamp{left:6%; bottom:30%; font-size:10px; padding:4px 7px}
+}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
