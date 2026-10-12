@@ -1606,27 +1606,100 @@ body.splash-on{overflow:hidden}
 .ap.d-corners .ap-deco{display:block; inset:0; background:linear-gradient(135deg, #141312 0 8%, transparent 8%), linear-gradient(225deg, #141312 0 8%, transparent 8%), linear-gradient(45deg, #141312 0 8%, transparent 8%), linear-gradient(315deg, #141312 0 8%, transparent 8%)}
 .ap.color .ap-front{clip-path:none}
 @media (max-width:640px){ .dp-album{width:40%; top:40%} .dp-env{width:30%; right:30%} .dp-mug{width:16%} }
-/* two closed photo albums beside the desk: which years the prints on the table come from */
-.pa{position:absolute; z-index:0; width:clamp(118px, 11vw, 168px); aspect-ratio:3/4; pointer-events:none; filter:drop-shadow(0 14px 18px rgba(0,0,0,.5))}
-.pa-l{left:calc(-1 * clamp(118px, 11vw, 168px) - 58px); top:8%; transform:rotate(-7deg)}
-.pa-r{right:calc(-1 * clamp(118px, 11vw, 168px) - 58px); top:46%; transform:rotate(6deg)}
+/* three photo albums lying on the desk; a click opens one */
+.desk.albums{height:clamp(500px, 74vh, 720px)}
+.alb{--r:0deg; position:absolute; z-index:2; width:clamp(150px, 21%, 250px); aspect-ratio:3/4; padding:0; border:0; background:none; color:inherit; cursor:var(--cur-hover);
+  filter:drop-shadow(0 14px 16px rgba(0,0,0,.5)); transform:rotate(var(--r)); transition:transform .35s cubic-bezier(.2,.8,.3,1), filter .35s}
+.alb:hover,.alb:focus-visible{transform:rotate(calc(var(--r) * .4)) translateY(-10px) scale(1.035); filter:drop-shadow(0 28px 26px rgba(0,0,0,.55))}
+.alb:focus-visible{outline:none} .alb:focus-visible .pa-cover{outline:3px solid #e3c98f; outline-offset:5px}
+.alb.a-v{left:6%; top:12%; --r:-7deg} .alb.a-vl{left:39.5%; top:27%; --r:3deg} .alb.a-l{left:71%; top:9%; --r:8deg}
 .pa-pages{position:absolute; inset:2% -3% -2.5% 3%; z-index:-1; border-radius:2px 6px 6px 2px; background:repeating-linear-gradient(90deg, #efe6cf 0 2px, #d8ccae 2px 3px); box-shadow:inset -2px 0 3px rgba(0,0,0,.25)}
-.pa-cover{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:14% 10% 0; border-radius:3px 7px 7px 3px;
-  background:radial-gradient(ellipse at 30% 25%, rgba(255,255,255,.08), transparent 60%), repeating-linear-gradient(35deg, rgba(0,0,0,.06) 0 2px, transparent 2px 4px), var(--pa, #6b1d1b);
-  box-shadow:inset 9px 0 0 rgba(0,0,0,.28), inset 11px 0 0 rgba(255,255,255,.06), inset 0 0 18px rgba(0,0,0,.45)}
-.pa-r .pa-cover{--pa:#24402f}
-.pa-cover b{font:700 clamp(9px, .8vw, 12px)/1 var(--mono); letter-spacing:.22em; color:#d9b866; text-shadow:0 1px 0 rgba(0,0,0,.5)}
-.pa-frame{position:absolute; inset:8% 9% 8% 15%; border:1.5px solid rgba(217,184,102,.55); border-radius:2px; box-shadow:inset 0 0 0 3px rgba(0,0,0,.12), inset 0 0 0 4.5px rgba(217,184,102,.25)}
-.pa-tag{position:relative; margin-top:auto; margin-bottom:22%; padding:6% 9% 7%; width:76%; background:#f1e8d2; box-shadow:0 1px 3px rgba(0,0,0,.4); transform:rotate(-2deg); text-align:center;
-  font:700 clamp(15px, 1.35vw, 21px)/1 'Caveat',var(--hand); color:#1f2f6b}
-.pa-tag em{display:block; margin-top:3px; font:400 clamp(12px, 1vw, 16px)/1.05 'Caveat',var(--hand); font-style:normal; color:#3b4f8f}
-@media (max-width:1400px){
-  .desk:has(.pa){margin-bottom:calc(clamp(96px, 13vw, 130px) * 4 / 3 + 110px)}
-  .pa{width:clamp(96px, 13vw, 130px); top:auto; bottom:calc(-1 * clamp(96px, 13vw, 130px) * 4 / 3 - 72px)}
-  .pa-l{left:4%; right:auto; transform:rotate(-5deg)}
-  .pa-r{left:calc(4% + clamp(96px, 13vw, 130px) + 34px); right:auto; transform:rotate(4deg)}
+.pa-cover{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:13% 10% 0 15%; border-radius:3px 7px 7px 3px;
+  background:radial-gradient(ellipse at 30% 25%, rgba(255,255,255,.09), transparent 60%), repeating-linear-gradient(35deg, rgba(0,0,0,.07) 0 2px, transparent 2px 4px), var(--pa, #6b1d1b);
+  box-shadow:inset 10px 0 0 rgba(0,0,0,.28), inset 12px 0 0 rgba(255,255,255,.06), inset 0 0 22px rgba(0,0,0,.5)}
+/* mum's album is velvet, Marina's is a shop-bought one from the 90s with a window for a print */
+.a-l .pa-cover{background:radial-gradient(ellipse 80% 60% at 35% 30%, rgba(255,180,170,.16), transparent 65%), radial-gradient(ellipse at 70% 90%, rgba(0,0,0,.3), transparent 60%), var(--pa)}
+.a-vl .pa-cover{background:linear-gradient(rgba(255,255,255,.05), rgba(0,0,0,.12)), repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 1px, transparent 1px 3px), var(--pa)}
+.pa-cover b{font:700 clamp(9px, .85vw, 13px)/1 var(--mono); letter-spacing:.22em; color:#d9b866; text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.pa-frame{position:absolute; inset:7% 8% 7% 14%; border:1.5px solid rgba(217,184,102,.55); border-radius:2px; box-shadow:inset 0 0 0 3px rgba(0,0,0,.12), inset 0 0 0 4.5px rgba(217,184,102,.25); pointer-events:none}
+.pa-win{position:relative; display:block; width:62%; margin-top:9%; padding:3%; background:#f4efe2; box-shadow:inset 0 0 0 1px rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.5); transform:rotate(-1.5deg)}
+.pa-win img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; filter:sepia(.42) saturate(.7) contrast(.94)}
+.pa-tag{position:relative; margin-top:auto; margin-bottom:20%; padding:6% 9% 7%; width:78%; background:#f1e8d2; box-shadow:0 1px 3px rgba(0,0,0,.4); transform:rotate(-2deg); text-align:center;
+  font:700 clamp(18px, 1.75vw, 27px)/1 'Caveat',var(--hand); color:#1f2f6b}
+.a-vl .pa-tag{margin-bottom:12%; transform:rotate(1.5deg)}
+.pa-tag em{display:block; margin-top:3px; font:400 clamp(13px, 1.1vw, 17px)/1.05 'Caveat',var(--hand); font-style:normal; color:#3b4f8f}
+@media (max-width:640px){
+  .desk.albums{height:clamp(420px, 62vh, 540px)}
+  .alb{width:31%} .alb.a-v{left:2%; top:10%} .alb.a-vl{left:34.5%; top:34%} .alb.a-l{left:66%; top:8%}
+  .pa-cover b{font-size:7px; letter-spacing:.14em}
+  .pa-tag{width:92%; padding:5% 4% 6%; font-size:16px} .pa-tag em{font-size:12px}
+  .a-vl .pa-tag{font-size:14px; margin-bottom:9%} .pa-win{width:70%; margin-top:6%}
 }
 
+/* ---------- an open album ---------- */
+.abv{position:fixed; inset:0; z-index:950; display:grid; place-items:center; background:rgba(12,8,5,.86); animation:veilIn .3s ease; touch-action:pan-y}
+.abv[hidden]{display:none}
+.abv-wrap{position:relative; display:flex; flex-direction:column; align-items:center; gap:14px}
+.abv-book{--pw:min(calc(46vw - 64px), calc((100vh - 150px) * .75), 520px); position:relative; padding:14px; border-radius:6px; background:var(--cov, #333);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 30px rgba(0,0,0,.5), 0 30px 70px rgba(0,0,0,.65); animation:abIn .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes abIn{from{transform:translateY(30px) scale(.94); opacity:0}}
+.abv.single .abv-book{--pw:min(calc(100vw - 48px), calc((100vh - 170px) * .75))}
+.abv-sp{position:relative; display:flex; perspective:2600px}
+.abv-pg{position:relative; width:var(--pw); aspect-ratio:3/4; overflow:hidden; container-type:size; background:var(--pg); -webkit-backface-visibility:hidden; backface-visibility:hidden}
+.abv-pg.r{box-shadow:inset 18px 0 22px -14px rgba(0,0,0,.55)} .abv-pg.l{box-shadow:inset -18px 0 22px -14px rgba(0,0,0,.55)}
+.abv.single .abv-pg{box-shadow:inset 14px 0 18px -12px rgba(0,0,0,.5)}
+.abv-leaf{position:absolute; top:0; height:100%; width:50%; transform-style:preserve-3d; z-index:5; transition:transform .75s cubic-bezier(.45,.05,.3,1)}
+.abv.single .abv-leaf{width:100%}
+.abv-leaf .abv-pg{position:absolute; inset:0}
+.abv-leaf .back{transform:rotateY(180deg)}
+.abv-leaf::after{content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, rgba(0,0,0,.28), transparent 60%); opacity:0; transition:opacity .75s; z-index:3}
+.abv-leaf.go::after{opacity:1}
+/* page skins */
+.ab-black{--pg:radial-gradient(ellipse at 40% 30%, #2a2825, #1a1917 75%); --ink:#ebe5d6; --cn:#0b0a09; --pr:#f6f2e7}
+.ab-cream{--pg:radial-gradient(ellipse at 30% 25%, #f5eedb, #e6dbbf 80%); --ink:#25398a; --cn:#4a2c1a; --pr:#fbf8f0}
+.ab-magnet{--pg:repeating-linear-gradient(0deg, rgba(120,100,70,.07) 0 1px, transparent 1px 5px), linear-gradient(115deg, rgba(255,255,255,.22), transparent 26%, transparent 70%, rgba(255,255,255,.1)), #ddd5c3; --ink:#1d1d1d; --pr:#fdfcf8}
+.abv-pg::before{content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .35  0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ab-body{position:absolute; inset:5cqw 6cqw; display:flex; flex-direction:column; align-items:center; justify-content:space-evenly}
+.ab-body.k-pp{flex-direction:row; align-items:stretch; justify-content:space-between}
+.k-pp .ab-it:first-child{align-self:flex-start; margin-top:4cqw} .k-pp .ab-it:last-child{align-self:flex-end; margin-bottom:4cqw}
+.ab-it{position:relative; display:flex; flex-direction:column; align-items:center; width:var(--iw); padding:0; border:0; background:none; color:inherit; cursor:var(--cur-hover); transform:translateX(var(--ox, 0)) rotate(var(--rr, 0deg)); transition:transform .25s}
+.ab-it:hover{transform:translateX(var(--ox, 0)) rotate(var(--rr, 0deg)) translateY(-1.2cqw)}
+.ab-it:focus-visible{outline:none} .ab-it:focus-visible .ab-pr{outline:3px solid #e3c98f; outline-offset:3px}
+.ab-it.away .ab-pr{visibility:hidden}
+.ab-pr{position:relative; display:block; width:100%; padding:3.2%; background:var(--pr); box-shadow:0 1px 2px rgba(0,0,0,.45), 0 3px 8px rgba(0,0,0,.18); border-radius:2px}
+.ab-pr.old{background:#f1e7cf}
+.ab-pr img{display:block; width:100%; aspect-ratio:var(--ar); object-fit:cover; filter:sepia(.14) saturate(.9) contrast(1.04) brightness(.98)}
+.ab-pr.old img{filter:sepia(.42) saturate(.7) contrast(.94) brightness(1.04)}
+.ab-pr::after{content:""; position:absolute; inset:3.2%; pointer-events:none; background:radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(40,24,10,.3)), linear-gradient(125deg, rgba(255,255,255,.16), transparent 30%)}
+.ab-pr .ap-date{font-size:max(7px, 2.6cqw); right:7%; bottom:6%}
+/* photo corners on paper albums; the magnetic one holds prints under film instead */
+.ab-cn{position:absolute; inset:-1.5%; pointer-events:none; z-index:2;
+  background:linear-gradient(135deg, var(--cn) 0 9%, transparent 9.2%), linear-gradient(225deg, var(--cn) 0 9%, transparent 9.2%), linear-gradient(45deg, var(--cn) 0 9%, transparent 9.2%), linear-gradient(315deg, var(--cn) 0 9%, transparent 9.2%)}
+.ab-cream .ab-cn{filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.ab-black .ab-cn{filter:drop-shadow(0 0 1px rgba(255,255,255,.18))}
+.ab-magnet .ab-cn{display:none}
+.ab-cap{display:block; margin-top:2cqw; max-width:100%; font:400 clamp(12px, 4.6cqw, 26px)/1.02 'Caveat',var(--hand); color:var(--ink); text-align:center; transform:rotate(-1.5deg)}
+.ab-black .ab-cap{font-weight:500; letter-spacing:.01em; text-shadow:0 0 1px rgba(255,255,255,.2)}
+.ab-magnet .ab-cap{padding:.5cqw 2cqw .8cqw; background:#fffef8; box-shadow:0 1px 2px rgba(0,0,0,.3); font-weight:700; transform:rotate(2deg)}
+.ab-first{position:absolute; inset:0; display:grid; place-items:center; padding:12cqw; text-align:center; white-space:pre-line;
+  font:400 clamp(16px, 6.4cqw, 36px)/1.15 'Caveat',var(--hand); color:var(--ink); transform:rotate(-3deg)}
+.ab-black .ab-first{font-weight:500}
+.ab-first.blank{display:none}
+.abv-x{position:absolute; right:-6px; top:-48px; padding:6px 10px; border:0; background:none; font:24px/1 'Caveat',var(--hand); color:#e3c98f; cursor:var(--cur-hover)}
+.abv-x:hover{color:#fff3d6}
+.abv-nav{position:absolute; top:50%; width:46px; height:46px; margin-top:-23px; border-radius:50%; border:0; background:rgba(233,220,188,.92); color:#2a1c10; font:700 28px/1 var(--serif); cursor:var(--cur-hover); box-shadow:0 4px 12px rgba(0,0,0,.5); z-index:6}
+.abv-nav.p{left:-62px} .abv-nav.n{right:-62px}
+.abv-nav:disabled{opacity:0; pointer-events:none}
+.abv-nav:focus-visible,.abv-x:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
+.abv-n{margin:0; font:14px var(--mono); letter-spacing:.12em; color:rgba(233,220,188,.75)}
+.abv.single .abv-nav{top:auto; bottom:-58px; margin:0} .abv.single .abv-nav.p{left:0} .abv.single .abv-nav.n{right:0}
+.abv.single .abv-n{margin-top:6px}
+/* a print taken out of the album */
+.abh{position:fixed; inset:0; z-index:1000}
+.abh[hidden]{display:none}
+.abh .ap-veil{position:absolute}
+.abh .ap{z-index:1001}
 
 /* a photo on the desk: .ap positions, .ap-lift rotates and lifts, .ap-card turns over */
 .ap{--w:clamp(112px, 14vw, 196px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:var(--cur-grab)}
@@ -1646,11 +1719,11 @@ body.splash-on{overflow:hidden}
 .ap .scene{pointer-events:none}
 .ap.h .scene{aspect-ratio:3/2}
 .ap.sq{--w:clamp(136px, 16vw, 224px)}
-.ap.v34 .scene{aspect-ratio:3/4} .ap.h43 .scene{aspect-ratio:4/3} .ap.sq .scene{aspect-ratio:1}
+.ap.v34 .scene{aspect-ratio:3/4} .ap.h43 .scene{aspect-ratio:4/3} .ap.sq .scene{aspect-ratio:1} .ap.v23 .scene{aspect-ratio:2/3} .ap.h32 .scene{aspect-ratio:3/2}
 /* prints from the lab on Nevsky: warm, a little faded, a soft vignette and fine grain, so painted frames sit with the old ones */
 .ap.color .scene::after{content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
   background:radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(40,24,10,.32)), linear-gradient(rgba(255,236,200,.06), rgba(255,236,200,.06))}
-.ap.v34.color .scene, .ap.h43.color .scene, .ap.sq.color .scene{filter:sepia(.14) saturate(.9) contrast(1.04) brightness(.98)}
+.ap.v34.color .scene, .ap.h43.color .scene, .ap.sq.color .scene, .ap.v23.color .scene, .ap.h32.color .scene{filter:sepia(.14) saturate(.9) contrast(1.04) brightness(.98)}
 .ap.old.color .scene{filter:sepia(.42) saturate(.7) contrast(.94) brightness(1.04)}
 .ap.old.color .scene::after{background:radial-gradient(ellipse 72% 68% at 50% 45%, transparent 50%, rgba(70,44,14,.38)), linear-gradient(rgba(255,226,170,.14), rgba(255,226,170,.14))}
 .ap.h .scene img{height:84%; bottom:3%}
@@ -2764,15 +2837,12 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <div class="arc-top">
       <div>
         <h2>Фотоархив</h2>
-        <p class="lede prose" style="color:var(--cream)">Снимки из дел и чужих альбомов, вперемешку на одном столе. Двигайте их, берите в руки и читайте, что написано на обороте.</p>
+        <p class="lede prose" style="color:var(--cream)">На столе три альбома: Витин, мамин Лёшин и общий, который собрала им Марина. Листайте, доставайте снимки и переворачивайте: на обороте всегда что-нибудь написано.</p>
       </div>
-      <button class="arc-shuffle" type="button">Разбросать заново</button>
     </div>
-    <div class="desk" data-desk>
-        <div class="pa pa-l" aria-hidden="true"><span class="pa-cover"><b>ФОТОАЛЬБОМ</b><i class="pa-frame"></i><span class="pa-tag">1980 — 1981<em>армия, дембель</em></span></span><span class="pa-pages"></span></div>
-        <div class="pa pa-r" aria-hidden="true"><span class="pa-cover"><b>ФОТОАЛЬБОМ</b><i class="pa-frame"></i><span class="pa-tag">1994 — 1996<em>Петербург, свои</em></span></span><span class="pa-pages"></span></div>
+    <div class="desk albums" data-desk>
       <div class="desk-props" aria-hidden="true">
-        <div class="dp-cal"><b>1996</b><span>ФЕВРАЛЬ</span><em></em></div>
+        <div class="dp-cal"><b>1996</b><span>ОКТЯБРЬ</span><em></em></div>
         <svg class="dp-ash" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="rgba(190,215,220,.22)" stroke="rgba(230,245,250,.45)" stroke-width="3"/><circle cx="60" cy="60" r="38" fill="rgba(40,40,40,.35)" stroke="rgba(230,245,250,.25)" stroke-width="2"/><g transform="rotate(-25 60 60)"><rect x="52" y="48" width="44" height="7" rx="2" fill="#efe9dc"/><rect x="52" y="48" width="12" height="7" rx="1" fill="#c98a3c"/><rect x="92" y="48" width="5" height="7" fill="#555"/></g><g transform="rotate(40 60 60)"><rect x="40" y="62" width="22" height="7" rx="2" fill="#efe9dc"/><rect x="40" y="62" width="10" height="7" fill="#c98a3c"/></g><circle cx="66" cy="70" r="6" fill="rgba(120,120,120,.6)"/></svg>
         <svg class="dp-lens" viewBox="0 0 200 90"><rect x="96" y="38" width="96" height="14" rx="7" fill="#2a1a10"/><rect x="96" y="40" width="96" height="4" rx="2" fill="#5a3a22"/><circle cx="48" cy="45" r="40" fill="rgba(200,225,230,.18)" stroke="#9a8a6a" stroke-width="7"/><path d="M26 30a28 28 0 0 1 22-12" stroke="rgba(255,255,255,.55)" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
         <svg class="dp-pencil" viewBox="0 0 240 20"><path d="M0 10l26-8v16z" fill="#e2c39a"/><path d="M0 10l8-2.5v5z" fill="#333"/><rect x="26" y="2" width="190" height="16" fill="#b23a2b"/><rect x="26" y="7" width="190" height="2" fill="rgba(255,255,255,.18)"/><rect x="216" y="2" width="22" height="16" rx="2" fill="#c9b27a"/></svg>
@@ -2781,9 +2851,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <svg class="dp-mug" viewBox="0 0 120 120"><circle cx="58" cy="60" r="44" fill="#e9e4d8"/><circle cx="58" cy="60" r="36" fill="#5a2f14"/><circle cx="58" cy="60" r="36" fill="url(#mugTea)"/><path d="M100 50a16 16 0 0 1 0 22" stroke="#e9e4d8" stroke-width="9" fill="none" stroke-linecap="round"/><defs><radialGradient id="mugTea" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#a9662a"/><stop offset="1" stop-color="#4a2410"/></radialGradient></defs><ellipse cx="46" cy="48" rx="10" ry="5" fill="rgba(255,255,255,.25)" transform="rotate(-30 46 48)"/></svg>
         <i class="dp-glow"></i>
       </div>
-      <p class="desk-hint">Тяните снимки. Нажмите, чтобы взять в руки.</p>
-      <div class="ap-veil" hidden></div>
-      <p class="ap-help" hidden>Нажмите на снимок, чтобы перевернуть. Мимо, чтобы положить.</p>
+      <p class="desk-hint">Нажмите на альбом, чтобы открыть.</p>
     </div>
   </div>
 </main>
@@ -3584,144 +3652,221 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   })();
 
 
-  /* ---------- photo archive: a desk of loose photos ---------- */
+  /* ---------- photo archive: three albums on the desk ---------- */
   (() => {
-    const desk = document.querySelector('[data-desk]'); if (!desk || !window.ARCHIVE) return;
-    const veil = desk.querySelector('.ap-veil'), help = desk.querySelector('.ap-help');
+    const desk = document.querySelector('[data-desk]'); if (!desk || !window.ALBUMS || !window.PHOTOS) return;
     const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    let z = 10, rnd = 1996;
-    const rand = () => { rnd = (rnd * 16807) % 2147483647; return rnd / 2147483647; };
-    const photos = ARCHIVE.map(([src, bg, shape, back, date], k) => {
-      const el = document.createElement('div');
-      const lab = !!bg, num = /lesha|pirat/.test(src) ? '002' : '001';
-      const deco = ['', 'd-tape', '', 'd-corners', 'd-clip', '', 'd-tape2', ''][k % 8];
-      const [form, tone] = String(shape).split(' ');
-      el.className = `ap ${/^h/.test(form) ? 'h' : form === 'sq' ? 'sq' : 'v'}${/\d/.test(form) ? ' ' + form : ''}${tone ? ' ' + tone : ''} ${lab ? 'lab' : 'color'}${deco ? ' ' + deco : ''}`;
-      el.tabIndex = 0; el.setAttribute('role', 'button');
-      el.setAttribute('aria-label', `Снимок ${k + 1}. Нажмите, чтобы взять в руки`);
-      el.innerHTML = `<div class="ap-lift"><div class="ap-card">
-        <div class="ap-face ap-front"><i class="ap-deco" aria-hidden="true"></i><span class="scene ${lab ? 'bg-' + bg : 'full'}">${lab ? sceneExtra(bg, num) : ''}<img src="${src}" alt="" loading="lazy" draggable="false"></span>${date ? `<span class="ap-date">${date}</span>` : ''}</div>
-        <div class="ap-face ap-back" data-print="${lab ? 'фотобумага «Унибром»  ГОСТ 10752-79' : 'фото за 1 час  Невский, 54'}">${lab ? `<span class="ft-lab">Фотолаборатория ГУВД СПб<br>№&nbsp;${num}-${k + 1}</span>` : ''}<span class="ft-hw">${back}</span></div>
-      </div></div>`;
-      desk.appendChild(el);
-      return {el, lift: el.firstElementChild, card: el.querySelector('.ap-card'), x: 50, y: 50, r: 0};
-    });
-    const place = p => { p.el.style.left = p.x + '%'; p.el.style.top = p.y + '%'; p.lift.style.setProperty('--r', p.r + 'deg'); };
-    // a loose grid with jitter, in random order, so every photo shows at least a corner
-    const scatter = () => {
-      const w = innerWidth;
-      const cols = w < 640 ? 3 : w < 1000 ? 4 : 5, rows = Math.ceil(photos.length / cols);
-      const order = photos.map((_, i) => i).sort(() => rand() - .5);
-      order.forEach((pi, n) => {
-        const p = photos[pi], c = n % cols, r = Math.floor(n / cols);
-        p.x = Math.min(88, Math.max(12, 8 + (c + .5) / cols * 84 + (rand() - .5) * (60 / cols)));
-        p.y = Math.min(84, Math.max(16, 12 + (r + .5) / rows * 76 + (rand() - .5) * (40 / rows)));
-        p.r = Math.round((rand() - .5) * 26);
-        p.el.style.zIndex = ++z; place(p);
-      });
-    };
-    scatter();
-    desk.closest('.archive').querySelector('.arc-shuffle').addEventListener('click', () => { if (!open) scatter(); });
+    const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const AR = {v34: '3/4', v23: '2/3', h43: '4/3', h32: '3/2', sq: '1/1'};
+    const form = k => String(PHOTOS[k][1]).split(' ')[0];
+    const portrait = k => /^v|sq/.test(form(k));
 
-    /* dragging on the desk; a tap without movement picks the photo up */
-    let drag = null, open = null;
-    photos.forEach(p => {
-      p.el.addEventListener('pointerdown', e => {
-        if (e.button > 0) return;
-        if (open){ if (open === p) spinStart(e, p); return; }
-        e.preventDefault(); p.el.setPointerCapture(e.pointerId);
-        const dr = desk.getBoundingClientRect();
-        drag = {p, id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: p.x, oy: p.y, w: dr.width, h: dr.height, moved: false, lx: e.clientX, lt: performance.now(), t: 0};
-        p.el.style.zIndex = ++z;
-      });
-      p.el.addEventListener('pointermove', e => {
-        if (open === p && spin) return spinMove(e);
-        if (!drag || drag.p !== p || e.pointerId !== drag.id) return;
-        const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
-        if (!drag.moved && Math.hypot(dx, dy) < 6) return;
-        if (!drag.moved){ drag.moved = true; p.el.classList.add('drag'); }
-        const pw = p.lift.offsetWidth / drag.w * 50, ph = p.lift.offsetHeight / drag.h * 50;
-        p.x = Math.min(100 - pw * .6, Math.max(pw * .6, drag.ox + dx / drag.w * 100));
-        p.y = Math.min(100 - ph * .5, Math.max(ph * .5, drag.oy + dy / drag.h * 100));
-        // the photo swings a little in the direction it is pulled
-        const now = performance.now(), v = (e.clientX - drag.lx) / Math.max(8, now - drag.lt);
-        drag.t = drag.t * .6 + Math.max(-14, Math.min(14, v * 9)) * .4; drag.lx = e.clientX; drag.lt = now;
-        p.lift.style.setProperty('--t', drag.t.toFixed(1) + 'deg');
-        place(p);
+    /* the closed albums */
+    const hint = desk.querySelector('.desk-hint');
+    ALBUMS.forEach(al => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'alb a-' + al.id; b.style.setProperty('--pa', al.cover);
+      b.setAttribute('aria-label', `Открыть альбом «${al.tag}»`);
+      const win = al.window && PHOTOS[al.window] ? `<span class="pa-win"><img src="${PHOTOS[al.window][0]}" alt="" loading="lazy" draggable="false"></span>` : '';
+      b.innerHTML = `<span class="pa-cover"><b>ФОТОАЛЬБОМ</b><i class="pa-frame"></i>${win}<span class="pa-tag">${esc(al.tag)}<em>${esc(al.sub || '')}</em></span></span><span class="pa-pages"></span>`;
+      b.addEventListener('click', () => openAlbum(al, b));
+      desk.insertBefore(b, hint);
+    });
+
+    /* pages: the inscription first, then two prints a page (two uprights side by side, otherwise one under the other) */
+    const paginate = al => {
+      const pages = [{first: al.first || ''}], list = al.photos.filter(([k]) => PHOTOS[k]);
+      for (let i = 0; i < list.length;){
+        const a = list[i], b = list[i + 1];
+        if (!b){ pages.push({k: portrait(a[0]) ? 'p' : 'l', items: [a]}); i++; continue; }
+        const pa = portrait(a[0]), pb = portrait(b[0]);
+        pages.push({k: pa && pb ? 'pp' : !pa && !pb ? 'll' : 'pl', items: [a, b]}); i += 2;
+      }
+      return pages;
+    };
+    const width = (k, kind) => {
+      const f = form(k), tall = f === 'v23';
+      if (kind === 'pp') return tall ? 42 : 44;
+      if (kind === 'll') return 64;
+      if (kind === 'pl') return f === 'sq' ? 40 : /^v/.test(f) ? (tall ? 35 : 39) : 58;
+      if (kind === 'p') return tall ? 60 : 66;
+      return 82;
+    };
+    let cur = null;   // {al, pages, i (first page shown), single}
+    const pageHTML = (n, side) => {
+      const pg = cur.pages[n], cls = `abv-pg ${side || ''}`;
+      if (!pg) return `<div class="${cls}"><span class="ab-first blank"></span></div>`;
+      if (pg.items == null) return `<div class="${cls}"><span class="ab-first">${esc(pg.first)}</span></div>`;
+      const its = pg.items.map(([k, cap], j) => {
+        const [src, shape, , date] = PHOTOS[k], [f, tone] = String(shape).split(' ');
+        const seed = (n * 7 + j * 13) % 5, ox = pg.k === 'pp' ? 0 : [-7, 6, -3, 8, -5][seed] * (j ? -1 : 1);
+        const rr = [-2.2, 1.6, -1, 2.4, .8][seed];
+        return `<button type="button" class="ab-it" data-k="${k}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
+          <span class="ab-pr${tone ? ' ' + tone : ''}"><img src="${src}" alt="" style="--ar:${AR[f] || '3/4'}" draggable="false">${date ? `<span class="ap-date">${date}</span>` : ''}<i class="ab-cn"></i></span>
+          ${cap ? `<span class="ab-cap">${esc(cap)}</span>` : ''}</button>`;
+      }).join('');
+      return `<div class="${cls}"><div class="ab-body k-${pg.k}">${its}</div></div>`;
+    };
+
+    /* the open album */
+    const view = document.createElement('div');
+    view.className = 'abv'; view.hidden = true; view.setAttribute('role', 'dialog'); view.setAttribute('aria-modal', 'true');
+    view.innerHTML = `<div class="abv-wrap"><div class="abv-book"><button class="abv-x" type="button">закрыть альбом ✕</button>
+      <button class="abv-nav p" type="button" aria-label="Назад">‹</button><div class="abv-sp"></div><button class="abv-nav n" type="button" aria-label="Дальше">›</button></div>
+      <p class="abv-n"></p></div>`;
+    document.body.appendChild(view);
+    const book = view.querySelector('.abv-book'), sp = view.querySelector('.abv-sp'), cnt = view.querySelector('.abv-n');
+    const prevB = view.querySelector('.abv-nav.p'), nextB = view.querySelector('.abv-nav.n');
+    let opener = null, busy = false, seen = {};
+    const isSingle = () => innerWidth < 760;
+    const step = () => cur.single ? 1 : 2;
+    const last = () => cur.single ? cur.pages.length - 1 : Math.floor((cur.pages.length - 1) / 2) * 2;
+    const paint = () => {
+      const i = cur.i;
+      sp.innerHTML = cur.single ? pageHTML(i) : pageHTML(i, 'l') + pageHTML(i + 1, 'r');
+      prevB.disabled = i <= 0; nextB.disabled = i >= last();
+      const tot = cur.pages.length;
+      cnt.textContent = cur.single ? `${i + 1} / ${tot}` : `${i + 1}${i + 1 < tot ? '–' + (i + 2) : ''} / ${tot}`;
+      // preload the next spread
+      [i + step(), i + step() + 1].forEach(n => (cur.pages[n] && cur.pages[n].items || []).forEach(([k]) => { const im = new Image(); im.src = PHOTOS[k][0]; }));
+      if (i >= last()){ seen[cur.al.id] = 1; if (ALBUMS.every(a => seen[a.id]) && window.lihieOnce) window.lihieOnce('albums'); }
+    };
+    const openAlbum = (al, btn) => {
+      opener = btn; cur = {al, pages: paginate(al), i: 0, single: isSingle()};
+      view.className = `abv ab-${al.skin}${cur.single ? ' single' : ''}`; book.style.setProperty('--cov', al.cover);
+      view.setAttribute('aria-label', `Альбом «${al.tag}»`);
+      paint(); view.hidden = false; document.documentElement.style.overflow = 'hidden';
+      book.style.animation = 'none'; book.offsetWidth; book.style.animation = '';
+      view.querySelector('.abv-x').focus({preventScroll: true});
+    };
+    const closeAlbum = () => {
+      if (view.hidden) return; dropHand(true);
+      view.hidden = true; document.documentElement.style.overflow = ''; busy = false;
+      if (opener) opener.focus({preventScroll: true});
+    };
+    /* turning a leaf: the page lifts at the spine and falls onto the other side */
+    const flip = dir => {
+      if (busy || !cur) return;
+      const to = cur.i + dir * step();
+      if (to < 0 || to > last()) return;
+      busy = true;
+      const leaf = document.createElement('div'); leaf.className = 'abv-leaf';
+      const from = cur.i;
+      if (cur.single){
+        if (dir > 0){
+          sp.innerHTML = pageHTML(to);
+          leaf.innerHTML = pageHTML(from).replace('abv-pg', 'abv-pg front') + `<div class="abv-pg back"></div>`;
+          leaf.style.cssText = 'left:0; transform-origin:0 50%; transform:rotateY(0deg)';
+        } else {
+          leaf.innerHTML = pageHTML(to).replace('abv-pg', 'abv-pg front') + `<div class="abv-pg back"></div>`;
+          leaf.style.cssText = 'left:0; transform-origin:0 50%; transform:rotateY(-180deg)';
+        }
+      } else if (dir > 0){
+        sp.innerHTML = pageHTML(from, 'l') + pageHTML(to + 1, 'r');
+        leaf.innerHTML = pageHTML(from + 1, 'r front') + pageHTML(to, 'l back');
+        leaf.style.cssText = 'left:50%; transform-origin:0 50%; transform:rotateY(0deg)';
+      } else {
+        sp.innerHTML = pageHTML(to, 'l') + pageHTML(from + 1, 'r');
+        leaf.innerHTML = pageHTML(from, 'l front') + pageHTML(to + 1, 'r back');
+        leaf.style.cssText = 'left:0; transform-origin:100% 50%; transform:rotateY(0deg)';
+      }
+      sp.appendChild(leaf); leaf.offsetWidth; leaf.classList.add('go');
+      leaf.style.transform = cur.single ? (dir > 0 ? 'rotateY(-180deg)' : 'rotateY(0deg)') : (dir > 0 ? 'rotateY(-180deg)' : 'rotateY(180deg)');
+      let done = false;
+      const fin = () => { if (done) return; done = true; cur.i = to; paint(); busy = false; };
+      leaf.addEventListener('transitionend', e => { if (e.target === leaf && e.propertyName === 'transform') fin(); });
+      setTimeout(fin, 900);
+    };
+    prevB.addEventListener('click', () => flip(-1));
+    nextB.addEventListener('click', () => flip(1));
+    view.querySelector('.abv-x').addEventListener('click', closeAlbum);
+    view.addEventListener('click', e => { if (e.target === view || e.target.classList.contains('abv-wrap')) closeAlbum(); });
+    // swipe to turn
+    let sw = null;
+    sp.addEventListener('pointerdown', e => { sw = {x: e.clientX, y: e.clientY, t: performance.now()}; });
+    sp.addEventListener('pointerup', e => {
+      if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y; const quick = performance.now() - sw.t < 700; sw = null;
+      if (quick && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4){ sp.dataset.swiped = '1'; flip(dx < 0 ? 1 : -1); setTimeout(() => delete sp.dataset.swiped, 50); }
+    });
+    addEventListener('resize', () => { if (!cur || view.hidden) return; const s1 = isSingle(); if (s1 !== cur.single){ cur.single = s1; if (!s1) cur.i -= cur.i % 2; view.classList.toggle('single', s1); paint(); } });
+
+    /* a print taken out: centred and large; tap turns it over, drag sideways spins it */
+    const hand = document.createElement('div');
+    hand.className = 'abh'; hand.hidden = true;
+    hand.innerHTML = `<div class="ap-veil"></div><p class="ap-help">Нажмите на снимок, чтобы перевернуть. Мимо, чтобы вложить обратно.</p>`;
+    document.body.appendChild(hand);
+    let held = null, spin = null;
+    const takeOut = it => {
+      const k = it.dataset.k, [src, shape, back, date] = PHOTOS[k], [f, tone] = String(shape).split(' ');
+      const el = document.createElement('div');
+      el.className = `ap ${/^h/.test(f) ? 'h' : f === 'sq' ? 'sq' : 'v'} ${f}${tone ? ' ' + tone : ''} color exam`;
+      el.tabIndex = 0; el.setAttribute('role', 'button'); el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape вкладывает обратно');
+      el.innerHTML = `<div class="ap-lift"><div class="ap-card">
+        <div class="ap-face ap-front"><i class="ap-deco" aria-hidden="true"></i><span class="scene full"><img src="${src}" alt="" draggable="false"></span>${date ? `<span class="ap-date">${date}</span>` : ''}</div>
+        <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"><span class="ft-hw">${esc(back)}</span></div>
+      </div></div>`;
+      hand.appendChild(el); hand.hidden = false;
+      const lift = el.firstElementChild, card = el.querySelector('.ap-card');
+      const pr = it.querySelector('.ab-pr').getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
+      // the print's own proportions decide how big it can be in hand
+      lift.style.transition = 'none'; lift.style.setProperty('--ew', pr.width + 'px');
+      lift.style.setProperty('--dx', (pr.left + pr.width / 2 - vw / 2) + 'px'); lift.style.setProperty('--dy', (pr.top + pr.height / 2 - vh / 2) + 'px');
+      const ratio = lift.offsetHeight / lift.offsetWidth;
+      const w = Math.min(vw * (vw < 640 ? .86 : .6), vh * (vw < 640 ? .66 : .74) / ratio);
+      lift.offsetWidth; lift.style.transition = '';
+      requestAnimationFrame(() => { lift.style.setProperty('--ew', Math.round(w) + 'px'); lift.style.setProperty('--dx', '0px'); lift.style.setProperty('--dy', (vw < 640 ? -30 : -14) + 'px'); });
+      it.classList.add('away'); held = {el, lift, card, it};
+      el.focus({preventScroll: true});
+      el.addEventListener('pointerdown', e => { if (e.button > 0) return; e.preventDefault(); el.setPointerCapture(e.pointerId); spin = {sx: e.clientX, base: el.classList.contains('flip') ? 180 : 0, moved: false}; });
+      el.addEventListener('pointermove', e => {
+        if (!spin) return; const dx = e.clientX - spin.sx; if (!spin.moved && Math.abs(dx) < 6) return;
+        spin.moved = true; el.classList.add('spin'); el.classList.remove('tilt');
+        card.style.setProperty('--tx', '0deg'); card.style.setProperty('--ty', '0deg'); card.style.setProperty('--ry', (spin.base + dx * .6) + 'deg');
       });
       const end = e => {
-        if (open === p && spin) return spinEnd(e);
-        if (!drag || drag.p !== p) return;
-        const moved = drag.moved; drag = null;
-        p.el.classList.remove('drag'); p.lift.style.setProperty('--t', '0deg');
-        if (moved){ p.r = Math.max(-16, Math.min(16, p.r + Math.round((Math.random() - .5) * 8))); place(p); }
-        else if (e.type === 'pointerup') pick(p);
+        if (!spin) return; const s = spin; spin = null; el.classList.remove('spin');
+        if (!s.moved){ if (e.type === 'pointerup') turn(); return; }
+        const a = s.base + (e.clientX - s.sx) * .6, side = ((Math.round(a / 180) % 2) + 2) % 2;
+        card.style.setProperty('--ry', Math.round(a / 180) * 180 + 'deg');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.classList.toggle('flip', side === 1);
+          setTimeout(() => { if (!spin){ card.style.transition = 'none'; card.style.removeProperty('--ry'); card.offsetWidth; card.style.transition = ''; } }, 720);
+        }));
       };
-      p.el.addEventListener('pointerup', end);
-      p.el.addEventListener('pointercancel', end);
-      p.el.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open === p ? turn(p) : pick(p); }
-        else if (!open && e.key.startsWith('Arrow')){
-          e.preventDefault(); const st = 2;
-          if (e.key === 'ArrowLeft') p.x -= st; if (e.key === 'ArrowRight') p.x += st;
-          if (e.key === 'ArrowUp') p.y -= st; if (e.key === 'ArrowDown') p.y += st;
-          p.x = Math.min(95, Math.max(5, p.x)); p.y = Math.min(95, Math.max(5, p.y)); place(p);
-        }
-      });
+      el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); turn(); } });
+    };
+    const turn = () => { if (!held) return; held.el.classList.toggle('flip'); held.card.style.removeProperty('--ry'); };
+    const dropHand = now => {
+      if (!held) return; const h = held; held = null; spin = null;
+      const finish = () => { h.el.remove(); h.it.classList.remove('away'); if (!held) hand.hidden = true; };
+      if (now || !h.it.isConnected){ finish(); return; }
+      const pr = h.it.querySelector('.ab-pr').getBoundingClientRect();
+      h.el.classList.remove('flip', 'tilt'); h.card.style.setProperty('--tx', '0deg'); h.card.style.setProperty('--ty', '0deg');
+      h.lift.style.setProperty('--ew', pr.width + 'px');
+      h.lift.style.setProperty('--dx', (pr.left + pr.width / 2 - innerWidth / 2) + 'px'); h.lift.style.setProperty('--dy', (pr.top + pr.height / 2 - innerHeight / 2) + 'px');
+      hand.querySelector('.ap-veil').style.opacity = '0';
+      setTimeout(() => { finish(); hand.querySelector('.ap-veil').style.opacity = ''; h.it.focus({preventScroll: true}); }, 480);
+    };
+    hand.querySelector('.ap-veil').style.transition = 'opacity .4s';
+    hand.querySelector('.ap-veil').addEventListener('click', () => dropHand());
+    sp.addEventListener('click', e => {
+      const it = e.target.closest('.ab-it'); if (!it || busy || sp.dataset.swiped || held) return;
+      takeOut(it);
     });
-
-    /* in hand: centred and large; drag sideways to turn it, tap to flip it over */
-    let spin = null;
-    const turn = p => { p.el.classList.toggle('flip'); p.card.style.removeProperty('--ry'); };
-    const pick = p => {
-      open = p; p.el.style.zIndex = ++z;
-      const r = p.el.getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
-      const s = Math.min(vw * (vw < 640 ? .84 : .62) / p.lift.offsetWidth, vh * (vw < 640 ? .64 : .72) / p.lift.offsetHeight);
-      p.lift.style.setProperty('--dx', (vw / 2 - r.left) + 'px');
-      p.lift.style.setProperty('--dy', (vh / 2 - (vw < 640 ? 34 : 14) - r.top) + 'px');
-      p.lift.style.setProperty('--ew', Math.round(p.lift.offsetWidth * Math.max(1.2, s)) + 'px');
-      p.el.classList.add('exam'); veil.hidden = false; help.hidden = false;
-      p.el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape кладёт на стол');
-      document.documentElement.style.overflow = 'hidden';
-    };
-    const drop = () => {
-      const p = open; if (!p) return; open = null; spin = null;
-      p.el.classList.remove('exam', 'tilt'); p.card.style.setProperty('--tx', '0deg'); p.card.style.setProperty('--ty', '0deg');
-      veil.hidden = true; help.hidden = true; document.documentElement.style.overflow = '';
-      p.el.setAttribute('aria-label', 'Снимок. Нажмите, чтобы взять в руки');
-    };
-    const spinStart = (e, p) => {
-      e.preventDefault(); p.el.setPointerCapture(e.pointerId);
-      spin = {sx: e.clientX, base: p.el.classList.contains('flip') ? 180 : 0, moved: false};
-    };
-    const spinMove = e => {
-      const dx = e.clientX - spin.sx; if (!spin.moved && Math.abs(dx) < 6) return;
-      spin.moved = true; open.el.classList.add('spin'); open.el.classList.remove('tilt');
-      open.card.style.setProperty('--tx', '0deg'); open.card.style.setProperty('--ty', '0deg');
-      open.card.style.setProperty('--ry', (spin.base + dx * .6) + 'deg');
-    };
-    const spinEnd = e => {
-      const p = open, s = spin; spin = null; p.el.classList.remove('spin');
-      if (!s.moved){ if (e.type === 'pointerup') turn(p); return; }
-      const a = s.base + (e.clientX - s.sx) * .6, side = ((Math.round(a / 180) % 2) + 2) % 2;
-      p.card.style.setProperty('--ry', Math.round(a / 180) * 180 + 'deg');
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        p.el.classList.toggle('flip', side === 1);
-        setTimeout(() => { if (!spin){ p.card.style.transition = 'none'; p.card.style.removeProperty('--ry'); p.card.offsetWidth; p.card.style.transition = ''; } }, 720);
-      }));
-    };
-    // with a mouse the photo in hand leans toward the cursor
     if (fine) addEventListener('pointermove', e => {
-      if (!open || spin) return;
-      const r = open.el.querySelector('.ap-card').getBoundingClientRect();
+      if (!held || spin) return;
+      const r = held.card.getBoundingClientRect();
       const nx = (e.clientX - (r.left + r.width / 2)) / innerWidth, ny = (e.clientY - (r.top + r.height / 2)) / innerHeight;
-      open.el.classList.add('tilt');
-      open.card.style.setProperty('--ty', (nx * 22).toFixed(1) + 'deg');
-      open.card.style.setProperty('--tx', (-ny * 18).toFixed(1) + 'deg');
+      held.el.classList.add('tilt'); held.card.style.setProperty('--ty', (nx * 22).toFixed(1) + 'deg'); held.card.style.setProperty('--tx', (-ny * 18).toFixed(1) + 'deg');
     });
-    veil.addEventListener('click', drop);
-    addEventListener('keydown', e => { if (e.key === 'Escape' && open){ const p = open; drop(); p.el.focus(); } });
-    addEventListener('hashchange', drop);
+    addEventListener('keydown', e => {
+      if (view.hidden) return;
+      if (e.key === 'Escape'){ e.preventDefault(); held ? dropHand() : closeAlbum(); }
+      else if (!held && e.key === 'ArrowRight') flip(1);
+      else if (!held && e.key === 'ArrowLeft') flip(-1);
+    });
+    addEventListener('hashchange', closeAlbum);
   })();
 
 
@@ -4281,6 +4426,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     {key: 'light', t: 'Экономия электроэнергии', x: 'Свет погашен. Работает только телевизор, как и положено в девяносто шестом.', hint: 'Счёт за свет опять пришёл огромный.'},
     {key: 'servant', t: 'Нашла', x: 'Обе прятались в серванте. Хрусталь цел, пиво нет.', hint: 'В серванте кто-то шуршит.'},
     {key: 'delo', t: 'Дело закрыто (почти)', x: 'Все конверты вскрыты. Трофимов просит ничего не рассказывать прокурору.', hint: 'На Литейном лежит дело, которое никто не дочитал.'},
+    {key: 'albums', t: 'Мама, хватит', x: 'Все три альбома пролистаны до последней страницы. Лёша просит больше никому их не показывать.', hint: 'На столе в архиве лежат альбомы. Их редко досматривают до конца.'},
     {key: 'records', t: 'Дискотека на Стачек', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок много, а играет всё одна.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
