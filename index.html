@@ -297,6 +297,20 @@ a{color:inherit}
 .as-sum{margin:10px 0 4px 40px; font:700 15px/1.3 var(--mono); color:#a8261f}
 .as-foot{margin:6px 0 0 40px; font:11px/1.3 var(--mono); color:#8a7f6c}
 
+/* touch screens: cheaper versions of the heaviest effects (reflections, blurred shadows, filtered PNGs) */
+@media (hover:none), (pointer:coarse){
+  .servant .sv-png{-webkit-box-reflect:none}
+  .servant .sh1 .sv-png{filter:saturate(.5) sepia(.16) brightness(.9) contrast(1.1)}
+  .servant .sh2 .sv-png{filter:saturate(.8) sepia(.12) brightness(.86)}
+  .servant .photo.png img{filter:sepia(.22) saturate(.85) brightness(.88)}
+  .sv-girl{filter:brightness(.9) saturate(.95) sepia(.1)}
+  .floor-thing svg{filter:none}
+  .ksiva::before{filter:none; background:none; box-shadow:4px 10px 18px rgba(0,0,0,.45)}
+  .ids-stamp{filter:none}
+  .servant .glint{animation:none; display:none}
+  .room .stage{contain:layout paint}
+}
+
 /* lighting and depth */
 .light-shade{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:multiply;
   background:
@@ -3961,6 +3975,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const snow = document.getElementById('snow');
   const sctx = snow.getContext('2d');
   const flakes = Array.from({length: 45}, () => ({x: Math.random() * 160, y: Math.random() * 290, r: Math.random() * 1.6 + .5, s: Math.random() * .5 + .25, w: Math.random() * 6.28}));
+  // phones: while the page scrolls, the little canvases (snow, dust, TV hiss) skip frames so scrolling stays smooth
+  let scrollingT = 0, scrolling = false;
+  const coarse = matchMedia('(hover:none), (pointer:coarse)').matches;
+  if (coarse) addEventListener('scroll', () => { scrolling = true; clearTimeout(scrollingT); scrollingT = setTimeout(() => scrolling = false, 180); }, {passive:true});
   let snowing = false, roomInView = true;
   new IntersectionObserver(es => { roomInView = es[0].isIntersecting; if (roomInView){ startSnow(); if (typeof startAir === 'function') startAir(); } }).observe(document.querySelector('.room'));
   function drawSnow(){
@@ -3977,7 +3995,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (snowing) return; snowing = true;
     (function tick(){
       if (!homeVisible || !roomInView || document.hidden){ snowing = false; return; }
-      drawSnow(); requestAnimationFrame(tick);
+      if (!scrolling) drawSnow(); requestAnimationFrame(tick);
     })();
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) startSnow(); });
@@ -4019,7 +4037,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (airOn) return; airOn = true;
     (function tick(now){
       if (!homeVisible || !roomInView || document.hidden){ airOn = false; return; }
-      drawAir(now); requestAnimationFrame(tick);
+      if (!scrolling) drawAir(now); requestAnimationFrame(tick);
     })(performance.now());
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) startAir(); });
