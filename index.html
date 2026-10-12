@@ -1036,6 +1036,9 @@ p{margin:0 0 1em}
 .sheet-seal span{order:-1; font:700 18px/1 'Caveat',var(--hand); color:#a8261f; white-space:nowrap}
 .sheet-seal:hover{transform:rotate(-4deg) scale(1.06)}
 .npc-sheet:has(.sheet-seal){padding-bottom:110px}
+.leaf .pg-fit{transform-origin:0 0}
+.pg-no{position:absolute; left:0; right:0; bottom:9px; text-align:center; font:12px/1 var(--mono); color:var(--ink-soft); letter-spacing:.1em; pointer-events:none}
+.leaf .prose p.cont{text-indent:0}
 /* navigation under the folder */
 .book-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; color:#d9c9a4}
 .pg-btn{font:700 17px/1 var(--serif); color:var(--ink); background:var(--paper); border:0; border-radius:3px; padding:12px 18px; min-height:44px; cursor:var(--cur-hover);
@@ -2785,21 +2788,24 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     bricks: '<span class="poster"></span><i class="sh"></i>',
     'home-v': '<span class="frame"></span>', 'home-l': '<span class="frame"></span>'}[bg] || '');
   // pages of the case, in reading order; the folder shows two at a time (one on phones)
+  // the case is written as sections; it is laid out into pages that fit the folder (see paginate)
   const pagesFor = (b, i) => {
-    const P = [];
-    const head = (t) => `<p class="pg-head"><span>${b.unit}</span><span>Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}</span></p><h2 class="pg-title">${t}</h2>`;
-    P.push(`<div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
+    const S = [], num = `Дело №&nbsp;96/${String(i + 1).padStart(3, '0')}`;
+    const top = `<p class="pg-head"><span>${b.unit}</span><span>${num}</span></p>`;
+    const sec = (title, items, keep) => S.push({head: title ? `${top}<h2 class="pg-title">${title}</h2>` : '', cont: top, items, keep});
+    const it = (h, w) => ({h, w: w || ''});
+    sec('', [it(`<div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
       <div class="mug"><span class="clip"></span><img src="${b.cardPhoto || b.photo}" alt="${b.alt}" style="object-position:${b.cardPhoto ? '50% 25%' : b.pos}">${stampSvg(b)}</div>
-      <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>`);
-    const half = Math.ceil(b.prose.length / 2);
-    P.push(`<h1 class="pg-name">${b.name}</h1><p class="sub">${b.sub}</p>
-      <div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>
-      <div class="prose">${list(b.prose.slice(0, half), p => `<p>${p}</p>`)}</div>`);
-    P.push(`${head('Характеристика, продолжение')}<div class="prose">${list(b.prose.slice(half), p => `<p>${p}</p>`)}</div>`);
-    P.push(`${head('Как говорит')}<ul class="quotes">${list(b.quotes, q => `<li>${q}</li>`)}</ul>`);
-    if (b.watch && b.watch.length) P.push(`${head('Наружное наблюдение')}<div class="nn">${list(b.watch, ([src, cap], k) => `<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`)}</div>`);
-    P.push(`${head('Связи')}<ul class="links">${list(b.links, ([n, d]) => `<li><b>${n}</b>, ${d}</li>`)}</ul>`);
-    P.push(`${head('Скачать')}${(b.files.png || b.files.json || b.files.lore) ? `
+      <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>`)], true);
+    S[0].cont = '';
+    sec('', [it(`<h1 class="pg-name">${b.name}</h1><p class="sub">${b.sub}</p>`),
+      it(`<div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>`),
+      ...b.prose.map(p => it(`<p>${p}</p>`, 'prose'))]);
+    S[1].head = ''; S[1].cont = top;
+    sec('Как говорит', (b.quotes || []).map(q => it(`<li>${q}</li>`, 'quotes')));
+    if (b.watch && b.watch.length) sec('Наружное наблюдение', b.watch.map(([src, cap], k) => it(`<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`, 'nn')));
+    sec('Связи', (b.links || []).map(([n, d]) => it(`<li><b>${n}</b>, ${d}</li>`, 'links')));
+    sec('Скачать', [it((b.files.png || b.files.json || b.files.lore) ? `
       <div class="dl">
         ${b.files.png ? `<a class="btn" href="${b.files.png}" download="${b.files.name}.png">Карточка PNG <small>с портретом</small></a>` : ''}
         ${b.files.json ? `<a class="btn alt" href="${b.files.json}" download="${b.files.name}.json">Карточка JSON</a>` : ''}
@@ -2807,10 +2813,57 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       </div>
       <p class="meta">Лорбук на ${b.loreCount} записей уже встроен в карточку. Отдельный файл нужен, только если встроенный не подтянулся. ${b.credit || ''} <a href="#/start">Как подключить</a></p>` : `
       <p class="lede">Карточка пока не выложена. Скоро появится здесь.</p>
-      ${b.credit ? `<p class="meta">${b.credit}</p>` : ''}`}`);
-    if (P.length % 2) P.push(`<div class="pg-end">${stampSvg(b)}<p>Конец личного дела</p></div>`);
-    return P;
+      ${b.credit ? `<p class="meta">${b.credit}</p>` : ''}`)], true);
+    S.end = `<div class="pg-end">${stampSvg(b)}<p>Конец личного дела</p></div>`;
+    return S;
   };
+  const WRAP = {prose: ['<div class="prose">', '</div>'], quotes: ['<ul class="quotes">', '</ul>'], links: ['<ul class="links">', '</ul>'], nn: ['<div class="nn">', '</div>']};
+  const join = items => { let h = '', w = ''; items.forEach(x => { if (x.w !== w){ if (w) h += WRAP[w][1]; if (x.w) h += WRAP[x.w][0]; w = x.w; } h += x.h; }); if (w) h += WRAP[w][1]; return h; };
+  // lays the sections out into pages the size of the visible leaf: no scrolling inside a page
+  function layoutCase(sections, leaf){
+    const cs = getComputedStyle(leaf), m = document.createElement('div');
+    m.className = 'leaf'; m.setAttribute('aria-hidden', 'true');
+    m.style.cssText = `position:absolute; left:-9999px; top:0; width:${leaf.clientWidth}px; height:${leaf.clientHeight}px; overflow:hidden; visibility:hidden; padding:${cs.padding}`;
+    leaf.parentNode.appendChild(m);
+    const fits = h => { m.innerHTML = h; return m.scrollHeight <= m.clientHeight + 1; };
+    const out = [];
+    sections.forEach(sc => {
+      if (sc.keep){
+        const base = sc.head + join(sc.items);
+        // first a smaller photo, only then smaller type
+        let html = base;
+        for (const w of [46, 40, 34, 28, 24]){ html = base.replace('<div class="mug">', `<div class="mug" style="width:${w}%">`); if (fits(html)) break; }
+        let z = 1;
+        while (!fits(`<div class="pg-fit" style="zoom:${z}">${html}</div>`) && z > .7) z -= .03;
+        out.push(z < 1 ? `<div class="pg-fit" style="zoom:${z.toFixed(2)}">${html}</div>` : html); return;
+      }
+      let cur = [], first = true;
+      const flush = () => { if (cur.length){ out.push((first ? sc.head : sc.cont) + join(cur)); first = false; cur = []; } };
+      const lead = () => first ? sc.head : sc.cont;
+      sc.items.forEach(x => {
+        if (fits(lead() + join([...cur, x]))){ cur.push(x); return; }
+        // a paragraph too long for what is left: split it by sentences
+        const mt = x.w === 'prose' && x.h.match(/^<p>([\s\S]*)<\/p>$/);
+        if (mt){
+          let rest = mt[1].split(/(?<=[.!?…»])\s+(?=[А-ЯЁA-Z«—])/), cont = false;
+          while (rest.length){
+            const take = [];
+            while (rest.length && fits(lead() + join([...cur, para(take.concat(rest[0]), cont)]))) take.push(rest.shift());
+            if (!take.length){ if (cur.length){ flush(); continue; } take.push(rest.shift()); }
+            cur.push(para(take, cont)); cont = true;
+            if (rest.length) flush();
+          }
+          return;
+        }
+        flush(); cur.push(x);
+      });
+      flush();
+    });
+    m.remove();
+    if (out.length % 2) out.push(sections.end);
+    return out.map((h, k) => h + `<span class="pg-no">— ${k + 1} —</span>`);
+  }
+  const para = (parts, cont) => ({h: `<p${cont ? ' class="cont"' : ''}>${parts.join(' ')}</p>`, w: 'prose'});
   const PAGES = {};
   const plural = (n, one, few, many) => (n % 10 === 1 && n % 100 !== 11) ? one : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? few : many;
   const dossier = (b, i) => { PAGES[b.id] = pagesFor(b, i); return `
@@ -2992,7 +3045,16 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const book = page => page.querySelector('.book');
   const state = new WeakMap();      // page -> {k: index of the first visible page, busy}
   const st = page => { if (!state.has(page)) state.set(page, {k:0, busy:false}); return state.get(page); };
-  const pagesOf = page => PAGES[book(page).dataset.id];
+  const LAID = {};
+  const pagesOf = page => {
+    const id = book(page).dataset.id, leaf = book(page).querySelector('.slot.r .leaf');
+    const key = narrow() + ':' + leaf.clientWidth + 'x' + leaf.clientHeight;
+    if (!LAID[id] || LAID[id].key !== key){ LAID[id] = {key, P: leaf.clientHeight > 80 ? layoutCase(PAGES[id], leaf) : (LAID[id] ? LAID[id].P : [''])}; }
+    return LAID[id].P;
+  };
+  addEventListener('resize', () => { clearTimeout(window.__caseRT); window.__caseRT = setTimeout(() => {
+    document.querySelectorAll('main.page.on .book, main.page.active .book').forEach(bk => { const pg = bk.closest('main.page'); const S = st(pg), n = pagesOf(pg).length; S.k = Math.min(S.k, n - 1); paint(pg); });
+  }, 250); });
   const fill = (el, html) => { el.innerHTML = html == null ? '' : html; el.classList.toggle('blank', html == null); el.scrollTop = 0; };
   const leafHTML = html => `<div class="leaf${html == null ? ' blank' : ''}">${html == null ? '' : html}</div>`;
   const pageStep = () => narrow() ? 1 : 2;
