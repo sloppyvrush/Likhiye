@@ -4128,7 +4128,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       cancelAnimationFrame(rollRaf); rollRaf = requestAnimationFrame(loop);
       rs.focus({preventScroll: true});
       let text = '';
-      try { const g = (await card(st.bid))[st.g || 0] || ''; text = g; } catch (e) { text = st.p; }
+      try { text = st.full || (await card(st.bid))[st.g || 0] || ''; } catch (e) { text = st.p; }
       if (playingSt !== st) return;
       // the bold heading line of the card is replaced by the title card above
       text = text.replace(/^\s*\*\*[^\n]*\*\*\s*\n/, '').replace(/^\s*_{3,}\s*$/m, '');
