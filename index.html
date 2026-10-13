@@ -2623,7 +2623,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <main class="page" data-route="/bots">
   <div class="wrap section on-wall">
     <h2>Персонажи</h2>
-    <p class="lede prose" style="color:var(--cream)">Все жильцы города. Откройте дело, чтобы прочитать характеристику, выбрать старт и скачать карточку.</p>
+    <p class="lede prose" style="color:var(--cream)">Все жильцы города. Откройте дело, чтобы прочитать характеристику и выбрать старт.</p>
     <div class="folders" data-folders></div>
   </div>
 </main>
@@ -2928,7 +2928,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       <p class="prose">Обе карточки собраны одинаково: описание на английском, речь и прозвища на русском, лорбук встроен, старты на русском.</p>
 
       <ol class="steps">
-        <li><h3>Скачайте карточку</h3><p>PNG с портретом или JSON, внутри одно и то же. Кнопки скачивания появляются на странице персонажа, когда карточка выложена.</p></li>
+        <li><h3>Скачайте карточку</h3><p>PNG с портретом или JSON, внутри одно и то же.</p></li>
         <li><h3>Импортируйте в SillyTavern</h3><p>Список персонажей, кнопка импорта из файла, выберите скачанный файл.</p></li>
         <li><h3>Согласитесь на встроенный лорбук</h3><p>Таверна спросит, импортировать ли лорбук персонажа. Ответьте «да», и он сам привяжется к карточке.</p></li>
         <li><h3>Выберите старт</h3><p>Старты лежат свайпами на первом сообщении, листайте стрелкой вправо. Последний, «Ваш старт», пустой: начало пишете сами.</p></li>
@@ -3090,15 +3090,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     sec('Как говорит', (b.quotes || []).map(q => it(`<li>${q}</li>`, 'quotes')));
     if (b.watch && b.watch.length) sec('Наружное наблюдение', b.watch.map(([src, cap], k) => it(`<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`, 'nn')));
     sec('Связи', (b.links || []).map(([n, d]) => it(`<li><b>${n}</b>, ${d}</li>`, 'links')));
-    sec('Скачать', [it((b.files.png || b.files.json || b.files.lore) ? `
-      <div class="dl">
-        ${b.files.png ? `<a class="btn" href="${b.files.png}" download="${b.files.name}.png">Карточка PNG <small>с портретом</small></a>` : ''}
-        ${b.files.json ? `<a class="btn alt" href="${b.files.json}" download="${b.files.name}.json">Карточка JSON</a>` : ''}
-        ${b.files.lore ? `<a class="btn alt" href="${b.files.lore}" download="${b.files.name}_лорбук.json">Лорбук отдельно</a>` : ''}
-      </div>
-      <p class="meta">Лорбук на ${b.loreCount} записей уже встроен в карточку. Отдельный файл нужен, только если встроенный не подтянулся. ${b.credit || ''} <a href="#/start">Как подключить</a></p>` : `
-      <p class="lede">Карточка пока не выложена. Скоро появится здесь.</p>
-      ${b.credit ? `<p class="meta">${b.credit}</p>` : ''}`)], true);
+    if (b.credit) sec('', [it(`<p class="meta">${b.credit}</p>`)], true);
     S.end = `<div class="pg-end">${stampSvg(b)}<p>Конец личного дела</p></div>`;
     return S;
   };
@@ -4098,10 +4090,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     addEventListener('hashchange', close);
     window.openStarts = open;
 
-    /* «Смотреть подробнее»: the full start from the card in downloads/, rolling up like the end of an old film */
+    /* «Смотреть подробнее»: the full start text (st.full in bots.js), rolling up like the end of an old film */
     const roll = document.getElementById('vcRoll'), rs = roll.querySelector('.vc-scroll'), rin = roll.querySelector('.vc-in'), pauseB = roll.querySelector('.vc-pause');
-    const CARD = {viktor: 'downloads/viktor_gromov.json', lesha: 'downloads/alexei_tikhonov.json'}, cards = {};
-    const card = id => cards[id] || (cards[id] = fetch(CARD[id]).then(r => r.json()).then(j => { const d = j.data || j; return [d.first_mes, ...(d.alternate_greetings || [])]; }));
     const escH = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const md = t => escH(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\{\{user\}\}/g, '<span class="vc-you">{{user}}</span>').replace(/\{\{char\}\}/g, '');
     let rollRaf = 0, rollPos = 0, held = 0, paused = false, last = 0, playingSt = null;
@@ -4127,8 +4117,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       rollPos = 0; rs.scrollTop = 0; paused = !!reduce; held = 0; last = 0; pauseB.textContent = paused ? '▶' : '❚❚';
       cancelAnimationFrame(rollRaf); rollRaf = requestAnimationFrame(loop);
       rs.focus({preventScroll: true});
-      let text = '';
-      try { text = st.full || (await card(st.bid))[st.g || 0] || ''; } catch (e) { text = st.p; }
+      let text = st.full || st.p || '';
       if (playingSt !== st) return;
       // the bold heading line of the card is replaced by the title card above
       text = text.replace(/^\s*\*\*[^\n]*\*\*\s*\n/, '').replace(/^\s*_{3,}\s*$/m, '');
