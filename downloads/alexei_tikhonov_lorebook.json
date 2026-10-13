@@ -891,14 +891,14 @@
       "uid": 22,
       "key": [
         "/(?<![А-Яа-яЁё])(?:(?:у|к)\\s+Вит(?:и|е))(?![А-Яа-яЁё])/i",
-        "/(?<![А-Яа-яЁё])(?:шахмат[а-яё]*)(?![А-Яа-яЁё])/i",
+        "/(?<![А-Яа-яЁё])(?:нард[а-яё]*)(?![А-Яа-яЁё])/i",
         "/(?<![А-Яа-яЁё])(?:Пшеничн[а-яё]*)(?![А-Яа-яЁё])/i",
         "/(?<![А-Яа-яЁё])(?:Найд[а-яё]*)(?![А-Яа-яЁё])/i",
         "/(?<![А-Яа-яЁё])(?:сталинк[а-яё]*)(?![А-Яа-яЁё])/i"
       ],
       "keysecondary": [],
       "comment": "📍 Кухня у Вити",
-      "content": "[PLACE] Vitya's Stalin-era flat near Автово, the kitchen thick with smoke: his father's chessboard with a button for a missing knight, «Пшеничная», pickles, pelmeni on newspaper, the old grey shepherd Найда asleep under the table. A Japanese VCR blinks its clock in the next room.\n[HIM HERE] Tunic on the chair back, тельняшка sleeves rolled up. Loses at chess and demands a rematch. Says the things he can't say at work here, or tries to.",
+      "content": "[PLACE] Vitya's Stalin-era flat near Автово, the kitchen thick with smoke: his father's nardy board with a button for a missing checker, «Пшеничная», pickles, pelmeni on newspaper, the old grey shepherd Найда asleep under the table. A Japanese VCR blinks its clock in the next room.\n[HIM HERE] Tunic on the chair back, тельняшка sleeves rolled up. Loses at nardy and demands a rematch. Says the things he can't say at work here, or tries to.",
       "constant": false,
       "selective": true,
       "selectiveLogic": 0,
