@@ -383,7 +383,7 @@ a{color:inherit}
   padding:.35cqw .7cqw; background:#a8261f; border:.15cqw solid #fff3da; box-shadow:0 .3cqw .6cqw rgba(0,0,0,.5); rotate:-8deg; animation:slap 1s ease-out forwards}
 @keyframes slap{0%{scale:.3; opacity:0} 18%{scale:1.15; opacity:1} 30%{scale:1} 75%{opacity:1} 100%{opacity:0; translate:-50% -140%}}
 /* achievement: a paper certificate that slides in at the top right */
-.ach{position:fixed; z-index:400; top:calc(var(--bar, 56px) + 14px); right:14px; width:min(340px, calc(100vw - 28px)); display:grid; grid-template-columns:58px 1fr; gap:12px; align-items:center;
+.ach{position:fixed; z-index:1100; top:calc(var(--bar, 56px) + 14px); right:14px; width:min(340px, calc(100vw - 28px)); display:grid; grid-template-columns:58px 1fr; gap:12px; align-items:center;
   padding:14px 16px 14px 12px; border:0; text-align:left; cursor:var(--cur-hover); color:var(--ink);
   background:radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.5), transparent 60%), #f3ead2; box-shadow:0 0 0 1px rgba(120,90,40,.35), inset 0 0 0 5px #f3ead2, inset 0 0 0 6.5px rgba(168,38,31,.55), 0 18px 34px rgba(0,0,0,.55);
   transform:translateX(calc(100% + 30px)) rotate(2deg); transition:transform .55s cubic-bezier(.3,1.3,.4,1)}
@@ -1708,10 +1708,20 @@ body.splash-on{overflow:hidden}
 .ap.torn .ap-front::after,.ap.torn .scene::after{display:none}
 .ap.torn .ap-back,.ap.exam.torn .ap-back{-webkit-mask:var(--mask) 0 0/100% 100% no-repeat; mask:var(--mask) 0 0/100% 100% no-repeat; box-shadow:none; padding-right:46%}
 .ap.torn .ap-back::after{right:46%}
-.abh-tear{position:fixed; left:50%; bottom:calc(max(18px, env(safe-area-inset-bottom)) + 42px); z-index:1002; transform:translateX(-50%) rotate(-1.5deg); padding:6px 16px 8px; border:0; border-radius:2px;
+.abh-bar{position:fixed; left:50%; bottom:calc(max(18px, env(safe-area-inset-bottom)) + 42px); z-index:1002; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; width:max-content; max-width:calc(100vw - 24px); transform:translateX(-50%)}
+.abh-btn{padding:6px 16px 8px; border:0; border-radius:2px; transform:rotate(-1.5deg);
   background:#f1e8d2; color:#1f2f6b; font:700 22px/1 'Caveat',var(--hand); white-space:nowrap; box-shadow:0 3px 10px rgba(0,0,0,.5); cursor:var(--cur-hover)}
-.abh-tear:hover{background:#fff6dc} .abh-tear:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
-@media (max-width:640px){ .abh-tear{bottom:calc(max(18px, env(safe-area-inset-bottom)) + 104px); font-size:19px} }
+.abh-btn:hover{background:#fff6dc} .abh-btn:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
+.abh-btn.take{transform:rotate(1.5deg); background:#e9dcbc}
+.abh-dlg{position:fixed; left:50%; top:50%; z-index:1003; width:min(420px, calc(100vw - 32px)); padding:22px 24px 18px; transform:translate(-50%,-50%) rotate(-1deg);
+  background:repeating-linear-gradient(transparent 0 27px, rgba(43,74,139,.16) 27px 28px), #f6efdc; box-shadow:0 18px 50px rgba(0,0,0,.6); animation:abIn .3s cubic-bezier(.2,.8,.3,1)}
+.abh-who{margin:0 0 6px; font:700 13px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:#a8261f}
+.abh-line{margin:0; font:400 24px/1.12 'Caveat',var(--hand); color:#1f2f6b}
+.abh-line.after{text-align:center}
+.abh-acts{display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap; margin-top:16px}
+.abh-acts .abh-btn{transform:none; box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.abh-acts .yes{background:#a8261f; color:#f6ecd6}
+@media (max-width:640px){ .abh-bar{bottom:calc(max(18px, env(safe-area-inset-bottom)) + 96px); gap:8px} .abh-btn{font-size:18px; padding:5px 11px 7px} .abh-line{font-size:21px} }
 
 /* a photo on the desk: .ap positions, .ap-lift rotates and lifts, .ap-card turns over */
 .ap{--w:clamp(112px, 14vw, 196px); position:absolute; left:50%; top:50%; width:0; height:0; z-index:1; touch-action:none; cursor:var(--cur-grab)}
@@ -1891,6 +1901,39 @@ body.splash-on{overflow:hidden}
   .vr-hint{display:none}
 }
 
+
+/* «Смотреть подробнее»: the whole start runs as the closing credits of a Soviet film */
+.vr-more{position:absolute; right:7%; bottom:7%; z-index:5; padding:4px 8px; border:1px solid rgba(255,244,220,.55); border-radius:2px; background:rgba(0,0,0,.35); color:#fff4dc;
+  font:700 3.4cqw/1 var(--mono); letter-spacing:.06em; cursor:var(--cur-hover); text-shadow:none}
+.vr-more:hover{background:rgba(255,244,220,.15)} .vr-more:focus-visible{outline:2px solid #e3c98f; outline-offset:2px}
+.vr-screen:not(.play) .vr-more{visibility:hidden}
+.vcr{position:fixed; inset:0; z-index:400; background:#060504; color:#efe7d4; animation:veilIn .6s ease}
+.vcr[hidden]{display:none}
+.vc-scroll{position:absolute; inset:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; outline:none}
+.vc-scroll::-webkit-scrollbar{display:none}
+.vc-in{max-width:620px; margin:0 auto; padding:58vh 26px 38vh; text-align:center; font:400 21px/1.7 var(--serif); text-shadow:0 0 8px rgba(255,236,200,.28)}
+.vc-in h2{margin:0 0 14px; font:400 clamp(34px, 6vw, 58px)/1.05 var(--display); letter-spacing:.06em; text-transform:uppercase; color:#fff6e2}
+.vc-in .vc-when{margin:0 0 70px; font:15px var(--mono); letter-spacing:.2em; text-transform:uppercase; color:#c9bd9f}
+.vc-in p{margin:0 0 1.15em}
+.vc-in .vc-sep{margin:2.2em auto; width:60px; height:1px; background:rgba(239,231,212,.45)}
+.vc-in .vc-you{font-family:var(--mono); font-size:.82em; color:#e3c98f}
+.vc-in .vc-cast{margin-top:120px; font:15px/2.1 var(--mono); letter-spacing:.18em; text-transform:uppercase; color:#d8ccb0}
+.vc-in .vc-cast b{display:block; margin-bottom:16px; font:400 26px var(--display); letter-spacing:.1em; color:#fff6e2}
+.vc-in .vc-end{margin-top:140px; font:400 clamp(30px, 5vw, 46px)/1.1 var(--display); letter-spacing:.08em; color:#fff6e2}
+.vc-in .vc-again{margin-top:30px; padding:8px 18px; border:1px solid rgba(239,231,212,.5); background:none; color:#efe7d4; font:14px var(--mono); letter-spacing:.14em; cursor:var(--cur-hover)}
+/* film: grain, flicker, a dark frame */
+.vc-film{position:absolute; inset:-50%; pointer-events:none; opacity:.16; animation:vcGrain .5s steps(4) infinite;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23f)'/%3E%3C/svg%3E")}
+.vcr::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0,0,0,.85)); animation:vcFlick 3.2s steps(1) infinite}
+@keyframes vcGrain{0%{transform:translate(0,0)} 25%{transform:translate(-4%,3%)} 50%{transform:translate(3%,-2%)} 75%{transform:translate(-2%,-4%)}}
+@keyframes vcFlick{0%,100%{opacity:1} 12%{opacity:.86} 13%{opacity:1} 57%{opacity:.92} 58%{opacity:1}}
+.vc-ui{position:absolute; right:16px; top:12px; z-index:2; display:flex; gap:10px}
+.vc-btn{padding:6px 12px; border:1px solid rgba(239,231,212,.35); border-radius:3px; background:rgba(6,5,4,.6); color:#efe7d4; font:14px var(--mono); cursor:var(--cur-hover)}
+.vc-btn:hover{background:rgba(239,231,212,.12)} .vc-btn:focus-visible,.vc-again:focus-visible{outline:2px solid #e3c98f; outline-offset:2px}
+.vc-hint{position:absolute; left:0; right:0; bottom:14px; margin:0; text-align:center; font:19px 'Caveat',var(--hand); color:rgba(227,201,143,.7); pointer-events:none; animation:vcHint 6s forwards}
+@keyframes vcHint{0%,75%{opacity:1} 100%{opacity:0}}
+@media (max-width:640px){ .vc-in{font-size:18px; padding-left:20px; padding-right:20px} .vc-in .vc-cast{font-size:13px} }
+@media (prefers-reduced-motion:reduce){ .vc-film,.vcr::after{animation:none} }
 
 /* ---------- starts page and the split shelf of tapes ---------- */
 .starts-desk{display:grid; gap:10px; justify-items:center; margin-top:10px}
@@ -2932,7 +2975,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           <canvas width="200" height="150" aria-hidden="true"></canvas>
           <div class="vr-idle"><span class="vr-osd tl">AV-1</span><p>Вставьте кассету</p></div>
           <div class="vr-show"><span class="vr-osd tl">PLAY ▶</span><span class="vr-osd tr vr-first">ПЕРВЫЙ</span><span class="vr-osd bl vr-count">0:00:00</span>
-            <p class="vr-t"></p><h3 class="vr-h"></h3><p class="vr-p"></p></div>
+            <p class="vr-t"></p><h3 class="vr-h"></h3><p class="vr-p"></p><button class="vr-more" type="button">Смотреть подробнее ▸▸</button></div>
           <i class="vr-glass" aria-hidden="true"></i>
         </div>
         <div class="vr-side" aria-hidden="true"><i class="vr-knob"></i><i class="vr-knob s"></i><i class="vr-grille"></i><span class="vr-make">ЦВЕТНОЙ</span></div>
@@ -2948,6 +2991,12 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <div class="vr-tapes"></div>
   </div>
   <p class="vr-hint">Выберите кассету, она сама встанет в магнитофон.</p>
+</div>
+<div class="vcr" id="vcRoll" hidden role="dialog" aria-modal="true" aria-label="Титры">
+  <div class="vc-scroll" tabindex="0"><div class="vc-in"></div></div>
+  <i class="vc-film" aria-hidden="true"></i>
+  <div class="vc-ui"><button class="vc-btn vc-pause" type="button" aria-label="Пауза">❚❚</button><button class="vc-btn vc-x" type="button">закрыть ✕</button></div>
+  <p class="vc-hint">титры можно листать</p>
 </div>
 <div class="ach-sheet-wrap" id="achSheet" hidden role="dialog" aria-modal="true" aria-label="Ведомость заслуг">
   <div class="ach-sheet">
@@ -3713,7 +3762,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         const [src, shape, , date] = PHOTOS[k], [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
         const seed = (n * 7 + j * 13) % 5, ox = pg.k === 'pp' ? 0 : [-7, 6, -3, 8, -5][seed] * (j ? -1 : 1);
         const rr = [-2.2, 1.6, -1, 2.4, .8][seed];
-        return `<button type="button" class="ab-it${/torn/.test(tone) ? ' torn' : ''}" data-k="${k}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
+        return `<button type="button" class="ab-it${/torn/.test(tone) ? ' torn' : ''}" data-k="${k}" data-cap="${esc(cap || '')}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
           <span class="ab-pr${tone ? ' ' + tone : ''}"><img src="${src}" alt="" style="--ar:${AR[f] || '3/4'}" draggable="false">${date ? `<span class="ap-date">${date}</span>` : ''}<i class="ab-cn"></i></span>
           ${cap ? `<span class="ab-cap">${esc(cap)}</span>` : ''}</button>`;
       }).join('');
@@ -3818,15 +3867,20 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"${/torn/.test(tone) ? ` style="--mask:url('${src.replace(/\.webp$/, '-back.png')}')"` : ''}><span class="ft-hw">${esc(back)}</span></div>
       </div></div>`;
       hand.appendChild(el); hand.hidden = false;
-      // a torn print: the other half can be held up against it
+      // buttons under the print: hold up the torn-off half, take the print out of the album
+      const bar = document.createElement('div'); bar.className = 'abh-bar';
       if (whole){
-        const b = document.createElement('button'); b.type = 'button'; b.className = 'abh-tear'; b.textContent = 'приложить оторванную половину';
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'abh-btn'; b.textContent = 'приложить оторванную половину';
         b.addEventListener('click', () => {
           const torn = el.classList.toggle('torn'); el.querySelector('.scene img').src = torn ? src : whole;
           b.textContent = torn ? 'приложить оторванную половину' : 'убрать обратно';
         });
-        hand.appendChild(b);
+        bar.appendChild(b);
       }
+      const tk = document.createElement('button'); tk.type = 'button'; tk.className = 'abh-btn take'; tk.textContent = 'достать из альбома';
+      tk.addEventListener('click', () => askTake(el, it, k));
+      bar.appendChild(tk);
+      hand.appendChild(bar);
       const lift = el.firstElementChild, card = el.querySelector('.ap-card');
       const pr = it.querySelector('.ab-pr').getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
       // the print's own proportions decide how big it can be in hand
@@ -3858,19 +3912,55 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); turn(); } });
     };
     const turn = () => { if (!held) return; held.el.classList.toggle('flip'); held.card.style.removeProperty('--ry'); };
+    /* taking a print out: the owners of the album object, in their own words, and then let you have it */
+    const TAKE = {
+      v: [
+        ['Витя', 'Гражданочка, это порча имущества. Сто сорок девятая, между прочим. Уголки хоть не рвите.', 'Протокол составлен. Изъято при свидетелях. Свидетель: Найда.'],
+        ['Витя', 'Изъятие вещественных доказательств производится в присутствии понятых. Понятых нет. Ладно... берите, я отвернусь.', 'Витя отвернулся и очень внимательно смотрит в окно.'],
+        ['Витя', 'Этот альбом мама собирала. Берите, только аккуратно. Как своё.', 'Витя молча поправил пустые уголки.']
+      ],
+      l: [
+        ['Валентина Ивановна', 'Это кто там мой альбом потрошит? Я эти уголки по одному клеила! Ну ладно, бери, раз надо. Только верни потом. И покушай сначала.', 'Валентина Ивановна вздохнула и пошла за пирожками.'],
+        ['Лёша', 'Ты что делаешь? Мать увидит пустое место, убьёт. Сначала меня, потом тебя. Бери быстрее, пока она на кухне.', 'Лёша прикрыл пустое место салфеткой. Авось не заметит.'],
+        ['Валентина Ивановна', '«Фотографии не вынимать!» Там же написано, на первой странице. Ох... Ну бери уж. Лёшенька там хоть хорошо вышел?', 'Валентина Ивановна записала себе: «Карточку отдала хорошему человеку».']
+      ],
+      vl: [
+        ['Марина', 'Стоп! Я этот альбом три месяца собирала, клей на свои покупала. Берёшь? Пиши расписку.', 'Расписка принята. М. Громова.'],
+        ['Марина', 'Это подарок, между прочим. Им обоим. Ладно... но если Витя спросит, я ничего не видела.', 'Марина сделала вид, что ничего не видела.'],
+        ['Лёша и Витя', '— Вить, глянь, у нас фотки тырят.\n— Пусть берёт, Лёш. Нас в этом альбоме и так слишком много.', 'Лёша обиделся. Витя доволен.']
+      ]
+    };
+    const askTake = (el, it, k) => {
+      if (hand.querySelector('.abh-dlg')) return;
+      const set = TAKE[cur && cur.al.id] || TAKE.v, [who, line, after] = set[Math.floor(Math.random() * set.length)];
+      const dlg = document.createElement('div'); dlg.className = 'abh-dlg'; dlg.setAttribute('role', 'alertdialog'); dlg.setAttribute('aria-label', who);
+      dlg.innerHTML = `<p class="abh-who">${esc(who)}</p><p class="abh-line">${esc(line).replace(/\n/g, '<br>')}</p>
+        <div class="abh-acts"><button type="button" class="abh-btn yes">всё равно достать</button><button type="button" class="abh-btn no">не трогаю</button></div>`;
+      hand.appendChild(dlg);
+      dlg.querySelector('.no').focus({preventScroll: true});
+      dlg.querySelector('.no').addEventListener('click', () => { dlg.remove(); el.focus({preventScroll: true}); });
+      dlg.querySelector('.yes').addEventListener('click', () => {
+        const img = el.querySelector('.scene img'), url = img.getAttribute('src');
+        const name = ('Лихие — ' + (it.dataset.cap || k)).replace(/[\\/:*?"<>|!]+/g, '').replace(/\s+/g, ' ').trim() + (url.match(/\.\w+$/) || ['.webp'])[0];
+        const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+        dlg.innerHTML = `<p class="abh-line after">${esc(after)}</p>`; dlg.classList.add('done');
+        setTimeout(() => dlg.remove(), 2600);
+        if (window.lihieOnce) window.lihieOnce('thief');
+      });
+    };
     const dropHand = now => {
       if (!held) return; const h = held; held = null; spin = null;
-      const finish = () => { h.el.remove(); h.it.classList.remove('away'); if (!held){ hand.hidden = true; hand.querySelectorAll('.abh-tear').forEach(b => b.remove()); } };
+      const finish = () => { h.el.remove(); h.it.classList.remove('away'); if (!held){ hand.hidden = true; hand.querySelectorAll('.abh-bar,.abh-dlg').forEach(b => b.remove()); } };
       if (now || !h.it.isConnected){ finish(); return; }
       const pr = h.it.querySelector('.ab-pr').getBoundingClientRect();
       h.el.classList.remove('flip', 'tilt'); h.card.style.setProperty('--tx', '0deg'); h.card.style.setProperty('--ty', '0deg');
       h.lift.style.setProperty('--ew', pr.width + 'px');
       h.lift.style.setProperty('--dx', (pr.left + pr.width / 2 - innerWidth / 2) + 'px'); h.lift.style.setProperty('--dy', (pr.top + pr.height / 2 - innerHeight / 2) + 'px');
-      hand.querySelector('.ap-veil').style.opacity = '0'; hand.querySelectorAll('.abh-tear').forEach(b => b.remove());
+      hand.querySelector('.ap-veil').style.opacity = '0'; hand.querySelectorAll('.abh-bar,.abh-dlg').forEach(b => b.remove());
       setTimeout(() => { finish(); hand.querySelector('.ap-veil').style.opacity = ''; h.it.focus({preventScroll: true}); }, 480);
     };
     hand.querySelector('.ap-veil').style.transition = 'opacity .4s';
-    hand.querySelector('.ap-veil').addEventListener('click', () => dropHand());
+    hand.querySelector('.ap-veil').addEventListener('click', () => { if (!hand.querySelector('.abh-dlg')) dropHand(); });
     sp.addEventListener('click', e => {
       const it = e.target.closest('.ab-it'); if (!it || busy || sp.dataset.swiped || held) return;
       takeOut(it);
@@ -3883,7 +3973,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     });
     addEventListener('keydown', e => {
       if (view.hidden) return;
-      if (e.key === 'Escape'){ e.preventDefault(); held ? dropHand() : closeAlbum(); }
+      if (e.key === 'Escape'){ e.preventDefault(); const dl = hand.querySelector('.abh-dlg'); dl ? dl.remove() : held ? dropHand() : closeAlbum(); }
       else if (!held && e.key === 'ArrowRight') flip(1);
       else if (!held && e.key === 'ArrowLeft') flip(-1);
     });
@@ -3918,7 +4008,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const DUO = {id:'duo', starts:[], cols:[]};
     BOTS.slice(0, 2).forEach((b, bi) => {
       const col = {title: PILE[b.id] || b.name, from: DUO.starts.length, n: 0};
-      clean(b).forEach((s, k) => { DUO.starts.push({...s, who: SHORT[b.id] || b.name, side: bi ? 'r' : 'l', first: k === 0, both: count[s.h] > 1}); col.n++; });
+      clean(b).forEach((s, k) => { DUO.starts.push({...s, bid: b.id, who: SHORT[b.id] || b.name, side: bi ? 'r' : 'l', first: k === 0, both: count[s.h] > 1}); col.n++; });
       DUO.cols.push(col);
     });
     const dc = document.getElementById('duoCount'); if (dc) dc.textContent = `Общие: ${DUO.starts.length}\u00a0${typeof plural === 'function' ? plural(DUO.starts.length, 'кассета', 'кассеты', 'кассет') : 'кассет'}`;
@@ -3927,7 +4017,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       : b.starts.map((st, k) => tapeHTML({...st, first: k === 0}, k)).join('');
     const open = env => {
       bot = env.dataset.env === 'duo' ? DUO : BOTS.find(b => b.id === env.dataset.env); if (!bot) return;
-      if (bot !== DUO) bot = {...bot, starts: clean(bot)};
+      if (bot !== DUO) bot = {...bot, starts: clean(bot).map(s => ({...s, bid: bot.id}))};
       opener = env; cur = null; busy = false;
       tapesEl.innerHTML = tapesFor(bot); tapesEl.classList.toggle('split', bot === DUO);
       hintEl.textContent = bot === DUO ? 'Слева Витины кассеты, справа Лёшины. Выберите, она сама встанет в магнитофон.' : 'Выберите кассету, она сама встанет в магнитофон.';
@@ -4007,6 +4097,55 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     addEventListener('keydown', e => { if (e.key === 'Escape' && !room.hidden) close(); });
     addEventListener('hashchange', close);
     window.openStarts = open;
+
+    /* «Смотреть подробнее»: the full start from the card in downloads/, rolling up like the end of an old film */
+    const roll = document.getElementById('vcRoll'), rs = roll.querySelector('.vc-scroll'), rin = roll.querySelector('.vc-in'), pauseB = roll.querySelector('.vc-pause');
+    const CARD = {viktor: 'downloads/viktor_gromov.json', lesha: 'downloads/alexei_tikhonov.json'}, cards = {};
+    const card = id => cards[id] || (cards[id] = fetch(CARD[id]).then(r => r.json()).then(j => { const d = j.data || j; return [d.first_mes, ...(d.alternate_greetings || [])]; }));
+    const escH = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const md = t => escH(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\{\{user\}\}/g, '<span class="vc-you">{{user}}</span>').replace(/\{\{char\}\}/g, '');
+    let rollRaf = 0, rollPos = 0, held = 0, paused = false, last = 0, playingSt = null;
+    const speed = () => innerWidth < 640 ? 26 : 30;
+    const loop = t => {
+      const dt = last ? Math.min(.1, (t - last) / 1000) : 0; last = t;
+      if (!paused && performance.now() > held){
+        rollPos += speed() * dt; const max = rs.scrollHeight - rs.clientHeight;
+        if (rollPos >= max){ rollPos = max; paused = true; pauseB.textContent = '▶'; }
+        rs.scrollTop = rollPos;
+      } else rollPos = rs.scrollTop;
+      rollRaf = requestAnimationFrame(loop);
+    };
+    const hold = () => { held = performance.now() + 2600; };
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => rs.addEventListener(ev, hold, {passive: true}));
+    // any scroll that isn't ours (scrollbar, keys, a flick) takes over for a moment
+    rs.addEventListener('scroll', () => { if (Math.abs(rs.scrollTop - rollPos) > 4){ hold(); rollPos = rs.scrollTop; } }, {passive: true});
+    const startRoll = async st => {
+      playingSt = st;
+      const who = BOTS.find(b => b.id === st.bid) || BOTS[0];
+      rin.innerHTML = `<h2>${escH(st.h)}</h2><p class="vc-when">${escH(st.t)}</p><p>…</p>`;
+      roll.hidden = false; document.documentElement.style.overflow = 'hidden';
+      rollPos = 0; rs.scrollTop = 0; paused = !!reduce; held = 0; last = 0; pauseB.textContent = paused ? '▶' : '❚❚';
+      cancelAnimationFrame(rollRaf); rollRaf = requestAnimationFrame(loop);
+      rs.focus({preventScroll: true});
+      let text = '';
+      try { const g = (await card(st.bid))[st.g || 0] || ''; text = g; } catch (e) { text = st.p; }
+      if (playingSt !== st) return;
+      // the bold heading line of the card is replaced by the title card above
+      text = text.replace(/^\s*\*\*[^\n]*\*\*\s*\n/, '').replace(/^\s*_{3,}\s*$/m, '');
+      const body = text.split(/\n\s*\n+/).map(par => par.trim()).filter(Boolean).map(par => /^_{3,}$/.test(par) ? '<div class="vc-sep"></div>' : `<p>${md(par).replace(/\n/g, '<br>')}</p>`).join('');
+      const SEEN = {viktor: /Вит|Виктор|Громов/, lesha: /Л[её]ш|Л[её]х|Тихонов/};
+      const cast = BOTS.slice(0, 2).filter(b => b.id === st.bid || (SEEN[b.id] && SEEN[b.id].test(text))).map(b => escH(b.name)).join('<br>');
+      rin.innerHTML = `<h2>${escH(st.h)}</h2><p class="vc-when">${escH(st.t)}</p>${body}
+        <div class="vc-cast"><b>В ролях</b>${cast}${/Найд/.test(text) ? '<br>Найда' : ''}<br>и вы</div>
+        <p class="vc-end">Продолжение следует…</p><button class="vc-again" type="button">ещё раз</button>`;
+    };
+    const stopRoll = () => { if (roll.hidden) return; roll.hidden = true; cancelAnimationFrame(rollRaf); playingSt = null; document.documentElement.style.overflow = room.hidden ? '' : 'hidden'; room.querySelector('.vr-more')?.focus({preventScroll: true}); };
+    room.querySelector('.vr-more').addEventListener('click', () => { const st = cur && bot && bot.starts[+cur.dataset.i]; if (st) startRoll(st); });
+    roll.querySelector('.vc-x').addEventListener('click', stopRoll);
+    pauseB.addEventListener('click', () => { paused = !paused; held = 0; pauseB.textContent = paused ? '▶' : '❚❚'; pauseB.setAttribute('aria-label', paused ? 'Дальше' : 'Пауза'); if (!paused && rollPos >= rs.scrollHeight - rs.clientHeight - 2) rollPos = 0; });
+    rin.addEventListener('click', e => { if (e.target.closest('.vc-again')){ rollPos = 0; rs.scrollTop = 0; paused = false; pauseB.textContent = '❚❚'; } });
+    addEventListener('keydown', e => { if (!roll.hidden && e.key === 'Escape'){ e.stopImmediatePropagation(); stopRoll(); } }, true);
+    addEventListener('hashchange', stopRoll);
   })();
 
   /* ---------- the starts page: three envelopes on the desk ---------- */
@@ -4447,6 +4586,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     {key: 'light', t: 'Экономия электроэнергии', x: 'Свет погашен. Работает только телевизор, как и положено в девяносто шестом.', hint: 'Счёт за свет опять пришёл огромный.'},
     {key: 'servant', t: 'Нашла', x: 'Обе прятались в серванте. Хрусталь цел, пиво нет.', hint: 'В серванте кто-то шуршит.'},
     {key: 'delo', t: 'Дело закрыто (почти)', x: 'Все конверты вскрыты. Трофимов просит ничего не рассказывать прокурору.', hint: 'На Литейном лежит дело, которое никто не дочитал.'},
+    {key: 'thief', t: 'Порча имущества', x: 'Снимок изъят из альбома. Витя составил протокол, Марина обиделась, Валентина Ивановна простила.', hint: 'В альбомах есть снимки, которые хочется унести с собой.'},
     {key: 'albums', t: 'Мама, хватит', x: 'Все три альбома пролистаны до последней страницы. Лёша просит больше никому их не показывать.', hint: 'На столе в архиве лежат альбомы. Их редко досматривают до конца.'},
     {key: 'records', t: 'Дискотека на Стачек', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок много, а играет всё одна.'}
   ];
