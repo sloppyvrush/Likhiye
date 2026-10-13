@@ -4502,7 +4502,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <section class="dl-sheet" style="--r:.3deg"><h4>${esc(D.people.title)}</h4><div class="dl-people">${D.people.list.map(p => `<div class="dl-p"><span class="ph">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : ''}</span><span><b>${esc(p.n)}</b><i>${esc(p.r)}</i><span>${esc(p.t)}</span>${p.real && named() ? `<span class="real">${esc(p.real)}</span>` : ''}</span></div>`).join('')}</div></section>
         <h3 class="dl-h">Вещественные доказательства<small>Серые печати: то, что можно найти в стартах. Вскрывайте, когда нашли в игре.</small></h3>
         <div class="dl-grid">${D.evidence.map(env).join('')}</div>
-        <h3 class="dl-h">Ход расследования<small>Красные печати: этапы дела по дням. Спойлеры.</small></h3>
+        <h3 class="dl-h">Ход расследования<small>Красные печати: четыре этапа дела по ходу истории. Спойлеры.</small></h3>
         <div class="dl-grid">${D.stages.map((x, k) => env(x, k + 2)).join('')}</div>
         <div class="dl-deep"><p>Совершенно секретно. Только для тех, кто уже доиграл или не боится спойлеров.</p><div class="dl-grid">${D.secret.map((x, k) => env(x, k + 4)).join('')}</div></div>
         <button class="dl-reset" type="button">Запечатать всё обратно</button>`;
