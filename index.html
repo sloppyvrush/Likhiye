@@ -2227,31 +2227,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 
 /* ================= ABOUT: an old fridge in a Soviet kitchen ================= */
 /* letters, photos and the postcard hang on the fridge door on magnets; the kitchen is drawn around it */
-.ab-kitchen{position:relative; overflow:hidden; color:#2a2418;
-  background:
-    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,214,150,.42), transparent 70%),
-    radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(40,26,10,.38)),
-    linear-gradient(transparent 0 270px, #8a6a3a 270px 274px, #c6533c 274px 296px, #3f6aa8 296px 300px, transparent 300px),
-    linear-gradient(#a9c0b4 0 270px, transparent 270px),
-    linear-gradient(#cfc7b5 0 2px, transparent 2px) 0 300px / 46px 46px,
-    linear-gradient(90deg, #cfc7b5 0 2px, transparent 2px) 0 300px / 46px 46px,
-    radial-gradient(ellipse 60% 60% at 30% 25%, rgba(255,255,255,.55), transparent 70%) 0 300px / 46px 46px,
-    #ece6d8}
-.ab-kitchen .about.section{padding-bottom:0}
-.ab-kitchen h2{color:#2a2418; position:relative; z-index:1}
-.ab-kitchen .lede{color:#3a3024; position:relative; z-index:1}
-.kt-wall{position:absolute; inset:0; pointer-events:none}
-.kt-wall svg{position:absolute; filter:drop-shadow(4px 8px 8px rgba(40,26,10,.3))}
-.kt-window{left:calc(50% - 480px - 22px - 190px); top:330px; width:190px}
-.kt-radio{left:calc(50% - 480px - 22px - 130px); top:800px; width:90px}
-.kt-shelf{right:calc(50% - 480px - 22px - 210px); top:340px; width:210px}
-.kt-table{left:calc(50% - 480px - 18px - 210px); bottom:108px; width:210px}
-.kt-stove{right:calc(50% - 480px - 18px - 210px); bottom:108px; width:210px}
-@media (max-width:1180px){ .kt-wall{display:none} }
-.kt-floor{position:relative; height:110px; border-top:10px solid #6a4224;
-  background:linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.05) 40%, rgba(0,0,0,.25)),
-    conic-gradient(from 45deg, #b08654 0 25%, #c9a274 0 50%, #b08654 0 75%, #c9a274 0) 0 0 / 64px 64px}
-
+.ab-kitchen{position:relative; color:#2a2418; background:#2a2219}
+/* the kitchen picture stays put while the fridge scrolls past; until it is there, a dim warm wall */
+.kt-bg{position:sticky; top:var(--bar); height:calc(100svh - var(--bar)); margin-bottom:calc(-100svh + var(--bar)); pointer-events:none;
+  background:linear-gradient(rgba(20,14,8,.18), rgba(20,14,8,.32)), url("assets/about/kitchen.webp") 50% 50% / cover no-repeat,
+    radial-gradient(ellipse 70% 60% at 50% 20%, #6a5440, #3a2e22 60%, #241c14)}
+.ab-kitchen .about.section{position:relative; padding-bottom:60px}
+.ab-kitchen h2{color:var(--cream); text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.ab-kitchen .lede{color:#f1e6cc; text-shadow:0 2px 10px rgba(0,0,0,.65)}
 .ab-fridge{position:relative; max-width:960px; margin:34px auto 0; padding:170px clamp(16px, 5vw, 64px) 130px;
   border-radius:70px 70px 18px 18px / 56px 56px 18px 18px;
   background:linear-gradient(90deg, #c4bfb3 0%, #e6e2d8 5%, #f6f4ed 20%, #fbfaf6 50%, #f2efe7 80%, #dcd7cb 95%, #bcb7aa 100%);
@@ -2265,8 +2248,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:linear-gradient(90deg, #8d9195, #f2f3f4 35%, #c4c7ca 60%, #7d8185); box-shadow:4px 8px 10px rgba(0,0,0,.3)}
 .fr-vent{position:absolute; left:0; right:0; bottom:0; height:84px; border-radius:0 0 18px 18px; border-top:3px solid #d6d1c4;
   background:linear-gradient(transparent 26px, #4a4640 26px 30px, transparent 30px 38px, #4a4640 38px 42px, transparent 42px 50px, #4a4640 50px 54px, transparent 54px) 50% 0 / 60% 100% no-repeat, linear-gradient(90deg, #cdc8bb, #e9e6dd 30%, #e9e6dd 70%, #cdc8bb)}
-.fr-abc{position:absolute; top:100px; left:30%; display:flex; gap:2px}
-.fr-abc b{display:block; rotate:var(--r); font:400 46px/1 var(--display); color:var(--c);
+.fr-abc{position:absolute; top:92px; left:30%; display:flex; gap:4px}
+.fr-abc b{display:block; rotate:var(--r); font:400 60px/1 var(--display); color:var(--c);
   text-shadow:0 2px 0 rgba(0,0,0,.25), 0 3px 0 color-mix(in srgb, var(--c) 70%, #000), 0 8px 8px rgba(0,0,0,.25)}
 .fr-list{position:relative; width:170px; padding:18px 16px 12px; rotate:4deg; display:flex; flex-direction:column;
   background:#fbf7ea repeating-linear-gradient(transparent 0 23px, rgba(84,124,176,.3) 23px 24px) 0 14px; box-shadow:0 4px 10px rgba(0,0,0,.18);
@@ -2275,20 +2258,21 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .fr-list s{text-decoration-thickness:2px; color:#6a5f8a}
 
 /* magnets */
-.mg{position:absolute; z-index:6; top:-14px; left:50%; translate:-50% 0; width:30px; height:30px; border-radius:50%; pointer-events:none;
+.mg{position:absolute; z-index:6; top:-20px; left:50%; translate:-50% 0; width:42px; height:42px; border-radius:50%; pointer-events:none;
   filter:drop-shadow(1px 3px 2px rgba(0,0,0,.35))}
 .mg-red{background:radial-gradient(circle at 35% 30%, #ffb3a6 0 3px, #e2483a 6px, #9a1f17 100%)}
 .mg-blue{background:radial-gradient(circle at 35% 30%, #c6dbff 0 3px, #4a7ac4 6px, #1f3a72 100%)}
-.mg-lemon{background:radial-gradient(circle, #fff6c4 0 3px, transparent 3.5px), repeating-conic-gradient(#f3d64a 0 26deg, #fff6c4 26deg 30deg), #f3d64a; box-shadow:inset 0 0 0 3px #e8b33c, inset 0 0 0 5px #fff6c4}
-.mg-straw{width:28px; height:32px; border-radius:50% 50% 50% 50% / 38% 38% 62% 62%;
-  background:radial-gradient(circle, #ffe08a 0 1px, transparent 1.6px) 0 0 / 7px 7px, radial-gradient(circle at 35% 30%, #ff8a80, #d42a2a 55%, #8e1414)}
-.mg-straw::before{content:""; position:absolute; left:50%; top:-6px; width:22px; height:10px; translate:-50% 0; border-radius:50%; background:#4f8a3a; clip-path:polygon(0 50%, 20% 0, 35% 60%, 50% 0, 65% 60%, 80% 0, 100% 50%, 50% 100%)}
+.mg-lemon{background:radial-gradient(circle, #fff6c4 0 3px, transparent 3.5px), repeating-conic-gradient(#f3d64a 0 26deg, #fff6c4 26deg 30deg), #f3d64a; box-shadow:inset 0 0 0 4px #e8b33c, inset 0 0 0 7px #fff6c4}
+.mg-straw{width:40px; height:46px; border-radius:50% 50% 50% 50% / 38% 38% 62% 62%;
+  background:radial-gradient(circle, #ffe08a 0 1.4px, transparent 2px) 0 0 / 9px 9px, radial-gradient(circle at 35% 30%, #ff8a80, #d42a2a 55%, #8e1414)}
+.mg-straw::before{content:""; position:absolute; left:50%; top:-8px; width:30px; height:14px; translate:-50% 0; border-radius:50%; background:#4f8a3a; clip-path:polygon(0 50%, 20% 0, 35% 60%, 50% 0, 65% 60%, 80% 0, 100% 50%, 50% 100%)}
 .ab-post{position:relative}
-.ab-post .pm1{left:16%; top:-12px} .ab-post .pm2{left:auto; right:12%; translate:0 0; top:-12px}
+.ab-post .pm1{left:16%; top:-18px} .ab-post .pm2{left:auto; right:12%; translate:0 0; top:-18px}
 
 .ab-letters{position:relative; z-index:1; display:grid; grid-template-columns:56% 46%; grid-template-rows:auto 1fr; align-items:start}
 .ab-letters .ab-letter{grid-column:1; grid-row:1 / 3}
-.ab-letters .ab-letter.sq{grid-column:2; grid-row:1; margin:60px 0 0 -4%}
+.ab-mcol{grid-column:2; grid-row:1; display:flex; flex-direction:column; align-items:flex-end; margin:-20px 0 0 -4%}
+.ab-mcol .ab-letter.sq{align-self:stretch; margin-top:-60px}
 .fr-notes{grid-column:2; grid-row:2; display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:34px 26px; padding:70px 0 20px 6%}
 .fr-recipe{position:relative; width:200px; padding:22px 16px 14px; rotate:-3deg; display:flex; flex-direction:column; gap:4px;
   background:#f3ead2; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 19px/1.15 'Caveat', cursive; color:#5a2f1a}
@@ -2316,7 +2300,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 /* photos on paperclips; they turn over like the ones in the albums */
 .ab-ph{position:relative; z-index:3; width:clamp(150px, 15vw, 190px); display:grid; cursor:var(--cur-hover, pointer); perspective:1400px; outline:none; -webkit-tap-highlight-color:transparent}
 .ab-ph.me{float:left; margin:-96px 22px 12px calc(-1 * (var(--mg) + clamp(16px, 2.2vw, 26px)) - 34px); transform:rotate(-5deg)}
-.ab-ph.mi{float:right; margin:-110px calc(-1 * clamp(22px, 3.4vw, 46px) - 34px) 12px 20px; transform:rotate(5deg)}
+.ab-ph.mi{margin:0 -30px 0 0; transform:rotate(5deg)}
 .ab-ph:focus-visible .ph-face{box-shadow:0 0 0 3px var(--glow), 0 12px 24px rgba(0,0,0,.45)}
 .ph-face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#f4efe2; box-shadow:0 5px 12px rgba(40,20,5,.3); transition:transform .8s cubic-bezier(.45,.05,.25,1)}
 .ph-front{padding:10px 10px 6px}
@@ -2329,7 +2313,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .ab-ph .fr{aspect-ratio:3/4}
 .ph-cap{margin:8px 0 0 !important; text-align:center; font:700 28px/1 'Caveat', cursive; color:var(--pen)}
 .ph-cap small{display:block; margin-top:4px; font:400 11.5px/1.3 var(--mono); letter-spacing:.06em; color:var(--ink-soft)}
-.ab-ph.mi .about .fr{position:relative; overflow:hidden; background:#2b2622}
+.about .fr{position:relative; overflow:hidden; background:#2b2622}
 .about .fr img{display:block; width:100%; height:100%; object-fit:cover}
 .about .fr.nofoto{background:repeating-linear-gradient(135deg, #2e2924 0 10px, #332d27 10px 20px)}
 .about .fr.nofoto::after{content:"здесь будет фото"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-4deg); padding:4px 10px; background:var(--stamp); color:#f1e6cc; font:700 11px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
@@ -2373,23 +2357,24 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 @media (max-width:860px){
   .ab-letters{grid-template-columns:1fr; grid-template-rows:none}
   .ab-letters .ab-letter{grid-column:1; grid-row:auto}
-  .ab-letters .ab-letter.sq{grid-column:1; grid-row:auto; margin:24px 0 0 6%}
+  .ab-mcol{grid-column:1; grid-row:auto; margin:40px 0 0 6%}
   .fr-notes{grid-column:1; grid-row:auto; padding:50px 0 0}
-  .fr-abc b{font-size:34px}
+  .fr-abc b{font-size:44px}
   .fr-list, .fr-recipe{width:150px; font-size:17px}
 }
 @media (max-width:760px){
   .ab-fridge{padding:170px 12px 110px; border-radius:40px 40px 14px 14px / 34px 34px 14px 14px}
   .fr-handle{display:none}
   .fr-abc{left:50%; translate:-50% 0; top:94px}
-  .fr-abc b{font-size:30px}
+  .fr-abc b{font-size:38px}
   .ab-kitchen .wrap{padding-left:10px; padding-right:10px}
   .ab-letter{--lh:30px; font-size:18.5px}
   .ab-letter .ab-hi{font-size:38px}
-  .ab-letters .ab-letter.sq{margin:30px 0 0 4%; transform:rotate(1deg)}
+  .ab-mcol{margin:40px 0 0 4%}
+  .ab-mcol .ab-letter.sq{transform:rotate(1deg); margin-top:-50px}
   .ab-ph{width:120px}
   .ab-ph.me{margin:-64px 16px 8px -40px; transform:rotate(-3deg)}
-  .ab-ph.mi{margin:-70px -22px 8px 14px}
+  .ab-ph.mi{margin:0 -6px 0 0}
   .ph-cap{font-size:22px} .ph-cap small{font-size:10px}
   .ph-back{padding:12px 10px} .ph-back p{font-size:17px}
   .ab-ph .fr.nofoto::after{font-size:8.5px; padding:3px 6px; letter-spacing:.08em}
@@ -3203,40 +3188,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <!-- ================= ABOUT: a letter, two photos and a postcard ================= -->
 <main class="page" data-route="/about">
   <div class="ab-kitchen">
-    <div class="kt-wall" aria-hidden="true">
-      <svg class="kt-window" viewBox="0 0 240 400"><defs><linearGradient id="ktSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16233d"/><stop offset="1" stop-color="#2d3c5c"/></linearGradient></defs>
-        <rect x="10" y="10" width="220" height="300" rx="3" fill="#e9e4d6"/><rect x="24" y="24" width="192" height="272" fill="url(#ktSky)"/>
-        <g fill="#24314d"><rect x="30" y="150" width="70" height="146"/><rect x="120" y="120" width="90" height="176"/></g>
-        <g fill="#f2c36b" opacity=".85"><rect x="40" y="168" width="10" height="12"/><rect x="74" y="200" width="10" height="12"/><rect x="132" y="140" width="10" height="12"/><rect x="170" y="172" width="10" height="12"/><rect x="150" y="236" width="10" height="12"/><rect x="58" y="246" width="10" height="12"/></g>
-        <g fill="#fff" opacity=".7"><circle cx="60" cy="50" r="1.2"/><circle cx="150" cy="70" r="1"/><circle cx="190" cy="40" r="1.3"/><circle cx="96" cy="96" r="1"/></g>
-        <path d="M120 24v272M24 120h192" stroke="#e9e4d6" stroke-width="10"/><rect x="24" y="24" width="60" height="96" fill="none" stroke="#d6d0c0" stroke-width="3"/>
-        <path d="M14 168h212v6H14z" fill="#d4ccb8"/><path d="M18 172h204l-6 120c-30 8-62 4-96-2s-68-2-96 4z" fill="#f4ecdc" opacity=".96"/>
-        <path d="M18 172h204l-6 120c-30 8-62 4-96-2s-68-2-96 4z" fill="url(#ktCheck)" opacity=".55"/>
-        <defs><pattern id="ktCheck" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="7" fill="#c6533c" opacity=".35"/><rect width="7" height="14" fill="#c6533c" opacity=".35"/></pattern></defs>
-        <path d="M18 176c10 8 20 8 30 0s20 8 30 0 20 8 30 0 20 8 30 0 20 8 30 0 20 8 30 0 14 6 22 0" fill="none" stroke="#c6533c" stroke-width="2" opacity=".6"/>
-        <rect x="0" y="310" width="240" height="18" rx="3" fill="#e2dccc"/><rect x="0" y="326" width="240" height="6" fill="#bdb49e"/>
-        <g transform="translate(40 268)"><path d="M0 42h44l-6-38H6z" fill="#b5532e"/><path d="M22 4c-8-18-24-22-26-30M22 4c4-20 18-28 24-34M22 4c0-16 2-26-2-40" stroke="#4f7a3a" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="-4" cy="-26" r="6" fill="#d23b3b"/><circle cx="46" cy="-30" r="6" fill="#d23b3b"/><circle cx="20" cy="-36" r="6" fill="#e04a4a"/></g>
-        <g transform="translate(150 262)"><rect x="0" y="0" width="40" height="48" rx="6" fill="#b9d3b0" opacity=".75"/><rect x="2" y="-8" width="36" height="10" rx="2" fill="#c9a24a"/><g fill="#6d8f3a"><ellipse cx="12" cy="20" rx="6" ry="10"/><ellipse cx="27" cy="26" rx="6" ry="11"/><ellipse cx="18" cy="36" rx="6" ry="9"/></g></g>
-      </svg>
-      <svg class="kt-radio" viewBox="0 0 120 110"><rect x="6" y="10" width="108" height="92" rx="10" fill="#7a4a2a"/><rect x="14" y="18" width="92" height="56" rx="6" fill="#e8dcc0"/><g stroke="#7a4a2a" stroke-width="3"><path d="M22 28h76M22 38h76M22 48h76M22 58h76M22 68h76"/></g><circle cx="40" cy="88" r="8" fill="#e8dcc0"/><circle cx="80" cy="88" r="8" fill="#e8dcc0"/><path d="M60 10V0" stroke="#3a2a1a" stroke-width="3"/></svg>
-      <svg class="kt-shelf" viewBox="0 0 260 300"><rect x="0" y="120" width="260" height="12" rx="2" fill="#8a5a32"/><path d="M20 132l10 30M240 132l-10 30" stroke="#6a4224" stroke-width="6"/>
-        <g transform="translate(18 38)"><rect width="56" height="82" rx="8" fill="#f2efe6"/><rect x="0" y="-12" width="56" height="16" rx="5" fill="#d23b3b"/><circle cx="28" cy="40" r="16" fill="#d23b3b" opacity=".85"/><text x="28" y="74" text-anchor="middle" font-family="PT Serif, serif" font-size="11" fill="#5a3a2a">САХАР</text></g>
-        <g transform="translate(90 50)"><rect width="50" height="70" rx="8" fill="#f2efe6"/><rect x="0" y="-12" width="50" height="16" rx="5" fill="#d23b3b"/><circle cx="25" cy="32" r="13" fill="#d23b3b" opacity=".85"/><text x="25" y="62" text-anchor="middle" font-family="PT Serif, serif" font-size="11" fill="#5a3a2a">СОЛЬ</text></g>
-        <g transform="translate(158 26)"><path d="M10 94h70l-6-72H16z" fill="#3f6aa8"/><ellipse cx="45" cy="22" rx="30" ry="7" fill="#35588e"/><path d="M30 14q15-14 30 0" fill="none" stroke="#2a2a2a" stroke-width="4"/><path d="M78 40l26-16-4 8-20 20z" fill="#3f6aa8"/><g fill="#f1e6cc"><circle cx="45" cy="60" r="10"/></g><circle cx="45" cy="60" r="5" fill="#d23b3b"/></g>
-        <g transform="translate(60 160)"><path d="M0 0h16" stroke="#9a9488" stroke-width="5" stroke-linecap="round"/><path d="M8 0v6" stroke="#9a9488" stroke-width="4"/><path d="M-12 8h40l-4 110h-32z" fill="#f4ecdc"/><path d="M-12 8h40l-1 22h-38z" fill="#c6533c" opacity=".7"/><path d="M-10 92h36" stroke="#c6533c" stroke-width="4" opacity=".7"/></g>
-        <g transform="translate(150 166)"><circle cx="34" cy="34" r="32" fill="#efe9da" stroke="#7a6a50" stroke-width="4"/><path d="M34 34V12M34 34l14 8" stroke="#2a2418" stroke-width="3" stroke-linecap="round"/><g fill="#2a2418"><circle cx="34" cy="7" r="1.6"/><circle cx="61" cy="34" r="1.6"/><circle cx="34" cy="61" r="1.6"/><circle cx="7" cy="34" r="1.6"/></g></g>
-      </svg>
-      <svg class="kt-table" viewBox="0 0 240 300"><path d="M30 120v176M210 120v176" stroke="#6a4224" stroke-width="12"/><path d="M50 200h140" stroke="#6a4224" stroke-width="8"/>
-        <path d="M0 96h240v34c-20 8-40 4-60 0s-40 8-60 0-40-8-60 0-40 4-60 0z" fill="#ece2c8"/><path d="M0 96h240v34c-20 8-40 4-60 0s-40 8-60 0-40-8-60 0-40 4-60 0z" fill="url(#ktOil)"/>
-        <defs><pattern id="ktOil" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="3.4" fill="#c6533c" opacity=".55"/><circle cx="18" cy="18" r="3" fill="#3f6aa8" opacity=".5"/></pattern></defs>
-        <g transform="translate(40 40)"><path d="M0 0h34l-4 58H4z" fill="rgba(230,240,245,.55)" stroke="#9aa3ab" stroke-width="2"/><path d="M3 18h28l-3 38H6z" fill="#a8561e"/><path d="M-4 30h42l-4 30H0z" fill="#b9b4a8"/><path d="M38 34c14 0 14 20 0 20" fill="none" stroke="#b9b4a8" stroke-width="5"/><path d="M24 -10l-6 40" stroke="#cfc9bd" stroke-width="3"/></g>
-        <g transform="translate(120 76)"><ellipse cx="40" cy="18" rx="46" ry="10" fill="#f6f2ea"/><ellipse cx="40" cy="18" rx="40" ry="7" fill="none" stroke="#3f6aa8" stroke-width="2"/><g fill="none" stroke-width="7"><ellipse cx="24" cy="10" rx="13" ry="6" stroke="#b9772f"/><ellipse cx="52" cy="10" rx="13" ry="6" stroke="#c4843a"/><ellipse cx="38" cy="2" rx="13" ry="6" stroke="#b06c28"/></g></g></svg>
-      <svg class="kt-stove" viewBox="0 0 240 320"><rect x="10" y="80" width="220" height="236" rx="8" fill="#f1eee6"/><rect x="10" y="80" width="220" height="14" rx="6" fill="#d9d5ca"/>
-        <rect x="28" y="150" width="184" height="120" rx="6" fill="#d8d4c8"/><rect x="40" y="162" width="160" height="70" rx="4" fill="#2e2b28"/><rect x="40" y="162" width="160" height="70" rx="4" fill="url(#ktGlass)"/><defs><linearGradient id="ktGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.18)"/><stop offset=".5" stop-color="rgba(255,255,255,0)"/></linearGradient></defs>
-        <rect x="70" y="244" width="100" height="10" rx="5" fill="#a9adb1"/><g fill="#2e2b28"><circle cx="46" cy="118" r="10"/><circle cx="92" cy="118" r="10"/><circle cx="148" cy="118" r="10"/><circle cx="194" cy="118" r="10"/></g><g fill="#c8ccd0"><circle cx="46" cy="118" r="5"/><circle cx="92" cy="118" r="5"/><circle cx="148" cy="118" r="5"/><circle cx="194" cy="118" r="5"/></g>
-        <path d="M18 80h204" stroke="#5a5650" stroke-width="5"/><g transform="translate(40 18)"><path d="M10 62h70l-6-46H16z" fill="#d23b3b"/><ellipse cx="45" cy="16" rx="30" ry="6" fill="#b62d2d"/><path d="M28 10q17-18 34 0" fill="none" stroke="#2a2a2a" stroke-width="4"/><path d="M78 34l28-18-4 8-22 22z" fill="#d23b3b"/><circle cx="45" cy="40" r="9" fill="#f1e6cc"/><circle cx="45" cy="40" r="4" fill="#3f6aa8"/></g>
-        <g transform="translate(140 30)"><rect x="0" y="12" width="70" height="38" rx="6" fill="#5a5650"/><rect x="-10" y="18" width="12" height="6" rx="3" fill="#5a5650"/></g></svg>
-    </div>
+    <div class="kt-bg" aria-hidden="true"></div>
 
     <div class="wrap section about">
       <h2>О проекте</h2>
@@ -3265,19 +3217,21 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p class="ab-sign">Ваша Слопи</p>
           <svg class="ab-pen" viewBox="0 0 260 30" aria-hidden="true"><path d="M2 15l26-7v14z" fill="#c9a24a"/><path d="M2 15l9-2.4v4.8z" fill="#2b2622"/><rect x="28" y="6" width="200" height="18" rx="9" fill="#1f2e4f"/><rect x="28" y="8" width="200" height="4" rx="2" fill="rgba(255,255,255,.18)"/><rect x="150" y="3" width="70" height="5" rx="2.5" fill="#c9a24a"/><rect x="226" y="6" width="30" height="18" rx="6" fill="#c9a24a"/></svg>
         </article>
-        <article class="ab-letter sq">
-          <i class="mg mg-blue" aria-hidden="true"></i>
+        <div class="ab-mcol">
         <div class="ab-ph mi" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Милки. Нажмите, чтобы перевернуть">
           <i class="mg mg-lemon" aria-hidden="true"></i>
           <div class="ph-face ph-front"><div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Милки<small>придумала Лёшу</small></p></div>
           <div class="ph-face ph-back"><p>Милки. Подпись тут должна была быть длиннее, но Лёша опять одолжил ручку и не вернул.</p><span>окт. 96</span></div>
         </div>
+        <article class="ab-letter sq">
+          <i class="mg mg-blue" aria-hidden="true"></i>
         <p class="ab-hi">Привет-привет!</p>
         <p>Бла-бла-бла, тут скоро будет очень трогательный текст от Милки. Бла-бла, бла-бла-бла, и ещё немножко бла.</p>
         <p>Лёша передаёт всем привет и просит не верить ничему, что про него рассказывает Витя. Бла-бла-бла. Витя просит не верить Лёше. Бла.</p>
         <p>Бла-бла-бла-бла, бла-бла. Пирата покормили. Бла!</p>
         <p class="ab-sign">Ваша Милки</p>
         </article>
+        </div>
           <div class="fr-notes" aria-hidden="true">
             <div class="fr-list"><i class="mg mg-red"></i><b>Купить:</b><span>хлеб</span><span>кефир</span><span>батарейки в плеер</span><span>кассету «Кино»</span><s>сушки</s></div>
             <div class="fr-recipe"><i class="mg mg-blue"></i><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
@@ -3319,7 +3273,6 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <div class="fr-vent" aria-hidden="true"></div>
       </div>
     </div>
-    <div class="kt-floor" aria-hidden="true"></div>
   </div>
 </main>
 
