@@ -2395,6 +2395,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .ab-mcol{grid-column:1; grid-row:auto; margin:40px 0 0 6%}
   .fr-notes{flex-direction:row; flex-wrap:wrap; justify-content:center; gap:34px 22px; padding-top:20px}
   .ab-row2{grid-template-columns:1fr}
+  .fr-notes{margin-top:0}
   .fr-abc .abc{font-size:44px}
   .fr-list, .fr-recipe{width:150px; font-size:17px}
 }
@@ -2483,11 +2484,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 /* two notes hang in the gaps, over our letters */
 .ab-letters .fr-list.fr-pin{position:absolute; z-index:3; left:56%; top:8px; width:170px}
 .ab-mcol{position:relative}
-.ab-mcol .fr-recipe.fr-pin{position:absolute; z-index:3; right:-14px; bottom:-70px; width:190px}
-.fr-notes{grid-template-columns:1fr}
+.fr-notes{grid-template-columns:1fr 1fr; padding-top:30px; margin-top:-70px; gap:34px 12px}
+.fr-notes > div{max-width:170px}
+.fr-notes .fr-recipe{grid-column:1 / -1; max-width:200px}
 @media (max-width:860px){
   .ab-letters .fr-list.fr-pin{position:relative; left:auto; top:auto; justify-self:center; margin:34px 0 0}
-  .ab-mcol .fr-recipe.fr-pin{position:relative; right:auto; bottom:auto; align-self:center; margin-top:34px}
 }
 /* a magnet taken off the postcard; the card swings on the other one */
 .mg.mg-off{visibility:hidden}
@@ -3353,7 +3354,6 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p>Бла-бла-бла-бла, бла-бла. Пирата покормили. Бла!</p>
         <p class="ab-sign">Ваша Милки</p>
         </article>
-        <div class="fr-recipe fr-pin" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
         </div>
         </div>
 
@@ -3391,6 +3391,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           <div class="fr-notes">
             <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
             <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
+            <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
           </div>
         </div>
         <div class="fr-vent" aria-hidden="true"></div>
