@@ -226,14 +226,14 @@ a{color:inherit}
     radial-gradient(ellipse calc(var(--sw,100%) * 0.15) 17% at calc(var(--sl,0px) + var(--sw,100%) * 0.385) 47%, #f4f6ff 0%, #f4f6ff 55%, rgba(200,212,240,0) 100%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.3) 36% at calc(var(--sl,0px) + var(--sw,100%) * 0.38) 50%, #8d9cc0 0%, rgba(140,160,205,.0) 75%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.21) 7% at calc(var(--sl,0px) + var(--sw,100%) * 0.375) 89%, #98a4c6 0%, rgba(152,164,198,0) 82%),
-    radial-gradient(ellipse calc(var(--sw,100%) * 0.05) 9% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, #ffdca6 0%, rgba(255,220,166,0) 100%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.1) 18% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, #f4cf9c 0%, rgba(244,207,156,.35) 45%, rgba(244,207,156,0) 100%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.12) 38% at calc(var(--sl,0px) + var(--sw,100%) * 0.09) 36%, #c79c6c 0%, rgba(199,156,108,0) 80%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.12) 7% at calc(var(--sl,0px) + var(--sw,100%) * 0.17) 89%, #8c6a4a 0%, rgba(140,106,74,0) 80%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.6) 60% at calc(var(--sl,0px) + var(--sw,100%) * 0.4) 45%, #3c4462 0%, #22263a 70%, #15172a 100%)}
 /* in the dark: the street lamp outside pours warm light through the window, the TV throws a cold patch onto the floor */
 .light-night-glow{position:absolute; inset:0; z-index:6; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .45s;
   background:
-    radial-gradient(ellipse calc(var(--sw,100%) * 0.05) 9.5% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, rgba(255,186,104,.36), rgba(255,186,104,0) 72%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.09) 17% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, rgba(255,186,104,.22), rgba(255,186,104,.08) 50%, rgba(255,186,104,0) 85%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.11) 30% at calc(var(--sl,0px) + var(--sw,100%) * 0.095) 40%, rgba(255,168,84,.10), rgba(255,168,84,0) 75%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.11) 6% at calc(var(--sl,0px) + var(--sw,100%) * 0.17) 89%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%),
     radial-gradient(ellipse calc(var(--sw,100%) * 0.19) 6% at calc(var(--sl,0px) + var(--sw,100%) * 0.375) 89%, rgba(150,178,235,.2), rgba(150,178,235,0) 75%)}
@@ -298,9 +298,9 @@ a{color:inherit}
 .ach-sheet h3 span{font:400 26px/1 'Caveat',var(--hand); letter-spacing:0; color:#1f2f6b}
 .as-pen{margin:0 0 12px 40px; font:19px/1.2 'Caveat',var(--hand); color:#9a1f17; transform:rotate(-1deg)}
 /* the moth paperwork: a separate slip pinned beside the sheet (on phones it folds up above it) */
-.as-pair{position:relative; display:flex; align-items:flex-start; justify-content:center; width:min(900px, 100%)}
+.as-pair{position:relative; display:flex; align-items:flex-start; justify-content:center; width:min(1040px, 100%)}
 .as-pair .ach-sheet{flex:0 1 560px}
-.as-slip{position:relative; z-index:2; flex:0 0 290px; margin:118px 0 0 -44px; padding:16px 18px 14px; color:#2a2418; transform:rotate(3.4deg);
+.as-slip{position:relative; z-index:2; flex:0 0 390px; margin:110px 0 0 -16px; padding:20px 24px 18px; color:#2a2418; transform:rotate(3.4deg);
   background:linear-gradient(180deg, rgba(255,255,255,.35), transparent 40%), #e9e6dc; box-shadow:0 10px 22px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.5) inset}
 .as-slip .tp{position:absolute; top:-10px; width:70px; height:22px; background:rgba(236,226,192,.7); box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .as-slip .tp.a{left:-18px; transform:rotate(-34deg)} .as-slip .tp.b{right:-14px; transform:rotate(24deg); display:none}
@@ -312,11 +312,12 @@ a{color:inherit}
 .sl-txt{margin:0 0 8px; padding-right:12px; font:12px/1.4 var(--mono); color:#4a4236}
 .as-slip .as-moth{margin:0 0 6px}
 .sl-list{margin:6px 0 0; padding:0; list-style:none; display:grid; gap:4px}
-.sl-list li{font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+.sl-list li{font:19px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+@media (min-width:1001px){ .sl-h{font-size:22px} .sl-txt{font-size:13px} .sl-seal{width:92px; height:92px} }
 .sl-list li b{font:700 12.5px/1.2 var(--mono); letter-spacing:.05em; color:#2a2418; margin-right:6px}
 .sl-seal{position:absolute; right:10px; top:10px; width:80px; height:80px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
 .as-slip.done .sl-seal{opacity:.55; transform:rotate(-14deg)}
-@media (max-width:900px){
+@media (max-width:1000px){
   .as-pair{flex-direction:column; align-items:center; width:min(560px, 100%)}
   .as-pair .ach-sheet{flex:none; width:100%}
   .as-slip{order:-1; flex:none; align-self:flex-start; width:88%; margin:6px 0 10px 4px; padding:12px 14px 10px; transform:rotate(-1.2deg)}
@@ -787,7 +788,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .light-night{mix-blend-mode:normal; background:radial-gradient(ellipse 26% 34% at 38% 48%, rgba(10,14,30,.25), rgba(8,10,24,.78) 70%); right:auto; width:var(--stageW)}
   html.room-pan .night-air{right:auto; width:var(--stageW)}
   html.room-pan .light-night-glow{mix-blend-mode:normal; right:auto; width:var(--stageW);
-    background:radial-gradient(ellipse 5% 9.5% at 10.4% 31.6%, rgba(255,186,104,.38), rgba(255,186,104,0) 72%), radial-gradient(ellipse 9% 28% at 10% 38%, rgba(255,160,80,.16), rgba(255,160,80,0) 80%),
+    background:radial-gradient(ellipse 9% 17% at 10.4% 31.6%, rgba(255,186,104,.24), rgba(255,186,104,.08) 50%, rgba(255,186,104,0) 85%), radial-gradient(ellipse 9% 28% at 10% 38%, rgba(255,160,80,.16), rgba(255,160,80,0) 80%),
       radial-gradient(ellipse 11% 6% at 17% 89%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%), radial-gradient(ellipse 19% 6% at 37.5% 89%, rgba(150,178,235,.14), rgba(150,178,235,0) 75%)}
   html.room-pan .window .curtain{animation-name:swayl}
   html.room-pan .moth{will-change:transform}
@@ -5133,11 +5134,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const lerp = (a, b, k) => a + (b - a) * k;
   // beams as quads in % of the room: top-left, top-right, bottom-right, bottom-left
   const BEAMS = [
-    {q:[[9.6, 30.5], [11.2, 30.5], [26, 96], [12, 98]], c:[255, 196, 120], a:.13, n:60},   // from the street lamp, through the glass, down onto the floor
+    {q:[[8.4, 29], [12.4, 29], [28, 97], [10, 99]], c:[255, 196, 120], a:.11, n:60, soft:16},   // from the street lamp, through the glass, down onto the floor
     {q:[[25.5, 39], [44.5, 39], [56, 100], [17, 100]], c:[160, 188, 245], a:.05, n:55, tv:true}  // the TV screen, spilling towards us and onto the floor
   ];
   BEAMS.forEach(b => b.motes = Array.from({length: b.n}, () => ({u: Math.random(), v: Math.random(), r: Math.random() * .9 + .35,
-    du: (Math.random() - .5) * .0007, dv: (Math.random() - .5) * .0005 - .00012, ph: Math.random() * 6.28})));
+    du: (Math.random() - .5) * .00025, dv: (Math.random() - .5) * .00012 - .00003, ph: Math.random() * 6.28})));
   let nightWas = false;
   function drawNight(now){
     if (!airCtx) return;
@@ -5155,13 +5156,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       // the shaft itself: brightest at its source, fading towards the floor
       const g = airCtx.createLinearGradient(X((A[0] + B[0]) / 2), Y(A[1]), X((C[0] + D[0]) / 2), Y(C[1]));
       g.addColorStop(0, `rgba(${b.c},${(b.a * flick).toFixed(3)})`); g.addColorStop(1, `rgba(${b.c},0)`);
-      airCtx.save(); airCtx.filter = 'blur(5px)'; airCtx.fillStyle = g; airCtx.beginPath(); airCtx.moveTo(X(A[0]), Y(A[1])); airCtx.lineTo(X(B[0]), Y(B[1])); airCtx.lineTo(X(C[0]), Y(C[1])); airCtx.lineTo(X(D[0]), Y(D[1])); airCtx.closePath(); airCtx.fill(); airCtx.restore();
+      airCtx.save(); airCtx.filter = `blur(${b.soft || 6}px)`; airCtx.fillStyle = g; airCtx.beginPath(); airCtx.moveTo(X(A[0]), Y(A[1])); airCtx.lineTo(X(B[0]), Y(B[1])); airCtx.lineTo(X(C[0]), Y(C[1])); airCtx.lineTo(X(D[0]), Y(D[1])); airCtx.closePath(); airCtx.fill(); airCtx.restore();
       // dust drifting inside the shaft
       for (const m of b.motes){
-        if (!reduce){ m.u += m.du + Math.sin(t * .5 + m.ph) * .0004; m.v += m.dv + Math.cos(t * .4 + m.ph) * .0003; }
+        if (!reduce){ m.u += m.du + Math.sin(t * .6 + m.ph) * .00018; m.v += m.dv + Math.cos(t * .5 + m.ph) * .00007; }
         m.u = (m.u + 1) % 1; m.v = (m.v + 1) % 1;
         const x = lerp(lerp(A[0], B[0], m.u), lerp(D[0], C[0], m.u), m.v), y = lerp(lerp(A[1], B[1], m.u), lerp(D[1], C[1], m.u), m.v);
-        const edge = Math.min(m.u, 1 - m.u) * 4, a = Math.min(1, edge) * (1 - m.v * .75) * (.45 + .55 * Math.sin(t * 1.6 + m.ph) ** 2) * .9 * flick;
+        const edge = Math.min(m.u, 1 - m.u) * 4, a = Math.min(1, edge) * (1 - m.v * .75) * (.7 + .3 * Math.sin(t * 2 + m.ph)) * .8 * flick;
         airCtx.fillStyle = `rgba(${b.c},${a.toFixed(3)})`;
         airCtx.beginPath(); airCtx.arc(X(x), Y(y), m.r, 0, 6.28); airCtx.fill();
       }
