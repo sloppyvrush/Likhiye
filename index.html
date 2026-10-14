@@ -747,7 +747,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.ach-wall,.pennant{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.ach-wall,.pennant,.rm-phone,.rm-nardy,.rm-ticket{display:none}
   .lamp{left:40%; width:20%; height:9%}
   .moth{width:3.4cqw}
   .dust{left:10%; width:80%; top:4%; height:60%}
@@ -803,7 +803,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
   html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
   html.room-pan .ach-wall{display:flex}
-  html.room-pan .pennant{display:block}
+  html.room-pan .pennant, html.room-pan .rm-phone, html.room-pan .rm-nardy, html.room-pan .rm-ticket{display:block}
   html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
   html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
@@ -2506,6 +2506,113 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 }
 /* a magnet taken off the postcard; the card swings on the other one */
 .mg.mg-off{visibility:hidden}
+/* ================= TOYS: phone, nardy, lottery, pager ================= */
+.rm-phone, .rm-nardy, .rm-ticket{padding:0; border:0; background:none; cursor:var(--cur-hover, pointer); -webkit-tap-highlight-color:transparent}
+.rm-phone svg, .rm-nardy svg, .rm-ticket svg{display:block; width:100%; overflow:visible}
+.rm-phone{left:76.2%; width:6.2%; bottom:2.2%; z-index:4; filter:drop-shadow(.2cqw .5cqw .4cqw rgba(0,0,0,.55))}
+.rm-nardy{left:84.4%; width:7.6%; bottom:2.4%; z-index:4; transform:perspective(60cqw) rotateX(52deg) rotate(-6deg); transform-origin:50% 100%; filter:drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.55))}
+.rm-ticket{left:75.6%; width:3.6%; top:47.5%; z-index:4; rotate:-9deg; filter:drop-shadow(.1cqw .2cqw .2cqw rgba(0,0,0,.45))}
+.rm-phone:hover, .rm-ticket:hover{scale:1.06} .rm-nardy:hover{filter:drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.55)) brightness(1.15)}
+.rm-phone:focus-visible, .rm-nardy:focus-visible, .rm-ticket:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
+.rm-phone.ring{animation:phRing .12s linear infinite alternate}
+@keyframes phRing{from{rotate:-3deg} to{rotate:3deg}}
+.room.dark .rm-phone, .room.dark .rm-nardy, .room.dark .rm-ticket{filter:brightness(.45)}
+
+.toy{position:fixed; inset:0; z-index:310; display:grid; place-items:center; padding:16px; background:rgba(12,8,5,.8); overflow:auto}
+.toy[hidden]{display:none}
+.toy-box{position:relative; width:min(860px, 100%)}
+.toy-x{position:absolute; right:-6px; top:-44px; z-index:3; width:40px; height:40px; border:0; border-radius:50%; background:#f1e6cc; color:#2a2418; font:28px/1 var(--serif); cursor:var(--cur-hover, pointer); box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.toy section[hidden]{display:none}
+
+/* phone */
+.ty-phone{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, .9fr); gap:26px; align-items:center; padding:28px; border-radius:10px;
+  background:repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, transparent 2px 9px), linear-gradient(#5a3a22, #3f2716); box-shadow:0 24px 50px rgba(0,0,0,.55), inset 0 0 0 4px rgba(0,0,0,.25)}
+.tp-dial{display:flex; flex-direction:column; align-items:center; gap:14px}
+.tp-svg{width:min(340px, 100%); display:block; filter:drop-shadow(0 10px 12px rgba(0,0,0,.45)); user-select:none; -webkit-user-select:none}
+.tp-hits circle{fill:transparent; cursor:var(--cur-hover, pointer)}
+.tp-hits circle:hover{fill:rgba(255,255,255,.18)}
+.tp-strip{margin:0; min-width:200px; padding:8px 16px; background:#f4ecd8; box-shadow:0 3px 6px rgba(0,0,0,.35); text-align:center; font:700 28px/1 'Caveat', cursive; color:#2b3f7a; letter-spacing:.06em; rotate:-1deg}
+.tp-side{display:flex; flex-direction:column; gap:14px}
+.tp-book{padding:16px 18px 12px; background:#f6efdb repeating-linear-gradient(transparent 0 25px, rgba(84,124,176,.28) 25px 26px) 0 36px; box-shadow:0 6px 14px rgba(0,0,0,.35); rotate:1deg; color:#2a2418}
+.tp-book b{display:block; margin-bottom:6px; font:700 13px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:#a8261f}
+.tp-book p{display:flex; justify-content:space-between; margin:0; font:700 20px/26px 'Caveat', cursive; color:#22355a}
+.tp-book p i{font-style:normal}
+.tp-book .tp-more{display:block; font-size:16px; color:#6a5f8a}
+.tp-talk{min-height:118px; padding:14px 16px; background:rgba(20,12,6,.55); border-radius:6px; color:#f1e6cc; font:17px/1.4 var(--serif)}
+.tp-talk p{margin:0 0 6px} .tp-talk .tp-idle, .tp-talk .sys{font:13px/1.4 var(--mono); color:#c9bc98}
+.tp-talk .who{color:#e3c98f; font-weight:700}
+.tp-hang{align-self:flex-start; padding:10px 16px; border:0; border-radius:4px; background:#a8261f; color:#f6ecd6; font:14px/1 var(--mono); cursor:var(--cur-hover, pointer)}
+.tp-hang:disabled{opacity:.45; cursor:default}
+@media (max-width:700px){ .ty-phone{grid-template-columns:1fr; padding:18px} .tp-talk{min-height:96px} }
+
+/* nardy */
+.ty-nardy{padding:26px; border-radius:10px; color:#f1e6cc; background:linear-gradient(#6a3a1c, #4a2610); box-shadow:0 24px 50px rgba(0,0,0,.55), inset 0 0 0 4px rgba(0,0,0,.25)}
+.tn-q{margin:0 0 16px; text-align:center; font:700 34px/1 'Caveat', cursive}
+.tn-pick{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.tn-pick .tn-q{grid-column:1 / -1}
+.tn-pick[hidden], .tn-game[hidden], .tn-btns button[hidden]{display:none}
+.tn-who{display:flex; flex-direction:column; align-items:center; gap:8px; padding:18px; border:2px solid rgba(232,201,138,.35); border-radius:8px; background:rgba(0,0,0,.2); color:inherit; cursor:var(--cur-hover, pointer); font:inherit}
+.tn-who:hover{border-color:#e8c98a; background:rgba(0,0,0,.32)}
+.tn-who img{width:110px; height:110px; border-radius:50%; object-fit:cover; object-position:50% 20%; border:4px solid #e8c98a}
+.tn-who b{font:700 30px/1 'Caveat', cursive}
+.tn-who span{font:15px/1.3 var(--serif); color:#e3d3ac; text-align:center}
+.tn-score{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; font:700 26px/1 'Caveat', cursive}
+.tn-score b{font-size:34px; color:#e8c98a} .tn-to{font:12px/1 var(--mono); letter-spacing:.1em; color:#c9bc98; text-transform:uppercase}
+.tn-board{display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:12px; border-radius:6px;
+  background:linear-gradient(90deg, transparent calc(50% - 3px), #3a1c0c calc(50% - 3px) calc(50% + 3px), transparent calc(50% + 3px)), repeating-linear-gradient(90deg, #d9b98a 0 8.33%, #b98a5a 8.33% 16.66%), #c9a274;
+  box-shadow:inset 0 0 0 6px #8a4a22, inset 0 0 18px rgba(0,0,0,.4)}
+.tn-half{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:14px; min-height:150px; padding:16px; position:relative}
+.tn-call{flex-basis:100%; margin:0; text-align:center; font:700 26px/1 'Caveat', cursive; color:#2a1608; min-height:26px}
+.die{width:58px; height:58px; padding:8px; border-radius:10px; background:#f6f1e6; box-shadow:inset -3px -4px 6px rgba(0,0,0,.15), 0 5px 8px rgba(0,0,0,.35); display:grid; grid-template:repeat(3, 1fr) / repeat(3, 1fr)}
+.die i{width:11px; height:11px; place-self:center; border-radius:50%; background:#2a1d14}
+.die.red i{background:#a8261f}
+.die.roll{animation:dieRoll .12s linear infinite}
+@keyframes dieRoll{from{rotate:-14deg; translate:0 -4px} to{rotate:14deg; translate:0 3px}}
+.tn-say{display:flex; align-items:center; gap:12px; margin:16px 0; min-height:64px}
+.tn-ava{width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 20%; border:3px solid #e8c98a; flex:none}
+.tn-say p{position:relative; margin:0; padding:10px 14px; border-radius:10px; background:#f4ecd8; color:#2a2418; font:700 21px/1.2 'Caveat', cursive}
+.tn-btns{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+.tn-btns button{padding:11px 18px; border:0; border-radius:4px; font:14px/1 var(--mono); cursor:var(--cur-hover, pointer)}
+.tn-roll, .tn-again{background:#e8c98a; color:#2a1608} .tn-swap{background:rgba(0,0,0,.25); color:#f1e6cc}
+.tn-roll:disabled{opacity:.5; cursor:default}
+@media (max-width:600px){ .tn-pick{grid-template-columns:1fr} .tn-who img{width:80px; height:80px} .die{width:46px; height:46px; padding:6px} .die i{width:9px; height:9px} .tn-half{min-height:120px; gap:8px; padding:10px} }
+
+/* lottery */
+.ty-lotto{display:flex; flex-direction:column; align-items:center; gap:16px}
+.tl-ticket{width:min(520px, 100%); padding:16px 18px 12px; background:#f6ecc8; background-image:repeating-linear-gradient(45deg, rgba(224,106,26,.07) 0 6px, transparent 6px 12px); box-shadow:0 20px 40px rgba(0,0,0,.5); border-radius:3px; rotate:-1deg;
+  -webkit-mask:radial-gradient(circle 6px at 0 50%, transparent 98%, #000) , radial-gradient(circle 6px at 100% 50%, transparent 98%, #000); -webkit-mask-composite:source-in; mask-composite:intersect}
+.tl-top{display:flex; align-items:baseline; gap:12px; margin:-16px -18px 14px; padding:10px 18px; background:#e06a1a; color:#fff}
+.tl-top b{font:700 30px/1 var(--mono); letter-spacing:.24em}
+.tl-top span{font:10px/1.3 var(--mono); opacity:.9}
+.tl-field{position:relative; height:150px; border-radius:4px; overflow:hidden; background:#fffaf0; box-shadow:inset 0 0 0 2px #e06a1a}
+.tl-prize{position:absolute; inset:0; margin:0; display:grid; place-items:center; padding:14px 22px; text-align:center; font:700 26px/1.15 'Caveat', cursive; color:#2b3f7a}
+.tl-prize em{display:block; font:700 13px/1 var(--mono); font-style:normal; letter-spacing:.14em; color:#a8261f; margin-bottom:6px}
+.tl-cover{position:absolute; inset:0; width:100%; height:100%; cursor:var(--cur-hover, pointer); touch-action:none}
+.tl-rules{margin:10px 0 0; font:10.5px/1.35 var(--mono); color:#6a5a3a}
+.tl-more{padding:11px 18px; border:0; border-radius:4px; background:#e06a1a; color:#fff; font:14px/1 var(--mono); cursor:var(--cur-hover, pointer)}
+
+/* pager */
+.pager{position:fixed; left:14px; bottom:14px; z-index:90; font-family:var(--mono)}
+.pg-dev{position:relative; display:flex; flex-direction:column; align-items:center; gap:3px; width:96px; padding:8px 8px 5px; border:0; border-radius:10px 10px 14px 14px; cursor:var(--cur-hover, pointer);
+  background:linear-gradient(#3a3a3a, #161616); box-shadow:0 8px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.18)}
+.pg-lcd{display:block; width:100%; height:24px; overflow:hidden; border-radius:3px; background:#8fa47a; box-shadow:inset 0 2px 3px rgba(0,0,0,.45); text-align:left}
+.pg-run{display:inline-block; padding:0 4px; white-space:nowrap; font:700 11px/24px var(--mono); color:#1d2a14; letter-spacing:.04em}
+.pager.new .pg-run{animation:pgRun 9s linear infinite}
+@keyframes pgRun{from{transform:translateX(90px)} to{transform:translateX(-100%)}}
+.pg-brand{font:700 6.5px/1 var(--mono); letter-spacing:.2em; color:#9a9a9a}
+.pg-dot{position:absolute; right:-4px; top:-4px; width:14px; height:14px; border-radius:50%; background:#e2483a; box-shadow:0 0 0 2px #161616}
+.pager.buzz .pg-dev{animation:pgBuzz .07s linear 10 alternate}
+@keyframes pgBuzz{from{translate:-2px 0} to{translate:2px 0}}
+.pg-panel{position:absolute; left:0; bottom:calc(100% + 10px); width:min(300px, calc(100vw - 28px)); padding:12px; border-radius:10px; background:linear-gradient(#2e2e2e, #141414); box-shadow:0 14px 28px rgba(0,0,0,.55); color:#c9c9c9}
+.pg-head{margin:0 0 8px; font:11px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase}
+.pg-screen{min-height:86px; padding:10px; border-radius:4px; background:#8fa47a; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); color:#1d2a14}
+.pg-msg{margin:0; font:700 14px/1.35 var(--mono)} .pg-when{margin:6px 0 0; font:10px/1 var(--mono); opacity:.7}
+.pg-nav{display:flex; justify-content:space-between; align-items:center; margin-top:8px; font:11px/1 var(--mono)}
+.pg-nav button{width:32px; height:26px; border:0; border-radius:4px; background:#3e3e3e; color:#ddd; cursor:var(--cur-hover, pointer)}
+.pg-nav button:disabled{opacity:.35; cursor:default}
+body.splash-on .pager{display:none}
+@media (max-width:600px){ .pager{left:10px; bottom:10px} .pg-dev{width:80px} }
+@media (prefers-reduced-motion:reduce){ .pager.new .pg-run, .pager.buzz .pg-dev, .die.roll, .rm-phone.ring{animation:none} }
 </style>
 </head>
 <body>
@@ -2682,6 +2789,32 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           <defs><linearGradient id="pnVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.16)"/><stop offset=".5" stop-color="rgba(0,0,0,0)"/><stop offset="1" stop-color="rgba(0,0,0,.28)"/></linearGradient></defs>
         </svg>
       </a>
+      <button class="rm-phone" id="rmPhone" type="button" aria-label="Телефон. Позвонить">
+        <svg viewBox="0 0 140 110" aria-hidden="true">
+          <path d="M118 74c14 4 20 14 14 24s-20 8-22-2 8-14 2-20" fill="none" stroke="#2a1410" stroke-width="2.6" stroke-dasharray="3 2.4"/>
+          <path d="M22 50h96l14 50H8z" fill="#b8231c"/><path d="M22 50h96l14 50H8z" fill="url(#phSh)"/>
+          <path d="M8 100h124v6H8z" fill="#6e120e"/>
+          <ellipse cx="70" cy="72" rx="24" ry="20" fill="#efe6d2"/><ellipse cx="70" cy="72" rx="24" ry="20" fill="none" stroke="#6e120e" stroke-width="1.6"/>
+          <ellipse cx="70" cy="72" rx="8" ry="6.6" fill="#b8231c"/>
+          <g fill="#3a1410"><circle cx="70" cy="56.5" r="3"/><circle cx="80" cy="59" r="3"/><circle cx="87" cy="66" r="3"/><circle cx="88.5" cy="75" r="3"/><circle cx="84" cy="83.5" r="3"/><circle cx="60" cy="59" r="3"/><circle cx="53" cy="66" r="3"/><circle cx="51.5" cy="75" r="3"/><circle cx="56" cy="83.5" r="3"/><circle cx="64" cy="88" r="3"/></g>
+          <path d="M10 40c0-14 8-22 20-22h80c12 0 20 8 20 22v6c0 6-6 8-12 6l-10-4c-4-2-6-4-6-8v-4H38v4c0 4-2 6-6 8l-10 4c-6 2-12 0-12-6z" fill="#c42a22"/>
+          <path d="M30 22h80" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
+          <defs><linearGradient id="phSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.18)"/><stop offset="1" stop-color="rgba(0,0,0,.25)"/></linearGradient></defs>
+        </svg>
+      </button>
+      <button class="rm-nardy" id="rmNardy" type="button" aria-label="Нарды. Сыграть">
+        <svg viewBox="0 0 160 70" aria-hidden="true">
+          <rect x="2" y="8" width="156" height="58" rx="4" fill="#5a2e14"/><rect x="2" y="2" width="156" height="58" rx="4" fill="#8a4a22"/>
+          <rect x="8" y="7" width="144" height="48" rx="2" fill="none" stroke="#c9a24a" stroke-width="1.6"/>
+          <path d="M80 2v58" stroke="#3a1c0c" stroke-width="2.4"/>
+          <g fill="none" stroke="#e8c98a" stroke-width="1.4" opacity=".85"><path d="M40 18l10 13-10 13-10-13zM120 18l10 13-10 13-10-13z"/><circle cx="40" cy="31" r="4"/><circle cx="120" cy="31" r="4"/></g>
+          <g fill="#e8c98a" opacity=".6"><circle cx="16" cy="14" r="1.6"/><circle cx="64" cy="14" r="1.6"/><circle cx="16" cy="48" r="1.6"/><circle cx="64" cy="48" r="1.6"/><circle cx="96" cy="14" r="1.6"/><circle cx="144" cy="14" r="1.6"/><circle cx="96" cy="48" r="1.6"/><circle cx="144" cy="48" r="1.6"/></g>
+          <rect x="74" y="24" width="12" height="16" rx="2" fill="#c9a24a"/><rect x="77" y="28" width="6" height="8" rx="1" fill="#7a5a1a"/>
+        </svg>
+      </button>
+      <button class="rm-ticket" id="rmTicket" type="button" aria-label="Лотерейный билет «Спринт». Стереть">
+        <svg viewBox="0 0 80 46" aria-hidden="true"><rect width="80" height="46" rx="2" fill="#f2e7c6"/><rect x="0" y="0" width="80" height="13" fill="#e06a1a"/><text x="40" y="10" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" font-weight="700" fill="#fff" letter-spacing="2">СПРИНТ</text><rect x="8" y="18" width="64" height="20" rx="2" fill="#b9bcbf"/><path d="M10 26h20M36 30h24M14 33h14" stroke="#e6e8ea" stroke-width="2"/><text x="40" y="44" text-anchor="middle" font-family="PT Mono, monospace" font-size="4.4" fill="#5a4a2a">МОМЕНТАЛЬНАЯ ЛОТЕРЕЯ</text></svg>
+      </button>
       <button class="ach-wall" id="achWall" type="button" aria-label="Ведомость заслуг на стене: ваши достижения"><i class="aw-pin" aria-hidden="true"></i><b>ВЕДОМОСТЬ</b><span>заслуг</span><i class="aw-lines" aria-hidden="true"></i><em class="aw-n">0/17</em></button>
       <div class="bin" id="bin" aria-hidden="true"><svg viewBox="0 0 80 96"><defs>
           <linearGradient id="binBody" x1="0" x2="1"><stop offset="0" stop-color="#1f2a1c"/><stop offset=".22" stop-color="#4e6243"/><stop offset=".45" stop-color="#5f7552"/><stop offset=".75" stop-color="#3a4a33"/><stop offset="1" stop-color="#1a2317"/></linearGradient>
@@ -3498,6 +3631,75 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 </div>
 <div class="npc-modal" id="npcModal" hidden role="dialog" aria-modal="true" aria-label="Дело"></div>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Фотография крупно"><figure><figcaption></figcaption></figure><button class="lb-x" type="button" aria-label="Закрыть">×</button></div>
+<div class="toy" id="toy" hidden role="dialog" aria-modal="true" aria-label="Игрушки">
+  <div class="toy-box">
+    <button class="toy-x" type="button" aria-label="Закрыть">×</button>
+
+    <section class="ty-phone" data-toy="phone" hidden>
+      <div class="tp-dial">
+        <svg class="tp-svg" viewBox="-120 -120 240 240" aria-hidden="true">
+          <circle r="116" fill="#2a1410"/><circle r="113" fill="#b8231c"/>
+          <circle r="104" fill="#efe6d2"/><g class="tp-digits"></g>
+          <g class="tp-disc"><path class="tp-discp" fill="rgba(240,236,226,.38)" stroke="#8a7a62" stroke-width="1.2" fill-rule="evenodd"/></g>
+          <circle r="42" fill="#efe6d2" stroke="#8a7a62" stroke-width="1.2"/>
+          <text y="-8" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="#5a4a32" letter-spacing="1">ЛЕНИНГРАД</text>
+          <text y="8" text-anchor="middle" font-family="Caveat, cursive" font-size="15" font-weight="700" fill="#2b3f7a">252-38-14</text>
+          <text y="22" text-anchor="middle" font-family="PT Mono, monospace" font-size="6.5" fill="#8a7a62">кв. Громова</text>
+          <path class="tp-stop" d="M0 0" stroke="#c9ccd0" stroke-width="7" stroke-linecap="round"/>
+          <g class="tp-hits"></g>
+        </svg>
+        <p class="tp-strip" aria-live="polite"><span class="tp-num">— — —</span></p>
+      </div>
+      <div class="tp-side">
+        <div class="tp-book">
+          <b>Записная книжка</b>
+          <p><span>Витя (раб.)</span><i>315-02-47</i></p>
+          <p><span>Лёша</span><i>252-17-90</i></p>
+          <p><span>Милиция</span><i>02</i></p>
+          <p><span>Скорая</span><i>03</i></p>
+          <p><span>Точное время</span><i>100</i></p>
+          <p class="tp-more">Ещё два номера записаны где-то на доске…</p>
+        </div>
+        <div class="tp-talk" aria-live="polite"><p class="tp-idle">Крутите диск: нажмите на цифру.</p></div>
+        <button class="tp-hang" type="button">Положить трубку</button>
+      </div>
+    </section>
+
+    <section class="ty-nardy" data-toy="nardy" hidden>
+      <div class="tn-pick">
+        <p class="tn-q">С кем играем?</p>
+        <button class="tn-who" type="button" data-who="v"><img src="assets/people/viktor-home.webp" alt=""><b>Витя</b><span>«Сыграем. Только без слёз потом».</span></button>
+        <button class="tn-who" type="button" data-who="l"><img src="assets/people/lesha-home.webp" alt=""><b>Лёша</b><span>«Ставлю на кон пачку „Явы“!»</span></button>
+      </div>
+      <div class="tn-game" hidden>
+        <div class="tn-score"><span>Вы <b class="tn-me">0</b></span><span class="tn-to">до трёх побед</span><span><b class="tn-op">0</b> <em class="tn-name">Лёша</em></span></div>
+        <div class="tn-board">
+          <div class="tn-half me"><div class="die"></div><div class="die"></div><p class="tn-call"></p></div>
+          <div class="tn-half op"><div class="die"></div><div class="die"></div><p class="tn-call"></p></div>
+        </div>
+        <div class="tn-say"><img class="tn-ava" src="" alt=""><p></p></div>
+        <div class="tn-btns"><button class="tn-roll" type="button">Бросить кости</button><button class="tn-again" type="button" hidden>Ещё партию</button><button class="tn-swap" type="button">Сменить соперника</button></div>
+      </div>
+    </section>
+
+    <section class="ty-lotto" data-toy="lotto" hidden>
+      <div class="tl-ticket">
+        <div class="tl-top"><b>СПРИНТ</b><span>Всероссийская моментальная лотерея · серия 96 · цена 1000 руб.</span></div>
+        <div class="tl-field"><p class="tl-prize"></p><canvas class="tl-cover"></canvas></div>
+        <p class="tl-rules">Сотрите защитный слой монеткой. Выигрыши до 10 000 руб. выплачиваются в киоске, остальные — в Москве.</p>
+      </div>
+      <button class="tl-more" type="button">Купить ещё билет</button>
+    </section>
+  </div>
+</div>
+<div class="pager" id="pager">
+  <button class="pg-dev" type="button" aria-label="Пейджер: сообщения"><span class="pg-lcd"><span class="pg-run">— — —</span></span><i class="pg-dot" hidden></i><span class="pg-brand">MOTOROLA</span></button>
+  <div class="pg-panel" hidden>
+    <p class="pg-head">Пейджер · <span class="pg-count"></span></p>
+    <div class="pg-screen"><p class="pg-msg"></p><p class="pg-when"></p></div>
+    <div class="pg-nav"><button class="pg-prev" type="button" aria-label="Предыдущее">◀</button><span class="pg-pos"></span><button class="pg-next" type="button" aria-label="Следующее">▶</button></div>
+  </div>
+</div>
 <script src="bots.js"></script>
 <script src="music.js"></script>
 <script src="npcs.js"></script>
@@ -4033,6 +4235,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const fallAnim = (el, extra = 0) => {
       const fr = fridge.getBoundingClientRect(), r = el.getBoundingClientRect();
       const fall = Math.max(200, fr.bottom - r.top + 60 + extra), dx = (Math.random() - .5) * 80;
+      if (window.lihieSfx) window.lihieSfx.paper();
       if (reduce) return Promise.resolve();
       return el.animate([{translate: '0 0', opacity: 1}, {translate: `${dx * .3}px ${fall * .4}px`, opacity: 1, offset: .5}, {translate: `${dx}px ${fall}px`, opacity: 0}],
         {duration: 950, easing: 'cubic-bezier(.5,0,.9,.6)'}).finished;
@@ -4132,11 +4335,319 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     rat.addEventListener('click', () => {
       if (rat.classList.contains('run') || rat.classList.contains('pet')) return;
       petted = true; rat.classList.add('pet');
+      if (window.lihieSfx) window.lihieSfx.squeak();
       if (window.lihieOnce) window.lihieOnce('rat');
+      if (window.lihiePage) setTimeout(() => window.lihiePage('rat'), 2500);
       setTimeout(() => rat.classList.remove('pet'), 3200);
     });
     addEventListener('hashchange', () => { if (location.hash === '#/about'){ clearTimeout(timer); timer = setTimeout(trip, 2500); } });
     if (location.hash === '#/about') timer = setTimeout(trip, 2500); else schedule();
+  })();
+
+
+  /* ---------- sounds for the toys: all synthesised, no files; volume follows the record player's knob ---------- */
+  const SFX = (() => {
+    let ac = null, noiseBuf = null;
+    const ctx = () => { if (!ac){ try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } } if (ac.state === 'suspended') ac.resume(); return ac; };
+    const level = () => { let v = .7; try { const x = parseFloat(localStorage.getItem('lihie-vol')); if (x >= 0 && x <= 1) v = x; } catch (e) {} return v * .5; };
+    const noise = c => { if (!noiseBuf){ noiseBuf = c.createBuffer(1, c.sampleRate, c.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } return noiseBuf; };
+    const out = (c, g = 1) => { const n = c.createGain(); n.gain.value = level() * g; n.connect(c.destination); return n; };
+    const tone = (f, t0, dur, {type = 'sine', g = .3, attack = .005, rel = .02} = {}) => {
+      const c = ctx(); if (!c) return; const o = c.createOscillator(), a = c.createGain(), t = c.currentTime + t0;
+      o.type = type; o.frequency.value = f; a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(g, t + attack); a.gain.setValueAtTime(g, t + dur - rel); a.gain.linearRampToValueAtTime(0, t + dur);
+      o.connect(a).connect(out(c)); o.start(t); o.stop(t + dur + .02);
+    };
+    const burst = (t0, dur, {g = .4, f = 2000, q = 1, type = 'bandpass'} = {}) => {
+      const c = ctx(); if (!c) return; const s = c.createBufferSource(), fl = c.createBiquadFilter(), a = c.createGain(), t = c.currentTime + t0;
+      s.buffer = noise(c); fl.type = type; fl.frequency.value = f; fl.Q.value = q;
+      a.gain.setValueAtTime(g, t); a.gain.exponentialRampToValueAtTime(.001, t + dur);
+      s.connect(fl).connect(a).connect(out(c)); s.start(t, Math.random() * .5); s.stop(t + dur + .02);
+    };
+    return {
+      tick: (t0 = 0) => burst(t0, .025, {g: .6, f: 3200, q: 4}),
+      wind: () => { for (let i = 0; i < 6; i++) burst(i * .03, .02, {g: .15, f: 5000, q: 6}); },
+      pickup: () => { burst(0, .09, {g: .7, f: 700, q: 1.5}); burst(.05, .05, {g: .3, f: 2400, q: 3}); },
+      hangup: () => { burst(0, .14, {g: .9, f: 380, q: 1.2}); burst(.02, .06, {g: .4, f: 1800, q: 3}); },
+      ringback: (t0 = 0) => { tone(425, t0, 1, {g: .16}); },
+      busy: (n = 4) => { for (let i = 0; i < n; i++) tone(425, i * .7, .35, {g: .16}); },
+      bell: () => { for (let i = 0; i < 16; i++) tone(i % 2 ? 1180 : 1320, i * .045, .04, {type: 'square', g: .05}); },
+      dice: () => { for (let i = 0; i < 9; i++) burst(i * .045 + Math.random() * .02, .03, {g: .5, f: 2600 + Math.random() * 1600, q: 5}); burst(.48, .08, {g: .7, f: 900, q: 2}); burst(.56, .05, {g: .4, f: 1400, q: 3}); },
+      scratch: () => burst(0, .07, {g: .22, f: 6000, q: .7, type: 'highpass'}),
+      paper: () => burst(0, .25, {g: .25, f: 3000, q: .6}),
+      win: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * .11, .18, {type: 'triangle', g: .16})),
+      lose: () => [392, 330, 262].forEach((f, i) => tone(f, i * .15, .22, {type: 'triangle', g: .14})),
+      pager: () => { for (let r = 0; r < 3; r++) for (let i = 0; i < 3; i++) tone(2900, r * .42 + i * .1, .07, {type: 'square', g: .045}); },
+      squeak: () => { const c = ctx(); if (!c) return; const o = c.createOscillator(), a = c.createGain(), t = c.currentTime; o.type = 'sine'; o.frequency.setValueAtTime(2400, t); o.frequency.exponentialRampToValueAtTime(3600, t + .08); o.frequency.exponentialRampToValueAtTime(2600, t + .16); a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(.12, t + .02); a.gain.linearRampToValueAtTime(0, t + .17); o.connect(a).connect(out(c)); o.start(t); o.stop(t + .2); }
+    };
+  })();
+  window.lihieSfx = SFX;
+
+  /* ---------- the pager: little messages as you walk around the site ---------- */
+  const PAGER_MSG = {
+    hello: 'ДОБРО ПОЖАЛОВАТЬ В КИРОВСКИЙ. ЧАЙ НА КУХНЕ. — Л.',
+    '/delo': 'ГАРАЖИ 2:00. ПРИВЕЗИ ВСЁ. — К.',
+    '/archive': 'АЛЬБОМЫ НЕ ДОСТАВАТЬ. МАМА РУГАТЬСЯ БУДЕТ. — Л.',
+    '/lyudi': 'ДОСКУ НЕ ТРОГАТЬ. — В.',
+    '/gorod': 'НА РЫНОК ПОСЛЕ 22:00 НЕ ХОДИ. — В.',
+    '/starty': 'КАССЕТЫ СДАТЬ В ПРОКАТ ДО ПЯТНИЦЫ. ВИДЕОСАЛОН «ЭРА»',
+    '/about': 'КУПИ ХЛЕБ И КЕФИР. — Л.',
+    hero: 'ЛИЧНОЕ ДЕЛО НЕ ЧИТАТЬ. — В.',
+    dark: 'ТЫ ЧЕГО СВЕТ ВЫКЛЮЧИЛА? — В.',
+    vcall: 'НА РАБОЧИЙ НЕ ЗВОНИ. ПО ДЕЛУ — ЧЕРЕЗ ДЕЖУРНОГО. — В.',
+    rat: 'КРЫСУ НЕ КОРМИТЬ. ОНА И ТАК ТОЛСТАЯ. — Л.'
+  };
+  const pager = (() => {
+    const box = document.getElementById('pager'); if (!box) return () => {};
+    const dev = box.querySelector('.pg-dev'), panel = box.querySelector('.pg-panel'), run = box.querySelector('.pg-run'), dot = box.querySelector('.pg-dot');
+    let got = []; try { got = JSON.parse(localStorage.getItem('lihie-pager') || '[]'); } catch (e) {}
+    got = got.filter(x => PAGER_MSG[x.id]);
+    let at = got.length - 1, seen = true;
+    try { seen = localStorage.getItem('lihie-pager-seen') !== '0'; } catch (e) {}
+    const stamp = () => { const d = new Date(); return `14.10.96 ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; };
+    const show = () => {
+      const n = got.length;
+      box.querySelector('.pg-count').textContent = `${n} из ${Object.keys(PAGER_MSG).length}`;
+      box.querySelector('.pg-msg').textContent = n ? PAGER_MSG[got[at].id] : 'НЕТ СООБЩЕНИЙ';
+      box.querySelector('.pg-when').textContent = n ? got[at].t : '';
+      box.querySelector('.pg-pos').textContent = n ? `${at + 1}/${n}` : '';
+      box.querySelector('.pg-prev').disabled = at <= 0; box.querySelector('.pg-next').disabled = at >= n - 1;
+      run.textContent = n ? PAGER_MSG[got[n - 1].id] : '— — —';
+      dot.hidden = seen; box.classList.toggle('new', !seen);
+    };
+    const markSeen = v => { seen = v; try { localStorage.setItem('lihie-pager-seen', v ? '1' : '0'); } catch (e) {} };
+    dev.addEventListener('click', () => { const on = panel.hidden; panel.hidden = !on; if (on){ at = got.length - 1; markSeen(true); } show(); });
+    box.querySelector('.pg-prev').addEventListener('click', () => { at = Math.max(0, at - 1); show(); });
+    box.querySelector('.pg-next').addEventListener('click', () => { at = Math.min(got.length - 1, at + 1); show(); });
+    document.addEventListener('click', e => { if (!panel.hidden && !box.contains(e.target)){ panel.hidden = true; } });
+    show();
+    return id => {
+      if (!PAGER_MSG[id] || got.some(x => x.id === id)) return;
+      got.push({id, t: stamp()}); at = got.length - 1;
+      try { localStorage.setItem('lihie-pager', JSON.stringify(got)); } catch (e) {}
+      markSeen(!panel.hidden); show();
+      box.classList.remove('buzz'); void box.offsetWidth; box.classList.add('buzz');
+      SFX.pager();
+      if (got.length === Object.keys(PAGER_MSG).length && window.lihieOnce) window.lihieOnce('pager');
+    };
+  })();
+  window.lihiePage = pager;
+  const pageRoute = () => { const r = location.hash.replace(/^#/, '') || '/'; if (PAGER_MSG[r]) pager(r); else if (botIds.has(r)) pager('hero'); };
+  addEventListener('hashchange', () => setTimeout(pageRoute, 1200));
+  (function hello(){ if (document.body.classList.contains('splash-on') || document.getElementById('intro')) return setTimeout(hello, 1000); setTimeout(() => { pager('hello'); pageRoute(); }, 4000); })();
+
+  /* ---------- toys in the room: one dialog, three panels ---------- */
+  const toy = document.getElementById('toy');
+  const toyOpen = name => { toy.hidden = false; document.body.style.overflow = 'hidden'; toy.querySelectorAll('[data-toy]').forEach(s => s.hidden = s.dataset.toy !== name); toy.dispatchEvent(new CustomEvent('toyopen', {detail: name})); };
+  const toyClose = () => { if (toy.hidden) return; toy.hidden = true; document.body.style.overflow = ''; toy.dispatchEvent(new Event('toyclose')); };
+  toy.querySelector('.toy-x').addEventListener('click', toyClose);
+  toy.addEventListener('click', e => { if (e.target === toy) toyClose(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toyClose(); });
+
+  /* phone: a rotary dial; numbers from the notebook, the board, and a few everyone knows */
+  (() => {
+    const btn = document.getElementById('rmPhone'), sec = toy.querySelector('.ty-phone'); if (!btn || !sec) return;
+    const svg = sec.querySelector('.tp-svg'), disc = sec.querySelector('.tp-disc'), numEl = sec.querySelector('.tp-num'), talk = sec.querySelector('.tp-talk'), hang = sec.querySelector('.tp-hang');
+    const ang = n => (-30 - 28 * (n - 1)) * Math.PI / 180, R = 78, HR = 14;
+    const label = n => n === 10 ? '0' : String(n);
+    let dpath = 'M108 0A108 108 0 1 1 -108 0A108 108 0 1 1 108 0Z M46 0A46 46 0 1 0 -46 0A46 46 0 1 0 46 0Z', digits = '', hits = '';
+    for (let n = 1; n <= 10; n++){
+      const x = (R * Math.cos(ang(n))).toFixed(1), y = (R * Math.sin(ang(n))).toFixed(1);
+      dpath += ` M${(+x + HR).toFixed(1)} ${y}A${HR} ${HR} 0 1 0 ${(x - HR).toFixed(1)} ${y}A${HR} ${HR} 0 1 0 ${(+x + HR).toFixed(1)} ${y}Z`;
+      digits += `<text x="${x}" y="${(+y + 7).toFixed(1)}" text-anchor="middle" font-family="PT Serif, serif" font-size="20" font-weight="700" fill="#2a1d14">${label(n)}</text>`;
+      hits += `<circle cx="${x}" cy="${y}" r="${HR + 2}" data-n="${n}"><title>${label(n)}</title></circle>`;
+    }
+    sec.querySelector('.tp-discp').setAttribute('d', dpath);
+    sec.querySelector('.tp-digits').innerHTML = digits; sec.querySelector('.tp-hits').innerHTML = hits;
+    const sa = 60 * Math.PI / 180; sec.querySelector('.tp-stop').setAttribute('d', `M${(98 * Math.cos(sa)).toFixed(1)} ${(98 * Math.sin(sa)).toFixed(1)}L${(114 * Math.cos(sa)).toFixed(1)} ${(114 * Math.sin(sa)).toFixed(1)}`);
+
+    const nowTime = () => { const p = new Intl.DateTimeFormat('ru-RU', {timeZone: 'Europe/Moscow', hour: 'numeric', minute: 'numeric'}).formatToParts(new Date()); const h = +p.find(x => x.type === 'hour').value, m = +p.find(x => x.type === 'minute').value;
+      const w = (n, a, b, c) => n % 10 === 1 && n % 100 !== 11 ? a : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? b : c;
+      return `Московское время ${h} ${w(h, 'час', 'часа', 'часов')} ${m} ${w(m, 'минута', 'минуты', 'минут')}.`; };
+    const pick = a => a[Math.floor(Math.random() * a.length)];
+    const BOOK = {
+      '02': () => [['Дежурный', 'Дежурная часть Кировского района, слушаю.'], ['Дежурный', 'Девушка, если вы опять про соседский магнитофон — пишите заявление в двух экземплярах.']],
+      '03': () => [['Скорая', 'Скорая, что случилось?'], ['Скорая', '…Моль? Девушка, это не к нам. Это в санэпидемстанцию.']],
+      '01': () => [['Пожарные', 'Пожарная охрана. Где горит?'], ['Пожарные', 'Рынок уже потушили. Не волнуйтесь, гражданочка.']],
+      '100': () => [['Автоинформатор', nowTime()], ['', '(короткие гудки)']],
+      '3150247': () => { pager('vcall'); return pick([
+        [['Витя', 'Громов.'], ['Витя', '…Гражданочка, это служебный телефон.'], ['Витя', 'Ладно. Что случилось? …Ничего? Тогда не занимай линию.']],
+        [['Витя', 'Громов слушает.'], ['Витя', 'А, это ты. Я на выезде через пять минут. Сырники в холодильнике. Всё, отбой.']],
+        [['Витя', 'Да.'], ['Витя', 'Лапин, если это опять ты с анекдотом — я тебя найду.'], ['Витя', '…А. Не Лапин. Извини. Слушаю.']]]); },
+      '2521790': () => pick([
+        [['Лёша', 'Алё! Тихонов!'], ['Лёша', 'О, привет! Слушай, я на минуту, меня тут… Витя рядом? Нет? Ну и хорошо. Перезвоню!']],
+        [['Лёша', 'Тихонов слушает.'], ['Лёша', 'Если ты по поводу кассеты «Кино» — я её верну. Честно. Скажи Вите.']],
+        [['Пират', 'Мрррау.'], ['Лёша', 'Пират, отдай трубку! …Алё? Это кот. Он у меня на телефоне дежурит.']]]),
+      '4843312': () => [['Марина', 'Да! Витя?'], ['Марина', 'Не Витя? Ой, а я думала Витя. Петька, положи кота на место!'], ['Марина', 'Извините, у меня тут дети. Если увидите брата — пусть ест нормально.']],
+      '1486105': () => [['Михалыч', 'Автосервис, Михалыч.'], ['Михалыч', 'Девушка, машину пригоняйте, по телефону не чиню.'], ['Михалыч', 'А, вы от Семёныча? Так бы сразу и сказали. Для своих — завтра к обеду.']]
+    };
+    const SECRET = {'3150247': 'v', '2521790': 'l', '4843312': 'm', '1486105': 'mi'};
+    let busy = false, idleT = 0, line = 0, talkT = [];
+    const fmt = d => d.length === 7 ? `${d.slice(0, 3)}-${d.slice(3, 5)}-${d.slice(5)}` : d;
+    const say = (who, text, cls = '') => { const p = document.createElement('p'); if (cls) p.className = cls; p.innerHTML = who ? `<span class="who">${who}:</span> ${text}` : text; talk.appendChild(p); talk.scrollTop = talk.scrollHeight; };
+    const reset = () => { talkT.forEach(clearTimeout); talkT = []; clearTimeout(idleT); queue.length = 0; digits = ''; numEl.textContent = '— — —'; talk.innerHTML = '<p class="tp-idle">Крутите диск: нажмите на цифру.</p>'; line = 0; };
+    const call = () => {
+      const d = digits; line = 1; talk.innerHTML = ''; say('', `Набираем ${fmt(d)}…`, 'sys');
+      const known = BOOK[d];
+      if (!known){
+        if (Math.random() < .5){ SFX.busy(5); say('', 'Короткие гудки. Занято.', 'sys'); }
+        else { SFX.ringback(.2); SFX.ringback(3.2); talkT.push(setTimeout(() => say('', 'Длинные гудки. Никто не берёт.', 'sys'), 3000)); talkT.push(setTimeout(() => say('Незнакомый голос', pick(['Алло, это баня? …Нет? Жаль.', 'Вам кого? Здесь таких нет. И не было.', 'Ошиблись номером, девушка. Бывает.'])), 5600)); }
+        return;
+      }
+      const isShort = d.length < 4; let t = isShort ? 600 : 3800;
+      if (!isShort){ SFX.ringback(.2); SFX.ringback(2.4); }
+      talkT.push(setTimeout(SFX.pickup, t - 150));
+      const lines = known();
+      lines.forEach(([who, text], i) => talkT.push(setTimeout(() => say(who, text), t + i * 1600)));
+      talkT.push(setTimeout(() => { SFX.busy(3); say('', 'Короткие гудки.', 'sys'); }, t + lines.length * 1600 + 800));
+      if (SECRET[d]){
+        let got = []; try { got = JSON.parse(localStorage.getItem('lihie-called') || '[]'); } catch (e) {}
+        if (!got.includes(SECRET[d])) got.push(SECRET[d]);
+        try { localStorage.setItem('lihie-called', JSON.stringify(got)); } catch (e) {}
+        if (got.length >= 4 && window.lihieOnce) talkT.push(setTimeout(() => window.lihieOnce('phone'), t + lines.length * 1600 + 1200));
+      }
+    };
+    // clicks made while the dial is still turning back wait their turn
+    const queue = [];
+    const spin = () => {
+      if (busy || !queue.length || line) return;
+      const n = queue.shift(), travel = 90 + 28 * (n - 1);
+      busy = true; clearTimeout(idleT);
+      SFX.wind();
+      const fwd = reduce ? 1 : travel * 2.2, back = reduce ? 1 : travel * 3.4;
+      disc.animate([{transform: 'rotate(0deg)'}, {transform: `rotate(${travel}deg)`}], {duration: fwd, easing: 'ease-out', fill: 'forwards'}).finished.then(() => {
+        for (let i = 0; i < n; i++) SFX.tick((back / 1000) * (i + .5) / n);
+        return disc.animate([{transform: `rotate(${travel}deg)`}, {transform: 'rotate(0deg)'}], {duration: back, easing: 'linear', fill: 'forwards'}).finished;
+      }).then(() => {
+        busy = false; digits += label(n); numEl.textContent = fmt(digits);
+        if (digits.length >= 7){ queue.length = 0; call(); return; }
+        if (queue.length) spin();
+        else idleT = setTimeout(() => { if (digits.length >= 2) call(); }, 3200);
+      });
+    };
+    sec.querySelector('.tp-hits').addEventListener('click', e => {
+      const c = e.target.closest('circle'); if (!c || line || digits.length + queue.length >= 7) return;
+      queue.push(+c.dataset.n); clearTimeout(idleT); spin();
+    });
+    hang.addEventListener('click', () => { SFX.hangup(); reset(); });
+    btn.addEventListener('click', () => { reset(); toyOpen('phone'); SFX.pickup(); });
+    toy.addEventListener('toyclose', () => { if (!sec.hidden){ reset(); SFX.hangup(); } });
+    // now and then, while the room is on screen, the phone rings
+    setInterval(() => { if (location.hash && location.hash !== '#/') return; if (!toy.hidden || Math.random() > .25 || document.hidden) return; btn.classList.add('ring'); SFX.bell(); setTimeout(() => SFX.bell(), 1300); setTimeout(() => btn.classList.remove('ring'), 2200); }, 45000);
+  })();
+
+  /* nardy: throw against Vitya or Lyosha, first to three */
+  (() => {
+    const btn = document.getElementById('rmNardy'), sec = toy.querySelector('.ty-nardy'); if (!btn || !sec) return;
+    const pickEl = sec.querySelector('.tn-pick'), game = sec.querySelector('.tn-game');
+    const [m1, m2] = sec.querySelectorAll('.tn-half.me .die'), [o1, o2] = sec.querySelectorAll('.tn-half.op .die');
+    const callMe = sec.querySelector('.tn-half.me .tn-call'), callOp = sec.querySelector('.tn-half.op .tn-call');
+    const sayEl = sec.querySelector('.tn-say p'), ava = sec.querySelector('.tn-ava'), roll = sec.querySelector('.tn-roll'), again = sec.querySelector('.tn-again');
+    const PIPS = {1: [5], 2: [1, 9], 3: [1, 5, 9], 4: [1, 3, 7, 9], 5: [1, 3, 5, 7, 9], 6: [1, 3, 4, 6, 7, 9]};
+    const face = (el, v) => { el.innerHTML = ''; for (let i = 1; i <= 9; i++){ const p = document.createElement('i'); p.style.gridArea = `${Math.ceil(i / 3)} / ${(i - 1) % 3 + 1}`; if (!PIPS[v].includes(i)) p.style.visibility = 'hidden'; el.appendChild(p); } };
+    const NAME = {1: 'як', 2: 'ду', 3: 'се', 4: 'джахар', 5: 'беш', 6: 'шеш'};
+    const callName = (a, b) => a === b ? (a === 6 ? 'ду-шеш!' : `ду-${NAME[a]}`) : `${NAME[Math.max(a, b)]}-${NAME[Math.min(a, b)]}`;
+    const pick = a => a[Math.floor(Math.random() * a.length)];
+    const TALK = {
+      v: {name: 'Витя', img: 'assets/people/viktor-home.webp',
+        start: ['Кидай. Только честно.', 'Ну давай, гражданочка. Посмотрим.'],
+        meWin: ['Хм. Бывает.', 'Повезло. Ещё раз.', 'Кости не те. Лёхины.'],
+        opWin: ['Так.', 'Учись, пока я добрый.', 'В части научился. Там по вечерам больше заняться было нечем.'],
+        tie: ['Ничья. Перекидываем.', 'Ровно. Ещё раз.'],
+        meDouble: ['Мухлюешь?', 'Дубль. Ну-ну.'], opDouble: ['Дубль. Записывай.', 'Вот так это делается.'],
+        meSix: ['Ду-шеш. Всё, сдаюсь. Шучу. Кидай дальше.'],
+        matchWin: ['Ладно. Твоя взяла. Только Лёхе не говори.', 'Обыграла. Завтра реванш, я запишу в протокол.'],
+        matchLose: ['Партия. Чай поставишь — сыграем ещё.', 'Моя. Не расстраивайся, меня даже Лёха редко обыгрывает.']},
+      l: {name: 'Лёша', img: 'assets/people/lesha-home.webp',
+        start: ['Ну, держись! Я в бане всех обыгрываю!', 'Ставлю пачку «Явы»! Ну, кидай!'],
+        meWin: ['Да ладно?! Кости кривые, я Жоре говорил!', 'Ну это случайно! Это не считается!', 'Витя, ты видел? Не видел. И хорошо.'],
+        opWin: ['Учись, пока я жив!', 'Ха! Как в бане по четвергам!', 'Это класс, это не лечится!'],
+        tie: ['Ничья! Это знак! Кидай ещё!', 'Поровну, как с Витей зарплату делим.'],
+        meDouble: ['Дубль?! Ты где так научилась?', 'Ого! Ну всё, я в шоке.'], opDouble: ['Дублик! Вот это я понимаю!', 'Видала? Рука набита!'],
+        meSix: ['Ду-шеш?! Всё, пиши пропало! Я Вите не скажу, что проиграл!'],
+        matchWin: ['Ну ты даёшь… Только Вите не говори, засмеёт.', 'Проиграл! «Явы» нет, держи жвачку «Love is».'],
+        matchLose: ['Я победил! Запиши, распишись, поставь печать!', 'Партия! Витя бы гордился. Ну, он бы промолчал, но гордился.']}
+    };
+    let who = 'l', me = 0, op = 0, busy = false;
+    const sayIt = t => { sayEl.textContent = t; };
+    const start = w => {
+      who = w; me = op = 0; const T = TALK[w];
+      sec.querySelector('.tn-name').textContent = T.name; ava.src = T.img; ava.alt = T.name;
+      sec.querySelector('.tn-me').textContent = 0; sec.querySelector('.tn-op').textContent = 0;
+      [m1, m2, o1, o2].forEach(d => face(d, 1)); [o1, o2].forEach(d => d.classList.add('red'));
+      callMe.textContent = callOp.textContent = '';
+      sayIt(pick(T.start)); roll.hidden = false; roll.disabled = false; again.hidden = true;
+      pickEl.hidden = true; game.hidden = false;
+    };
+    const shake = (dice, a, b) => new Promise(res => {
+      dice.forEach(d => d.classList.add('roll')); SFX.dice();
+      let k = 0; const t = setInterval(() => { dice.forEach(d => face(d, 1 + Math.floor(Math.random() * 6))); if (++k > 8){ clearInterval(t); dice.forEach(d => d.classList.remove('roll')); face(dice[0], a); face(dice[1], b); res(); } }, reduce ? 0 : 65);
+    });
+    roll.addEventListener('click', async () => {
+      if (busy) return; busy = true; roll.disabled = true;
+      const T = TALK[who], a = 1 + Math.floor(Math.random() * 6), b = 1 + Math.floor(Math.random() * 6);
+      callMe.textContent = ''; callOp.textContent = '';
+      await shake([m1, m2], a, b); callMe.textContent = callName(a, b);
+      if (a === 6 && b === 6){ sayIt(pick(T.meSix)); if (window.lihieOnce) window.lihieOnce('dushesh'); } else if (a === b) sayIt(pick(T.meDouble));
+      await new Promise(r => setTimeout(r, 900));
+      const c = 1 + Math.floor(Math.random() * 6), d = 1 + Math.floor(Math.random() * 6);
+      await shake([o1, o2], c, d); callOp.textContent = callName(c, d);
+      const s1 = a + b, s2 = c + d;
+      if (s1 > s2){ me++; sayIt(pick(T.meWin)); } else if (s2 > s1){ op++; sayIt(c === d ? pick(T.opDouble) : pick(T.opWin)); } else sayIt(pick(T.tie));
+      sec.querySelector('.tn-me').textContent = me; sec.querySelector('.tn-op').textContent = op;
+      if (me === 3 || op === 3){
+        setTimeout(() => { sayIt(pick(me === 3 ? T.matchWin : T.matchLose)); (me === 3 ? SFX.win : SFX.lose)(); }, 900);
+        roll.hidden = true; again.hidden = false;
+      } else roll.disabled = false;
+      busy = false;
+    });
+    again.addEventListener('click', () => start(who));
+    sec.querySelector('.tn-swap').addEventListener('click', () => { game.hidden = true; pickEl.hidden = false; });
+    sec.querySelectorAll('.tn-who').forEach(b => b.addEventListener('click', () => start(b.dataset.who)));
+    btn.addEventListener('click', () => { game.hidden = true; pickEl.hidden = false; toyOpen('nardy'); SFX.dice(); });
+  })();
+
+  /* lottery: scratch the silver off with a coin */
+  (() => {
+    const btn = document.getElementById('rmTicket'), sec = toy.querySelector('.ty-lotto'); if (!btn || !sec) return;
+    const cv = sec.querySelector('.tl-cover'), prize = sec.querySelector('.tl-prize'), c = cv.getContext('2d');
+    const PRIZES = [
+      ['БЕЗ ВЫИГРЫША', 'Зато честно. Не МММ.'], ['ВЫИГРЫШ', 'Бесплатный проезд на трамвае. Один раз.'], ['ВЫИГРЫШ', '1000 рублей. Хватит на ещё один билет.'],
+      ['ГЛАВНЫЙ ПРИЗ', 'Видеомагнитофон «Электроника». Получить у Лёши. Лёша не в курсе.'], ['ВЫИГРЫШ', 'Жвачка «Turbo» с вкладышем. Вкладыш — «Феррари».'],
+      ['БЕЗ ВЫИГРЫША', 'Попробуйте ещё раз. Или не пробуйте, Витя говорит — это развод.'], ['ВЫИГРЫШ', 'Поход в видеосалон «Эра» на ночной сеанс.'],
+      ['ПРЕДСКАЗАНИЕ', 'Сегодня вам встретится высокий майор. Он попросит предъявить документы.'], ['ВЫИГРЫШ', 'Пачка «Явы». Курить вредно, скажет Витя, и заберёт.'],
+      ['ПРЕДСКАЗАНИЕ', 'Вечером позвонят и ошибутся номером. Скажут: «Это баня?»'], ['ВЫИГРЫШ', 'Сникерс. Целый. Не делить с Лёшей.'],
+      ['ПРЕДСКАЗАНИЕ', 'Моль доберётся до шубы. Будьте начеку.'], ['БЕЗ ВЫИГРЫША', 'Билет можно сдать в макулатуру.'], ['ВЫИГРЫШ', 'Банка сгущёнки. Открывать ножом, как Лёша.']
+    ];
+    let last = -1, done = false, down = false, lastSfx = 0;
+    const deal = () => {
+      let i; do { i = Math.floor(Math.random() * PRIZES.length); } while (i === last); last = i;
+      prize.innerHTML = `<span><em>${PRIZES[i][0]}</em>${PRIZES[i][1]}</span>`;
+      const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+      cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr));
+      c.globalCompositeOperation = 'source-over';
+      const g = c.createLinearGradient(0, 0, cv.width, cv.height); g.addColorStop(0, '#c9ccd0'); g.addColorStop(.5, '#e9ebed'); g.addColorStop(1, '#a9adb2');
+      c.fillStyle = g; c.fillRect(0, 0, cv.width, cv.height);
+      c.fillStyle = 'rgba(90,90,96,.5)'; c.font = `700 ${14 * dpr}px "PT Mono", monospace`; c.textAlign = 'center';
+      for (let y = 26 * dpr; y < cv.height; y += 30 * dpr) for (let x = 40 * dpr; x < cv.width; x += 120 * dpr) c.fillText('СОТРИ', x + (y / dpr % 60 ? 60 * dpr : 0), y);
+      c.globalCompositeOperation = 'destination-out'; done = false;
+    };
+    let px = null, py = null;
+    const scratch = e => {
+      const r = cv.getBoundingClientRect(), dpr = cv.width / r.width, x = (e.clientX - r.left) * dpr, y = (e.clientY - r.top) * dpr;
+      c.lineWidth = 44 * dpr; c.lineCap = 'round'; c.beginPath(); c.moveTo(px ?? x, py ?? y); c.lineTo(x, y); c.stroke(); px = x; py = y;
+      const now = performance.now(); if (now - lastSfx > 70){ SFX.scratch(); lastSfx = now; }
+    };
+    const check = () => {
+      if (done) return; const d = c.getImageData(0, 0, cv.width, cv.height).data; let clear = 0, n = 0;
+      for (let i = 3; i < d.length; i += 4 * 40){ n++; if (d[i] < 40) clear++; }
+      if (clear / n > .55){ done = true; c.clearRect(0, 0, cv.width, cv.height); /win|ПРИЗ|ВЫИГРЫШ/.test(prize.textContent) && !/БЕЗ/.test(prize.textContent) ? SFX.win() : SFX.paper(); if (window.lihieOnce) window.lihieOnce('sprint'); }
+    };
+    cv.addEventListener('pointerdown', e => { down = true; cv.setPointerCapture(e.pointerId); scratch(e); });
+    cv.addEventListener('pointermove', e => { if (down) scratch(e); });
+    cv.addEventListener('pointerup', () => { down = false; px = py = null; check(); });
+    cv.addEventListener('pointercancel', () => { down = false; px = py = null; });
+    sec.querySelector('.tl-more').addEventListener('click', () => { SFX.paper(); deal(); });
+    btn.addEventListener('click', () => { toyOpen('lotto'); SFX.paper(); requestAnimationFrame(deal); });
   })();
 
   /* ---------- router ---------- */
@@ -4869,6 +5380,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const off = roomEl.classList.toggle('dark');
     lampBtn.setAttribute('aria-pressed', String(!off)); lampBtn.setAttribute('aria-label', off ? 'Включить свет' : 'Выключить свет');
     if (reduce && typeof drawNight === 'function') requestAnimationFrame(() => drawNight(performance.now()));
+    if (off && window.lihiePage) setTimeout(() => window.lihiePage('dark'), 1500);
     if (off && window.lihieOnce) window.lihieOnce('light', 'Экономия электроэнергии', 'Свет погашен. Работает только телевизор, как и положено в девяносто шестом.');
   });
 
@@ -5316,6 +5828,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     {key: 'thief', t: 'Порча имущества', x: 'Снимок изъят из альбома. Витя составил протокол, Марина обиделась, Валентина Ивановна простила.', hint: 'В альбомах есть снимки, которые хочется унести с собой.'},
     {key: 'albums', t: 'Мама, хватит', x: 'Все три альбома пролистаны до последней страницы. Лёша просит больше никому их не показывать.', hint: 'На столе в архиве лежат альбомы. Их редко досматривают до конца.'},
     {key: 'rat', t: 'Добрая душа', x: 'Кухонная крыса Мавюрка поглажена и больше никого не боится. Санэпидемстанцию решили не вызывать.', hint: 'На кухне кто-то шуршит за плитой.'},
+    {key: 'phone', t: 'Абонент', x: 'Дозвонилась до Вити, Лёши, Марины и Михалыча. Телефонистки на станции уже узнают тебя по голосу.', hint: 'Телефон на полу работает. Номера записаны в книжке и на доске.'},
+    {key: 'dushesh', t: 'Ду-шеш', x: 'Две шестёрки в нарды. Лёша требует проверить кости, Витя молча записывает.', hint: 'В нарды иногда выпадает самое лучшее.'},
+    {key: 'sprint', t: 'Азартная', x: 'Стёрт билет «Спринта». Главный приз пока у Лёши, Лёша не в курсе.', hint: 'В серванте засунут лотерейный билет.'},
+    {key: 'pager', t: 'На связи', x: 'Все сообщения на пейджере прочитаны. Абонент 1147 в курсе всего.', hint: 'Пейджер пищит, когда ты заходишь в новые места.'},
     {key: 'records', t: 'Филофонист', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок на полке много. Послушайте каждую хотя бы по полминуты.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
