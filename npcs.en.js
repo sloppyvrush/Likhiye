@@ -348,13 +348,14 @@ window.NPCS = [
     "id": "zhora",
     "name": "Zhora Sapog",
     "nick": "Sapog",
-    "role": "owns bathhouses and warehouses, 42",
+    "role": "director of the Avtovo market, owner of bathhouses and warehouses, 42",
     "group": "rayon",
     "photo": "",
     "pos": "50% 20%",
     "line": "Ex-wrestler. Backgammon on Thursdays in the steam room.",
     "about": [
       "Stocky, short powerful neck, a dark crew cut going grey, a cauliflower ear and a flattened nose, small watchful eyes. Wool trousers, a soft turtleneck, a single gold signet ring.",
+      "Besides the bathhouses and warehouses, he runs the Avtovo market as its director: the market pays Lyosha, not Lysy, and Lysy is leaning on Zhora harder and harder.",
       "He and Lyosha haggled for six months; now they remember each other’s birthdays. Now and then he feeds Viktor names from Lysy’s crew."
     ],
     "note": "Thursday. Banya. Don’t be late.",
@@ -375,22 +376,6 @@ window.NPCS = [
     ],
     "note": "Keeps his word. For now.",
     "who": "both"
-  },
-  {
-    "id": "kravets",
-    "name": "Boris Fomich Kravets",
-    "nick": "",
-    "role": "director of the Avtovo market",
-    "group": "rayon",
-    "photo": "",
-    "pos": "50% 20%",
-    "line": "Pays up, is scared of everyone and dabs his lip with a handkerchief.",
-    "about": [
-      "Short, soft belly, thin hair combed over the crown, a pencil moustache; by lunchtime his tie knot has slipped.",
-      "Lately he’s been glancing Zhora Sapog’s way."
-    ],
-    "note": "Scared of everyone. And rightly so.",
-    "who": "Lyosha"
   },
   {
     "id": "mama",
@@ -489,7 +474,7 @@ window.NPC_BOARD = {
   pos: {
     zorin:[130,130,-3], berezhnoy:[330,135,2], zhanna:[530,125,-2], trofimov:[730,135,1], rogov:[950,125,-2], gusev:[1140,140,3], pestov:[1470,125,-1],
     kornilov:[110,450,2], lapin:[280,450,-2], shevchuk:[450,460,3], viktor:[680,600,-2], lesha:[900,600,2], bondar:[1150,450,-3], mama:[1480,455,2],
-    barinov:[110,640,-2], kravets:[1180,790,2], pirat:[1520,675,-4], mikhalych:[1000,860,-1],
+    barinov:[110,640,-2], pirat:[1520,675,-4], mikhalych:[1000,860,-1],
     marina:[450,902,2], irina:[150,1157,-3], kot:[530,1157,2], lysy:[800,975,-2], zhora:[1060,1125,3], korney:[1400,885,-2], kids:[280,902,3], valya:[110,902,-3], naida:[1330,650,2], moshkin:[650,1085,-3], lyonin:[1200,1370,2], ryaboy:[1585,905,3]
   },
   links: [
@@ -502,20 +487,17 @@ window.NPC_BOARD = {
     ['kot','viktor','red'], ['kot','lesha','red'], ['kot','irina','white'], ['irina','viktor','white'], ['irina','ershov','white'], ['ershov','viktor','red'], ['lesha','irina','red'],
     ['viktor','marina','white'], ['marina','gena','white'], ['marina','kids','white'], ['viktor','kids','white'],
     ['viktor','valya','white'], ['valya','naida','white'], ['viktor','naida','white'],
-    ['viktor','barinov','white'], ['viktor','mikhalych','blue'], ['lesha','mikhalych','blue'], ['viktor','pestov','gold'],
-    ['lesha','kravets','gold'], ['kravets','zhora','gold'], ['kravets','lysy','red'], ['lesha','zhora','gold'], ['viktor','zhora','blue'],
+    ['viktor','barinov','white'], ['viktor','mikhalych','blue'], ['lesha','mikhalych','blue'], ['viktor','pestov','gold'], ['lesha','zhora','gold'], ['viktor','zhora','blue'],
     ['zhora','lyonin','red'], ['lesha','lyonin','blue'], ['lesha','moshkin','blue'], ['moshkin','lysy','red'], ['moshkin','lyonin','white'],
     ['viktor','korney','blue'], ['lesha','korney','blue'], ['lesha','mama','white'], ['mama','viktor','white'], ['lesha','pirat','white'],
     ['korney','lysy','red'], ['korney','zhora','gold'], ['korney','kot','red'],
-    ['zhora','lysy','red'], ['zhora','kot','red'],
-    ['gusev','kot','gold'], ['gusev','bondar','blue'], ['gusev','trofimov','blue'], ['rogov','trofimov','blue'], ['rogov','bondar','blue'], ['rogov','kravets','gold'],
-    ['bondar','kravets','red'], ['berezhnoy','ershov','blue'], ['berezhnoy','zorin','blue'], ['berezhnoy','lysy','gold'],
+    ['zhora','lysy','red'], ['zhora','kot','red'], ['ad_market','zhora','gold'], ['ryaboy','zhora','gold'], ['rogov','zhora','gold'], ['bondar','zhora','red'], ['lyonin','zhora','gold'],
+    ['gusev','kot','gold'], ['gusev','bondar','blue'], ['gusev','trofimov','blue'], ['rogov','trofimov','blue'], ['rogov','bondar','blue'], ['berezhnoy','ershov','blue'], ['berezhnoy','zorin','blue'], ['berezhnoy','lysy','gold'],
     ['zhanna','shevchuk','blue'], ['kornilov','lapin','blue'], ['lapin','shevchuk','blue'], ['kornilov','shevchuk','blue'],
     ['zorin','barinov','gold'], ['barinov','lysy','gold'], ['pestov','mikhalych','gold'], ['lesha','pestov','gold'],
-    ['irina','marina','red'], ['irina','lysy','white'], ['valya','marina','white'],
-    ['kot','kravets','red'], ['kot','moshkin','red'], ['lyonin','kravets','gold'],
-    ['n_yard','viktor','blue'], ['n_yard','ryaboy','white'], ['viktor','ryaboy','blue'], ['lesha','ryaboy','blue'], ['ryaboy','kravets','gold'], ['ryaboy','mikhalych','blue'], ['n_yard','lesha','blue'], ['n_fire','lesha','blue'], ['n_fire','kravets','gold'], ['n_canal','lyonin','red'], ['n_road','lysy','red'], ['n_road','mikhalych','blue'],
-    ['ph_gk','gusev','gold'], ['ph_gk','kot','gold'], ['ad_market','kravets','gold'], ['ph_ik','irina','white'], ['ph_ik','kot','white'], ['n_lysy','lysy','red'], ['ad_barinov','barinov','gold'], ['ph_lz','lesha','gold'], ['ph_lz','zhora','gold'], ['ph_lz','bondar','blue'], ['n_press','viktor','blue'], ['n_press','berezhnoy','gold']
+    ['irina','marina','red'], ['irina','lysy','white'], ['valya','marina','white'], ['kot','moshkin','red'],
+    ['n_yard','viktor','blue'], ['n_yard','ryaboy','white'], ['viktor','ryaboy','blue'], ['lesha','ryaboy','blue'], ['ryaboy','mikhalych','blue'], ['n_yard','lesha','blue'], ['n_fire','lesha','blue'], ['n_canal','lyonin','red'], ['n_road','lysy','red'], ['n_road','mikhalych','blue'],
+    ['ph_gk','gusev','gold'], ['ph_gk','kot','gold'], ['ph_ik','irina','white'], ['ph_ik','kot','white'], ['n_lysy','lysy','red'], ['ad_barinov','barinov','gold'], ['ph_lz','lesha','gold'], ['ph_lz','zhora','gold'], ['ph_lz','bondar','blue'], ['n_press','viktor','blue'], ['n_press','berezhnoy','gold']
   ],
   decor: [
     {id:'map', type:'map', x:1800, y:330, w:300, h:400, r:2},
@@ -523,7 +505,7 @@ window.NPC_BOARD = {
       body:['On the night of 8 October, residents found the body of a man of about thirty in a leather jacket in the courtyard of a building on Zaitseva Street. According to neighbours, at around two in the morning “someone was shouting” by the garages, but nobody went to the window.', 'The Kirovsky District CID was first on the scene, followed by officers from the GUVD homicide department. The victim’s identity is being established. Asked by our correspondent, one of the detectives answered briefly: “We’re on it.”', 'This is already the third murder in the district since the start of autumn.'],
       pen:'“We’re on it” — that’s Lyokha. I’d have kept it shorter. — V.'},
     {id:'n_fire', type:'news', x:1672, y:175, w:236, h:180, r:-3, paper:'Evening City', date:'22 October 1996', head:'Fire at Avtovo Market', sub:'Meat pavilion burns down, watchman killed.',
-      body:['At around three in the morning, a meat pavilion caught fire at Avtovo Market. Firefighters had the blaze out by morning. The body of the night watchman was found inside the pavilion.', 'Market director B. F. Kravets blamed old wiring and promised trading would reopen as early as Monday. Tenants of neighbouring pavilions say that the day before they had been “advised” to change their security.', 'The Kirovsky District CID does not rule out arson.'],
+      body:['At around three in the morning, a meat pavilion caught fire at Avtovo Market. Firefighters had the blaze out by morning. The body of the night watchman was found inside the pavilion.', 'Market director G. A. Sapozhnikov blamed old wiring and promised trading would reopen as early as Monday. Tenants of neighbouring pavilions say that the day before they had been “advised” to change their security.', 'The Kirovsky District CID does not rule out arson.'],
       pen:'Wiring, he says. Sure. — L.'},
     {id:'n_canal', type:'news', x:330, y:1395, w:200, h:190, r:-3, paper:'Smena', date:'28 November 1995', head:'Body in the Obvodny Canal', sub:'Market trader. Investigators say: an accident.',
       body:['The body of 34-year-old Alexander L., a trader at Avtovo Market, was found in the Obvodny Canal near the Baltic Station. According to the militsiya, the deceased was drunk and probably slipped on the icy embankment.', 'The case has been closed for lack of a criminal offence.'],
@@ -532,7 +514,7 @@ window.NPC_BOARD = {
       body:['Over the past year, nearly every petrol station and car wash on the Tallinn Highway has changed hands. The new owners prefer not to give their names, and the old ones prefer not to remember.', 'Locally, people mention one surname, or rather one nickname. Our source asked us not to print it.', 'Only a couple of car repair shops still run the old way, and rumour has it you’d “better not go poking your nose in” there.'],
       pen:'That’s about Mikhalych. Mikhalych is pleased. — V.'},
     {id:'ph_gk', type:'photo', x:1320, y:320, w:200, h:190, r:-4, src:'assets/board/gusev-kot.webp', cap:'Gusev and Kot, garages on Stachek, 2:10. An envelope?', pen:''},
-    {id:'ad_market', type:'ad', x:1858, y:592, w:176, h:190, r:6, paper:'Advertisement. “Evening City”', head:'AVTOVO MARKET', body:['Stalls and pavilions for rent.', '24-hour security. Order and peace of mind.', 'Contact the director: B. F. Kravets.'], pen:'“Order and peace of mind.” Yeah, right. — L.'},
+    {id:'ad_market', type:'ad', x:1858, y:592, w:176, h:190, r:6, paper:'Advertisement. “Evening City”', head:'AVTOVO MARKET', body:['Stalls and pavilions for rent.', '24-hour security. Order and peace of mind.', 'Enquiries to the director: G. A. Sapozhnikov.'], pen:'“Order and peace of mind.” Yeah, right. — L.'},
     {id:'ph_ik', type:'photo', x:340, y:1157, w:220, h:200, r:2, src:'assets/board/irina-kot.webp', cap:'Irina and Kotelnikov, Nevsky, outside a restaurant. October.', pen:''},
     {id:'n_lysy', type:'news', x:850, y:1250, w:260, h:230, r:-2, paper:'Evening City', date:'29 December 1995', head:'Gifts for the Orphanage', sub:'A Kirovsky District businessman brought the orphans tangerines, sweets and a new TV.', photo:'assets/board/lysy-charity.webp',
       body:['On the eve of the New Year, a local businessman who wished to remain anonymous visited Children’s Home No. 7. The children received tangerines, sweets and a Japanese TV: the old one had broken back in spring.', '“Children are sacred,” he told our correspondent, and asked us not to photograph his face.', 'The orphanage administration expressed its gratitude and its hope for further cooperation.'],
@@ -548,7 +530,7 @@ window.NPC_BOARD = {
     {x:330, y:292, t:'Smiles. Don’t trust. Calls the Smolny.', w:'v', under:'Put it back. If Berezhnoy sees I’ve pinned him on the board, I’m done. — V.'},
     {x:150, y:1327, t:'Irka’s with Kot. Calls in the evenings. Do NOT pick up.', w:'l', under:'Give it back. I wrote that for Vitya so he wouldn’t forget. — L.'},
     {x:1160, y:985, t:'Thursday: banya, backgammon. Don’t be late.', w:'l', under:'And now who’s going to tell Zhora I’m running late? — L.'},
-    {x:1290, y:815, t:'Kravets is scared of everyone. And rightly so.', w:'l', under:'That’s not rubbish, that’s operational intelligence. — L.'},
+    {x:1290, y:815, t:'Zhora runs the market now too. The bathhouse director.', w:'l', under:'That’s not rubbish, that’s operational intelligence. — L.'},
     {x:915, y:1075, t:'Who? Lysy’s people? Or…', w:'l', big:true, under:'Don’t touch. I haven’t decided what to make of it myself yet. — L.'},
     {x:205, y:1027, t:'Granny Valya knows more than the GUVD.', w:'v', under:'That’s it. Now she’ll find out I put her on the board. — V.'},
     {x:905, y:827, t:'Mikhalych: every car off the highway. Call him first: 130-47-82.', w:'v', under:'Hands off! That’s been up since ninety-two. — V.'},

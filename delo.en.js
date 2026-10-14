@@ -64,7 +64,7 @@ window.DELO = {
     {id: 'devyatka', seal: true, title: 'The “devyatka” at Mikhalych’s', from: 'the “Kopeyka” start', img: '', cap: 'VAZ-2109 in “wet asphalt” grey, a garage on the Tallinn Highway',
       lines: ['The car was brought in for repairs at the end of September, and the owner never came back for it. Mikhalych called him Tolik.', 'In the glovebox: an Avtovo Market pass in the name of Ryabtsev A. V., a pack of Marlboro, a Motorola pager.', 'Last message on the pager, 7.10.96, 23:48: “GARAGES 2:00. BRING EVERYTHING. K.”', '✎ Who’s “K.”? — V.']},
     {id: 'fire', seal: true, title: 'Fire at Avtovo Market', from: 'night call, stage 3', img: 'assets/starts/market.webp', cap: 'Meat pavilion after the fire, 22.10.96',
-      lines: ['The meat pavilion burned down. The watchman, Pyotr Ilyich Sazonov, 64, was found by the door, not on his cot.', 'The lock is intact; the door was opened with a key. Fire brigade: the fire started in the back room where market director Kravets kept his “papers”. The safe is open and empty.', '✎ The “Meat, 14” key. If only we’d twigged sooner. — V.']}
+      lines: ['The meat pavilion burned down. The watchman, Pyotr Ilyich Sazonov, 64, was found by the door, not on his cot.', 'The lock is intact; the door was opened with a key. Fire brigade: the fire started in the back room where market director Sapog kept his “papers”. The safe is open and empty.', '✎ The “Meat, 14” key. If only we’d twigged sooner. — V.']}
   ],
 
   stages: [
