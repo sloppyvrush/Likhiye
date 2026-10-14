@@ -2509,10 +2509,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 /* ================= TOYS: phone, nardy, lottery, pager ================= */
 .rm-phone, .rm-nardy, .rm-ticket{padding:0; border:0; background:none; cursor:var(--cur-hover, pointer); -webkit-tap-highlight-color:transparent}
 .rm-phone svg, .rm-nardy svg, .rm-ticket svg{display:block; width:100%; overflow:visible}
-.rm-phone{left:76.2%; width:6.2%; bottom:2.2%; z-index:4; filter:drop-shadow(.2cqw .5cqw .4cqw rgba(0,0,0,.55))}
-.rm-nardy{left:84.4%; width:7.6%; bottom:2.4%; z-index:4; transform:perspective(60cqw) rotateX(52deg) rotate(-6deg); transform-origin:50% 100%; filter:drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.55))}
+.rm-phone{left:19.5%; width:3.3%; top:37%; z-index:2; transform-origin:50% 0; filter:drop-shadow(.25cqw .45cqw .35cqw rgba(15,8,3,.55))}
+.rm-nardy{left:26%; width:13%; bottom:68.4%; z-index:7; rotate:-2deg; filter:drop-shadow(.2cqw .2cqw .25cqw rgba(0,0,0,.4))}
 .rm-ticket{left:75.6%; width:3.6%; top:47.5%; z-index:4; rotate:-9deg; filter:drop-shadow(.1cqw .2cqw .2cqw rgba(0,0,0,.45))}
-.rm-phone:hover, .rm-ticket:hover{scale:1.06} .rm-nardy:hover{filter:drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.55)) brightness(1.15)}
+.rm-phone:hover, .rm-ticket:hover{scale:1.06} .rm-nardy:hover{filter:drop-shadow(.2cqw .2cqw .25cqw rgba(0,0,0,.4)) brightness(1.15)}
 .rm-phone:focus-visible, .rm-nardy:focus-visible, .rm-ticket:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
 .rm-phone.ring{animation:phRing .12s linear infinite alternate}
 @keyframes phRing{from{rotate:-3deg} to{rotate:3deg}}
@@ -2587,32 +2587,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .tl-field{position:relative; height:150px; border-radius:4px; overflow:hidden; background:#fffaf0; box-shadow:inset 0 0 0 2px #e06a1a}
 .tl-prize{position:absolute; inset:0; margin:0; display:grid; place-items:center; padding:14px 22px; text-align:center; font:700 26px/1.15 'Caveat', cursive; color:#2b3f7a}
 .tl-prize em{display:block; font:700 13px/1 var(--mono); font-style:normal; letter-spacing:.14em; color:#a8261f; margin-bottom:6px}
-.tl-cover{position:absolute; inset:0; width:100%; height:100%; cursor:var(--cur-hover, pointer); touch-action:none}
+.tl-cover{position:absolute; inset:0; width:100%; height:100%; cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2732%27%20height%3D%2732%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cellipse%20cx%3D%2717%27%20cy%3D%2718%27%20rx%3D%2713%27%20ry%3D%2712%27%20fill%3D%27rgba%280%2C0%2C0%2C.35%29%27/%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2713%27%20fill%3D%27%23c9a24a%27/%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2713%27%20fill%3D%27none%27%20stroke%3D%27%238a6a1e%27%20stroke-width%3D%271.6%27%20stroke-dasharray%3D%271.4%201.2%27/%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2710%27%20fill%3D%27%23e2bf63%27%20stroke%3D%27%23a8822e%27%20stroke-width%3D%271%27/%3E%3Ctext%20x%3D%2715%27%20y%3D%2720%27%20text-anchor%3D%27middle%27%20font-family%3D%27Georgia%2Cserif%27%20font-weight%3D%27700%27%20font-size%3D%2714%27%20fill%3D%27%237a5a12%27%3E5%3C/text%3E%3Cpath%20d%3D%27M7%209a10%2010%200%200%201%208-4%27%20stroke%3D%27rgba%28255%2C255%2C255%2C.7%29%27%20stroke-width%3D%271.6%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") 15 15, pointer; touch-action:none}
 .tl-rules{margin:10px 0 0; font:10.5px/1.35 var(--mono); color:#6a5a3a}
 .tl-more{padding:11px 18px; border:0; border-radius:4px; background:#e06a1a; color:#fff; font:14px/1 var(--mono); cursor:var(--cur-hover, pointer)}
 
-/* pager */
-.pager{position:fixed; left:14px; bottom:14px; z-index:90; font-family:var(--mono)}
-.pg-dev{position:relative; display:flex; flex-direction:column; align-items:center; gap:3px; width:96px; padding:8px 8px 5px; border:0; border-radius:10px 10px 14px 14px; cursor:var(--cur-hover, pointer);
-  background:linear-gradient(#3a3a3a, #161616); box-shadow:0 8px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.18)}
-.pg-lcd{display:block; width:100%; height:24px; overflow:hidden; border-radius:3px; background:#8fa47a; box-shadow:inset 0 2px 3px rgba(0,0,0,.45); text-align:left}
-.pg-run{display:inline-block; padding:0 4px; white-space:nowrap; font:700 11px/24px var(--mono); color:#1d2a14; letter-spacing:.04em}
-.pager.new .pg-run{animation:pgRun 9s linear infinite}
-@keyframes pgRun{from{transform:translateX(90px)} to{transform:translateX(-100%)}}
-.pg-brand{font:700 6.5px/1 var(--mono); letter-spacing:.2em; color:#9a9a9a}
-.pg-dot{position:absolute; right:-4px; top:-4px; width:14px; height:14px; border-radius:50%; background:#e2483a; box-shadow:0 0 0 2px #161616}
-.pager.buzz .pg-dev{animation:pgBuzz .07s linear 10 alternate}
-@keyframes pgBuzz{from{translate:-2px 0} to{translate:2px 0}}
-.pg-panel{position:absolute; left:0; bottom:calc(100% + 10px); width:min(300px, calc(100vw - 28px)); padding:12px; border-radius:10px; background:linear-gradient(#2e2e2e, #141414); box-shadow:0 14px 28px rgba(0,0,0,.55); color:#c9c9c9}
-.pg-head{margin:0 0 8px; font:11px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase}
-.pg-screen{min-height:86px; padding:10px; border-radius:4px; background:#8fa47a; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); color:#1d2a14}
-.pg-msg{margin:0; font:700 14px/1.35 var(--mono)} .pg-when{margin:6px 0 0; font:10px/1 var(--mono); opacity:.7}
-.pg-nav{display:flex; justify-content:space-between; align-items:center; margin-top:8px; font:11px/1 var(--mono)}
-.pg-nav button{width:32px; height:26px; border:0; border-radius:4px; background:#3e3e3e; color:#ddd; cursor:var(--cur-hover, pointer)}
-.pg-nav button:disabled{opacity:.35; cursor:default}
-body.splash-on .pager{display:none}
-@media (max-width:600px){ .pager{left:10px; bottom:10px} .pg-dev{width:80px} }
-@media (prefers-reduced-motion:reduce){ .pager.new .pg-run, .pager.buzz .pg-dev, .die.roll, .rm-phone.ring{animation:none} }
+@media (prefers-reduced-motion:reduce){ .die.roll, .rm-phone.ring{animation:none} }
 </style>
 </head>
 <body>
@@ -2789,27 +2768,36 @@ body.splash-on .pager{display:none}
           <defs><linearGradient id="pnVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.16)"/><stop offset=".5" stop-color="rgba(0,0,0,0)"/><stop offset="1" stop-color="rgba(0,0,0,.28)"/></linearGradient></defs>
         </svg>
       </a>
-      <button class="rm-phone" id="rmPhone" type="button" aria-label="Телефон. Позвонить">
-        <svg viewBox="0 0 140 110" aria-hidden="true">
-          <path d="M118 74c14 4 20 14 14 24s-20 8-22-2 8-14 2-20" fill="none" stroke="#2a1410" stroke-width="2.6" stroke-dasharray="3 2.4"/>
-          <path d="M22 50h96l14 50H8z" fill="#b8231c"/><path d="M22 50h96l14 50H8z" fill="url(#phSh)"/>
-          <path d="M8 100h124v6H8z" fill="#6e120e"/>
-          <ellipse cx="70" cy="72" rx="24" ry="20" fill="#efe6d2"/><ellipse cx="70" cy="72" rx="24" ry="20" fill="none" stroke="#6e120e" stroke-width="1.6"/>
-          <ellipse cx="70" cy="72" rx="8" ry="6.6" fill="#b8231c"/>
-          <g fill="#3a1410"><circle cx="70" cy="56.5" r="3"/><circle cx="80" cy="59" r="3"/><circle cx="87" cy="66" r="3"/><circle cx="88.5" cy="75" r="3"/><circle cx="84" cy="83.5" r="3"/><circle cx="60" cy="59" r="3"/><circle cx="53" cy="66" r="3"/><circle cx="51.5" cy="75" r="3"/><circle cx="56" cy="83.5" r="3"/><circle cx="64" cy="88" r="3"/></g>
-          <path d="M10 40c0-14 8-22 20-22h80c12 0 20 8 20 22v6c0 6-6 8-12 6l-10-4c-4-2-6-4-6-8v-4H38v4c0 4-2 6-6 8l-10 4c-6 2-12 0-12-6z" fill="#c42a22"/>
-          <path d="M30 22h80" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
-          <defs><linearGradient id="phSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.18)"/><stop offset="1" stop-color="rgba(0,0,0,.25)"/></linearGradient></defs>
+      <button class="rm-phone" id="rmPhone" type="button" aria-label="Телефон на стене. Позвонить">
+        <svg viewBox="0 0 70 150" aria-hidden="true">
+          <path d="M35 112c-8 6 8 8 0 14s8 8 0 14 8 8 0 12" fill="none" stroke="#2a1410" stroke-width="2.2"/>
+          <rect x="6" y="6" width="58" height="96" rx="7" fill="#7a1612"/>
+          <rect x="8" y="4" width="54" height="94" rx="6" fill="#b8231c"/><rect x="8" y="4" width="54" height="94" rx="6" fill="url(#wpSh)"/>
+          <rect x="13" y="8" width="44" height="20" rx="5" fill="#c42a22"/>
+          <path d="M14 18c0-7 4-10 9-10h24c5 0 9 3 9 10" fill="none" stroke="#8a1a14" stroke-width="2"/>
+          <rect x="11" y="9" width="48" height="13" rx="6" fill="#d23a2e"/><rect x="15" y="10" width="40" height="3" rx="1.5" fill="rgba(255,255,255,.35)"/>
+          <circle cx="13" cy="15.5" r="6.5" fill="#c42a22"/><circle cx="57" cy="15.5" r="6.5" fill="#c42a22"/>
+          <circle cx="35" cy="58" r="21" fill="#efe6d2"/><circle cx="35" cy="58" r="21" fill="none" stroke="#6e120e" stroke-width="1.4"/>
+          <g fill="#3a1410"><circle cx="35" cy="43" r="2.6"/><circle cx="44" cy="45.6" r="2.6"/><circle cx="49.6" cy="52.4" r="2.6"/><circle cx="50.4" cy="61" r="2.6"/><circle cx="46" cy="69" r="2.6"/><circle cx="26" cy="45.6" r="2.6"/><circle cx="20.4" cy="52.4" r="2.6"/><circle cx="19.6" cy="61" r="2.6"/><circle cx="24" cy="69" r="2.6"/><circle cx="31" cy="72.6" r="2.6"/></g>
+          <circle cx="35" cy="58" r="7" fill="#b8231c"/>
+          <rect x="22" y="86" width="26" height="6" rx="3" fill="#6e120e"/>
+          <defs><linearGradient id="wpSh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,255,255,.16)"/><stop offset=".6" stop-color="rgba(0,0,0,0)"/><stop offset="1" stop-color="rgba(0,0,0,.25)"/></linearGradient></defs>
         </svg>
       </button>
       <button class="rm-nardy" id="rmNardy" type="button" aria-label="Нарды. Сыграть">
-        <svg viewBox="0 0 160 70" aria-hidden="true">
-          <rect x="2" y="8" width="156" height="58" rx="4" fill="#5a2e14"/><rect x="2" y="2" width="156" height="58" rx="4" fill="#8a4a22"/>
-          <rect x="8" y="7" width="144" height="48" rx="2" fill="none" stroke="#c9a24a" stroke-width="1.6"/>
-          <path d="M80 2v58" stroke="#3a1c0c" stroke-width="2.4"/>
-          <g fill="none" stroke="#e8c98a" stroke-width="1.4" opacity=".85"><path d="M40 18l10 13-10 13-10-13zM120 18l10 13-10 13-10-13z"/><circle cx="40" cy="31" r="4"/><circle cx="120" cy="31" r="4"/></g>
-          <g fill="#e8c98a" opacity=".6"><circle cx="16" cy="14" r="1.6"/><circle cx="64" cy="14" r="1.6"/><circle cx="16" cy="48" r="1.6"/><circle cx="64" cy="48" r="1.6"/><circle cx="96" cy="14" r="1.6"/><circle cx="144" cy="14" r="1.6"/><circle cx="96" cy="48" r="1.6"/><circle cx="144" cy="48" r="1.6"/></g>
-          <rect x="74" y="24" width="12" height="16" rx="2" fill="#c9a24a"/><rect x="77" y="28" width="6" height="8" rx="1" fill="#7a5a1a"/>
+        <svg viewBox="0 0 200 74" aria-hidden="true">
+          <ellipse cx="102" cy="66" rx="98" ry="7" fill="rgba(10,5,2,.45)"/>
+          <path d="M16 6h168l12 34H4z" fill="#9a5528"/>
+          <path d="M16 6h168l12 34H4z" fill="url(#nrTop)"/>
+          <path d="M100 6v34" stroke="#4a240e" stroke-width="2.4"/>
+          <path d="M22 10h72l-2 26H10zM106 10h72l12 26h-82z" fill="none" stroke="#d9b06a" stroke-width="1.3" opacity=".9"/>
+          <g fill="none" stroke="#f0d49a" stroke-width="1.2" opacity=".85"><path d="M52 14l11 9-11 9-11-9zM148 14l11 9-11 9-11-9z"/><circle cx="52" cy="23" r="3.2"/><circle cx="148" cy="23" r="3.2"/></g>
+          <path d="M4 40h192v18c0 3-2 5-5 5H9c-3 0-5-2-5-5z" fill="#6a3418"/>
+          <path d="M4 40h192v4H4z" fill="#7e4020"/>
+          <path d="M100 40v23" stroke="#3a1a08" stroke-width="2"/>
+          <rect x="92" y="44" width="16" height="12" rx="2" fill="#c9a24a"/><rect x="96" y="47" width="8" height="6" rx="1" fill="#7a5a1a"/>
+          <g fill="#c9a24a"><rect x="30" y="41" width="10" height="4" rx="1"/><rect x="160" y="41" width="10" height="4" rx="1"/></g>
+          <defs><linearGradient id="nrTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,236,190,.22)"/><stop offset="1" stop-color="rgba(0,0,0,.12)"/></linearGradient></defs>
         </svg>
       </button>
       <button class="rm-ticket" id="rmTicket" type="button" aria-label="Лотерейный билет «Спринт». Стереть">
@@ -3692,14 +3680,6 @@ body.splash-on .pager{display:none}
     </section>
   </div>
 </div>
-<div class="pager" id="pager">
-  <button class="pg-dev" type="button" aria-label="Пейджер: сообщения"><span class="pg-lcd"><span class="pg-run">— — —</span></span><i class="pg-dot" hidden></i><span class="pg-brand">MOTOROLA</span></button>
-  <div class="pg-panel" hidden>
-    <p class="pg-head">Пейджер · <span class="pg-count"></span></p>
-    <div class="pg-screen"><p class="pg-msg"></p><p class="pg-when"></p></div>
-    <div class="pg-nav"><button class="pg-prev" type="button" aria-label="Предыдущее">◀</button><span class="pg-pos"></span><button class="pg-next" type="button" aria-label="Следующее">▶</button></div>
-  </div>
-</div>
 <script src="bots.js"></script>
 <script src="music.js"></script>
 <script src="npcs.js"></script>
@@ -4337,7 +4317,6 @@ body.splash-on .pager{display:none}
       petted = true; rat.classList.add('pet');
       if (window.lihieSfx) window.lihieSfx.squeak();
       if (window.lihieOnce) window.lihieOnce('rat');
-      if (window.lihiePage) setTimeout(() => window.lihiePage('rat'), 2500);
       setTimeout(() => rat.classList.remove('pet'), 3200);
     });
     addEventListener('hashchange', () => { if (location.hash === '#/about'){ clearTimeout(timer); timer = setTimeout(trip, 2500); } });
@@ -4382,58 +4361,6 @@ body.splash-on .pager{display:none}
   })();
   window.lihieSfx = SFX;
 
-  /* ---------- the pager: little messages as you walk around the site ---------- */
-  const PAGER_MSG = {
-    hello: 'ДОБРО ПОЖАЛОВАТЬ В КИРОВСКИЙ. ЧАЙ НА КУХНЕ. — Л.',
-    '/delo': 'ГАРАЖИ 2:00. ПРИВЕЗИ ВСЁ. — К.',
-    '/archive': 'АЛЬБОМЫ НЕ ДОСТАВАТЬ. МАМА РУГАТЬСЯ БУДЕТ. — Л.',
-    '/lyudi': 'ДОСКУ НЕ ТРОГАТЬ. — В.',
-    '/gorod': 'НА РЫНОК ПОСЛЕ 22:00 НЕ ХОДИ. — В.',
-    '/starty': 'КАССЕТЫ СДАТЬ В ПРОКАТ ДО ПЯТНИЦЫ. ВИДЕОСАЛОН «ЭРА»',
-    '/about': 'КУПИ ХЛЕБ И КЕФИР. — Л.',
-    hero: 'ЛИЧНОЕ ДЕЛО НЕ ЧИТАТЬ. — В.',
-    dark: 'ТЫ ЧЕГО СВЕТ ВЫКЛЮЧИЛА? — В.',
-    vcall: 'НА РАБОЧИЙ НЕ ЗВОНИ. ПО ДЕЛУ — ЧЕРЕЗ ДЕЖУРНОГО. — В.',
-    rat: 'КРЫСУ НЕ КОРМИТЬ. ОНА И ТАК ТОЛСТАЯ. — Л.'
-  };
-  const pager = (() => {
-    const box = document.getElementById('pager'); if (!box) return () => {};
-    const dev = box.querySelector('.pg-dev'), panel = box.querySelector('.pg-panel'), run = box.querySelector('.pg-run'), dot = box.querySelector('.pg-dot');
-    let got = []; try { got = JSON.parse(localStorage.getItem('lihie-pager') || '[]'); } catch (e) {}
-    got = got.filter(x => PAGER_MSG[x.id]);
-    let at = got.length - 1, seen = true;
-    try { seen = localStorage.getItem('lihie-pager-seen') !== '0'; } catch (e) {}
-    const stamp = () => { const d = new Date(); return `14.10.96 ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; };
-    const show = () => {
-      const n = got.length;
-      box.querySelector('.pg-count').textContent = `${n} из ${Object.keys(PAGER_MSG).length}`;
-      box.querySelector('.pg-msg').textContent = n ? PAGER_MSG[got[at].id] : 'НЕТ СООБЩЕНИЙ';
-      box.querySelector('.pg-when').textContent = n ? got[at].t : '';
-      box.querySelector('.pg-pos').textContent = n ? `${at + 1}/${n}` : '';
-      box.querySelector('.pg-prev').disabled = at <= 0; box.querySelector('.pg-next').disabled = at >= n - 1;
-      run.textContent = n ? PAGER_MSG[got[n - 1].id] : '— — —';
-      dot.hidden = seen; box.classList.toggle('new', !seen);
-    };
-    const markSeen = v => { seen = v; try { localStorage.setItem('lihie-pager-seen', v ? '1' : '0'); } catch (e) {} };
-    dev.addEventListener('click', () => { const on = panel.hidden; panel.hidden = !on; if (on){ at = got.length - 1; markSeen(true); } show(); });
-    box.querySelector('.pg-prev').addEventListener('click', () => { at = Math.max(0, at - 1); show(); });
-    box.querySelector('.pg-next').addEventListener('click', () => { at = Math.min(got.length - 1, at + 1); show(); });
-    document.addEventListener('click', e => { if (!panel.hidden && !box.contains(e.target)){ panel.hidden = true; } });
-    show();
-    return id => {
-      if (!PAGER_MSG[id] || got.some(x => x.id === id)) return;
-      got.push({id, t: stamp()}); at = got.length - 1;
-      try { localStorage.setItem('lihie-pager', JSON.stringify(got)); } catch (e) {}
-      markSeen(!panel.hidden); show();
-      box.classList.remove('buzz'); void box.offsetWidth; box.classList.add('buzz');
-      SFX.pager();
-      if (got.length === Object.keys(PAGER_MSG).length && window.lihieOnce) window.lihieOnce('pager');
-    };
-  })();
-  window.lihiePage = pager;
-  const pageRoute = () => { const r = location.hash.replace(/^#/, '') || '/'; if (PAGER_MSG[r]) pager(r); else if (botIds.has(r)) pager('hero'); };
-  addEventListener('hashchange', () => setTimeout(pageRoute, 1200));
-  (function hello(){ if (document.body.classList.contains('splash-on') || document.getElementById('intro')) return setTimeout(hello, 1000); setTimeout(() => { pager('hello'); pageRoute(); }, 4000); })();
 
   /* ---------- toys in the room: one dialog, three panels ---------- */
   const toy = document.getElementById('toy');
@@ -4469,7 +4396,7 @@ body.splash-on .pager{display:none}
       '03': () => [['Скорая', 'Скорая, что случилось?'], ['Скорая', '…Моль? Девушка, это не к нам. Это в санэпидемстанцию.']],
       '01': () => [['Пожарные', 'Пожарная охрана. Где горит?'], ['Пожарные', 'Рынок уже потушили. Не волнуйтесь, гражданочка.']],
       '100': () => [['Автоинформатор', nowTime()], ['', '(короткие гудки)']],
-      '3150247': () => { pager('vcall'); return pick([
+      '3150247': () => { return pick([
         [['Витя', 'Громов.'], ['Витя', '…Гражданочка, это служебный телефон.'], ['Витя', 'Ладно. Что случилось? …Ничего? Тогда не занимай линию.']],
         [['Витя', 'Громов слушает.'], ['Витя', 'А, это ты. Я на выезде через пять минут. Сырники в холодильнике. Всё, отбой.']],
         [['Витя', 'Да.'], ['Витя', 'Лапин, если это опять ты с анекдотом — я тебя найду.'], ['Витя', '…А. Не Лапин. Извини. Слушаю.']]]); },
@@ -5380,7 +5307,6 @@ body.splash-on .pager{display:none}
     const off = roomEl.classList.toggle('dark');
     lampBtn.setAttribute('aria-pressed', String(!off)); lampBtn.setAttribute('aria-label', off ? 'Включить свет' : 'Выключить свет');
     if (reduce && typeof drawNight === 'function') requestAnimationFrame(() => drawNight(performance.now()));
-    if (off && window.lihiePage) setTimeout(() => window.lihiePage('dark'), 1500);
     if (off && window.lihieOnce) window.lihieOnce('light', 'Экономия электроэнергии', 'Свет погашен. Работает только телевизор, как и положено в девяносто шестом.');
   });
 
@@ -5831,7 +5757,6 @@ body.splash-on .pager{display:none}
     {key: 'phone', t: 'Абонент', x: 'Дозвонилась до Вити, Лёши, Марины и Михалыча. Телефонистки на станции уже узнают тебя по голосу.', hint: 'Телефон на полу работает. Номера записаны в книжке и на доске.'},
     {key: 'dushesh', t: 'Ду-шеш', x: 'Две шестёрки в нарды. Лёша требует проверить кости, Витя молча записывает.', hint: 'В нарды иногда выпадает самое лучшее.'},
     {key: 'sprint', t: 'Азартная', x: 'Стёрт билет «Спринта». Главный приз пока у Лёши, Лёша не в курсе.', hint: 'В серванте засунут лотерейный билет.'},
-    {key: 'pager', t: 'На связи', x: 'Все сообщения на пейджере прочитаны. Абонент 1147 в курсе всего.', hint: 'Пейджер пищит, когда ты заходишь в новые места.'},
     {key: 'records', t: 'Филофонист', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок на полке много. Послушайте каждую хотя бы по полминуты.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
