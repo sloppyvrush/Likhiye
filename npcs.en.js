@@ -431,7 +431,7 @@ window.NPCS = [
     "nick": "",
     "role": "small-time market reseller",
     "group": "proshloe",
-    "photo": "",
+    "photo": "assets/npc/lyonin.webp",
     "pos": "50% 20%",
     "line": "November ’95, Obvodny Canal. An accident. That’s what it says on paper.",
     "about": [

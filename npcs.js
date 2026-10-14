@@ -431,7 +431,7 @@ window.NPCS = [
     "nick": "",
     "role": "мелкий перекупщик с рынка",
     "group": "proshloe",
-    "photo": "",
+    "photo": "assets/npc/lyonin.webp",
     "pos": "50% 20%",
     "line": "Ноябрь 95-го, Обводный канал. Несчастный случай. Так записано.",
     "about": [
