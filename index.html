@@ -1760,6 +1760,10 @@ body.splash-on{overflow:hidden}
 .ap-back .ft-hw{margin-top:18%; font-size:clamp(12px, 8.6cqw, 23px)}
 .ap.h .ap-back .ft-hw{margin-top:6%; font-size:clamp(12px, 6cqw, 23px)}
 .ap.color .ap-back .ft-hw{margin-top:4%}
+.ap-back .ft-auth{display:block; margin-top:2%; font:400 clamp(11px, 6.2cqw, 21px)/1.45 var(--mono); color:#33302a; text-align:left}
+.ap.h .ap-back .ft-auth{font-size:clamp(11px, 4.2cqw, 21px)}
+.ap-back .ft-auth b{display:inline-block; margin-bottom:.7em; padding:1px 7px; border:1.5px solid #a8261f; border-radius:3px; color:#a8261f; font:700 .72em/1.3 var(--mono); letter-spacing:.12em; text-transform:uppercase; transform:rotate(-2deg)}
+.ap-back .ft-auth b{display:table}
 .ap.exam .ap-back .ft-hw{font-size:8.2cqw} .ap.exam.h .ap-back .ft-hw{font-size:5.6cqw} .ap.exam.sq .ap-back .ft-hw{font-size:7cqw}
 .ap.exam .ap-date{font-size:3.3cqw} .ap.exam .ap-back::after{font-size:2.6cqw}
 .ap-back::after{content:attr(data-print); position:absolute; left:8%; right:8%; bottom:5%; font:clamp(5px, 3.4cqw, 9px)/1.2 var(--mono); color:rgba(90,70,40,.42); letter-spacing:.06em; text-align:center}
@@ -3857,7 +3861,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       el.tabIndex = 0; el.setAttribute('role', 'button'); el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape вкладывает обратно');
       el.innerHTML = `<div class="ap-lift"><div class="ap-card">
         <div class="ap-face ap-front"><i class="ap-deco" aria-hidden="true"></i><span class="scene full"><img src="${src}" alt="" draggable="false"></span>${date ? `<span class="ap-date">${date}</span>` : ''}</div>
-        <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"${/torn/.test(tone) ? ` style="--mask:url('${src.replace(/\.webp$/, '-back.png')}')"` : ''}><span class="ft-hw">${esc(back)}</span></div>
+        <div class="ap-face ap-back" data-print="фото за 1 час  Невский, 54"${/torn/.test(tone) ? ` style="--mask:url('${src.replace(/\.webp$/, '-back.png')}')"` : ''}>${/^От автора:/.test(back) ? `<span class="ft-auth"><b>от автора</b>${esc(back.replace(/^От автора:\s*/, ''))}</span>` : `<span class="ft-hw">${esc(back)}</span>`}</div>
       </div></div>`;
       hand.appendChild(el); hand.hidden = false;
       // buttons under the print: hold up the torn-off half, take the print out of the album
