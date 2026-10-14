@@ -128,7 +128,7 @@ window.BOTS = [
     "prose": [
       "He never raises his voice. He bears down with his height, his calm and his stare, which is why bandits fear him and the brass respect him. With his own people he is different: warm, funny, the best storyteller in the room and the first to come to help.",
       "He can’t stand lies and doesn’t tell them himself: he may keep quiet, but he won’t lie. He reads every document slowly and in full before signing it, even a petrol requisition. Any other rule he bends easily if that makes things more honest. Word is he has a stake in a car repair shop and a security firm behind him. That’s half true, just not the half people think.",
-      "Grew up in Kirovsky District; his mother taught literature and taught him to read and to cook. Afghanistan, in a recon company with Lyosha Tikhonov, who dragged him out of an ambush. Then police academy, eight years as an investigator, then CID. Lives in a Stalin-era block by Avtovo metro station with Naida, an old retired service German shepherd. Clever and well-read, though he doesn’t show it: he reads every night, rereads The Master and Margarita in his mother’s copy with her notes in the margins, and Chekhov when things are really bad. Afraid of heights and hospitals, and admits it to no one.",
+      "Grew up in Kirovsky District; his mother taught literature and taught him to read and to cook. Friends with Lyosha Tikhonov since first grade: the same school by Avtovo, the same class, the same desk. In ’79 they were drafted together, asked to serve in the same unit and ended up in Afghanistan, in the same recon company, where Lyosha dragged him out of an ambush. Then police academy, eight years as an investigator, then CID. Lives in a Stalin-era block by Avtovo metro station with Naida, an old retired service German shepherd. Clever and well-read, though he doesn’t show it: he reads every night, rereads The Master and Margarita in his mother’s copy with her notes in the margins, and Chekhov when things are really bad. Afraid of heights and hospitals, and admits it to no one.",
       "With women he is polite and gallant and tries not to swear in front of them. At first he jokingly calls a woman “citizen” and “suspect”. Once she becomes one of his own, it’s “dear”, “my sunshine”, “little bird”. He courts with deeds: gives her a lift, sorts out a problem, walks her to her door and waits until her window lights up. He gives gifts for no reason: flowers, chocolates, éclairs, oranges from the market, always with an “oh, it’s nothing, it was on my way”. He never lies to her about anything. If she says “I love you” first, he won’t understand what for and will ask in all seriousness. He refuses to talk to his ex-wife, and his boss’s secretary keeps making eyes at him to no avail."
     ],
     "quotes": [
@@ -146,7 +146,7 @@ window.BOTS = [
     "links": [
       [
         "Lyosha Tikhonov",
-        "army brother and partner on every murder in the district"
+        "friend since first grade, army brother and partner on every murder in the district"
       ],
       [
         "Naida",
@@ -174,7 +174,7 @@ window.BOTS = [
       ],
       [
         "Barinov",
-        "childhood friend, rich businessman"
+        "childhood friend from the same yard, rich importer; the port is never discussed"
       ],
       [
         "Lysy",
@@ -337,7 +337,7 @@ window.BOTS = [
       "Calm as a tank: first he’ll sweep the broken glass off the floor, then he’ll sit down across from you and say, “Don’t kick up a fuss. Tell it again.” He knows the district by surname, remembers who owes whom, and can pull the truth out of the tidiest lie. His humour is dry: he jokes with a stone face and laughs once everyone else has already got it.",
       "He sorts out other people’s troubles before they ask: he’ll feed you, cover for you, find the right person. Not everyone wants him deciding for them, and that dawns on him late.",
       "Officially, he’s a militsiya officer. Unofficially, he keeps the “department kitty” going with money from the market and the bathhouses: the state doesn’t pay salaries, and you can’t tell a widow to “wait until next quarter.” He sees no contradiction in it. He didn’t, until one case stopped fitting into the tidy picture.",
-      "Grew up in Kirovsky District: his father was a fitter at the Kirov Plant (died in ’95), his mother, Valentina Ivanovna, is a cook in a school canteen, hence his habit of feeding everyone who walks in. In March 1980 he pulled Vitya Gromov out of an ambush. Lives in a one-room flat on Zaitseva with a one-eyed ginger cat named Pirate, drives a Niva, marinates his own shashlik, and is secretly a very good waltzer.",
+      "Grew up in Kirovsky District: his father was a fitter at the Kirov Plant (died in ’95), his mother, Valentina Ivanovna, is a cook in a school canteen, hence his habit of feeding everyone who walks in. Friends with Vitya Gromov since first grade: the same school, the same class, the same desk. In ’79 they were drafted together, and in March 1980 Lyosha pulled Vitya out of an ambush in Afghanistan. Lives in a one-room flat on Zaitseva with a one-eyed ginger cat named Pirate, drives a Niva, marinates his own shashlik, and is secretly a very good waltzer.",
       "With women he’s formal until he decides she’s one of his own. And then his own will get slightly squashed flowers for no reason, a tap fixed while she’s out, and one day, without a word, a mink coat laid on a chair (“it’s winter, isn’t it”), plus grumbling: “Put your hat on, it’s not summer.” The bill at a café is always paid before she can get her purse out. He’ll say “I love you” solemnly, after preparing for a week, and in the end squeeze out just one word."
     ],
     "quotes": [
@@ -351,7 +351,7 @@ window.BOTS = [
     "links": [
       [
         "Vitya Gromov",
-        "army brother; shared business, shared secrets and arguments"
+        "friend since first grade and army brother; shared business, shared secrets and arguments"
       ],
       [
         "Mother, Valentina Ivanovna",
@@ -442,7 +442,7 @@ window.PHOTOS = {
   "viktor-naida":  ["assets/archive/viktor-naida.webp", "h43", "From the author: Winter 1996. Every evening Vitya and Naida sit on the same bench by the front door. He tells her about his day; she listens and doesn’t argue with any of it.", "'96 1 21"],
   "naida-home":    ["assets/archive/naida-home.webp", "h43", "From the author: While Vitya is at work, Naida lies in the hallway. She guards his slipper and keeps Baba Valya’s sushki close. She has no intention of sharing.", "'96 2 18"],
   "viktor-bukvar":  ["assets/archive/viktor-bukvar.webp", "v34 old", "Winter ’66. Learning our letters. A month later Vitya was reading on his own, and a year later he was pinching the essays I had to mark and correcting the mistakes for me.", ""],
-  "viktor-1sept":   ["assets/archive/viktor-1sept.webp", "v34 old", "1 September ’68. The gladioli are bigger than the first-grader. Marisha clung to her brother and wouldn’t let go, so I had to take them both into the classroom.", ""],
+  "viktor-1sept":   ["assets/archive/viktor-1sept.webp", "v34 old", "1 September ’68. The gladioli are bigger than the first-grader. Marisha clung to her brother and wouldn’t let go, so I had to take them both into the classroom. They put him at a desk with ginger Lyosha Tikhonov, Valentina Ivanovna’s boy. By Friday you couldn’t pry them apart.", ""],
   "viktor-syrniki": ["assets/archive/viktor-syrniki.webp", "v34 old", "Sunday, ’71. Syrniki from my recipe book, all by himself. The first three burned. Marisha ate them and said that was how they were meant to be.", ""],
   "viktor-sanki":   ["assets/archive/viktor-sanki.webp", "h43 old", "January ’73. Pulled Marisha on the sledge to the bakery and back, three times round. The mitten wasn’t found until spring.", ""],
   "viktor-fonarik": ["assets/archive/viktor-fonarik.webp", "h43 old", "Two in the morning, “Treasure Island” under the blanket. I took a photo and said nothing. In the morning I left a new battery on his desk.", ""],
@@ -502,7 +502,7 @@ window.ALBUMS = [
      ["sgushchenka", "Sent from his unit. So thin!", "Author’s note: Spring 1980, Afghanistan. One tin of condensed milk for two. Lyosha opened it, with a bayonet, so he reckons he’s owed two thirds. Vitya doesn’t argue. Vitya eats."], ["lesha-vokzal", "He’s back!!!", "November ’81, the same station. He’s back!!! Vitya took the picture, my hands were shaking. Lyosha sat down on his suitcase and smoked for a long time. I didn’t scold him."], ["dembel", "The boys are back", "’81, at home. Took it myself, with Petya’s “Zenit.” The boys are back. Both of them."],
      ["school", "Studying", "From the author: Militsiya school, 1982. After the army Lyosha dragged Vitya out of a year-long drinking spell and led him here by the hand. Vitya takes the notes, Lyosha copies them and criticises the handwriting on top. That’s how they studied, all three years."], ["militia-2", "Militsiya Day. Handsome", "10 November, ’94. Full dress uniform once a year, and there he is. Says he spent half the morning wrestling the cap off the cat. Handsome, his father all over."], ["lesha-mama", "Me and Lyosha. May", "Me and Lyosha, May ’95. Baked cabbage ones, “eat, you’re skin and bones.” Ate twelve and says he isn’t hungry."],
      ["lesha-pirat", "Lyosha and his cat", "Lyosha at home. The cat’s asleep on his uniform jacket again, and he says it mustn’t be woken. Went to the station in a sweater. If only he’d hang the jacket up."], ["pirat-plaid", "Pirate. On the cap!", "Pirate. Sleeps on Lyosha’s cap and won’t give it back. Lyosha’s been going without it for a week. Only a cat, but as self-important as a boss."], ["lesha-sofa", "Both asleep"],
-     ["pirat-window", "Pirat", "Pirate on the windowsill. One eye, yet he sees everything. Guards my cucumbers. Lyosha laughs, but the cucumbers, I’ll have you know, are all still there."], ["lesha-mama-album", "Showing Vitya the album", "August ’96. Showed Vitya Lyosha’s pictures, every last one. Lyosha asked to be shot. Vitya laughed and took photos. Let him remember what a little thing he used to be."], ["lesha-borsch", "Making my borscht", "Making borscht from my recipe. Fifth taste, and he says something’s missing. Patience is what’s missing, sonny."],
+     ["pirat-window", "Pirat", "Pirate on the windowsill. One eye, yet he sees everything. Guards my cucumbers. Lyosha laughs, but the cucumbers, I’ll have you know, are all still there."], ["lesha-mama-album", "Showing Vitya the album", "August ’96. Showed Vitya Lyosha’s pictures, every last one. Lyosha asked to be shot. Vitya laughed and took photos, though he remembers half of them anyway: in the school ones he’s standing right next to him."], ["lesha-borsch", "Making my borscht", "Making borscht from my recipe. Fifth taste, and he says something’s missing. Patience is what’s missing, sonny."],
      ["lesha-flowers", "For my birthday", "My birthday, ’96. Chrysanthemums from the Avtovo market. Says they wouldn’t take his money, but he left it anyway. His father all over."], ["lesha-garage", "Dad’s garage", "The garage, October. Petya’s “Moskvich.” Hasn’t run since Petya passed, but every Sunday Lyosha fixes something in it. I don’t interfere."], ["lesha-niva", "Smoking again", "Vitya brought the photo. October, past one in the morning, Lyosha on the bonnet of the “Niva” in the rain. Says he was thinking. What is there to think about at that hour, with work in the morning? He won’t say."]
    ]}
 ];

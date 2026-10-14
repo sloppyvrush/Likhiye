@@ -67,6 +67,7 @@ window.NPCS = [
     "line": "Grew up in the same yard as Vitya. Now keeps a security detail of Afghan vets.",
     "about": [
       "Charming, generous, genuinely fond of Viktor. Once a month they have dinner and reminisce about the yard on Stachek Avenue; they never talk business.",
+      "His firm, Balt-Import: food and alcohol “from Europe” through the Sea Port, warehouse No. 7. The port is under Lysy, so Barinov pays him too, and he has his own dealings with Captain Zorin.",
       "Both know their interests may one day collide."
     ],
     "note": "Don’t ask about the port.",
@@ -83,7 +84,8 @@ window.NPCS = [
     "line": "A kindly “uncle” who calls Viktor “son.”",
     "about": [
       "Rosy-cheeked, soft hands, a silvery mane, horn-rimmed glasses, an immaculate uniform, smells of good cognac. Praises Viktor at meetings.",
-      "Now and then he asks, in a fatherly way, not to rush certain cases. He has his own people upstairs, at the Smolny. Viktor worked it all out long ago and smiles back just as warmly."
+      "Now and then he asks, in a fatherly way, not to rush certain cases. He has his own people upstairs, at the Smolny. Viktor worked it all out long ago and smiles back just as warmly.",
+      "Viktor suspects Lysy’s money is behind every fatherly “don’t rush it”. No proof yet. He and Yershov, Viktor’s old boss, go way back."
     ],
     "note": "Smiles. Don’t trust him.",
     "who": "Vitya"
@@ -147,7 +149,8 @@ window.NPCS = [
     "line": "A face you forget at once. Eyes that forget nothing.",
     "about": [
       "About forty, medium height, grey suit, deliberately forgettable.",
-      "Owes Viktor for a big case back in ’95. Can help with information, once, and only if it suits him."
+      "Owes Viktor for a big case back in ’95. Can help with information, once, and only if it suits him.",
+      "Not a friend, not a colleague: a debt. Has his own business around Barinov’s port deliveries."
     ],
     "note": "Call from a payphone only.",
     "who": "Vitya"
@@ -339,7 +342,7 @@ window.NPCS = [
     "line": "Loud, greedy and reliable in his own way.",
     "about": [
       "Fat, red, sweaty, uniform stretched tight, a gold tooth flashing when he laughs.",
-      "Registers imported cars, no awkward questions asked."
+      "Registers imported cars, no awkward questions asked. Not a colleague but a bought man: Mikhalych’s cars go through him like a knife through butter."
     ],
     "note": "Cognac. Not the cheap stuff.",
     "who": "Vitya"
