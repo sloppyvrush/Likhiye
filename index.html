@@ -311,33 +311,33 @@ a{color:inherit}
   background:linear-gradient(180deg, rgba(255,255,255,.35), transparent 40%), #e9e6dc; box-shadow:0 10px 22px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.5) inset}
 .as-slip .tp{position:absolute; top:-10px; width:70px; height:22px; background:rgba(236,226,192,.7); box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .as-slip .tp.a{left:-18px; transform:rotate(-34deg)} .as-slip .tp.b{right:-14px; transform:rotate(24deg); display:none}
-.sl-tgl{display:block; width:100%; padding:0; border:0; background:none; color:inherit; font:inherit; text-align:left; cursor:default}
-.sl-top{display:block; margin:0 0 6px; padding-right:80px; font:11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:#6a5f4c}
-.sl-h{display:block; margin:0 0 6px; font:700 19px/1.1 var(--mono); letter-spacing:.2em}
-.sl-h span{display:block; margin-top:3px; font:400 12px/1.2 var(--mono); letter-spacing:.04em; color:#5a5144}
-.sl-n, .sl-arr{display:none}
-.sl-txt{margin:0 0 8px; padding-right:12px; font:12px/1.4 var(--mono); color:#4a4236}
+.ms-tgl{display:block; width:100%; padding:0; border:0; background:none; color:inherit; font:inherit; text-align:left; cursor:default}
+.ms-top{display:block; margin:0 0 6px; padding-right:80px; font:11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:#6a5f4c}
+.ms-h{display:block; margin:0 0 6px; font:700 19px/1.1 var(--mono); letter-spacing:.2em}
+.ms-h span{display:block; margin-top:3px; font:400 12px/1.2 var(--mono); letter-spacing:.04em; color:#5a5144}
+.ms-n, .ms-arr{display:none}
+.ms-txt{margin:0 0 8px; padding-right:12px; font:12px/1.4 var(--mono); color:#4a4236}
 .as-slip .as-moth{margin:0 0 6px}
-.sl-list{margin:6px 0 0; padding:0; list-style:none; display:grid; gap:4px}
-.sl-list li{font:19px/1.15 'Caveat',var(--hand); color:#1f2f6b}
-@media (min-width:1001px){ .sl-h{font-size:22px} .sl-txt{font-size:13px} .sl-seal{width:92px; height:92px} }
-.sl-list li b{font:700 12.5px/1.2 var(--mono); letter-spacing:.05em; color:#2a2418; margin-right:6px}
-.sl-seal{position:absolute; right:10px; top:10px; width:80px; height:80px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
-.as-slip.done .sl-seal{opacity:.55; transform:rotate(-14deg)}
+.ms-list{margin:6px 0 0; padding:0; list-style:none; display:grid; gap:4px}
+.ms-list li{font:19px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+.ms-list li b{font:700 12.5px/1.2 var(--mono); letter-spacing:.05em; color:#2a2418; margin-right:6px}
+.ms-seal{position:absolute; right:10px; top:10px; width:80px; height:80px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
+.as-slip.done .ms-seal{opacity:.55; transform:rotate(-14deg)}
+@media (min-width:1001px){ .ms-h{font-size:22px} .ms-txt{font-size:13px} .ms-seal{width:92px; height:92px} }
 @media (max-width:1000px){
   .as-pair{flex-direction:column; align-items:center; width:min(560px, 100%)}
   .as-pair .ach-sheet{flex:none; width:100%}
   .as-slip{order:-1; flex:none; align-self:flex-start; width:88%; margin:6px 0 10px 4px; padding:12px 14px 10px; transform:rotate(-1.2deg)}
   .as-slip .tp.b{display:block}
-  .sl-tgl{cursor:var(--cur-hover); display:grid; grid-template-columns:1fr auto; column-gap:10px; align-items:end}
-  .sl-tgl .sl-top{grid-column:1/-1; padding-right:0}
-  .sl-tgl .sl-h{margin:0; font-size:16px}
-  .sl-n{display:block; font:700 17px/1 'Caveat',var(--hand); font-style:normal; color:#a8261f; white-space:nowrap}
-  .sl-arr{display:block; grid-column:2; justify-self:end; font-style:normal; font:13px/1 var(--mono); color:#6a5f4c; transition:transform .25s}
-  .as-slip:not(.open) .sl-body, .as-slip:not(.open) .sl-seal{display:none}
-  .as-slip.open .sl-body{margin-top:10px}
-  .as-slip.open .sl-arr{transform:rotate(180deg)}
-  .sl-seal{top:auto; bottom:8px; width:70px; height:70px}
+  .ms-tgl{cursor:var(--cur-hover); display:grid; grid-template-columns:1fr auto; column-gap:10px; align-items:end}
+  .ms-tgl .ms-top{grid-column:1/-1; padding-right:0}
+  .ms-tgl .ms-h{margin:0; font-size:16px}
+  .ms-n{display:block; font:700 17px/1 'Caveat',var(--hand); font-style:normal; color:#a8261f; white-space:nowrap}
+  .ms-arr{display:block; grid-column:2; justify-self:end; font-style:normal; font:13px/1 var(--mono); color:#6a5f4c; transition:transform .25s}
+  .as-slip:not(.open) .ms-body, .as-slip:not(.open) .ms-seal{display:none}
+  .as-slip.open .ms-body{margin-top:10px}
+  .as-slip.open .ms-arr{transform:rotate(180deg)}
+  .ms-seal{top:auto; bottom:8px; width:70px; height:70px}
 }
 .as-moth{margin:0 0 10px 40px; font:21px/1.25 'Caveat',var(--hand); color:#1f2f6b}
 .as-moth .tl{display:inline-block; position:relative; margin-left:8px; font:700 20px/1 var(--mono); letter-spacing:1px; color:#1f2f6b}
@@ -3628,13 +3628,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   </div>
   <div class="as-slip">
     <i class="tp a" aria-hidden="true"></i><i class="tp b" aria-hidden="true"></i>
-    <button class="sl-tgl" type="button" aria-expanded="false"><span class="sl-top">Санэпидемстанция Кировского р-на</span><span class="sl-h">СПРАВКА<span>о борьбе с молью на дому</span></span><em class="sl-n"></em><i class="sl-arr" aria-hidden="true">▾</i></button>
-    <div class="sl-body">
-      <p class="sl-txt">Выдана гостю кв. Громова в том, что он(а) лично и без применения нафталина выдворял(а) моль из квартиры.</p>
+    <button class="ms-tgl" type="button" aria-expanded="false"><span class="ms-top">Санэпидемстанция Кировского р-на</span><span class="ms-h">СПРАВКА<span>о борьбе с молью на дому</span></span><em class="ms-n"></em><i class="ms-arr" aria-hidden="true">▾</i></button>
+    <div class="ms-body">
+      <p class="ms-txt">Выдана гостю кв. Громова в том, что он(а) лично и без применения нафталина выдворял(а) моль из квартиры.</p>
       <p class="as-moth"></p>
-      <ul class="sl-list"></ul>
+      <ul class="ms-list"></ul>
     </div>
-    <svg class="sl-seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="slSealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g><g fill="currentColor" font-family="PT Mono, monospace" font-weight="700"><text font-size="10.4" letter-spacing="1.3"><textPath href="#slSealArc">САНЭПИДЕМСТАНЦИЯ ✦ КИРОВСКИЙ Р-Н ✦</textPath></text><text x="60" y="57" text-anchor="middle" font-size="11">МОЛЬ</text><text x="60" y="71" text-anchor="middle" font-size="11">ВЫДВОРЕНА</text></g></svg>
+    <svg class="ms-seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="slSealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g><g fill="currentColor" font-family="PT Mono, monospace" font-weight="700"><text font-size="10.4" letter-spacing="1.3"><textPath href="#slSealArc">САНЭПИДЕМСТАНЦИЯ ✦ КИРОВСКИЙ Р-Н ✦</textPath></text><text x="60" y="57" text-anchor="middle" font-size="11">МОЛЬ</text><text x="60" y="71" text-anchor="middle" font-size="11">ВЫДВОРЕНА</text></g></svg>
   </div>
   </div>
 </div>
@@ -5860,8 +5860,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       : `<li><b>${'?'.repeat(Math.min(9, r.t.length))}</b><span>${r.hint}</span></li>`).join('');
     const mGot = moths.filter(r => got.has(r.key));
     wallBox.querySelector('.as-slip').classList.toggle('done', n > 0);
-    wallBox.querySelector('.sl-n').textContent = `выдворено: ${n}`;
-    wallBox.querySelector('.sl-list').innerHTML = mGot.map(r => `<li><b>${r.t}.</b>${r.x}</li>`).join('');
+    wallBox.querySelector('.ms-n').textContent = `выдворено: ${n}`;
+    wallBox.querySelector('.ms-list').innerHTML = mGot.map(r => `<li><b>${r.t}.</b>${r.x}</li>`).join('');
     wallBox.querySelector('.as-moth').innerHTML = (n ? `Выдворено молей: <b>${n}</b> ${tally(n)}` : 'Выдворено молей: <b>0</b>. Моль пока живёт в шкафу и ест шубу.')
       + `<span class="as-marks">${moths.map(r => `<i class="${got.has(r.key) ? 'on' : ''}" title="${got.has(r.key) ? r.t : 'ещё нет'}">${r.key.slice(4)}</i>`).join('')}</span>`;
     wallBox.querySelector('.as-sum').textContent = got.size === REG.length ? 'Всё собрано. Витя выдаёт ключи от квартиры и просит больше не приходить.' : `Заслуг: ${got.size} из ${REG.length}`;
@@ -5872,7 +5872,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const close = () => { wallBox.hidden = true; document.body.style.overflow = ''; wallBtn.focus(); };
     wallBtn.addEventListener('click', open);
     wallBox.addEventListener('click', e => { if (e.target === wallBox || e.target.classList.contains('as-pair') || e.target.closest('.as-x')) close(); });
-    const slip = wallBox.querySelector('.as-slip'), slipBtn = slip.querySelector('.sl-tgl');
+    const slip = wallBox.querySelector('.as-slip'), slipBtn = slip.querySelector('.ms-tgl');
     slipBtn.addEventListener('click', () => { const on = slip.classList.toggle('open'); slipBtn.setAttribute('aria-expanded', String(on)); });
     // wipe everything this browser remembers about the visit: achievements, moths, records heard, notes, the yarn switch
     const rs = wallBox.querySelector('.as-reset');
