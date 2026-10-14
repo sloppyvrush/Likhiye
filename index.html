@@ -2227,12 +2227,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 
 /* ================= ABOUT: an old fridge in a Soviet kitchen ================= */
 /* letters, photos and the postcard hang on the fridge door on magnets; the kitchen is drawn around it */
-.ab-kitchen{position:relative; color:#2a2418; background:#2a2219}
-/* the kitchen picture stays put while the fridge scrolls past; until it is there, a dim warm wall */
-.kt-bg{position:sticky; top:var(--bar); height:calc(100svh - var(--bar)); margin-bottom:calc(-100svh + var(--bar)); pointer-events:none;
-  background:radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(20,14,8,.35)), url("assets/about/kitchen.webp") 50% 50% / cover no-repeat,
-    radial-gradient(ellipse 70% 60% at 50% 20%, #6a5440, #3a2e22 60%, #241c14)}
-.ab-kitchen .about.section{position:relative; padding-bottom:7svh}
+/* the wall scrolls with the fridge: the picture sits at the bottom, the fridge stands on its floor, above it the same painted wall goes on */
+.ab-kitchen{--kt-ar:calc(1438 / 2576); --kt-feet:.07; --kt-top:#8f8a72; position:relative; overflow:hidden; color:#2a2418;
+  background:radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,226,170,.28), transparent 70%), linear-gradient(#7d7a64, var(--kt-top) 60%)}
+.kt-img{position:absolute; left:0; right:0; bottom:0; aspect-ratio:2576 / 1438; pointer-events:none;
+  background:url("assets/about/kitchen.webp") 50% 100% / 100% 100% no-repeat}
+.kt-img::before{content:""; position:absolute; left:0; right:0; top:0; height:18%; background:linear-gradient(var(--kt-top), transparent)}
+.ab-kitchen .about.section{position:relative; padding-bottom:calc(100% * var(--kt-ar) * var(--kt-feet))}
 .kt-snow{position:absolute; inset:0; width:100%; height:100%}
 .ab-kitchen h2{color:#2a2418; text-shadow:0 1px 12px rgba(255,246,220,.8)}
 .ab-kitchen .lede{color:#2f271c; text-shadow:0 1px 10px rgba(255,246,220,.85)}
@@ -3189,7 +3190,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <!-- ================= ABOUT: a letter, two photos and a postcard ================= -->
 <main class="page" data-route="/about">
   <div class="ab-kitchen">
-    <div class="kt-bg" aria-hidden="true"><canvas class="kt-snow"></canvas></div>
+    <div class="kt-img" aria-hidden="true"><canvas class="kt-snow"></canvas></div>
 
     <div class="wrap section about">
       <h2>О проекте</h2>
