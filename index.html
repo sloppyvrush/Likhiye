@@ -2228,11 +2228,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 /* ================= ABOUT: an old fridge in a Soviet kitchen ================= */
 /* letters, photos and the postcard hang on the fridge door on magnets; the kitchen is drawn around it */
 /* the wall scrolls with the fridge: the picture sits at the bottom, the fridge stands on its floor, above it the same painted wall goes on */
-.ab-kitchen{--kt-ar:calc(1438 / 2576); --kt-feet:.07; --kt-top:#8f8a72; position:relative; overflow:hidden; color:#2a2418;
-  background:radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,226,170,.28), transparent 70%), linear-gradient(#7d7a64, var(--kt-top) 60%)}
-.kt-img{position:absolute; left:0; right:0; bottom:0; aspect-ratio:2576 / 1438; pointer-events:none;
+.ab-kitchen{--kt-ar:calc(2400 / 1792); --kt-feet:.035; position:relative; overflow:hidden; color:#2a2418;
+  background:linear-gradient(rgba(50,44,30,.24), rgba(50,44,30,0) 420px),
+    linear-gradient(90deg, #a1a48e 0%, #a5a58e 15%, #c3b392 30%, #e7c391 45%, #e9c490 50%, #e8c491 55%, #c3b393 70%, #a5a48f 85%, #a4a791 100%)}
+.kt-img{position:absolute; left:0; right:0; bottom:0; aspect-ratio:1792 / 2400; pointer-events:none;
   background:url("assets/about/kitchen.webp") 50% 100% / 100% 100% no-repeat}
-.kt-img::before{content:""; position:absolute; left:0; right:0; top:0; height:18%; background:linear-gradient(var(--kt-top), transparent)}
 .ab-kitchen .about.section{position:relative; padding-bottom:calc(100% * var(--kt-ar) * var(--kt-feet))}
 .kt-snow{position:absolute; inset:0; width:100%; height:100%}
 .ab-kitchen h2{color:#2a2418; text-shadow:0 1px 12px rgba(255,246,220,.8)}
@@ -3839,7 +3839,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (!cv || !page) return;
     const ctx = cv.getContext('2d');
     // the glass of the window in kitchen.webp, in pixels of that picture (change these if the picture is replaced)
-    const IMG = {w: 2576, h: 1438}, PANES = [[340, 165, 790, 348], [340, 405, 522, 590], [490, 590, 522, 855], [578, 405, 740, 855], [740, 405, 790, 540]];
+    const IMG = {w: 1792, h: 2400}, PANES = [[0, 500, 290, 656], [0, 701, 290, 1118], [112, 1118, 290, 1481]];
     const box = [Math.min(...PANES.map(p => p[0])), Math.min(...PANES.map(p => p[1])), Math.max(...PANES.map(p => p[2])), Math.max(...PANES.map(p => p[3]))];
     const flakes = Array.from({length: 140}, () => ({u: Math.random(), v: Math.random(), r: Math.random() * 1.6 + .6, s: Math.random() * .35 + .25, ph: Math.random() * 6.28}));
     let on = false;
