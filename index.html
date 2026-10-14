@@ -2235,12 +2235,19 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:url("assets/about/kitchen.webp") 50% 100% / 100% 100% no-repeat}
 .ab-kitchen .about.section{position:relative; padding-bottom:calc(100% * var(--kt-ar) * var(--kt-feet))}
 .kt-snow{position:absolute; inset:0; width:100%; height:100%}
-.ab-kitchen h2{color:#2a2418; text-shadow:0 1px 12px rgba(255,246,220,.8)}
-.ab-kitchen .lede{color:#2f271c; text-shadow:0 1px 10px rgba(255,246,220,.85)}
-.ab-fridge{position:relative; max-width:960px; margin:34px auto 0; padding:170px clamp(16px, 5vw, 64px) 130px;
+/* a plywood parcel box on top of the fridge carries the title */
+.ab-box{position:relative; z-index:2; width:min(440px, 86%); margin:0 auto -4px; translate:-14% 0; padding:26px 28px 20px; rotate:-1.2deg; color:#2a1d10;
+  background:linear-gradient(rgba(255,240,210,.12), rgba(60,36,14,.18)), repeating-linear-gradient(92deg, rgba(120,80,40,.12) 0 3px, transparent 3px 11px), repeating-linear-gradient(88deg, rgba(90,60,30,.1) 0 1px, transparent 1px 23px), #c49a62;
+  box-shadow:0 10px 18px rgba(40,26,10,.4), inset 0 0 0 3px rgba(90,60,30,.35); border-radius:3px}
+.bx-lid{position:absolute; left:-6px; right:-6px; top:-10px; height:16px; border-radius:2px; background:linear-gradient(#d2ab74, #a87c46); box-shadow:0 3px 4px rgba(40,26,10,.3)}
+.ab-box h2{margin:0 0 6px; font:700 52px/1 'Amatic SC', var(--hand); letter-spacing:.06em; color:#1e1a3a; transform:rotate(-1deg)}
+.bx-label{margin:0; display:inline-block; padding:8px 12px; background:#f4ecd8; box-shadow:0 2px 4px rgba(0,0,0,.2); font:700 19px/1.25 'Caveat', cursive; color:#2b3f7a; transform:rotate(.8deg)}
+.bx-label i{font:400 11px/1 var(--mono); font-style:normal; color:#6a5f4c; letter-spacing:.06em; text-transform:uppercase}
+.bx-stamp{position:absolute; right:16px; top:20px; padding:4px 8px; border:2.5px solid rgba(168,38,31,.75); color:rgba(168,38,31,.8); font:700 13px/1.1 var(--mono); letter-spacing:.1em; transform:rotate(8deg); mix-blend-mode:multiply}
+.ab-fridge{position:relative; max-width:1060px; margin:0 auto; padding:160px clamp(16px, 4vw, 52px) 120px;
   border-radius:70px 70px 18px 18px / 56px 56px 18px 18px;
-  background:linear-gradient(90deg, #c4bfb3 0%, #e6e2d8 5%, #f6f4ed 20%, #fbfaf6 50%, #f2efe7 80%, #dcd7cb 95%, #bcb7aa 100%);
-  box-shadow:0 26px 40px rgba(40,26,10,.4), inset 0 8px 14px rgba(255,255,255,.75), inset 0 -12px 22px rgba(0,0,0,.07)}
+  background:radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,226,170,.22), transparent 70%), linear-gradient(90deg, #a7a090 0%, #c8c1af 5%, #d9d2c0 20%, #e2dbc9 50%, #d6cfbd 80%, #bfb8a6 95%, #a19a8a 100%);
+  box-shadow:0 26px 40px rgba(40,26,10,.45), inset 0 8px 14px rgba(255,248,228,.45), inset 0 -16px 26px rgba(40,26,10,.14)}
 .ab-fridge::after{content:""; position:absolute; left:6%; right:6%; bottom:-12px; height:14px; pointer-events:none;
   background:linear-gradient(90deg, #2a2622 0 40px, transparent 40px calc(100% - 40px), #2a2622 calc(100% - 40px))}
 .fr-top{position:absolute; top:46px; left:50%; translate:-50% 0; width:min(300px, 56%); height:36px; border-radius:18px;
@@ -2250,7 +2257,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:linear-gradient(90deg, #8d9195, #f2f3f4 35%, #c4c7ca 60%, #7d8185); box-shadow:4px 8px 10px rgba(0,0,0,.3)}
 .fr-vent{position:absolute; left:0; right:0; bottom:0; height:84px; border-radius:0 0 18px 18px; border-top:3px solid #d6d1c4;
   background:linear-gradient(transparent 26px, #4a4640 26px 30px, transparent 30px 38px, #4a4640 38px 42px, transparent 42px 50px, #4a4640 50px 54px, transparent 54px) 50% 0 / 60% 100% no-repeat, linear-gradient(90deg, #cdc8bb, #e9e6dd 30%, #e9e6dd 70%, #cdc8bb)}
-.fr-abc{position:absolute; top:92px; left:30%; display:flex; gap:4px}
+.fr-abc{position:absolute; top:88px; left:50%; translate:-50% 0; display:flex; gap:4px}
 .fr-abc b{display:block; rotate:var(--r); font:400 60px/1 var(--display); color:var(--c);
   text-shadow:0 2px 0 rgba(0,0,0,.25), 0 3px 0 color-mix(in srgb, var(--c) 70%, #000), 0 8px 8px rgba(0,0,0,.25)}
 .fr-list{position:relative; width:170px; padding:18px 16px 12px; rotate:4deg; display:flex; flex-direction:column;
@@ -2260,7 +2267,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .fr-list s{text-decoration-thickness:2px; color:#6a5f8a}
 
 /* magnets */
-.mg{position:absolute; z-index:6; top:-20px; left:50%; translate:-50% 0; width:42px; height:42px; border-radius:50%; pointer-events:none;
+.mg{position:absolute; z-index:6; top:-20px; left:50%; translate:-50% 0; width:42px; height:42px; padding:0; border:0; border-radius:50%; cursor:var(--cur-hover, pointer); transition:scale .15s;
   filter:drop-shadow(1px 3px 2px rgba(0,0,0,.35))}
 .mg-red{background:radial-gradient(circle at 35% 30%, #ffb3a6 0 3px, #e2483a 6px, #9a1f17 100%)}
 .mg-blue{background:radial-gradient(circle at 35% 30%, #c6dbff 0 3px, #4a7ac4 6px, #1f3a72 100%)}
@@ -2269,23 +2276,38 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:radial-gradient(circle, #ffe08a 0 1.4px, transparent 2px) 0 0 / 9px 9px, radial-gradient(circle at 35% 30%, #ff8a80, #d42a2a 55%, #8e1414)}
 .mg-straw::before{content:""; position:absolute; left:50%; top:-8px; width:30px; height:14px; translate:-50% 0; border-radius:50%; background:#4f8a3a; clip-path:polygon(0 50%, 20% 0, 35% 60%, 50% 0, 65% 60%, 80% 0, 100% 50%, 50% 100%)}
 .ab-post{position:relative}
+.mg:hover{scale:1.12} .mg:focus-visible{outline:2px solid var(--glow); outline-offset:3px}
+/* a sheet whose magnet was taken falls to the floor; a note from us is left in its place */
+.dropped{visibility:hidden}
+.fall-note{position:absolute; z-index:8; width:200px; translate:-50% 0; padding:16px 14px 12px; rotate:var(--r, -3deg); background:#fbe68a; box-shadow:0 6px 12px rgba(40,26,10,.3);
+  font:700 21px/1.15 'Caveat', cursive; color:#2a2418; text-align:left; animation:noteIn .35s ease-out both}
+.fall-note b{display:block; margin-top:6px; font:700 17px/1 'Caveat', cursive; color:#a8261f; text-align:right}
+.fall-note button{display:block; margin:10px 0 0 auto; padding:4px 8px; border:1.5px dashed rgba(42,36,24,.5); background:none; font:12px/1.2 var(--mono); color:#2a2418; cursor:var(--cur-hover, pointer)}
+.fall-note button:hover{background:rgba(0,0,0,.06)}
+.fall-note::before{content:""; position:absolute; left:50%; top:-14px; width:28px; height:28px; translate:-50% 0; border-radius:50%; background:radial-gradient(circle at 35% 30%, #c6dbff 0 3px, #4a7ac4 6px, #1f3a72 100%); filter:drop-shadow(1px 3px 2px rgba(0,0,0,.35))}
+@keyframes noteIn{from{opacity:0; translate:-50% -10px} to{opacity:1; translate:-50% 0}}
 .ab-post .pm1{left:16%; top:-18px} .ab-post .pm2{left:auto; right:12%; translate:0 0; top:-18px}
 
-.ab-letters{position:relative; z-index:1; display:grid; grid-template-columns:56% 46%; grid-template-rows:auto 1fr; align-items:start}
-.ab-letters .ab-letter{grid-column:1; grid-row:1 / 3}
+.ab-letters{position:relative; z-index:1; display:grid; grid-template-columns:53% 49%; align-items:start}
+.ab-letters .ab-letter{grid-column:1; grid-row:1}
 .ab-mcol{grid-column:2; grid-row:1; display:flex; flex-direction:column; align-items:flex-end; margin:-20px 0 0 -4%}
 .ab-mcol .ab-letter.sq{align-self:stretch; margin-top:-60px}
-.fr-notes{grid-column:2; grid-row:2; display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:34px 26px; padding:70px 0 20px 6%}
+.fr-notes{display:grid; grid-template-columns:1fr 1fr; justify-items:center; align-items:start; gap:38px 14px; padding-top:60px}
+.fr-notes > div{width:100%; max-width:180px}
 .fr-recipe{position:relative; width:200px; padding:22px 16px 14px; rotate:-3deg; display:flex; flex-direction:column; gap:4px;
   background:#f3ead2; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 19px/1.15 'Caveat', cursive; color:#5a2f1a}
 .fr-recipe b{font:700 26px/1 'Caveat', cursive; color:#a8261f; margin-bottom:4px}
+.fr-vnote, .fr-lnote{position:relative; width:190px; padding:22px 16px 12px; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 20px/1.15 'Caveat', cursive}
+.fr-vnote{background:#f6f0dc repeating-linear-gradient(transparent 0 21px, rgba(84,124,176,.25) 21px 22px) 0 12px; color:#22355a; rotate:2.5deg}
+.fr-lnote{background:#fff3b0; color:#5a2f1a; rotate:-3deg}
+.fr-vnote b, .fr-lnote b{display:block; text-align:right; margin-top:4px}
 
 /* a sheet from a school exercise book: ruled lines, red margin */
-.ab-letter{--lh:34px; --mg:clamp(38px, 6vw, 70px); position:relative; transform:rotate(-1deg); color:#22355a;
+.ab-letter{--lh:32px; --mg:clamp(38px, 6vw, 70px); position:relative; transform:rotate(-1deg); color:#22355a;
   padding:calc(var(--lh) * 2) clamp(22px, 3.4vw, 46px) calc(var(--lh) * 1.5) calc(var(--mg) + clamp(16px, 2.2vw, 26px));
   background:#f7f3e6 repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) - 1px), rgba(84,124,176,.32) calc(var(--lh) - 1px) var(--lh)) 0 6px;
   box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 5px 12px rgba(40,20,5,.22);
-  font:400 21px/var(--lh) var(--hand)}
+  font:400 20px/var(--lh) var(--hand)}
 .ab-letter::before{content:""; position:absolute; top:0; bottom:0; left:var(--mg); width:2px; background:rgba(204,72,64,.55)}
 .ab-letter::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.35), transparent 55%), radial-gradient(ellipse at 95% 100%, rgba(140,110,60,.12), transparent 60%)}
 .ab-letter p{position:relative; z-index:1; margin:0 0 var(--lh)}
@@ -2320,8 +2342,16 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .about .fr.nofoto{background:repeating-linear-gradient(135deg, #2e2924 0 10px, #332d27 10px 20px)}
 .about .fr.nofoto::after{content:"здесь будет фото"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-4deg); padding:4px 10px; background:var(--stamp); color:#f1e6cc; font:700 11px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
 
-.ab-row2{position:relative; z-index:1; display:flex; justify-content:center; margin-top:clamp(50px, 7vw, 90px)}
-.ab-row2 .ab-post-wrap{width:min(780px, 100%)}
+.ab-row2{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, 1fr); gap:clamp(20px, 3vw, 44px); align-items:start; margin-top:clamp(40px, 5vw, 64px)}
+.ab-row2 .ab-post-wrap{width:100%}
+/* the postcard is smaller on the fridge */
+.ab-row2 .pk-msg{font-size:17px}
+.ab-row2 .pk-msg .pk-sign{font-size:26px}
+.ab-row2 .pk-l{min-height:32px} .ab-row2 .pk-l span{font-size:20px}
+.ab-row2 .pk-from a{font-size:18px}
+.ab-row2 .pk-stamps{height:104px} .ab-row2 .pk-stamp{width:68px; height:85px} .ab-row2 .pk-mark{width:160px; height:85px; right:30px}
+.ab-row2 .pk-idx svg{width:18px; height:30px}
+.ab-row2 .ab-post .front .cap b{font-size:26px}
 .ab-post-wrap{max-width:780px; margin:0; text-align:center}
 .ab-post-lede{margin:0 0 22px; font:700 34px/1.1 'Caveat', cursive; color:#2b3f7a}
 .ab-hint{margin:16px 0 0; font:400 12.5px/1.4 var(--mono); color:#6a5f4c}
@@ -2360,13 +2390,18 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .ab-letters{grid-template-columns:1fr; grid-template-rows:none}
   .ab-letters .ab-letter{grid-column:1; grid-row:auto}
   .ab-mcol{grid-column:1; grid-row:auto; margin:40px 0 0 6%}
-  .fr-notes{grid-column:1; grid-row:auto; padding:50px 0 0}
+  .fr-notes{flex-direction:row; flex-wrap:wrap; justify-content:center; gap:34px 22px; padding-top:20px}
+  .ab-row2{grid-template-columns:1fr}
   .fr-abc b{font-size:44px}
   .fr-list, .fr-recipe{width:150px; font-size:17px}
 }
 @media (max-width:760px){
   .ab-fridge{padding:170px 12px 110px; border-radius:40px 40px 14px 14px / 34px 34px 14px 14px}
   .fr-handle{display:none}
+  .ab-box{translate:0 0; width:94%; padding:20px 16px 14px}
+  .ab-box h2{font-size:40px}
+  .bx-label{font-size:16px}
+  .bx-stamp{top:10px; right:10px; font-size:10px; padding:3px 6px}
   .fr-abc{left:50%; translate:-50% 0; top:94px}
   .fr-abc b{font-size:38px}
   .ab-kitchen .wrap{padding-left:10px; padding-right:10px}
@@ -2394,6 +2429,54 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .ab-post .front .cap span{text-align:left}
 }
 @media (prefers-reduced-motion:reduce){ .ab-post .face, .ph-face{transition:none} }
+/* the picture is a touch out of focus, like a background should be; its little life: curtain, steam, flame, music */
+.kt-img{filter:blur(1.6px) saturate(.95)}
+.kt-img > i{position:absolute; pointer-events:none}
+.kt-curtain{left:0; top:9.5%; width:18.4%; height:11.54%; transform-origin:50% 0;
+  background:url("assets/about/kitchen.webp") 0% 10.74% / 543% 866.4% no-repeat; animation:ktCurtain 7s ease-in-out infinite alternate}
+@keyframes ktCurtain{0%{transform:skewX(0deg) scaleY(1)} 50%{transform:skewX(-1.4deg) scaleY(1.006)} 100%{transform:skewX(1deg) scaleY(.998)}}
+.kt-fire{left:86%; top:64.6%; width:9.4%; height:1.6%; border-radius:50%;
+  background:radial-gradient(ellipse 14% 90% at 12% 100%, rgba(120,170,255,.95), transparent 80%), radial-gradient(ellipse 14% 90% at 32% 100%, rgba(140,190,255,.95), transparent 80%), radial-gradient(ellipse 14% 90% at 52% 100%, rgba(120,170,255,.95), transparent 80%), radial-gradient(ellipse 14% 90% at 72% 100%, rgba(140,190,255,.95), transparent 80%), radial-gradient(ellipse 14% 90% at 90% 100%, rgba(120,170,255,.95), transparent 80%), radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,170,90,.5), transparent 80%);
+  filter:drop-shadow(0 0 6px rgba(110,160,255,.8)); transform-origin:50% 100%; animation:ktFire .18s steps(2) infinite alternate}
+@keyframes ktFire{from{transform:scaleY(1); opacity:.9} to{transform:scaleY(1.25); opacity:1}}
+.kt-steam{left:81.5%; top:57.6%; width:6%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); opacity:0; animation:ktSteam 4.2s ease-out infinite}
+.kt-steam.s2{animation-delay:1.4s; left:82.5%} .kt-steam.s3{animation-delay:2.8s; left:81%}
+@keyframes ktSteam{0%{opacity:0; transform:translate(0,0) scale(.4)} 20%{opacity:.85} 100%{opacity:0; transform:translate(-60%, -260%) scale(1.8)}}
+.kt-note{left:83.5%; top:32.5%; font:700 clamp(18px, 2.2vw, 40px)/1 'Caveat', cursive; font-style:normal; color:#4a2e1c; opacity:0; animation:ktNote 5s ease-out infinite}
+.kt-note.n2{animation-delay:1.25s; left:85%} .kt-note.n3{animation-delay:2.5s; left:84%} .kt-note.n4{animation-delay:3.75s; left:86%}
+@keyframes ktNote{0%{opacity:0; transform:translate(0,0) rotate(-10deg)} 15%{opacity:.85} 100%{opacity:0; transform:translate(-120%, -260%) rotate(14deg)}}
+@media (prefers-reduced-motion:reduce){ .kt-img > i{animation:none} .kt-steam, .kt-note{display:none} }
+
+/* the threshold at the end of the kitchen */
+.kt-sill{position:relative; z-index:3; height:26px; margin-top:-10px; border-radius:3px 3px 0 0;
+  background:linear-gradient(#e0c48a 0 3px, #b08a4e 3px 6px, #7a5430 6px 9px, #8e6438 9px, #6a4524 100%);
+  box-shadow:0 -4px 10px rgba(40,26,10,.35), 0 8px 16px rgba(0,0,0,.45)}
+.kt-sill::after{content:""; position:absolute; left:0; right:0; top:10px; height:2px; background:repeating-linear-gradient(90deg, rgba(40,20,8,.35) 0 2px, transparent 2px 90px)}
+
+/* a kitchen rat that runs out now and then; pet it and it melts */
+.kt-run{position:absolute; left:0; right:0; bottom:0; aspect-ratio:1792 / 2400; pointer-events:none; z-index:4; overflow:hidden}
+.kt-rat{position:absolute; bottom:1.6%; left:0; width:clamp(64px, 6.2vw, 110px); padding:0; border:0; background:none; pointer-events:auto; cursor:var(--cur-hover, pointer);
+  filter:drop-shadow(0 6px 4px rgba(0,0,0,.35)); -webkit-tap-highlight-color:transparent}
+.kt-rat[hidden]{display:none}
+.kt-rat svg{display:block; width:100%; overflow:visible}
+.kt-rat.left svg{transform:scaleX(-1)}
+.kt-rat.run svg{animation:ratBob .16s ease-in-out infinite alternate}
+.kt-rat.run .lg1{animation:ratLeg .16s linear infinite alternate} .kt-rat.run .lg2{animation:ratLeg .16s linear infinite alternate-reverse}
+.kt-rat .rt-tail{transform-origin:30px 40px; animation:ratTail 1.4s ease-in-out infinite alternate}
+.kt-rat .rt-happy, .kt-rat .rt-blush{display:none}
+.kt-rat.pet .rt-eye{display:none} .kt-rat.pet .rt-happy, .kt-rat.pet .rt-blush{display:inline}
+.kt-rat.pet svg{animation:ratPet .5s ease-in-out infinite alternate}
+.rt-hearts{position:absolute; left:50%; top:-10px; pointer-events:none}
+.rt-hearts i{position:absolute; font:700 22px/1 var(--serif); font-style:normal; color:#e2486a; opacity:0}
+.kt-rat.pet .rt-hearts i{animation:ratHeart 1.4s ease-out infinite} .kt-rat.pet .rt-hearts i:nth-child(2){animation-delay:.45s; left:-18px} .kt-rat.pet .rt-hearts i:nth-child(3){animation-delay:.9s; left:16px}
+@keyframes ratBob{from{transform:translateY(0)} to{transform:translateY(-3px)}}
+.kt-rat.left.run svg{animation-name:ratBobL} @keyframes ratBobL{from{transform:scaleX(-1) translateY(0)} to{transform:scaleX(-1) translateY(-3px)}}
+.kt-rat.left.pet svg{animation-name:ratPetL}
+@keyframes ratLeg{from{transform:translateX(-2px)} to{transform:translateX(2px)}}
+@keyframes ratTail{from{transform:rotate(-6deg)} to{transform:rotate(8deg)}}
+@keyframes ratPet{from{transform:scale(1)} to{transform:scale(1.06, .94)}}
+@keyframes ratPetL{from{transform:scaleX(-1)} to{transform:scale(-1.06, .94)}}
+@keyframes ratHeart{0%{opacity:0; transform:translateY(0) scale(.6)} 25%{opacity:1} 100%{opacity:0; transform:translateY(-46px) scale(1.2)}}
 </style>
 </head>
 <body>
@@ -3190,43 +3273,50 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <!-- ================= ABOUT: a letter, two photos and a postcard ================= -->
 <main class="page" data-route="/about">
   <div class="ab-kitchen">
-    <div class="kt-img" aria-hidden="true"><canvas class="kt-snow"></canvas></div>
+    <div class="kt-img" aria-hidden="true">
+      <canvas class="kt-snow"></canvas>
+      <i class="kt-curtain"></i>
+      <i class="kt-fire"></i>
+      <i class="kt-steam s1"></i><i class="kt-steam s2"></i><i class="kt-steam s3"></i>
+      <i class="kt-note n1">♪</i><i class="kt-note n2">♫</i><i class="kt-note n3">♪</i><i class="kt-note n4">♬</i>
+    </div>
 
     <div class="wrap section about">
-      <h2>О проекте</h2>
-      <p class="lede prose">Пара слов от тех, кто всё это придумал. Всё самое важное у нас, как у всех, висит на холодильнике.</p>
-
+      <div class="ab-box">
+        <div class="bx-lid" aria-hidden="true"></div>
+        <h2>О проекте</h2>
+        <p class="bx-label"><i>Кому:</i> всем, кто заглянул на кухню<br><i>От кого:</i> Слопи и Милки, Ленинград</p>
+        <span class="bx-stamp" aria-hidden="true">НЕ КАНТОВАТЬ</span>
+      </div>
       <div class="ab-fridge">
         <div class="fr-top" aria-hidden="true"><span class="fr-plate"></span></div>
         <div class="fr-abc" aria-hidden="true"><b style="--c:#d23b3b; --r:-8deg">Л</b><b style="--c:#3f6aa8; --r:6deg">И</b><b style="--c:#e8b33c; --r:-3deg">Х</b><b style="--c:#4f8a4a; --r:9deg">И</b><b style="--c:#d23b3b; --r:-6deg">Е</b></div>
         <i class="fr-handle" aria-hidden="true"></i>
 
         <div class="ab-letters">
-        <article class="ab-letter">
-          <i class="mg mg-straw" aria-hidden="true"></i>
-        <div class="ab-ph me" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Слопи. Нажмите, чтобы перевернуть">
-          <i class="mg mg-red" aria-hidden="true"></i>
+        <article class="ab-letter" data-drop="Эй! Я это три вечера писала. Повесь обратно!" data-by="Слопи">
+          <button class="mg mg-straw" type="button" aria-label="Снять магнит"></button>
+        <div class="ab-ph me" data-drop="Это вообще-то мой лучший ракурс." data-by="Слопи" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Слопи. Нажмите, чтобы перевернуть">
+          <button class="mg mg-red" type="button" aria-label="Снять магнит"></button>
           <div class="ph-face ph-front"><div class="fr"><img src="assets/about/slopi.webp" alt="Слопи" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Слопи<small>придумала Витю</small></p></div>
           <div class="ph-face ph-back"><p>Слопи. Снято за секунду до того, как Витя сказал: «Гражданочка, фотографировать не положено».</p><span>окт. 96</span></div>
         </div>
         <p class="ab-hi">Привет!</p>
-        <p>Меня зовут Слопи, и «Лихие» — мой самый любимый и самый личный проект.</p>
-        <p>Я коренная петербурженка, и мои родители тоже. Поэтому Петербург для меня не декорация для ботов, а дом. Вся эта серия выросла из любви к нему: к дворам-колодцам, трамваям, мокрым крышам и кухням, где до ночи пьют чай и разговаривают обо всём на свете.</p>
-        <p>А ещё она выросла из рассказов моих родителей. Они много вспоминали те годы: как жили, как работали, как выкручивались и как умудрялись смеяться, когда было совсем не до смеха. И у нас дома до сих пор лежат старые семейные фотоальбомы, с уголками и подписями на обороте. Я очень люблю их листать. Отсюда и фотоархив на сайте, и надписи на каждом снимке, и вся эта атмосфера.</p>
-        <p>Мне хотелось сделать ботов, каких в нашем комьюнити почти не встретишь. Не идеальных принцев и не злодеев на одну сцену, а <u>живых людей</u>: со своей историей, с родными, с привычками и с прошлым. Таких, про которых хочется узнавать дальше.</p>
-        <p>И я делала это не одна. Милки — моя самая близкая подруга. Это она придумала и написала Лёшу, и без него Витя был бы совсем другим. Мы вместе придумывали этот Петербург девяносто шестого и вместе в нём жили.</p>
-        <p>Этот проект очень много для меня значит. Я вложила в него кусочек своего города, своей семьи и <u>своего сердца</u>. И когда кто-то пишет, что Витя или Лёша показались ему настоящими, у меня внутри всё откликается.</p>
+        <p>Меня зовут Слопи, и «Лихие» — мой самый личный проект.</p>
+        <p>Я коренная петербурженка, и мои родители тоже. Вся эта серия выросла из любви к нашему городу, из их рассказов о тех годах и из старых семейных альбомов с подписями на обороте.</p>
+        <p>Мне хотелось сделать не типичных для комьюнити ботов, а <u>живых людей</u>, про которых хочется узнавать дальше. И делала я это не одна: Лёшу придумала и написала Милки, моя самая близкая подруга.</p>
+        <p>Я вложила сюда кусочек своего города, своей семьи и <u>своего сердца</u>. И когда кто-то пишет, что Витя или Лёша показались ему настоящими, у меня внутри всё откликается.</p>
         <p class="ab-sign">Ваша Слопи</p>
           <svg class="ab-pen" viewBox="0 0 260 30" aria-hidden="true"><path d="M2 15l26-7v14z" fill="#c9a24a"/><path d="M2 15l9-2.4v4.8z" fill="#2b2622"/><rect x="28" y="6" width="200" height="18" rx="9" fill="#1f2e4f"/><rect x="28" y="8" width="200" height="4" rx="2" fill="rgba(255,255,255,.18)"/><rect x="150" y="3" width="70" height="5" rx="2.5" fill="#c9a24a"/><rect x="226" y="6" width="30" height="18" rx="6" fill="#c9a24a"/></svg>
         </article>
         <div class="ab-mcol">
-        <div class="ab-ph mi" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Милки. Нажмите, чтобы перевернуть">
-          <i class="mg mg-lemon" aria-hidden="true"></i>
+        <div class="ab-ph mi" data-drop="Я тут красивая, повесь!" data-by="Милки" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Милки. Нажмите, чтобы перевернуть">
+          <button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>
           <div class="ph-face ph-front"><div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Милки<small>придумала Лёшу</small></p></div>
           <div class="ph-face ph-back"><p>Милки. Подпись тут должна была быть длиннее, но Лёша опять одолжил ручку и не вернул.</p><span>окт. 96</span></div>
         </div>
-        <article class="ab-letter sq">
-          <i class="mg mg-blue" aria-hidden="true"></i>
+        <article class="ab-letter sq" data-drop="Ну вот, теперь Лёша обиделся. Верни как было!" data-by="Милки">
+          <button class="mg mg-blue" type="button" aria-label="Снять магнит"></button>
         <p class="ab-hi">Привет-привет!</p>
         <p>Бла-бла-бла, тут скоро будет очень трогательный текст от Милки. Бла-бла, бла-бла-бла, и ещё немножко бла.</p>
         <p>Лёша передаёт всем привет и просит не верить ничему, что про него рассказывает Витя. Бла-бла-бла. Витя просит не верить Лёше. Бла.</p>
@@ -3234,17 +3324,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p class="ab-sign">Ваша Милки</p>
         </article>
         </div>
-          <div class="fr-notes" aria-hidden="true">
-            <div class="fr-list"><i class="mg mg-red"></i><b>Купить:</b><span>хлеб</span><span>кефир</span><span>батарейки в плеер</span><span>кассету «Кино»</span><s>сушки</s></div>
-            <div class="fr-recipe"><i class="mg mg-blue"></i><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
-          </div>
         </div>
 
         <div class="ab-row2">
           <div class="ab-post-wrap">
             <p class="ab-post-lede">А это вам.<span class="pk-turn"> Переверните.</span></p>
-        <div class="ab-post" role="button" tabindex="0" aria-pressed="false" aria-label="Открытка от Слопи и Милки. Нажмите, чтобы перевернуть">
-              <i class="mg mg-red pm1" aria-hidden="true"></i><i class="mg mg-lemon pm2" aria-hidden="true"></i>
+        <div class="ab-post" data-drop="Это же вам! Поднимите, пока Витя не увидел." data-by="Слопи и Милки" role="button" tabindex="0" aria-pressed="false" aria-label="Открытка от Слопи и Милки. Нажмите, чтобы перевернуть">
+              <button class="mg mg-red pm1" type="button" aria-label="Снять магнит"></button><button class="mg mg-lemon pm2" type="button" aria-label="Снять магнит"></button>
           <div class="face front">
             <div class="fr"><img src="assets/about/vdvoem.webp" alt="Слопи и Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
             <div class="cap"><b>С приветом из Питера!</b><span>Слопи и Милки · «Лихие»</span></div>
@@ -3271,10 +3357,32 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         </div>
             <p class="ab-hint"><span class="pk-turn">Нажмите на открытку, чтобы перевернуть. </span>Фотографии тоже переворачиваются.</p>
           </div>
+          <div class="fr-notes">
+            <div class="fr-list" data-drop="А хлеб теперь кто купит?" data-by="Милки"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button><b>Купить:</b><span>хлеб</span><span>кефир</span><span>батарейки в плеер</span><span>кассету «Кино»</span><s>сушки</s></div>
+            <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
+            <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
+            <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
+          </div>
         </div>
         <div class="fr-vent" aria-hidden="true"></div>
       </div>
     </div>
+    <div class="kt-run" aria-hidden="false">
+      <button class="kt-rat" type="button" aria-label="Крыса Мавюрка. Погладить" hidden>
+        <svg viewBox="0 0 120 60"><path class="rt-tail" d="M30 40C14 42 6 34 2 24" fill="none" stroke="#e9a6a0" stroke-width="3.4" stroke-linecap="round"/>
+          <g class="rt-legs"><path class="lg1" d="M44 44l-4 9M76 44l4 9" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/><path class="lg2" d="M52 46l2 8M70 46l-2 8" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/></g>
+          <ellipse cx="60" cy="36" rx="30" ry="15" fill="#9c918a"/><ellipse cx="58" cy="40" rx="22" ry="8" fill="#b5aba4"/>
+          <path d="M84 30c10-4 22 2 28 10c-6 6-18 8-28 4z" fill="#9c918a"/>
+          <ellipse cx="86" cy="22" rx="8" ry="9" fill="#9c918a"/><ellipse cx="86" cy="22" rx="5" ry="6" fill="#efb1ab"/>
+          <circle cx="112" cy="40" r="3" fill="#e2848a"/>
+          <g class="rt-eye"><circle cx="98" cy="34" r="2.6" fill="#1d1a18"/><circle cx="98.8" cy="33.2" r=".9" fill="#fff"/></g>
+          <path class="rt-happy" d="M95 34q3-3.5 6 0" fill="none" stroke="#1d1a18" stroke-width="1.8" stroke-linecap="round"/>
+          <ellipse class="rt-blush" cx="100" cy="40" rx="4" ry="2.2" fill="#f08a95" opacity=".7"/>
+          <path d="M110 38l9-3M110 41l9 1" stroke="#6a605a" stroke-width=".8"/></svg>
+        <span class="rt-hearts"><i>♥</i><i>♥</i><i>♥</i></span>
+      </button>
+    </div>
+    <div class="kt-sill" aria-hidden="true"></div>
   </div>
 </main>
 
@@ -3868,6 +3976,66 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     addEventListener('hashchange', () => setTimeout(start, 50));
     document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
     setTimeout(start, 300);
+  })();
+
+
+  /* ---------- «О проекте»: take a magnet off and the sheet falls; a note is left in its place ---------- */
+  (() => {
+    const fridge = document.querySelector('.ab-fridge'); if (!fridge) return;
+    const tilt = [-4, 3, -2, 4, -3];
+    fridge.addEventListener('click', e => {
+      const mg = e.target.closest('.mg'); if (!mg) return;
+      e.stopPropagation(); e.preventDefault();
+      const item = mg.closest('[data-drop]'); if (!item || item.classList.contains('dropped') || item.dataset.falling) return;
+      item.dataset.falling = '1';
+      const fr = fridge.getBoundingClientRect(), r = item.getBoundingClientRect();
+      const fall = Math.max(200, fr.bottom - r.top + 60), dx = (Math.random() - .5) * 80;
+      const done = () => {
+        item.classList.add('dropped'); delete item.dataset.falling;
+        const n = document.createElement('div'); n.className = 'fall-note';
+        n.style.left = (r.left - fr.left + r.width / 2) + 'px'; n.style.top = Math.max(20, r.top - fr.top + Math.min(60, r.height / 4)) + 'px';
+        n.style.setProperty('--r', tilt[Math.floor(Math.random() * tilt.length)] + 'deg');
+        n.innerHTML = `${item.dataset.drop}<b>— ${item.dataset.by}</b><button type="button">повесить обратно ↺</button>`;
+        fridge.appendChild(n);
+        n.querySelector('button').addEventListener('click', ev => {
+          ev.stopPropagation(); n.remove(); item.classList.remove('dropped');
+          if (!reduce) item.animate([{translate: '0 -24px', opacity: 0}, {translate: '0 0', opacity: 1}], {duration: 380, easing: 'cubic-bezier(.2,.8,.3,1.2)'});
+        });
+      };
+      if (reduce){ done(); return; }
+      item.animate([{translate: '0 0', opacity: 1}, {translate: `${dx * .3}px ${fall * .4}px`, opacity: 1, offset: .5}, {translate: `${dx}px ${fall}px`, opacity: 0}],
+        {duration: 950, easing: 'cubic-bezier(.5,0,.9,.6)'}).finished.then(done);
+    }, true);
+  })();
+
+  /* ---------- «О проекте»: the kitchen rat; pet it once and it is yours ---------- */
+  (() => {
+    const rat = document.querySelector('.kt-rat'), run = document.querySelector('.kt-run'), page = document.querySelector('.page[data-route="/about"]');
+    if (!rat || !run || !page) return;
+    let busy = false, petted = false, timer = 0;
+    const W = () => run.clientWidth;
+    const go = (from, to, ms) => { rat.classList.add('run'); rat.classList.toggle('left', to < from);
+      return rat.animate([{transform: `translateX(${from}px)`}, {transform: `translateX(${to}px)`}], {duration: ms, easing: 'cubic-bezier(.4,.1,.6,.9)', fill: 'forwards'}).finished.then(() => rat.classList.remove('run')); };
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    async function trip(){
+      if (busy || !page.classList.contains('on') || document.hidden){ schedule(); return; }
+      busy = true; rat.hidden = false; petted = false; rat.classList.remove('pet');
+      const w = W(), start = w + 20, stop = w * (.28 + Math.random() * .3);
+      await go(start, stop, 1700 + Math.random() * 600);
+      if (!petted){ rat.classList.remove('left'); await wait(2600 + Math.random() * 1800); }
+      while (rat.classList.contains('pet')) await wait(300);
+      await go(stop, start, 1300);
+      rat.hidden = true; busy = false; schedule();
+    }
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(trip, 9000 + Math.random() * 16000); };
+    rat.addEventListener('click', () => {
+      if (rat.classList.contains('run') || rat.classList.contains('pet')) return;
+      petted = true; rat.classList.add('pet');
+      if (window.lihieOnce) window.lihieOnce('rat');
+      setTimeout(() => rat.classList.remove('pet'), 3200);
+    });
+    addEventListener('hashchange', () => { if (location.hash === '#/about'){ clearTimeout(timer); timer = setTimeout(trip, 2500); } });
+    if (location.hash === '#/about') timer = setTimeout(trip, 2500); else schedule();
   })();
 
   /* ---------- router ---------- */
@@ -5046,6 +5214,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     {key: 'delo', t: 'Дело закрыто (почти)', x: 'Все конверты вскрыты. Трофимов просит ничего не рассказывать прокурору.', hint: 'На Литейном лежит дело, которое никто не дочитал.'},
     {key: 'thief', t: 'Порча имущества', x: 'Снимок изъят из альбома. Витя составил протокол, Марина обиделась, Валентина Ивановна простила.', hint: 'В альбомах есть снимки, которые хочется унести с собой.'},
     {key: 'albums', t: 'Мама, хватит', x: 'Все три альбома пролистаны до последней страницы. Лёша просит больше никому их не показывать.', hint: 'На столе в архиве лежат альбомы. Их редко досматривают до конца.'},
+    {key: 'rat', t: 'Добрая душа', x: 'Кухонная крыса Мавюрка поглажена и больше никого не боится. Санэпидемстанцию решили не вызывать.', hint: 'На кухне кто-то шуршит за плитой.'},
     {key: 'records', t: 'Филофонист', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок на полке много. Послушайте каждую хотя бы по полминуты.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
