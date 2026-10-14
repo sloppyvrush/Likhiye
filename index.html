@@ -223,20 +223,20 @@ a{color:inherit}
 .lamp .shade,.lamp .bulb{transition:filter .25s, opacity .25s}
 .light-night{position:absolute; inset:0; z-index:6; pointer-events:none; mix-blend-mode:multiply; opacity:0; transition:opacity .45s;
   background:
-    radial-gradient(ellipse 15% 17% at 38.5% 47%, #f4f6ff 0%, #f4f6ff 55%, rgba(200,212,240,0) 100%),
-    radial-gradient(ellipse 30% 36% at 38% 50%, #8d9cc0 0%, rgba(140,160,205,.0) 75%),
-    radial-gradient(ellipse 21% 7% at 37.5% 89%, #98a4c6 0%, rgba(152,164,198,0) 82%),
-    radial-gradient(ellipse 5.5% 10% at 10.5% 32%, #ffdca6 0%, rgba(255,220,166,0) 100%),
-    radial-gradient(ellipse 12% 38% at 9% 36%, #c79c6c 0%, rgba(199,156,108,0) 80%),
-    radial-gradient(ellipse 12% 7% at 17% 89%, #8c6a4a 0%, rgba(140,106,74,0) 80%),
-    radial-gradient(ellipse 60% 60% at 40% 45%, #3c4462 0%, #22263a 70%, #15172a 100%)}
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.15) 17% at calc(var(--sl,0px) + var(--sw,100%) * 0.385) 47%, #f4f6ff 0%, #f4f6ff 55%, rgba(200,212,240,0) 100%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.3) 36% at calc(var(--sl,0px) + var(--sw,100%) * 0.38) 50%, #8d9cc0 0%, rgba(140,160,205,.0) 75%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.21) 7% at calc(var(--sl,0px) + var(--sw,100%) * 0.375) 89%, #98a4c6 0%, rgba(152,164,198,0) 82%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.05) 9% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, #ffdca6 0%, rgba(255,220,166,0) 100%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.12) 38% at calc(var(--sl,0px) + var(--sw,100%) * 0.09) 36%, #c79c6c 0%, rgba(199,156,108,0) 80%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.12) 7% at calc(var(--sl,0px) + var(--sw,100%) * 0.17) 89%, #8c6a4a 0%, rgba(140,106,74,0) 80%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.6) 60% at calc(var(--sl,0px) + var(--sw,100%) * 0.4) 45%, #3c4462 0%, #22263a 70%, #15172a 100%)}
 /* in the dark: the street lamp outside pours warm light through the window, the TV throws a cold patch onto the floor */
 .light-night-glow{position:absolute; inset:0; z-index:6; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .45s;
   background:
-    radial-gradient(ellipse 6% 11% at 10.5% 32%, rgba(255,186,104,.34), rgba(255,186,104,0) 72%),
-    radial-gradient(ellipse 11% 30% at 9.5% 40%, rgba(255,168,84,.10), rgba(255,168,84,0) 75%),
-    radial-gradient(ellipse 11% 6% at 17% 89%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%),
-    radial-gradient(ellipse 19% 6% at 37.5% 89%, rgba(150,178,235,.2), rgba(150,178,235,0) 75%)}
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.05) 9.5% at calc(var(--sl,0px) + var(--sw,100%) * 0.104) 31.6%, rgba(255,186,104,.36), rgba(255,186,104,0) 72%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.11) 30% at calc(var(--sl,0px) + var(--sw,100%) * 0.095) 40%, rgba(255,168,84,.10), rgba(255,168,84,0) 75%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.11) 6% at calc(var(--sl,0px) + var(--sw,100%) * 0.17) 89%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.19) 6% at calc(var(--sl,0px) + var(--sw,100%) * 0.375) 89%, rgba(150,178,235,.2), rgba(150,178,235,0) 75%)}
 .room.dark .light-night-glow{opacity:1}
 .night-air{position:absolute; inset:0; width:100%; height:100%; z-index:7; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .6s}
 .room.dark .night-air{opacity:1}
@@ -247,7 +247,7 @@ a{color:inherit}
 .room.dark .dust{opacity:0}
 .room.dark .lamp .shade{filter:brightness(.4) saturate(.6)}
 .room.dark .lamp .bulb{opacity:0}
-.room.dark .moth{filter:brightness(.36) saturate(.55) drop-shadow(0 0 .2cqw rgba(140,170,230,.22))}
+.room.dark .moth{filter:brightness(.24) saturate(.5) drop-shadow(0 0 .2cqw rgba(140,170,230,.22))}
 /* the wastebasket for whatever is lying on the floor */
 .bin{left:16.6%; width:5.2%; bottom:10.4%; z-index:2; filter:drop-shadow(.2cqw .2cqw .3cqw rgba(0,0,0,.45))}
 .bin svg{display:block; width:100%; overflow:visible}
@@ -297,23 +297,40 @@ a{color:inherit}
 .ach-sheet h3{margin:0 0 6px 40px; font:700 24px/1.05 var(--mono); letter-spacing:.14em}
 .ach-sheet h3 span{font:400 26px/1 'Caveat',var(--hand); letter-spacing:0; color:#1f2f6b}
 .as-pen{margin:0 0 12px 40px; font:19px/1.2 'Caveat',var(--hand); color:#9a1f17; transform:rotate(-1deg)}
-/* the moth paperwork is a separate slip glued onto the sheet */
-.as-slip{position:relative; margin:6px -22px 18px 52px; padding:16px 18px 14px; color:#2a2418; transform:rotate(1.6deg);
-  background:linear-gradient(180deg, rgba(255,255,255,.35), transparent 40%), #e9e6dc; box-shadow:0 6px 14px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.5) inset}
+/* the moth paperwork: a separate slip pinned beside the sheet (on phones it folds up above it) */
+.as-pair{position:relative; display:flex; align-items:flex-start; justify-content:center; width:min(900px, 100%)}
+.as-pair .ach-sheet{flex:0 1 560px}
+.as-slip{position:relative; z-index:2; flex:0 0 290px; margin:118px 0 0 -44px; padding:16px 18px 14px; color:#2a2418; transform:rotate(3.4deg);
+  background:linear-gradient(180deg, rgba(255,255,255,.35), transparent 40%), #e9e6dc; box-shadow:0 10px 22px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.5) inset}
 .as-slip .tp{position:absolute; top:-10px; width:70px; height:22px; background:rgba(236,226,192,.7); box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.as-slip .tp.a{left:-14px; transform:rotate(-28deg)} .as-slip .tp.b{right:-14px; transform:rotate(24deg)}
-.sl-top{margin:0 0 6px; font:11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:#6a5f4c}
-.sl-h{margin:0 0 6px; font:700 19px/1.1 var(--mono); letter-spacing:.2em}
+.as-slip .tp.a{left:-18px; transform:rotate(-34deg)} .as-slip .tp.b{right:-14px; transform:rotate(24deg); display:none}
+.sl-tgl{display:block; width:100%; padding:0; border:0; background:none; color:inherit; font:inherit; text-align:left; cursor:default}
+.sl-top{display:block; margin:0 0 6px; padding-right:80px; font:11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:#6a5f4c}
+.sl-h{display:block; margin:0 0 6px; font:700 19px/1.1 var(--mono); letter-spacing:.2em}
 .sl-h span{display:block; margin-top:3px; font:400 12px/1.2 var(--mono); letter-spacing:.04em; color:#5a5144}
-.sl-top, .sl-txt{padding-right:80px}
-.sl-txt{margin:0 0 8px; font:12px/1.4 var(--mono); color:#4a4236}
+.sl-n, .sl-arr{display:none}
+.sl-txt{margin:0 0 8px; padding-right:12px; font:12px/1.4 var(--mono); color:#4a4236}
 .as-slip .as-moth{margin:0 0 6px}
 .sl-list{margin:6px 0 0; padding:0; list-style:none; display:grid; gap:4px}
 .sl-list li{font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
 .sl-list li b{font:700 12.5px/1.2 var(--mono); letter-spacing:.05em; color:#2a2418; margin-right:6px}
-.sl-seal{position:absolute; right:14px; top:12px; width:84px; height:84px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
+.sl-seal{position:absolute; right:10px; top:10px; width:80px; height:80px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
 .as-slip.done .sl-seal{opacity:.55; transform:rotate(-14deg)}
-@media (max-width:600px){ .as-slip{margin:6px -6px 16px 30px} }
+@media (max-width:900px){
+  .as-pair{flex-direction:column; align-items:center; width:min(560px, 100%)}
+  .as-pair .ach-sheet{flex:none; width:100%}
+  .as-slip{order:-1; flex:none; align-self:flex-start; width:88%; margin:6px 0 10px 4px; padding:12px 14px 10px; transform:rotate(-1.2deg)}
+  .as-slip .tp.b{display:block}
+  .sl-tgl{cursor:var(--cur-hover); display:grid; grid-template-columns:1fr auto; column-gap:10px; align-items:end}
+  .sl-tgl .sl-top{grid-column:1/-1; padding-right:0}
+  .sl-tgl .sl-h{margin:0; font-size:16px}
+  .sl-n{display:block; font:700 17px/1 'Caveat',var(--hand); font-style:normal; color:#a8261f; white-space:nowrap}
+  .sl-arr{display:block; grid-column:2; justify-self:end; font-style:normal; font:13px/1 var(--mono); color:#6a5f4c; transition:transform .25s}
+  .as-slip:not(.open) .sl-body, .as-slip:not(.open) .sl-seal{display:none}
+  .as-slip.open .sl-body{margin-top:10px}
+  .as-slip.open .sl-arr{transform:rotate(180deg)}
+  .sl-seal{top:auto; bottom:8px; width:70px; height:70px}
+}
 .as-moth{margin:0 0 10px 40px; font:21px/1.25 'Caveat',var(--hand); color:#1f2f6b}
 .as-moth .tl{display:inline-block; position:relative; margin-left:8px; font:700 20px/1 var(--mono); letter-spacing:1px; color:#1f2f6b}
 .as-moth .tl s{position:absolute; left:-2px; right:-4px; top:50%; height:2px; background:#1f2f6b; transform:rotate(-20deg)}
@@ -347,12 +364,12 @@ a{color:inherit}
 /* lighting and depth */
 .light-shade{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:multiply;
   background:
-    radial-gradient(ellipse 48% 64% at 51% 14%, #fff6ea 0%, #eedfca 40%, #bea486 72%, #8a7160 100%)}
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.48) 64% at calc(var(--sl,0px) + var(--sw,100%) * 0.51) 14%, #fff6ea 0%, #eedfca 40%, #bea486 72%, #8a7160 100%)}
 .light-glow{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:screen;
   background:
-    radial-gradient(ellipse 20% 24% at 51% 13%, rgba(255,170,90,.32), transparent 72%),
-    radial-gradient(ellipse 30% 26% at 38% 50%, rgba(120,175,215,.24), transparent 70%),
-    radial-gradient(ellipse 13% 34% at 10% 36%, rgba(120,150,215,.12), transparent 72%)}
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.2) 24% at calc(var(--sl,0px) + var(--sw,100%) * 0.51) 13%, rgba(255,170,90,.32), transparent 72%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.3) 26% at calc(var(--sl,0px) + var(--sw,100%) * 0.38) 50%, rgba(120,175,215,.24), transparent 70%),
+    radial-gradient(ellipse calc(var(--sw,100%) * 0.13) 34% at calc(var(--sl,0px) + var(--sw,100%) * 0.1) 36%, rgba(120,150,215,.12), transparent 72%)}
 .tv .case{background:
     repeating-linear-gradient(95deg, rgba(0,0,0,.1) 0 3px, transparent 3px 9px),
     linear-gradient(160deg,#5e3520,#3a1e10 55%,#24120a) !important}
@@ -770,7 +787,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .light-night{mix-blend-mode:normal; background:radial-gradient(ellipse 26% 34% at 38% 48%, rgba(10,14,30,.25), rgba(8,10,24,.78) 70%); right:auto; width:var(--stageW)}
   html.room-pan .night-air{right:auto; width:var(--stageW)}
   html.room-pan .light-night-glow{mix-blend-mode:normal; right:auto; width:var(--stageW);
-    background:radial-gradient(ellipse 6% 11% at 10.5% 32%, rgba(255,186,104,.38), rgba(255,186,104,0) 72%), radial-gradient(ellipse 9% 28% at 10% 38%, rgba(255,160,80,.16), rgba(255,160,80,0) 80%),
+    background:radial-gradient(ellipse 5% 9.5% at 10.4% 31.6%, rgba(255,186,104,.38), rgba(255,186,104,0) 72%), radial-gradient(ellipse 9% 28% at 10% 38%, rgba(255,160,80,.16), rgba(255,160,80,0) 80%),
       radial-gradient(ellipse 11% 6% at 17% 89%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%), radial-gradient(ellipse 19% 6% at 37.5% 89%, rgba(150,178,235,.14), rgba(150,178,235,0) 75%)}
   html.room-pan .window .curtain{animation-name:swayl}
   html.room-pan .moth{will-change:transform}
@@ -2020,13 +2037,13 @@ body.splash-on{overflow:hidden}
 .cork-scroll .cork-size{margin:22px auto 26px}
 .cork::before{content:""; position:absolute; inset:0; opacity:.55; mix-blend-mode:multiply; pointer-events:none;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .28  0 0 0 0 .12  0 0 0 1.1 -.35'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
-.cork-title{position:absolute; z-index:6; left:560px; top:300px; width:320px; transform:rotate(-1.5deg); padding:10px 14px 12px; background:#f3ead2; box-shadow:0 4px 8px rgba(0,0,0,.35); text-align:center}
+.cork-title{position:absolute; left:560px; top:300px; width:320px; transform:rotate(-1.5deg); padding:10px 14px 12px; background:#f3ead2; box-shadow:0 4px 8px rgba(0,0,0,.35); text-align:center}
 .cork-title b{display:block; font:700 18px/1.2 var(--mono); letter-spacing:.12em; color:#2a2418}
 .cork-title span{font:24px/1 'Caveat',var(--hand); color:#1f2f6b}
 .cork-legend{position:absolute; left:1742px; top:24px; width:200px; z-index:6; padding:12px 14px; background:#efe6c9; transform:rotate(2deg); box-shadow:0 4px 8px rgba(0,0,0,.35); font:15px/1.25 var(--mono); color:#2a2418; display:grid; gap:4px}
 .cork-legend b{font:22px/1 'Caveat',var(--hand); color:#1f2f6b; font-weight:700}
 .cork-legend i{display:inline-block; width:26px; height:4px; margin-right:8px; vertical-align:middle; border-radius:2px; box-shadow:0 1px 1px rgba(0,0,0,.4)}
-.cork-yarn{position:absolute; inset:0; width:100%; height:100%; z-index:4; pointer-events:none}
+.cork-yarn{position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none}
 .cork-yarn path{fill:none; stroke-linecap:round; transition:opacity .25s, stroke-width .25s}
 .cork-yarn .ys{stroke:rgba(0,0,0,.28); stroke-width:3.4; transform:translate(2px,4px)}
 .cork-yarn .yl{stroke-width:2.4}
@@ -2037,7 +2054,7 @@ body.splash-on{overflow:hidden}
 button.cd:hover,button.cd:focus-visible{transform:scale(1.05); z-index:5}
 button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .cork.focus .cd:not(.near){filter:saturate(.4) brightness(.72) drop-shadow(0 6px 8px rgba(0,0,0,.38))}
-.cork.focus .cd.near{z-index:3}
+.cork.focus .cd.near{z-index:4}
 .cd .pc-pin{z-index:7; top:-4px}
 .cd .pc-pin.two{left:auto; right:14px; top:auto; bottom:12px}
 .cd.map svg{display:block; width:100%; height:100%}
@@ -2091,7 +2108,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .pc:focus-visible{transform:scale(1.07); z-index:5; box-shadow:0 14px 24px rgba(0,0,0,.45)}
 .pc:focus-visible{outline:3px solid #e3c98f; outline-offset:3px}
 .cork.focus .pc:not(.near){filter:saturate(.4) brightness(.72)}
-.cork.focus .pc.near{z-index:3}
+.cork.focus .pc.near{z-index:4}
 .pc-ph{flex:1; min-height:0; position:relative; overflow:hidden; background:#2c2620}
 .pc-ph img{width:100%; height:100%; object-fit:cover; filter:sepia(.2) contrast(1.05)}
 .pc-nm{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:4px; font:700 17px/.95 'Caveat',var(--hand); color:#1f2f6b}
@@ -2105,7 +2122,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .pc-pin{position:absolute; z-index:6; left:50%; top:-6px; width:16px; height:16px; margin-left:-8px; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.75) 0 2px, transparent 3px), radial-gradient(circle at 50% 55%, var(--pc), color-mix(in srgb, var(--pc) 55%, #000));
   box-shadow:2px 4px 3px rgba(0,0,0,.45)}
-.cn-spot{position:absolute; z-index:6; width:142px; translate:-50% -50%; rotate:var(--r)}
+.cn-spot{position:absolute; z-index:4; width:142px; translate:-50% -50%; rotate:var(--r)}
 .cn{position:relative; display:block; width:100%; min-height:80px; padding:15px 11px 11px; border:0; text-align:left; cursor:var(--cur-grab); touch-action:none;
   font:19px/1.02 'Caveat',var(--hand); background:linear-gradient(#f7e98e, #efdc6b); color:#1f2f6b; box-shadow:0 6px 10px rgba(0,0,0,.35); transition:transform .2s}
 .cn.l{background:repeating-linear-gradient(transparent 0 19px, rgba(43,74,139,.25) 19px 20px), #f5f1e6; color:#333; font-family:'Caveat',var(--hand); box-shadow:inset 18px 0 0 -16px rgba(200,60,60,.5), 0 6px 10px rgba(0,0,0,.35)}
@@ -3204,24 +3221,27 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   <p class="vc-hint">титры можно листать</p>
 </div>
 <div class="ach-sheet-wrap" id="achSheet" hidden role="dialog" aria-modal="true" aria-label="Ведомость заслуг">
+  <div class="as-pair">
   <div class="ach-sheet">
     <button class="as-x" type="button" aria-label="Закрыть">×</button>
     <p class="as-top">Квартира Громова В. С. · ул. Зайцева</p>
     <h3>ВЕДОМОСТЬ<br><span>личных заслуг гостя</span></h3>
     <p class="as-pen">Заполняет: В. Громов. Исправлять ручкой не надо, я всё вижу.</p>
-    <div class="as-slip">
-      <i class="tp a" aria-hidden="true"></i><i class="tp b" aria-hidden="true"></i>
-      <p class="sl-top">Санэпидемстанция Кировского р-на</p>
-      <p class="sl-h">СПРАВКА<span>о борьбе с молью на дому</span></p>
-      <p class="sl-txt">Выдана гостю кв. Громова в том, что он(а) лично и без применения нафталина выдворял(а) моль из квартиры.</p>
-      <p class="as-moth"></p>
-      <ul class="sl-list"></ul>
-      <svg class="sl-seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="slSealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g><g fill="currentColor" font-family="PT Mono, monospace" font-weight="700"><text font-size="10.4" letter-spacing="1.3"><textPath href="#slSealArc">САНЭПИДЕМСТАНЦИЯ ✦ КИРОВСКИЙ Р-Н ✦</textPath></text><text x="60" y="57" text-anchor="middle" font-size="11">МОЛЬ</text><text x="60" y="71" text-anchor="middle" font-size="11">ВЫДВОРЕНА</text></g></svg>
-    </div>
     <ol class="as-list"></ol>
     <p class="as-sum"></p>
     <p class="as-foot">Ведомость хранится только в вашем браузере. Другие гости ведут свою.</p>
     <button class="as-reset" type="button">Сжечь ведомость и начать заново</button>
+  </div>
+  <div class="as-slip">
+    <i class="tp a" aria-hidden="true"></i><i class="tp b" aria-hidden="true"></i>
+    <button class="sl-tgl" type="button" aria-expanded="false"><span class="sl-top">Санэпидемстанция Кировского р-на</span><span class="sl-h">СПРАВКА<span>о борьбе с молью на дому</span></span><em class="sl-n"></em><i class="sl-arr" aria-hidden="true">▾</i></button>
+    <div class="sl-body">
+      <p class="sl-txt">Выдана гостю кв. Громова в том, что он(а) лично и без применения нафталина выдворял(а) моль из квартиры.</p>
+      <p class="as-moth"></p>
+      <ul class="sl-list"></ul>
+    </div>
+    <svg class="sl-seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="slSealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g><g fill="currentColor" font-family="PT Mono, monospace" font-weight="700"><text font-size="10.4" letter-spacing="1.3"><textPath href="#slSealArc">САНЭПИДЕМСТАНЦИЯ ✦ КИРОВСКИЙ Р-Н ✦</textPath></text><text x="60" y="57" text-anchor="middle" font-size="11">МОЛЬ</text><text x="60" y="71" text-anchor="middle" font-size="11">ВЫДВОРЕНА</text></g></svg>
+  </div>
   </div>
 </div>
 <div class="npc-modal" id="npcModal" hidden role="dialog" aria-modal="true" aria-label="Дело"></div>
@@ -4726,27 +4746,31 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     }
   }
 
-  /* ---------- the room with the light off: shafts from the street lamp and the TV, dust in them,
-     and now and then a car passing below throws its headlights across the wall and ceiling ---------- */
+  /* ---------- the room with the light off: shafts from the street lamp and the TV, with dust in them ---------- */
+  // the room can be wider than the stage: lights are placed in % of the stage, shifted to where it sits
+  const stageEl = document.querySelector('.room .stage'), stageBox = {l: 0, w: 0};
+  const placeStage = () => { if (!stageEl || !roomEl) return; stageBox.l = stageEl.offsetLeft; stageBox.w = stageEl.offsetWidth;
+    roomEl.style.setProperty('--sl', stageBox.l + 'px'); roomEl.style.setProperty('--sw', stageBox.w + 'px'); };
+  if (stageEl && roomEl){ placeStage(); new ResizeObserver(placeStage).observe(roomEl); new ResizeObserver(placeStage).observe(stageEl); }
   const nCv = document.getElementById('nightAir'), airCtx = nCv && nCv.getContext('2d');
   const lerp = (a, b, k) => a + (b - a) * k;
   // beams as quads in % of the room: top-left, top-right, bottom-right, bottom-left
   const BEAMS = [
-    {q:[[5, 15], [15.5, 15], [27, 95], [9, 97]], c:[255, 196, 120], a:.075, n:70},   // street lamp through the window, down onto the floor
+    {q:[[9.6, 30.5], [11.2, 30.5], [26, 96], [12, 98]], c:[255, 196, 120], a:.13, n:60},   // from the street lamp, through the glass, down onto the floor
     {q:[[25.5, 39], [44.5, 39], [56, 100], [17, 100]], c:[160, 188, 245], a:.05, n:55, tv:true}  // the TV screen, spilling towards us and onto the floor
   ];
   BEAMS.forEach(b => b.motes = Array.from({length: b.n}, () => ({u: Math.random(), v: Math.random(), r: Math.random() * .9 + .35,
     du: (Math.random() - .5) * .0007, dv: (Math.random() - .5) * .0005 - .00012, ph: Math.random() * 6.28})));
-  let car = null, nextCar = 0, nightWas = false;
+  let nightWas = false;
   function drawNight(now){
     if (!airCtx) return;
     const dark = roomEl && roomEl.classList.contains('dark');
-    if (!dark){ if (nightWas){ airCtx.clearRect(0, 0, nCv.width, nCv.height); nightWas = false; car = null; } return; }
+    if (!dark){ if (nightWas){ airCtx.clearRect(0, 0, nCv.width, nCv.height); nightWas = false; } return; }
     const W = Math.round(nCv.clientWidth / 2), H = Math.round(nCv.clientHeight / 2);
     if (!W || !H) return;
     if (nCv.width !== W || nCv.height !== H){ nCv.width = W; nCv.height = H; }
-    if (!nightWas){ nightWas = true; nextCar = now + 5000 + Math.random() * 6000; }
-    const t = now / 1000, X = p => p / 100 * W, Y = p => p / 100 * H;
+    nightWas = true;
+    const k2 = W / nCv.clientWidth, t = now / 1000, X = p => (stageBox.l + p / 100 * stageBox.w) * k2, Y = p => p / 100 * H;
     airCtx.clearRect(0, 0, W, H);
     for (const b of BEAMS){
       const [A, B, C, D] = b.q;
@@ -4763,31 +4787,6 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         const edge = Math.min(m.u, 1 - m.u) * 4, a = Math.min(1, edge) * (1 - m.v * .75) * (.45 + .55 * Math.sin(t * 1.6 + m.ph) ** 2) * .9 * flick;
         airCtx.fillStyle = `rgba(${b.c},${a.toFixed(3)})`;
         airCtx.beginPath(); airCtx.arc(X(x), Y(y), m.r, 0, 6.28); airCtx.fill();
-      }
-    }
-    // headlights: a skewed square of light with the window cross in it, sliding across the wall and ceiling
-    if (!reduce && !car && now > nextCar) car = {t0: now, dur: 5200 + Math.random() * 2200, dir: Math.random() < .7 ? 1 : -1};
-    if (car){
-      const k = (now - car.t0) / car.dur;
-      if (k >= 1){ car = null; nextCar = now + 22000 + Math.random() * 30000; }
-      else {
-        const e = Math.sin(Math.PI * k), cx = car.dir > 0 ? lerp(4, 112, k) : lerp(112, 4, k);
-        const sk = (cx - 50) * .35, w = 15 + Math.abs(cx - 50) * .12, top = 1, bot = 52;
-        const P = [[cx - w / 2 + sk, top], [cx + w / 2 + sk, top], [cx + w / 2 - sk * .4, bot], [cx - w / 2 - sk * .4, bot]];
-        const g = airCtx.createLinearGradient(X(cx), Y(top), X(cx), Y(bot));
-        g.addColorStop(0, `rgba(255,246,226,${(.16 * e).toFixed(3)})`); g.addColorStop(1, `rgba(255,236,200,${(.05 * e).toFixed(3)})`);
-        airCtx.save();
-        airCtx.filter = 'blur(6px)';
-        airCtx.fillStyle = g; airCtx.beginPath(); P.forEach(([x, y], i) => i ? airCtx.lineTo(X(x), Y(y)) : airCtx.moveTo(X(x), Y(y))); airCtx.closePath(); airCtx.fill();
-        // the window frame casts its cross into the patch
-        airCtx.globalCompositeOperation = 'destination-out'; airCtx.filter = 'blur(3px)'; airCtx.fillStyle = 'rgba(0,0,0,.85)';
-        const at = (u, v) => [lerp(lerp(P[0][0], P[1][0], u), lerp(P[3][0], P[2][0], u), v), lerp(lerp(P[0][1], P[1][1], u), lerp(P[3][1], P[2][1], u), v)];
-        const bar = (u0, v0, u1, v1) => { const q = [at(u0, v0), at(u1, v0), at(u1, v1), at(u0, v1)]; airCtx.beginPath(); q.forEach(([x, y], i) => i ? airCtx.lineTo(X(x), Y(y)) : airCtx.moveTo(X(x), Y(y))); airCtx.closePath(); airCtx.fill(); };
-        bar(0, .64, 1, .7); bar(.48, .7, .53, 1);
-        airCtx.restore();
-        // and the window itself flares up while the car is right below it
-        const near = Math.max(0, 1 - Math.abs(k - (car.dir > 0 ? .12 : .88)) / .16);
-        if (near > 0){ const wg = airCtx.createRadialGradient(X(10.5), Y(36), 0, X(10.5), Y(36), X(10)); wg.addColorStop(0, `rgba(255,240,215,${(.22 * near).toFixed(3)})`); wg.addColorStop(1, 'rgba(255,240,215,0)'); airCtx.fillStyle = wg; airCtx.fillRect(0, 0, W, H); }
       }
     }
   }
@@ -4934,6 +4933,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       : `<li><b>${'?'.repeat(Math.min(9, r.t.length))}</b><span>${r.hint}</span></li>`).join('');
     const mGot = moths.filter(r => got.has(r.key));
     wallBox.querySelector('.as-slip').classList.toggle('done', n > 0);
+    wallBox.querySelector('.sl-n').textContent = `выдворено: ${n}`;
     wallBox.querySelector('.sl-list').innerHTML = mGot.map(r => `<li><b>${r.t}.</b>${r.x}</li>`).join('');
     wallBox.querySelector('.as-moth').innerHTML = (n ? `Выдворено молей: <b>${n}</b> ${tally(n)}` : 'Выдворено молей: <b>0</b>. Моль пока живёт в шкафу и ест шубу.')
       + `<span class="as-marks">${moths.map(r => `<i class="${got.has(r.key) ? 'on' : ''}" title="${got.has(r.key) ? r.t : 'ещё нет'}">${r.key.slice(4)}</i>`).join('')}</span>`;
@@ -4944,7 +4944,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const open = () => { drawWall(); wallBox.hidden = false; document.body.style.overflow = 'hidden'; wallBox.querySelector('.as-x').focus(); };
     const close = () => { wallBox.hidden = true; document.body.style.overflow = ''; wallBtn.focus(); };
     wallBtn.addEventListener('click', open);
-    wallBox.addEventListener('click', e => { if (e.target === wallBox || e.target.closest('.as-x')) close(); });
+    wallBox.addEventListener('click', e => { if (e.target === wallBox || e.target.classList.contains('as-pair') || e.target.closest('.as-x')) close(); });
+    const slip = wallBox.querySelector('.as-slip'), slipBtn = slip.querySelector('.sl-tgl');
+    slipBtn.addEventListener('click', () => { const on = slip.classList.toggle('open'); slipBtn.setAttribute('aria-expanded', String(on)); });
     // wipe everything this browser remembers about the visit: achievements, moths, records heard, notes, the yarn switch
     const rs = wallBox.querySelector('.as-reset');
     rs.addEventListener('click', () => {
@@ -4994,12 +4996,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const decor = {}; (B.decor || []).forEach(d => decor[d.id] = d);
     const size = id => decor[id] ? [decor[id].w, decor[id].h] : people[id].hero ? [196, 276] : people[id].animal ? (people[id].ar === '3/4' ? [134, 200] : [184, 162]) : [126, 186];
     const where = id => decor[id] ? [decor[id].x, decor[id].y] : B.pos[id];
-    // where the pin really sits: top centre of the card, turned with the card
-    const pinAt = id => {
-      const [x, y] = where(id), [, h] = size(id), r = (decor[id] ? decor[id].r || 0 : B.pos[id][2] || 0) * Math.PI / 180;
-      const dy = decor[id] ? -h / 2 + 4 : -h / 2 + 2;
-      return [x - dy * Math.sin(r), y + dy * Math.cos(r)];
-    };
+    const pinAt = id => { const [x, y] = where(id), [, h] = size(id); return [x, y - h / 2 + 9]; };
     const yarn = {red:'#b3261e', blue:'#2c4f96', gold:'#c99a2e', white:'#efe8d4'};
     const ok = id => (people[id] && B.pos[id]) || decor[id];
     const lines = (B.links || []).filter(([a, b]) => ok(a) && ok(b)).map(([a, b, c], k) => {
@@ -5008,13 +5005,6 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const path = `M${x1},${y1} Q${mx},${my} ${x2},${y2}`;
       return `<g data-a="${a}" data-b="${b}"><path class="ys" d="${path}"/><path class="yl" d="${path}" stroke="${yarn[c] || yarn.red}"/></g>`;
     }).join('');
-    // the yarn runs over the cards, so the pins it is tied to are drawn on top of it again
-    const pinColor = id => decor[id] ? (decor[id].type === 'map' ? '#2b4a8b' : decor[id].type === 'photo' ? '#d9a12b' : '#e9e2cf') : pins[(B.pos[id][0] + B.pos[id][1]) % pins.length];
-    const tied = [...new Set((B.links || []).filter(([a, b]) => ok(a) && ok(b)).flat().filter(id => ok(id)))];
-    const pinCols = [...new Set(tied.map(pinColor))];
-    const dk = c => '#' + [1, 3, 5].map(i => Math.round(parseInt(c.slice(i, i + 2), 16) * .55).toString(16).padStart(2, '0')).join('');
-    const pinHeads = `<defs>${pinCols.map((c, i) => `<radialGradient id="ph${i}" cx="50%" cy="55%" r="55%"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="${dk(c)}"/></radialGradient>`).join('')}</defs>`
-      + tied.map(id => { const [x, y] = pinAt(id), i = pinCols.indexOf(pinColor(id)); return `<circle class="yp" cx="${(x + 2).toFixed(1)}" cy="${(y + 4).toFixed(1)}" r="7.5" fill="rgba(0,0,0,.4)"/><circle class="yp" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8" fill="url(#ph${i})"/><circle class="yp" cx="${(x - 2.4).toFixed(1)}" cy="${(y - 3).toFixed(1)}" r="2" fill="rgba(255,255,255,.75)"/>`; }).join('');
     const LABEL = {shevchuk:'Пал Палыч', lapin:'Лапин «Профессор»', zhora:'Жора Сапог', korney:'Дед Корней', valya:'Баба Валя', kot:'Кот', mama:'Мама Лёши', kids:'Петька и Анютка', lysy:'Лысый', viktor:'Виктор Громов', lesha:'Алексей Тихонов', kornilov:'Дима Корнилов', zhanna:'Жанна', marina:'Марина', irina:'Ирина', gena:'Гена'};
     const label = id => LABEL[id] || people[id].name.replace(/^(Подполковник|Майор|Капитан|Лейтенант)\s+/, '').split(' ').slice(-1)[0];
     const thumb = src => /^assets\/.+\.webp$/.test(src || '') ? src.replace(/^assets\//, 'assets/thumbs/') : src;
@@ -5072,7 +5062,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     board.innerHTML = `<button class="trace-btn" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>Подсветка связей: <b>выключена</b></span><em>${matchMedia('(hover:hover)').matches ? 'включи и наведи на человека — загорятся его нитки' : 'включи: первое касание — нитки, второе — дело'}</em></button><div class="cork-scroll"><div class="cork-size"><div class="cork">
       <div class="cork-title"><b>КИРОВСКИЙ РАЙОН · 1996</b><span>кто кого знает</span></div>
       <div class="cork-legend"><b>Нитки:</b><span><i style="background:${yarn.red}"></i>враги</span><span><i style="background:${yarn.blue}"></i>свои, служба</span><span><i style="background:${yarn.gold}"></i>деньги, дела</span><span><i style="background:${yarn.white}"></i>личное</span></div>
-      <svg class="cork-yarn" viewBox="0 0 ${W} ${H}" aria-hidden="true">${lines}${pinHeads}</svg>
+      <svg class="cork-yarn" viewBox="0 0 ${W} ${H}" aria-hidden="true">${lines}</svg>
       ${(B.decor || []).map(decorHTML).join('')}
       ${ids.map(card).join('')}
       ${(B.notes || []).map(note).join('')}
