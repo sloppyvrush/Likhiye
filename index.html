@@ -2233,6 +2233,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(20,14,8,.35)), url("assets/about/kitchen.webp") 50% 50% / cover no-repeat,
     radial-gradient(ellipse 70% 60% at 50% 20%, #6a5440, #3a2e22 60%, #241c14)}
 .ab-kitchen .about.section{position:relative; padding-bottom:7svh}
+.kt-snow{position:absolute; inset:0; width:100%; height:100%}
 .ab-kitchen h2{color:#2a2418; text-shadow:0 1px 12px rgba(255,246,220,.8)}
 .ab-kitchen .lede{color:#2f271c; text-shadow:0 1px 10px rgba(255,246,220,.85)}
 .ab-fridge{position:relative; max-width:960px; margin:34px auto 0; padding:170px clamp(16px, 5vw, 64px) 130px;
@@ -3188,7 +3189,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <!-- ================= ABOUT: a letter, two photos and a postcard ================= -->
 <main class="page" data-route="/about">
   <div class="ab-kitchen">
-    <div class="kt-bg" aria-hidden="true"></div>
+    <div class="kt-bg" aria-hidden="true"><canvas class="kt-snow"></canvas></div>
 
     <div class="wrap section about">
       <h2>О проекте</h2>
@@ -3828,6 +3829,44 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     for (let x = 6; x <= 74; x += 6.8){ c += `<circle cx="${x}" cy="2" r="2.2"/><circle cx="${x}" cy="98" r="2.2"/>`; }
     for (let y = 6; y <= 94; y += 6.8){ c += `<circle cx="2" cy="${y}" r="2.2"/><circle cx="78" cy="${y}" r="2.2"/>`; }
     perf.innerHTML = c;
+  })();
+
+
+  /* ---------- «О проекте»: snow falling behind the kitchen window of the background picture ---------- */
+  (() => {
+    const cv = document.querySelector('.kt-snow'), page = document.querySelector('.page[data-route="/about"]');
+    if (!cv || !page) return;
+    const ctx = cv.getContext('2d');
+    // the glass of the window in kitchen.webp, in pixels of that picture (change these if the picture is replaced)
+    const IMG = {w: 2576, h: 1438}, PANES = [[340, 165, 790, 348], [340, 405, 522, 590], [490, 590, 522, 855], [578, 405, 740, 855], [740, 405, 790, 540]];
+    const box = [Math.min(...PANES.map(p => p[0])), Math.min(...PANES.map(p => p[1])), Math.max(...PANES.map(p => p[2])), Math.max(...PANES.map(p => p[3]))];
+    const flakes = Array.from({length: 140}, () => ({u: Math.random(), v: Math.random(), r: Math.random() * 1.6 + .6, s: Math.random() * .35 + .25, ph: Math.random() * 6.28}));
+    let on = false;
+    const draw = now => {
+      const dpr = Math.min(2, devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight;
+      if (!W || !H) return;
+      if (cv.width !== Math.round(W * dpr)){ cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+      const k = Math.max(W / IMG.w, H / IMG.h), ox = (W - IMG.w * k) / 2, oy = (H - IMG.h * k) / 2;
+      const X = x => (ox + x * k) * dpr, Y = y => (oy + y * k) * dpr, t = now / 1000;
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.save(); ctx.beginPath();
+      PANES.forEach(([x1, y1, x2, y2]) => ctx.rect(X(x1), Y(y1), X(x2) - X(x1), Y(y2) - Y(y1)));
+      ctx.clip();
+      const bw = box[2] - box[0], bh = box[3] - box[1];
+      for (const f of flakes){
+        if (!reduce){ f.v += f.s * .0016; f.u += Math.sin(t * .8 + f.ph) * .0004 + .0002; }
+        if (f.v > 1){ f.v -= 1; f.u = Math.random(); }
+        f.u = (f.u + 1) % 1;
+        ctx.fillStyle = `rgba(240,246,255,${(.55 + .4 * f.s).toFixed(2)})`;
+        ctx.beginPath(); ctx.arc(X(box[0] + f.u * bw), Y(box[1] + f.v * bh), f.r * k * 2.2 * dpr, 0, 6.28); ctx.fill();
+      }
+      ctx.restore();
+    };
+    const tick = now => { if (!page.classList.contains('on') || document.hidden){ on = false; return; } draw(now); requestAnimationFrame(tick); };
+    const start = () => { if (on || !page.classList.contains('on')) return; on = true; if (reduce){ draw(performance.now()); on = false; } else requestAnimationFrame(tick); };
+    addEventListener('hashchange', () => setTimeout(start, 50));
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
+    setTimeout(start, 300);
   })();
 
   /* ---------- router ---------- */
