@@ -2233,7 +2233,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     linear-gradient(90deg, #a1a48e 0%, #a5a58e 15%, #c3b392 30%, #e7c391 45%, #e9c490 50%, #e8c491 55%, #c3b393 70%, #a5a48f 85%, #a4a791 100%)}
 .kt-img{position:absolute; left:0; right:0; bottom:0; aspect-ratio:1792 / 2400; pointer-events:none;
   background:url("assets/about/kitchen.webp") 50% 100% / 100% 100% no-repeat}
-.ab-kitchen .about.section{position:relative; padding-bottom:calc(100% * var(--kt-ar) * var(--kt-feet))}
+.ab-kitchen .about.section{position:relative; z-index:1; pointer-events:none; padding-bottom:calc(100% * var(--kt-ar) * var(--kt-feet))}
+.ab-kitchen .about.section > *{pointer-events:auto}
 .kt-snow{position:absolute; inset:0; width:100%; height:100%}
 /* a plywood parcel box on top of the fridge carries the title */
 .ab-box{position:relative; z-index:2; width:min(440px, 86%); margin:0 auto -4px; translate:-14% 0; padding:26px 28px 20px; rotate:-1.2deg; color:#2a1d10;
@@ -2258,7 +2259,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .fr-vent{position:absolute; left:0; right:0; bottom:0; height:84px; border-radius:0 0 18px 18px; border-top:3px solid #d6d1c4;
   background:linear-gradient(transparent 26px, #4a4640 26px 30px, transparent 30px 38px, #4a4640 38px 42px, transparent 42px 50px, #4a4640 50px 54px, transparent 54px) 50% 0 / 60% 100% no-repeat, linear-gradient(90deg, #cdc8bb, #e9e6dd 30%, #e9e6dd 70%, #cdc8bb)}
 .fr-abc{position:absolute; top:88px; left:50%; translate:-50% 0; display:flex; gap:4px}
-.fr-abc b{display:block; rotate:var(--r); font:400 60px/1 var(--display); color:var(--c);
+.fr-abc .abc.off{visibility:hidden}
+.fr-abc .abc:hover{scale:1.08}
+.fr-abc .abc{display:block; padding:0; border:0; background:none; cursor:var(--cur-hover, pointer); rotate:var(--r); font:400 60px/1 var(--display); color:var(--c);
   text-shadow:0 2px 0 rgba(0,0,0,.25), 0 3px 0 color-mix(in srgb, var(--c) 70%, #000), 0 8px 8px rgba(0,0,0,.25)}
 .fr-list{position:relative; width:170px; padding:18px 16px 12px; rotate:4deg; display:flex; flex-direction:column;
   background:#fbf7ea repeating-linear-gradient(transparent 0 23px, rgba(84,124,176,.3) 23px 24px) 0 14px; box-shadow:0 4px 10px rgba(0,0,0,.18);
@@ -2392,7 +2395,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .ab-mcol{grid-column:1; grid-row:auto; margin:40px 0 0 6%}
   .fr-notes{flex-direction:row; flex-wrap:wrap; justify-content:center; gap:34px 22px; padding-top:20px}
   .ab-row2{grid-template-columns:1fr}
-  .fr-abc b{font-size:44px}
+  .fr-abc .abc{font-size:44px}
   .fr-list, .fr-recipe{width:150px; font-size:17px}
 }
 @media (max-width:760px){
@@ -2403,7 +2406,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .bx-label{font-size:16px}
   .bx-stamp{top:10px; right:10px; font-size:10px; padding:3px 6px}
   .fr-abc{left:50%; translate:-50% 0; top:94px}
-  .fr-abc b{font-size:38px}
+  .fr-abc .abc{font-size:38px}
   .ab-kitchen .wrap{padding-left:10px; padding-right:10px}
   .ab-letter{--lh:30px; font-size:18.5px}
   .ab-letter .ab-hi{font-size:38px}
@@ -2430,7 +2433,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 }
 @media (prefers-reduced-motion:reduce){ .ab-post .face, .ph-face{transition:none} }
 /* the picture is a touch out of focus, like a background should be; its little life: curtain, steam, flame, music */
-.kt-img{filter:blur(1.6px) saturate(.95)}
+.kt-img{filter:none}
 .kt-img > i{position:absolute; pointer-events:none}
 .kt-curtain{left:0; top:9.5%; width:18.4%; height:11.54%; transform-origin:50% 0;
   background:url("assets/about/kitchen.webp") 0% 10.74% / 543% 866.4% no-repeat; animation:ktCurtain 7s ease-in-out infinite alternate}
@@ -2454,7 +2457,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .kt-sill::after{content:""; position:absolute; left:0; right:0; top:10px; height:2px; background:repeating-linear-gradient(90deg, rgba(40,20,8,.35) 0 2px, transparent 2px 90px)}
 
 /* a kitchen rat that runs out now and then; pet it and it melts */
-.kt-run{position:absolute; left:0; right:0; bottom:0; aspect-ratio:1792 / 2400; pointer-events:none; z-index:4; overflow:hidden}
+.kt-run{position:absolute; left:0; right:0; bottom:0; aspect-ratio:1792 / 2400; pointer-events:none; z-index:0; overflow:hidden}
 .kt-rat{position:absolute; bottom:1.6%; left:0; width:clamp(64px, 6.2vw, 110px); padding:0; border:0; background:none; pointer-events:auto; cursor:var(--cur-hover, pointer);
   filter:drop-shadow(0 6px 4px rgba(0,0,0,.35)); -webkit-tap-highlight-color:transparent}
 .kt-rat[hidden]{display:none}
@@ -2477,6 +2480,17 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 @keyframes ratPet{from{transform:scale(1)} to{transform:scale(1.06, .94)}}
 @keyframes ratPetL{from{transform:scaleX(-1)} to{transform:scale(-1.06, .94)}}
 @keyframes ratHeart{0%{opacity:0; transform:translateY(0) scale(.6)} 25%{opacity:1} 100%{opacity:0; transform:translateY(-46px) scale(1.2)}}
+/* two notes hang in the gaps, over our letters */
+.ab-letters .fr-list.fr-pin{position:absolute; z-index:3; left:56%; top:8px; width:170px}
+.ab-mcol{position:relative}
+.ab-mcol .fr-recipe.fr-pin{position:absolute; z-index:3; right:-14px; bottom:-70px; width:190px}
+.fr-notes{grid-template-columns:1fr}
+@media (max-width:860px){
+  .ab-letters .fr-list.fr-pin{position:relative; left:auto; top:auto; justify-self:center; margin:34px 0 0}
+  .ab-mcol .fr-recipe.fr-pin{position:relative; right:auto; bottom:auto; align-self:center; margin-top:34px}
+}
+/* a magnet taken off the postcard; the card swings on the other one */
+.mg.mg-off{visibility:hidden}
 </style>
 </head>
 <body>
@@ -3281,6 +3295,21 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       <i class="kt-note n1">♪</i><i class="kt-note n2">♫</i><i class="kt-note n3">♪</i><i class="kt-note n4">♬</i>
     </div>
 
+    <div class="kt-run" aria-hidden="false">
+      <button class="kt-rat" type="button" aria-label="Крыса Мавюрка. Погладить" hidden>
+        <svg viewBox="0 0 120 60"><path class="rt-tail" d="M30 40C14 42 6 34 2 24" fill="none" stroke="#e9a6a0" stroke-width="3.4" stroke-linecap="round"/>
+          <g class="rt-legs"><path class="lg1" d="M44 44l-4 9M76 44l4 9" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/><path class="lg2" d="M52 46l2 8M70 46l-2 8" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/></g>
+          <ellipse cx="60" cy="36" rx="30" ry="15" fill="#9c918a"/><ellipse cx="58" cy="40" rx="22" ry="8" fill="#b5aba4"/>
+          <path d="M84 30c10-4 22 2 28 10c-6 6-18 8-28 4z" fill="#9c918a"/>
+          <ellipse cx="86" cy="22" rx="8" ry="9" fill="#9c918a"/><ellipse cx="86" cy="22" rx="5" ry="6" fill="#efb1ab"/>
+          <circle cx="112" cy="40" r="3" fill="#e2848a"/>
+          <g class="rt-eye"><circle cx="98" cy="34" r="2.6" fill="#1d1a18"/><circle cx="98.8" cy="33.2" r=".9" fill="#fff"/></g>
+          <path class="rt-happy" d="M95 34q3-3.5 6 0" fill="none" stroke="#1d1a18" stroke-width="1.8" stroke-linecap="round"/>
+          <ellipse class="rt-blush" cx="100" cy="40" rx="4" ry="2.2" fill="#f08a95" opacity=".7"/>
+          <path d="M110 38l9-3M110 41l9 1" stroke="#6a605a" stroke-width=".8"/></svg>
+        <span class="rt-hearts"><i>♥</i><i>♥</i><i>♥</i></span>
+      </button>
+    </div>
     <div class="wrap section about">
       <div class="ab-box">
         <div class="bx-lid" aria-hidden="true"></div>
@@ -3290,7 +3319,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       </div>
       <div class="ab-fridge">
         <div class="fr-top" aria-hidden="true"><span class="fr-plate"></span></div>
-        <div class="fr-abc" aria-hidden="true"><b style="--c:#d23b3b; --r:-8deg">Л</b><b style="--c:#3f6aa8; --r:6deg">И</b><b style="--c:#e8b33c; --r:-3deg">Х</b><b style="--c:#4f8a4a; --r:9deg">И</b><b style="--c:#d23b3b; --r:-6deg">Е</b></div>
+        <div class="fr-abc"><button class="abc" type="button" style="--c:#d23b3b; --r:-8deg" aria-label="Снять букву Л">Л</button><button class="abc" type="button" style="--c:#3f6aa8; --r:6deg" aria-label="Снять букву И">И</button><button class="abc" type="button" style="--c:#e8b33c; --r:-3deg" aria-label="Снять букву Х">Х</button><button class="abc" type="button" style="--c:#4f8a4a; --r:9deg" aria-label="Снять букву И">И</button><button class="abc" type="button" style="--c:#d23b3b; --r:-6deg" aria-label="Снять букву Е">Е</button></div>
         <i class="fr-handle" aria-hidden="true"></i>
 
         <div class="ab-letters">
@@ -3309,13 +3338,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p class="ab-sign">Ваша Слопи</p>
           <svg class="ab-pen" viewBox="0 0 260 30" aria-hidden="true"><path d="M2 15l26-7v14z" fill="#c9a24a"/><path d="M2 15l9-2.4v4.8z" fill="#2b2622"/><rect x="28" y="6" width="200" height="18" rx="9" fill="#1f2e4f"/><rect x="28" y="8" width="200" height="4" rx="2" fill="rgba(255,255,255,.18)"/><rect x="150" y="3" width="70" height="5" rx="2.5" fill="#c9a24a"/><rect x="226" y="6" width="30" height="18" rx="6" fill="#c9a24a"/></svg>
         </article>
+        <div class="fr-list fr-pin" data-drop="А хлеб теперь кто купит?" data-by="Милки"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button><b>Купить:</b><span>хлеб</span><span>кефир</span><span>батарейки в плеер</span><span>кассету «Кино»</span><s>сушки</s></div>
         <div class="ab-mcol">
         <div class="ab-ph mi" data-drop="Я тут красивая, повесь!" data-by="Милки" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Милки. Нажмите, чтобы перевернуть">
           <button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>
           <div class="ph-face ph-front"><div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Милки<small>придумала Лёшу</small></p></div>
           <div class="ph-face ph-back"><p>Милки. Подпись тут должна была быть длиннее, но Лёша опять одолжил ручку и не вернул.</p><span>окт. 96</span></div>
         </div>
-        <article class="ab-letter sq" data-drop="Ну вот, теперь Лёша обиделся. Верни как было!" data-by="Милки">
+        <article class="ab-letter sq" data-drop="Это было моё самое трогательное письмо! Вешай назад." data-by="Милки">
           <button class="mg mg-blue" type="button" aria-label="Снять магнит"></button>
         <p class="ab-hi">Привет-привет!</p>
         <p>Бла-бла-бла, тут скоро будет очень трогательный текст от Милки. Бла-бла, бла-бла-бла, и ещё немножко бла.</p>
@@ -3323,6 +3353,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p>Бла-бла-бла-бла, бла-бла. Пирата покормили. Бла!</p>
         <p class="ab-sign">Ваша Милки</p>
         </article>
+        <div class="fr-recipe fr-pin" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
         </div>
         </div>
 
@@ -3358,29 +3389,12 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
             <p class="ab-hint"><span class="pk-turn">Нажмите на открытку, чтобы перевернуть. </span>Фотографии тоже переворачиваются.</p>
           </div>
           <div class="fr-notes">
-            <div class="fr-list" data-drop="А хлеб теперь кто купит?" data-by="Милки"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button><b>Купить:</b><span>хлеб</span><span>кефир</span><span>батарейки в плеер</span><span>кассету «Кино»</span><s>сушки</s></div>
             <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
             <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
-            <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
           </div>
         </div>
         <div class="fr-vent" aria-hidden="true"></div>
       </div>
-    </div>
-    <div class="kt-run" aria-hidden="false">
-      <button class="kt-rat" type="button" aria-label="Крыса Мавюрка. Погладить" hidden>
-        <svg viewBox="0 0 120 60"><path class="rt-tail" d="M30 40C14 42 6 34 2 24" fill="none" stroke="#e9a6a0" stroke-width="3.4" stroke-linecap="round"/>
-          <g class="rt-legs"><path class="lg1" d="M44 44l-4 9M76 44l4 9" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/><path class="lg2" d="M52 46l2 8M70 46l-2 8" stroke="#8a7d76" stroke-width="4" stroke-linecap="round"/></g>
-          <ellipse cx="60" cy="36" rx="30" ry="15" fill="#9c918a"/><ellipse cx="58" cy="40" rx="22" ry="8" fill="#b5aba4"/>
-          <path d="M84 30c10-4 22 2 28 10c-6 6-18 8-28 4z" fill="#9c918a"/>
-          <ellipse cx="86" cy="22" rx="8" ry="9" fill="#9c918a"/><ellipse cx="86" cy="22" rx="5" ry="6" fill="#efb1ab"/>
-          <circle cx="112" cy="40" r="3" fill="#e2848a"/>
-          <g class="rt-eye"><circle cx="98" cy="34" r="2.6" fill="#1d1a18"/><circle cx="98.8" cy="33.2" r=".9" fill="#fff"/></g>
-          <path class="rt-happy" d="M95 34q3-3.5 6 0" fill="none" stroke="#1d1a18" stroke-width="1.8" stroke-linecap="round"/>
-          <ellipse class="rt-blush" cx="100" cy="40" rx="4" ry="2.2" fill="#f08a95" opacity=".7"/>
-          <path d="M110 38l9-3M110 41l9 1" stroke="#6a605a" stroke-width=".8"/></svg>
-        <span class="rt-hearts"><i>♥</i><i>♥</i><i>♥</i></span>
-      </button>
     </div>
     <div class="kt-sill" aria-hidden="true"></div>
   </div>
@@ -3983,28 +3997,79 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   (() => {
     const fridge = document.querySelector('.ab-fridge'); if (!fridge) return;
     const tilt = [-4, 3, -2, 4, -3];
+    const fallAnim = (el, extra = 0) => {
+      const fr = fridge.getBoundingClientRect(), r = el.getBoundingClientRect();
+      const fall = Math.max(200, fr.bottom - r.top + 60 + extra), dx = (Math.random() - .5) * 80;
+      if (reduce) return Promise.resolve();
+      return el.animate([{translate: '0 0', opacity: 1}, {translate: `${dx * .3}px ${fall * .4}px`, opacity: 1, offset: .5}, {translate: `${dx}px ${fall}px`, opacity: 0}],
+        {duration: 950, easing: 'cubic-bezier(.5,0,.9,.6)'}).finished;
+    };
+    const note = (x, y, html, onBack) => {
+      const n = document.createElement('div'); n.className = 'fall-note';
+      n.style.left = x + 'px'; n.style.top = y + 'px';
+      n.style.setProperty('--r', tilt[Math.floor(Math.random() * tilt.length)] + 'deg');
+      n.innerHTML = html + '<button type="button">повесить обратно ↺</button>';
+      fridge.appendChild(n);
+      n.querySelector('button').addEventListener('click', ev => { ev.stopPropagation(); n.remove(); onBack(); });
+    };
+    const back = el => { el.classList.remove('dropped'); if (!reduce) el.animate([{translate: '0 -24px', opacity: 0}, {translate: '0 0', opacity: 1}], {duration: 380, easing: 'cubic-bezier(.2,.8,.3,1.2)'}); };
+    // a photo inside a letter stays on the fridge when the letter falls
+    const freePhotos = item => [...item.querySelectorAll('.ab-ph')].forEach(ph => {
+      const fr = fridge.getBoundingClientRect(), pr = ph.getBoundingClientRect();
+      ph._home = {parent: ph.parentNode, next: ph.nextSibling};
+      const w = ph.offsetWidth, h = ph.offsetHeight;
+      fridge.appendChild(ph);
+      Object.assign(ph.style, {position: 'absolute', margin: '0', float: 'none', zIndex: 4, left: (pr.left + pr.width / 2 - fr.left - w / 2) + 'px', top: (pr.top + pr.height / 2 - fr.top - h / 2) + 'px'});
+    });
+    const homePhotos = item => fridge.querySelectorAll(':scope > .ab-ph').forEach(ph => {
+      if (!ph._home || ph._home.parent !== item) return;
+      ph._home.parent.insertBefore(ph, ph._home.next); ph._home = null;
+      ['position', 'margin', 'float', 'zIndex', 'left', 'top'].forEach(k => ph.style[k] = '');
+    });
+    const drop = item => {
+      item.dataset.falling = '1';
+      freePhotos(item);
+      const fr = fridge.getBoundingClientRect(), r = item.getBoundingClientRect();
+      fallAnim(item).then(() => {
+        item.classList.add('dropped'); delete item.dataset.falling; item.style.rotate = ''; item.style.transformOrigin = '';
+        note(r.left - fr.left + r.width / 2, Math.max(20, r.top - fr.top + Math.min(60, r.height / 4)), `${item.dataset.drop}<b>— ${item.dataset.by}</b>`, () => {
+          item.querySelectorAll('.mg-off').forEach(m => m.classList.remove('mg-off'));
+          homePhotos(item); back(item);
+        });
+      });
+    };
     fridge.addEventListener('click', e => {
+      // magnet letters: one by one
+      const abc = e.target.closest('.abc');
+      if (abc){
+        e.stopPropagation(); if (abc.classList.contains('off')) return;
+        fallAnim(abc).then(() => {
+          abc.classList.add('off');
+          const all = [...fridge.querySelectorAll('.abc')];
+          if (all.every(x => x.classList.contains('off'))){
+            const box = fridge.querySelector('.fr-abc'), fr = fridge.getBoundingClientRect(), r = box.getBoundingClientRect();
+            note(r.left - fr.left + r.width / 2, r.top - fr.top, 'Ну и кто теперь будет собирать буквы?<b>— Витя</b>', () => all.forEach(x => { x.classList.remove('off'); back(x); }));
+          }
+        });
+        return;
+      }
       const mg = e.target.closest('.mg'); if (!mg) return;
       e.stopPropagation(); e.preventDefault();
       const item = mg.closest('[data-drop]'); if (!item || item.classList.contains('dropped') || item.dataset.falling) return;
-      item.dataset.falling = '1';
-      const fr = fridge.getBoundingClientRect(), r = item.getBoundingClientRect();
-      const fall = Math.max(200, fr.bottom - r.top + 60), dx = (Math.random() - .5) * 80;
-      const done = () => {
-        item.classList.add('dropped'); delete item.dataset.falling;
-        const n = document.createElement('div'); n.className = 'fall-note';
-        n.style.left = (r.left - fr.left + r.width / 2) + 'px'; n.style.top = Math.max(20, r.top - fr.top + Math.min(60, r.height / 4)) + 'px';
-        n.style.setProperty('--r', tilt[Math.floor(Math.random() * tilt.length)] + 'deg');
-        n.innerHTML = `${item.dataset.drop}<b>— ${item.dataset.by}</b><button type="button">повесить обратно ↺</button>`;
-        fridge.appendChild(n);
-        n.querySelector('button').addEventListener('click', ev => {
-          ev.stopPropagation(); n.remove(); item.classList.remove('dropped');
-          if (!reduce) item.animate([{translate: '0 -24px', opacity: 0}, {translate: '0 0', opacity: 1}], {duration: 380, easing: 'cubic-bezier(.2,.8,.3,1.2)'});
-        });
-      };
-      if (reduce){ done(); return; }
-      item.animate([{translate: '0 0', opacity: 1}, {translate: `${dx * .3}px ${fall * .4}px`, opacity: 1, offset: .5}, {translate: `${dx}px ${fall}px`, opacity: 0}],
-        {duration: 950, easing: 'cubic-bezier(.5,0,.9,.6)'}).finished.then(done);
+      const left = [...item.querySelectorAll(':scope > .mg:not(.mg-off)')];
+      if (left.length > 1){
+        // one magnet off: it falls, the sheet swings on the other one
+        const other = left.find(x => x !== mg), ir = item.getBoundingClientRect(), or = other.getBoundingClientRect();
+        mg.classList.add('mg-off');
+        const ghost = mg.cloneNode(); ghost.classList.remove('mg-off'); item.appendChild(ghost);
+        fallAnim(ghost, 200).then(() => ghost.remove());
+        item.style.transformOrigin = `${or.left + or.width / 2 - ir.left}px ${or.top + or.height / 2 - ir.top}px`;
+        const deg = (or.left < ir.left + ir.width / 2) ? -9 : 9;
+        if (!reduce) item.animate([{rotate: '0deg'}, {rotate: `${deg * 1.5}deg`}, {rotate: `${deg * .7}deg`}, {rotate: `${deg}deg`}], {duration: 900, easing: 'ease-out'});
+        item.style.rotate = deg + 'deg';
+        return;
+      }
+      drop(item);
     }, true);
   })();
 
@@ -4020,11 +4085,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     async function trip(){
       if (busy || !page.classList.contains('on') || document.hidden){ schedule(); return; }
       busy = true; rat.hidden = false; petted = false; rat.classList.remove('pet');
-      const w = W(), start = w + 20, stop = w * (.28 + Math.random() * .3);
-      await go(start, stop, 1700 + Math.random() * 600);
-      if (!petted){ rat.classList.remove('left'); await wait(2600 + Math.random() * 1800); }
+      const fr = document.querySelector('.ab-fridge').getBoundingClientRect(), rr = run.getBoundingClientRect();
+      const rw = rat.offsetWidth, fl = fr.left - rr.left, start = -rw - 20;
+      const stop = Math.max(10, (fl - rw - 30) * (.3 + Math.random() * .5));
+      const hide = fl + Math.min(fr.width * .4, 260);
+      await go(start, stop, 1500 + Math.random() * 600);
+      await wait(2600 + Math.random() * 1800);
       while (rat.classList.contains('pet')) await wait(300);
-      await go(stop, start, 1300);
+      await go(stop, hide, 1500);
       rat.hidden = true; busy = false; schedule();
     }
     const schedule = () => { clearTimeout(timer); timer = setTimeout(trip, 9000 + Math.random() * 16000); };
