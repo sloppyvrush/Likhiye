@@ -282,6 +282,13 @@ a{color:inherit}
   background:linear-gradient(transparent 0 0), repeating-linear-gradient(transparent 0 .62cqw, rgba(60,80,140,.22) .62cqw .68cqw), #efe7d0;
   box-shadow:.25cqw .35cqw .5cqw rgba(0,0,0,.45); transform:rotate(2.5deg); transform-origin:50% 0; transition:transform .25s; -webkit-tap-highlight-color:transparent}
 .ach-wall:hover{transform:rotate(0deg) scale(1.05)} .ach-wall:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
+/* a velvet pennant on a cord: the playlist */
+.pennant{right:1.2%; top:45%; width:5.2%; z-index:3; display:block; transform-origin:50% 1%; animation:penSway 6s ease-in-out infinite alternate; filter:drop-shadow(.3cqw .6cqw .5cqw rgba(15,8,3,.5)); -webkit-tap-highlight-color:transparent}
+.pennant svg{display:block; width:100%; overflow:visible}
+.pennant:hover{animation-play-state:paused; filter:drop-shadow(.3cqw .6cqw .5cqw rgba(15,8,3,.5)) brightness(1.12)}
+.pennant:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
+@keyframes penSway{from{transform:rotate(-2.4deg)} to{transform:rotate(2.4deg)}}
+@media (prefers-reduced-motion:reduce){ .pennant{animation:none} }
 .ach-wall b{font:700 .62cqw/1 var(--mono); letter-spacing:.06em; color:#2a2418}
 .ach-wall span{font:.95cqw/1 'Caveat',var(--hand); color:#1f2f6b; margin-top:.15cqw}
 .aw-lines{flex:1; width:80%; margin:.3cqw 0; background:repeating-linear-gradient(transparent 0 .45cqw, rgba(30,40,90,.55) .45cqw .55cqw); mask:linear-gradient(90deg,#000 60%,transparent)}
@@ -740,7 +747,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 @media (max-width:760px){
   .room{--floor:20%}
   .stage{width:100%; aspect-ratio:3/4.3}
-  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.ach-wall{display:none}
+  .window,.servant,.sleeve,.rack,.curtain-rod,.booktable,.chair,.clock,.calendar,.sill-things,.floor-thing,.ach-wall,.pennant{display:none}
   .lamp{left:40%; width:20%; height:9%}
   .moth{width:3.4cqw}
   .dust{left:10%; width:80%; top:4%; height:60%}
@@ -796,6 +803,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
   html.room-pan .room::before, html.room-pan .room::after, html.room-pan .light-shade, html.room-pan .light-glow{right:auto; width:var(--stageW)}
   html.room-pan .window, html.room-pan .servant, html.room-pan .sleeve, html.room-pan .curtain-rod, html.room-pan .clock, html.room-pan .calendar, html.room-pan .sill-things, html.room-pan .floor-thing, html.room-pan .table{display:block}
   html.room-pan .ach-wall{display:flex}
+  html.room-pan .pennant{display:block}
   html.room-pan .carpet{left:23%; top:4.5%; width:53%; height:62%}
   html.room-pan .stand{left:23%; width:31%; bottom:12%; height:16.5%}
   html.room-pan .tv{left:22.5%; width:32%; bottom:28%}
@@ -2301,6 +2309,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .fr-recipe{position:relative; width:200px; padding:22px 16px 14px; rotate:-3deg; display:flex; flex-direction:column; gap:4px;
   background:#f3ead2; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 19px/1.15 'Caveat', cursive; color:#5a2f1a}
 .fr-recipe b{font:700 26px/1 'Caveat', cursive; color:#a8261f; margin-bottom:4px}
+.fr-spot{grid-column:1 / -1; position:relative; max-width:250px !important; padding:24px 18px 14px; rotate:1.5deg; display:flex; flex-direction:column; gap:6px;
+  background:#f3eee0 repeating-linear-gradient(transparent 0 22px, rgba(84,124,176,.22) 22px 23px) 0 14px; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 19px/1.15 'Caveat', cursive; color:#22355a}
+.fr-spot b{font:700 26px/1 'Caveat', cursive; color:#1f7a44}
+.fr-spot a{align-self:flex-end; margin-top:4px; font:700 20px/1 'Caveat', cursive; color:#a8261f; text-decoration:underline; text-underline-offset:3px}
+.mg-spot{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-20 -20 40 40'%3E%3Ccircle cx='0' cy='0' r='17' fill='%231db954'/%3E%3Cg fill='none' stroke='%23121212' stroke-linecap='round'%3E%3Cpath d='M-10.5 -5.2C-3.5 -8 5 -7.4 11 -3.8' stroke-width='3.2'/%3E%3Cpath d='M-9 1C-3 -1.2 4 -.8 9 2.2' stroke-width='2.7'/%3E%3Cpath d='M-7.4 6.6C-2.6 5 2.6 5.3 6.6 7.6' stroke-width='2.2'/%3E%3C/g%3E%3C/svg%3E") 50% 50% / 100% no-repeat; box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
 .fr-vnote, .fr-lnote{position:relative; width:190px; padding:22px 16px 12px; box-shadow:0 4px 10px rgba(0,0,0,.18); font:700 20px/1.15 'Caveat', cursive}
 .fr-vnote{background:#f6f0dc repeating-linear-gradient(transparent 0 21px, rgba(84,124,176,.25) 21px 22px) 0 12px; color:#22355a; rotate:2.5deg}
 .fr-lnote{background:#fff3b0; color:#5a2f1a; rotate:-3deg}
@@ -2652,6 +2665,23 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           </g>
         </svg>
       </div>
+<a class="pennant" href="https://open.spotify.com/playlist/1uiPB1MWlylfv3SsScDeHF" target="_blank" rel="noopener" aria-label="Плейлист «Лихих» в Spotify" title="Плейлист к «Лихим» — открыть в Spotify">
+        <svg viewBox="0 0 100 210" aria-hidden="true">
+          <path d="M50 4L14 38M50 4L86 38" stroke="#c9a24a" stroke-width="1.6" fill="none"/>
+          <circle cx="50" cy="4" r="3.4" fill="#8a7a5a"/><circle cx="49" cy="3" r="1.2" fill="#e8dcc0"/>
+          <rect x="6" y="36" width="88" height="7" rx="3.5" fill="#6e3b1f"/><circle cx="6" cy="39.5" r="5" fill="#c9a24a"/><circle cx="94" cy="39.5" r="5" fill="#c9a24a"/>
+          <path d="M12 43H88V150L50 186L12 150Z" fill="#9e1d1d"/>
+          <path d="M12 43H88V150L50 186L12 150Z" fill="url(#pnVelvet)"/>
+          <path d="M18 49H82V147L50 177L18 147Z" fill="none" stroke="#e2bf63" stroke-width="1.6"/>
+          <g fill="#e2bf63" font-family="PT Serif, serif" text-anchor="middle"><text x="50" y="66" font-size="9.5" font-weight="700" letter-spacing=".8">ЛИХИЕ</text><text x="50" y="140" font-size="6.6" letter-spacing=".6">ПЛЕЙЛИСТ</text><text x="50" y="149" font-size="5.6" letter-spacing=".4">ПЕТЕРБУРГ · 96</text></g>
+          <g transform="translate(50 100)"><circle cx="0" cy="0" r="17" fill="#e2bf63"/><g fill="none" stroke="#9e1d1d" stroke-linecap="round"><path d="M-10.5 -5.2C-3.5 -8 5 -7.4 11 -3.8" stroke-width="3.2"/><path d="M-9 1C-3 -1.2 4 -.8 9 2.2" stroke-width="2.7"/><path d="M-7.4 6.6C-2.6 5 2.6 5.3 6.6 7.6" stroke-width="2.2"/></g></g>
+          <path d="M44 74l6-4 6 4M38 80h24" stroke="#e2bf63" stroke-width="1.2" fill="none"/>
+          <g stroke="#e2bf63" stroke-width="1.6"></g>
+          <path d="M12 150L50 186L88 150" fill="none" stroke="#e2bf63" stroke-width="2.4" stroke-dasharray="1.6 2.2"/>
+          <g fill="#e2bf63"><path d="M50 186l-4 10h8z"/><circle cx="50" cy="200" r="4"/></g>
+          <defs><linearGradient id="pnVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.16)"/><stop offset=".5" stop-color="rgba(0,0,0,0)"/><stop offset="1" stop-color="rgba(0,0,0,.28)"/></linearGradient></defs>
+        </svg>
+      </a>
       <button class="ach-wall" id="achWall" type="button" aria-label="Ведомость заслуг на стене: ваши достижения"><i class="aw-pin" aria-hidden="true"></i><b>ВЕДОМОСТЬ</b><span>заслуг</span><i class="aw-lines" aria-hidden="true"></i><em class="aw-n">0/17</em></button>
       <div class="bin" id="bin" aria-hidden="true"><svg viewBox="0 0 80 96"><defs>
           <linearGradient id="binBody" x1="0" x2="1"><stop offset="0" stop-color="#1f2a1c"/><stop offset=".22" stop-color="#4e6243"/><stop offset=".45" stop-color="#5f7552"/><stop offset=".75" stop-color="#3a4a33"/><stop offset="1" stop-color="#1a2317"/></linearGradient>
@@ -3390,6 +3420,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
             <p class="ab-hint"><span class="pk-turn">Нажмите на открытку, чтобы перевернуть. </span>Фотографии тоже переворачиваются.</p>
           </div>
           <div class="fr-notes">
+            <div class="fr-spot" data-drop="Без музыки читать — как чай без сахара. Повесь!" data-by="Слопи"><button class="mg mg-spot" type="button" aria-label="Снять магнит"></button><b>Что послушать</b><span>Мы собрали плейлист под атмосферу «Лихих»: эти песни звучат как наш Петербург девяносто шестого. Включайте, пока читаете и играете.</span><a href="https://open.spotify.com/playlist/1uiPB1MWlylfv3SsScDeHF" target="_blank" rel="noopener">Плейлист в Spotify →</a></div>
             <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
             <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
             <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
