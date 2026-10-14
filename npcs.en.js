@@ -447,11 +447,11 @@ window.NPCS = [
     "nick": "Ryaboy",
     "role": "killed by the garages on Zaitseva St, aged 31",
     "group": "proshloe",
-    "photo": "",
+    "photo": "assets/npc/ryaboy.webp",
     "pos": "50% 22%",
     "line": "Night of 8 October, the garages on Zaitseva. One knife blow, upward under the ribs.",
     "about": [
-      "Ex-boxer: broken nose, short haircut, tracksuit under a black leather jacket. Officially unemployed, drove a “wet asphalt” grey “devyatka”, lived with his mother on Veteranov. The kiosk girls called him Tolik: polite, bought prison-song tapes every week and never haggled.",
+      "Ex-boxer: broken nose, short haircut, a dark tracksuit, with a black leather jacket over it when it’s cold. Officially unemployed, drove a “wet asphalt” grey “devyatka”, lived with his mother on Veteranov. The kiosk girls called him Tolik: polite, bought prison-song tapes every week and never haggled.",
       "Once a week he collected a fat envelope at the market and drove it off somewhere. A tidy man: he wrote every sum down in a squared exercise book. The inside pocket of his jacket was ripped out, and the notebook wasn’t on him."
     ],
     "note": "Whose money? Driven where? Why the garages at two in the morning?",
