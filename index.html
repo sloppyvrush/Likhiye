@@ -4464,15 +4464,15 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     btn.addEventListener('click', () => { reset(); toyOpen('phone'); SFX.pickup(); });
     toy.addEventListener('toyclose', () => { if (!sec.hidden){ reset(); SFX.hangup(); } });
     // now and then, while the room is on screen, the phone rings
-    // rarely: only on the main page with the room on screen, the browser tab in front, and not more than once in a few minutes
+    // now and then: only on the main page with the room on screen and the browser tab in front
     let lastRing = performance.now();
     setInterval(() => {
       const home = !location.hash || location.hash === '#/' || location.hash === '#';
       if (!home || document.hidden || !document.hasFocus() || !roomInView || !toy.hidden) return;
-      if (performance.now() - lastRing < 240000 || Math.random() > .15) return;
+      if (Math.random() > .25) return;
       lastRing = performance.now();
       btn.classList.add('ring'); SFX.bell(); setTimeout(() => SFX.bell(), 1300); setTimeout(() => btn.classList.remove('ring'), 2200);
-    }, 60000);
+    }, 45000);
   })();
 
   /* nardy: throw against Vitya or Lyosha, first to three */
