@@ -225,8 +225,19 @@ a{color:inherit}
   background:
     radial-gradient(ellipse 15% 17% at 38.5% 47%, #f4f6ff 0%, #f4f6ff 55%, rgba(200,212,240,0) 100%),
     radial-gradient(ellipse 30% 36% at 38% 50%, #8d9cc0 0%, rgba(140,160,205,.0) 75%),
-    radial-gradient(ellipse 12% 38% at 9% 36%, #8e9fc4 0%, rgba(120,140,190,0) 80%),
+    radial-gradient(ellipse 21% 7% at 37.5% 89%, #98a4c6 0%, rgba(152,164,198,0) 82%),
+    radial-gradient(ellipse 5.5% 10% at 10.5% 32%, #ffdca6 0%, rgba(255,220,166,0) 100%),
+    radial-gradient(ellipse 12% 38% at 9% 36%, #c79c6c 0%, rgba(199,156,108,0) 80%),
+    radial-gradient(ellipse 13% 9% at 13% 84%, #8c6a4a 0%, rgba(140,106,74,0) 80%),
     radial-gradient(ellipse 60% 60% at 40% 45%, #3c4462 0%, #22263a 70%, #15172a 100%)}
+/* in the dark: the street lamp outside pours warm light through the window, the TV throws a cold patch onto the floor */
+.light-night-glow{position:absolute; inset:0; z-index:6; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .45s;
+  background:
+    radial-gradient(ellipse 6% 11% at 10.5% 32%, rgba(255,186,104,.34), rgba(255,186,104,0) 72%),
+    radial-gradient(ellipse 11% 30% at 9.5% 40%, rgba(255,168,84,.10), rgba(255,168,84,0) 75%),
+    radial-gradient(ellipse 12% 6% at 13% 84%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%),
+    radial-gradient(ellipse 19% 6% at 37.5% 89%, rgba(150,178,235,.2), rgba(150,178,235,0) 75%)}
+.room.dark .light-night-glow{opacity:1}
 .light-shade,.light-glow,.dust{transition:opacity .45s}
 .room.dark .light-night{opacity:1}
 .room.dark .light-shade{opacity:.15}
@@ -284,6 +295,23 @@ a{color:inherit}
 .ach-sheet h3{margin:0 0 6px 40px; font:700 24px/1.05 var(--mono); letter-spacing:.14em}
 .ach-sheet h3 span{font:400 26px/1 'Caveat',var(--hand); letter-spacing:0; color:#1f2f6b}
 .as-pen{margin:0 0 12px 40px; font:19px/1.2 'Caveat',var(--hand); color:#9a1f17; transform:rotate(-1deg)}
+/* the moth paperwork is a separate slip glued onto the sheet */
+.as-slip{position:relative; margin:6px -22px 18px 52px; padding:16px 18px 14px; color:#2a2418; transform:rotate(1.6deg);
+  background:linear-gradient(180deg, rgba(255,255,255,.35), transparent 40%), #e9e6dc; box-shadow:0 6px 14px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.5) inset}
+.as-slip .tp{position:absolute; top:-10px; width:70px; height:22px; background:rgba(236,226,192,.7); box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.as-slip .tp.a{left:-14px; transform:rotate(-28deg)} .as-slip .tp.b{right:-14px; transform:rotate(24deg)}
+.sl-top{margin:0 0 6px; font:11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:#6a5f4c}
+.sl-h{margin:0 0 6px; font:700 19px/1.1 var(--mono); letter-spacing:.2em}
+.sl-h span{display:block; margin-top:3px; font:400 12px/1.2 var(--mono); letter-spacing:.04em; color:#5a5144}
+.sl-top, .sl-txt{padding-right:80px}
+.sl-txt{margin:0 0 8px; font:12px/1.4 var(--mono); color:#4a4236}
+.as-slip .as-moth{margin:0 0 6px}
+.sl-list{margin:6px 0 0; padding:0; list-style:none; display:grid; gap:4px}
+.sl-list li{font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+.sl-list li b{font:700 12.5px/1.2 var(--mono); letter-spacing:.05em; color:#2a2418; margin-right:6px}
+.sl-seal{position:absolute; right:14px; top:12px; width:84px; height:84px; color:#a8261f; opacity:0; transform:rotate(-14deg) scale(1.2); transition:opacity .3s, transform .3s; pointer-events:none; mix-blend-mode:multiply}
+.as-slip.done .sl-seal{opacity:.55; transform:rotate(-14deg)}
+@media (max-width:600px){ .as-slip{margin:6px -6px 16px 30px} }
 .as-moth{margin:0 0 10px 40px; font:21px/1.25 'Caveat',var(--hand); color:#1f2f6b}
 .as-moth .tl{display:inline-block; position:relative; margin-left:8px; font:700 20px/1 var(--mono); letter-spacing:1px; color:#1f2f6b}
 .as-moth .tl s{position:absolute; left:-2px; right:-4px; top:50%; height:2px; background:#1f2f6b; transform:rotate(-20deg)}
@@ -738,6 +766,9 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
     background:radial-gradient(ellipse 48% 64% at 51% 14%, transparent 0%, rgba(40,24,10,.1) 40%, rgba(30,18,8,.3) 72%, rgba(22,13,6,.48) 100%)}
   html.room-pan .light-glow{mix-blend-mode:normal; opacity:.75}
   html.room-pan .light-night{mix-blend-mode:normal; background:radial-gradient(ellipse 26% 34% at 38% 48%, rgba(10,14,30,.25), rgba(8,10,24,.78) 70%); right:auto; width:var(--stageW)}
+  html.room-pan .light-night-glow{mix-blend-mode:normal; right:auto; width:var(--stageW);
+    background:radial-gradient(ellipse 6% 11% at 10.5% 32%, rgba(255,186,104,.38), rgba(255,186,104,0) 72%), radial-gradient(ellipse 9% 28% at 10% 38%, rgba(255,160,80,.16), rgba(255,160,80,0) 80%),
+      radial-gradient(ellipse 12% 6% at 13% 84%, rgba(255,166,90,.12), rgba(255,166,90,0) 75%), radial-gradient(ellipse 19% 6% at 37.5% 89%, rgba(150,178,235,.14), rgba(150,178,235,0) 75%)}
   html.room-pan .window .curtain{animation-name:swayl}
   html.room-pan .moth{will-change:transform}
   html.room-pan .stage{width:var(--stageW); aspect-ratio:16/9; margin:0}
@@ -2174,6 +2205,95 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .dk-ring{position:absolute; left:52%; top:6%; width:90px; height:90px; border-radius:50%; border:6px solid rgba(70,35,10,.28); filter:blur(.6px)}
 }
 
+/* ================= ABOUT ================= */
+.about .ab-desk{display:grid; grid-template-columns:minmax(200px, 290px) 1fr; gap:clamp(28px, 4.5vw, 56px); align-items:start; margin-top:34px}
+.about .ab-desk.rev{grid-template-columns:1fr minmax(200px, 290px); margin-top:clamp(40px, 6vw, 72px)}
+.ab-desk.rev .ab-photos{padding-top:60px}
+.ab-photos{display:flex; flex-direction:column; gap:34px; padding-top:14px}
+.ab-ph{position:relative; margin:0; padding:12px 12px 14px; background:#f4efe2; box-shadow:0 14px 30px rgba(0,0,0,.45); transform:rotate(var(--r, 0deg))}
+.ab-ph::before{content:""; position:absolute; top:-13px; left:50%; width:92px; height:28px; transform:translateX(-50%) rotate(-4deg); background:rgba(236,226,192,.62); box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.ab-desk.rev .ab-ph::before{transform:translateX(-50%) rotate(5deg)}
+.about .fr{position:relative; overflow:hidden; background:#2b2622}
+.ab-ph .fr{aspect-ratio:3/4}
+.about .fr img{display:block; width:100%; height:100%; object-fit:cover}
+.about .fr.nofoto{background:repeating-linear-gradient(135deg, #2e2924 0 10px, #332d27 10px 20px)}
+.about .fr.nofoto::after{content:"здесь будет фото"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-4deg); padding:4px 10px; background:var(--stamp); color:#f1e6cc; font:700 12px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
+.ab-ph figcaption{margin-top:10px; text-align:center; font:700 30px/1 'Caveat', cursive; color:var(--pen)}
+.ab-ph figcaption small{display:block; margin-top:5px; font:400 12px/1.3 var(--mono); letter-spacing:.06em; color:var(--ink-soft)}
+
+/* a sheet from a school exercise book: ruled lines, red margin */
+.ab-letter{--lh:34px; --mg:clamp(38px, 6vw, 70px); position:relative; transform:rotate(.5deg); color:#22355a;
+  padding:calc(var(--lh) * 2) clamp(22px, 4.5vw, 56px) calc(var(--lh) * 1.5) calc(var(--mg) + clamp(16px, 2.4vw, 28px));
+  background:#f7f3e6 repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) - 1px), rgba(84,124,176,.32) calc(var(--lh) - 1px) var(--lh)) 0 6px;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 18px 40px rgba(0,0,0,.45);
+  font:400 21px/var(--lh) var(--hand)}
+.ab-letter::before{content:""; position:absolute; top:0; bottom:0; left:var(--mg); width:2px; background:rgba(204,72,64,.55)}
+.ab-letter::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.35), transparent 55%), radial-gradient(ellipse at 95% 100%, rgba(140,110,60,.12), transparent 60%)}
+.ab-letter p{position:relative; z-index:1; margin:0 0 var(--lh)}
+/* Milki writes on squared paper, in violet ink */
+.ab-letter.sq{transform:rotate(-.6deg); color:#45367f;
+  background:repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) / 2 - 1px), rgba(90,120,160,.26) calc(var(--lh) / 2 - 1px) calc(var(--lh) / 2)) 0 6px,
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--lh) / 2 - 1px), rgba(90,120,160,.26) calc(var(--lh) / 2 - 1px) calc(var(--lh) / 2)) 0 0 #f6f4ec}
+.ab-letter .ab-hi{font:700 44px/var(--lh) 'Caveat', cursive; margin-bottom:var(--lh)}
+.ab-letter u{text-decoration:underline wavy rgba(204,72,64,.75); text-decoration-thickness:1.5px; text-underline-offset:5px}
+.ab-letter .ab-sign{margin:0; text-align:right; font:700 40px/var(--lh) 'Caveat', cursive; padding-right:4%}
+
+/* the postcard: photo on the front, thanks on the back */
+.ab-post-wrap{max-width:780px; margin:clamp(56px, 8vw, 96px) auto 0; text-align:center}
+.ab-post-lede{margin:0 0 18px; font:700 34px/1.1 'Caveat', cursive; color:var(--cream)}
+.ab-post{display:grid; perspective:2000px; cursor:var(--cur-hover, pointer); text-align:left; transform:rotate(-1.2deg); outline:none}
+.ab-post:focus-visible .face{box-shadow:0 0 0 3px var(--glow), 0 20px 44px rgba(0,0,0,.5)}
+.ab-post .face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#f6f1e3; color:var(--ink); box-shadow:0 20px 44px rgba(0,0,0,.5); transition:transform .9s cubic-bezier(.45,.05,.25,1)}
+.ab-post .back{transform:rotateY(180deg)}
+.ab-post.on .front{transform:rotateY(-180deg)}
+.ab-post.on .back{transform:rotateY(0deg)}
+.ab-post .front{display:flex; flex-direction:column; padding:14px 14px 0}
+.ab-post .front .fr{flex:1 1 auto; aspect-ratio:4/3; min-height:0}
+.ab-post .front .cap{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:8px 4px 10px}
+.ab-post .front .cap b{font:700 clamp(24px, 3.4vw, 34px)/1.1 'Caveat', cursive; color:var(--stamp)}
+.ab-post .front .cap span{font:400 11px/1.3 var(--mono); letter-spacing:.08em; color:var(--ink-soft); text-align:right}
+.ab-post .back{display:grid; grid-template-columns:1.1fr 1fr; grid-template-rows:auto 1fr; padding:clamp(18px, 3vw, 30px)}
+.pk-head{grid-column:1/-1; margin:0 0 14px; text-align:center; font:700 13px/1 var(--mono); letter-spacing:.32em; text-transform:uppercase; color:#6b5f49}
+.pk-msg{display:flex; flex-direction:column; padding-right:clamp(16px, 3vw, 28px); border-right:1.5px solid #9a8c70; font:400 21px/1.55 var(--hand); color:var(--pen)}
+.pk-msg p{margin:0 0 .7em}
+.pk-msg .pk-sign{margin:auto 0 0; padding-top:1em; font:700 32px/1.05 'Caveat', cursive}
+.pk-adr{position:relative; padding-left:clamp(16px, 3vw, 28px); display:flex; flex-direction:column}
+.pk-stamps{position:relative; height:128px; margin-bottom:6px}
+.pk-stamp{position:absolute; right:0; top:0; width:84px; height:105px; filter:drop-shadow(0 1px 1px rgba(0,0,0,.25)); transform:rotate(2deg)}
+.pk-mark{position:absolute; right:40px; top:26px; width:200px; height:106px; opacity:.62; transform:rotate(-8deg); mix-blend-mode:multiply}
+.pk-l{display:flex; align-items:baseline; gap:10px; margin:0; min-height:38px; border-bottom:1px solid #9a8c70}
+.pk-l i, .pk-from i{font:400 12px/1 var(--mono); font-style:normal; color:#6b5f49; flex:none}
+.pk-l span{font:700 25px/1.4 'Caveat', cursive; color:var(--pen)}
+.pk-from{display:flex; flex-direction:column; gap:3px; margin:14px 0 10px}
+.pk-from i{margin-bottom:4px}
+.pk-from a{font:700 22px/1.15 'Caveat', cursive; color:var(--pen); text-decoration:none; width:max-content; max-width:100%}
+.pk-from a:hover{text-decoration:underline}
+.pk-idx{display:flex; gap:5px; margin-top:auto}
+.pk-idx svg{width:22px; height:36px}
+.ab-hint{margin:18px 0 0; font:400 13px/1.4 var(--mono); color:#c9bc98}
+@media (max-width:760px){
+  .about .ab-desk{grid-template-columns:1fr; gap:30px}
+  .about .ab-desk.rev{grid-template-columns:1fr}
+  .ab-desk.rev .ab-photos{order:-1; padding-top:14px}
+  .ab-photos{flex-direction:row; justify-content:center; padding:14px 6px 0}
+  .ab-ph{flex:0 1 58%; max-width:230px; padding:8px 8px 10px}
+  .ab-ph figcaption{font-size:24px}
+  .ab-ph figcaption small{font-size:10.5px}
+  .ab-letter{--lh:30px; font-size:18.5px; transform:none}
+  .ab-letter .ab-hi{font-size:38px}
+  /* on a phone the back would stretch the photo, so the postcard lies face up with its back beside it */
+  .ab-post{display:flex; flex-direction:column; gap:26px; transform:none; cursor:default}
+  .ab-post .face, .ab-post.on .face{transform:rotate(-1deg); backface-visibility:visible; -webkit-backface-visibility:visible; transition:none}
+  .ab-post .back, .ab-post.on .back{transform:rotate(1deg)}
+  .ab-post .front .fr{aspect-ratio:4/3}
+  .pk-turn, .ab-hint{display:none}
+  .ab-post .back{grid-template-columns:1fr}
+  .pk-msg{padding:0 0 18px; border-right:0; border-bottom:1.5px solid #9a8c70; margin-bottom:12px; font-size:17.5px}
+  .pk-adr{padding-left:0}
+  .ab-post .front .cap{flex-direction:column; gap:2px}
+  .ab-post .front .cap span{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){ .ab-post .face{transition:none} }
 </style>
 </head>
 <body>
@@ -2224,6 +2344,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <a href="#/delo">Дело</a>
     <a href="#/archive"><span class="long">Фотоархив</span><span class="short">Архив</span></a>
     <a href="#/start"><span class="long">Как подключить</span><span class="short">Подключить</span></a>
+    <a href="#/about"><span class="long">О проекте</span><span class="short">О нас</span></a>
   </nav>
 </header>
 
@@ -2574,6 +2695,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <div class="light-shade" aria-hidden="true"></div>
     <div class="light-glow" aria-hidden="true"></div>
     <div class="light-night" aria-hidden="true"></div>
+    <div class="light-night-glow" aria-hidden="true"></div>
   </section>
   <div class="pan-hint" aria-hidden="true">← листай комнату →</div>
 
@@ -2964,6 +3086,80 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   </div>
 </main>
 
+<!-- ================= ABOUT: a letter, two photos and a postcard ================= -->
+<main class="page" data-route="/about">
+  <div class="wrap section on-wall about">
+    <h2>О проекте</h2>
+    <p class="lede prose" style="color:var(--cream)">Пара слов от тех, кто всё это придумал.</p>
+
+    <div class="ab-desk">
+      <div class="ab-photos">
+        <figure class="ab-ph" style="--r:-3deg">
+          <div class="fr"><img src="assets/about/slopi.webp" alt="Слопи" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
+          <figcaption>Слопи<small>придумала Витю</small></figcaption>
+        </figure>
+      </div>
+
+      <article class="ab-letter">
+        <p class="ab-hi">Привет!</p>
+        <p>Меня зовут Слопи, и «Лихие» — мой самый любимый и самый личный проект.</p>
+        <p>Я коренная петербурженка, и мои родители тоже. Поэтому Петербург для меня не декорация для ботов, а дом. Вся эта серия выросла из любви к нему: к дворам-колодцам, трамваям, мокрым крышам и кухням, где до ночи пьют чай и разговаривают обо всём на свете.</p>
+        <p>А ещё она выросла из рассказов моих родителей. Они много вспоминали те годы: как жили, как работали, как выкручивались и как умудрялись смеяться, когда было совсем не до смеха. И у нас дома до сих пор лежат старые семейные фотоальбомы, с уголками и подписями на обороте. Я очень люблю их листать. Отсюда и фотоархив на сайте, и надписи на каждом снимке, и вся эта атмосфера.</p>
+        <p>Мне хотелось сделать ботов, каких в нашем комьюнити почти не встретишь. Не идеальных принцев и не злодеев на одну сцену, а <u>живых людей</u>: со своей историей, с родными, с привычками и с прошлым. Таких, про которых хочется узнавать дальше.</p>
+        <p>И я делала это не одна. Милки — моя самая близкая подруга. Это она придумала и написала Лёшу, и без него Витя был бы совсем другим. Мы вместе придумывали этот Петербург девяносто шестого и вместе в нём жили.</p>
+        <p>Этот проект очень много для меня значит. Я вложила в него кусочек своего города, своей семьи и <u>своего сердца</u>. И когда кто-то пишет, что Витя или Лёша показались ему настоящими, у меня внутри всё откликается.</p>
+        <p class="ab-sign">Ваша Слопи</p>
+      </article>
+    </div>
+
+    <div class="ab-desk rev">
+      <article class="ab-letter sq">
+        <p class="ab-hi">Привет-привет!</p>
+        <p>Бла-бла-бла, тут скоро будет очень трогательный текст от Милки. Бла-бла, бла-бла-бла, и ещё немножко бла.</p>
+        <p>Лёша передаёт всем привет и просит не верить ничему, что про него рассказывает Витя. Бла-бла-бла. Витя просит не верить Лёше. Бла.</p>
+        <p>Бла-бла-бла-бла, бла-бла. Пирата покормили. Бла!</p>
+        <p class="ab-sign">Ваша Милки</p>
+      </article>
+      <div class="ab-photos">
+        <figure class="ab-ph" style="--r:2.5deg">
+          <div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
+          <figcaption>Милки<small>придумала Лёшу</small></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="ab-post-wrap">
+      <p class="ab-post-lede">А это вам.<span class="pk-turn"> Переверните.</span></p>
+      <div class="ab-post" role="button" tabindex="0" aria-pressed="false" aria-label="Открытка от Слопи и Милки. Нажмите, чтобы перевернуть">
+        <div class="face front">
+          <div class="fr"><img src="assets/about/vdvoem.webp" alt="Слопи и Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
+          <div class="cap"><b>С приветом из Питера!</b><span>Слопи и Милки · «Лихие»</span></div>
+        </div>
+        <div class="face back">
+          <p class="pk-head">Почтовая карточка</p>
+          <div class="pk-msg">
+            <p>Дорогие наши!</p>
+            <p>Спасибо всем, кто играл с Витей и Лёшей, листал этот сайт, вскрывал конверты с делом и переворачивал фотографии. Спасибо всем, кто писал нам, присылал скрины и просто поддерживал. Вы даже не представляете, как это для нас важно.</p>
+            <p class="pk-sign">Обнимаем,<br>Слопи и Милки</p>
+          </div>
+          <div class="pk-adr">
+            <div class="pk-stamps" aria-hidden="true">
+              <svg class="pk-stamp" viewBox="0 0 80 100"><rect x="2" y="2" width="76" height="96" fill="#fffdf6"/><g fill="#f6f1e3" class="perf"></g><rect x="9" y="9" width="62" height="82" fill="#2f5b7a"/><g fill="none" stroke="#f1e6cc" stroke-width="1.3"><path d="M14 80h52M16 72h48v8M20 72v8M26 72v8M32 72v8M48 72v8M54 72v8M60 72v8M31 54h18v18H31zM36 72v-8q4-5 8 0v8M34 42h12v12H34zM32.5 42q7.5-7 15 0"/><path d="M38.8 35L40 12l1.2 23z" fill="#f1e6cc"/><path d="M37 12h6l-1 2h-4z" fill="#f1e6cc"/></g><text x="14" y="21" font-family="PT Mono, monospace" font-size="8" font-weight="700" fill="#f1e6cc">1500</text><text x="40" y="88.5" text-anchor="middle" font-family="PT Serif, serif" font-size="7.4" letter-spacing="1.2" fill="#f1e6cc">РОССИЯ·1996</text></svg>
+              <svg class="pk-mark" viewBox="0 0 150 80"><defs><path id="pkArc" d="M40 40m-27 0a27 27 0 1 1 54 0"/></defs><g fill="none" stroke="#2c2b48" stroke-width="1.4"><circle cx="40" cy="40" r="34"/><circle cx="40" cy="40" r="22"/><path d="M78 22q9-5 18 0t18 0t18 0t18 0M78 34q9-5 18 0t18 0t18 0t18 0M78 46q9-5 18 0t18 0t18 0t18 0M78 58q9-5 18 0t18 0t18 0t18 0"/></g><g fill="#2c2b48" font-family="PT Mono, monospace"><text font-size="7.2" letter-spacing="1"><textPath href="#pkArc">САНКТ-ПЕТЕРБУРГ</textPath></text><text x="40" y="39" text-anchor="middle" font-size="7.6" font-weight="700">14.10.96</text><text x="40" y="49" text-anchor="middle" font-size="6.4">190000</text></g></svg>
+            </div>
+            <p class="pk-l"><i>Куда</i><span>всем, кто играл, листал</span></p>
+            <p class="pk-l"><span>и поддерживал</span></p>
+            <p class="pk-l"><i>Кому</i><span>вам, с любовью</span></p>
+            <p class="pk-from"><i>Отправители</i><a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Слопи · t.me/sillysloppy</a><a href="https://t.me/milkiwaywlw" target="_blank" rel="noopener">Милки · t.me/milkiwaywlw</a></p>
+            <div class="pk-idx" aria-label="Индекс 190000"></div>
+          </div>
+        </div>
+      </div>
+      <p class="ab-hint">Нажмите на открытку, чтобы перевернуть.</p>
+    </div>
+  </div>
+</main>
+
 <footer>
   <div class="sig">Лихие</div>
   <p>Боты для SillyTavern о Петербурге девяностых.</p>
@@ -3009,7 +3205,15 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     <p class="as-top">Квартира Громова В. С. · ул. Зайцева</p>
     <h3>ВЕДОМОСТЬ<br><span>личных заслуг гостя</span></h3>
     <p class="as-pen">Заполняет: В. Громов. Исправлять ручкой не надо, я всё вижу.</p>
-    <p class="as-moth"></p>
+    <div class="as-slip">
+      <i class="tp a" aria-hidden="true"></i><i class="tp b" aria-hidden="true"></i>
+      <p class="sl-top">Санэпидемстанция Кировского р-на</p>
+      <p class="sl-h">СПРАВКА<span>о борьбе с молью на дому</span></p>
+      <p class="sl-txt">Выдана гостю кв. Громова в том, что он(а) лично и без применения нафталина выдворял(а) моль из квартиры.</p>
+      <p class="as-moth"></p>
+      <ul class="sl-list"></ul>
+      <svg class="sl-seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="slSealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g><g fill="currentColor" font-family="PT Mono, monospace" font-weight="700"><text font-size="10.4" letter-spacing="1.3"><textPath href="#slSealArc">САНЭПИДЕМСТАНЦИЯ ✦ КИРОВСКИЙ Р-Н ✦</textPath></text><text x="60" y="57" text-anchor="middle" font-size="11">МОЛЬ</text><text x="60" y="71" text-anchor="middle" font-size="11">ВЫДВОРЕНА</text></g></svg>
+    </div>
     <ol class="as-list"></ol>
     <p class="as-sum"></p>
     <p class="as-foot">Ведомость хранится только в вашем браузере. Другие гости ведут свою.</p>
@@ -3323,7 +3527,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   }
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/lyudi':'Люди района · Лихие','/starty':'Старты · Лихие','/gorod':'Город · Лихие','/archive':'Фотоархив · Лихие','/delo':'Дело № 1147 · Лихие','/start':'Как подключить · Лихие'};
+  const titles = {'/':'Лихие','/bots':'Персонажи · Лихие','/lyudi':'Люди района · Лихие','/starty':'Старты · Лихие','/gorod':'Город · Лихие','/archive':'Фотоархив · Лихие','/delo':'Дело № 1147 · Лихие','/start':'Как подключить · Лихие','/about':'О проекте · Лихие'};
   BOTS.forEach(b => titles['/' + b.id] = b.name + ' · Лихие');
   const botIds = new Set(BOTS.map(b => '/' + b.id));
 
@@ -3482,6 +3686,25 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   });
   let wasNarrow = narrow();
   addEventListener('resize', () => { if (narrow() !== wasNarrow){ wasNarrow = narrow(); const p = document.querySelector('.page.on'); if (p && p.querySelector('.book')) paint(p); } });
+
+
+  /* ---------- «О проекте»: the postcard turns over, the postal code is drawn in the old template ---------- */
+  (() => {
+    const card = document.querySelector('.ab-post'); if (!card) return;
+    const flip = () => { const on = card.classList.toggle('on'); card.setAttribute('aria-pressed', String(on)); };
+    card.addEventListener('click', e => { if (!e.target.closest('a')) flip(); });
+    card.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')){ e.preventDefault(); flip(); } });
+    const SEG = {t:'M0 0H10', m:'M0 10H10', b:'M0 20H10', lu:'M0 0V10', ll:'M0 10V20', ru:'M10 0V10', rl:'M10 10V20', du:'M10 0L0 10', dl:'M10 10L0 20'};
+    const DIG = {0:'t b lu ll ru rl', 1:'du ru rl', 9:'t lu ru m dl'};
+    const all = Object.values(SEG).join('');
+    const box = card.querySelector('.pk-idx');
+    box.innerHTML = '190000'.split('').map(d => `<svg viewBox="-4 -4 18 28" aria-hidden="true"><path d="${all}" fill="none" stroke="#b7a98a" stroke-width=".9" stroke-dasharray="1 1.6"/><path d="${DIG[d].split(' ').map(k => SEG[k]).join('')}" fill="none" stroke="#2B4A8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`).join('');
+    // perforated edge of the stamp
+    const perf = card.querySelector('.pk-stamp .perf'); let c = '';
+    for (let x = 6; x <= 74; x += 6.8){ c += `<circle cx="${x}" cy="2" r="2.2"/><circle cx="${x}" cy="98" r="2.2"/>`; }
+    for (let y = 6; y <= 94; y += 6.8){ c += `<circle cx="2" cy="${y}" r="2.2"/><circle cx="78" cy="${y}" r="2.2"/>`; }
+    perf.innerHTML = c;
+  })();
 
   /* ---------- router ---------- */
   const pages = [...document.querySelectorAll('.page')];
@@ -4401,7 +4624,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const tr = TRACKS[+audio.dataset.i]; if (!tr || heard.has(tr.src)) return;
     heard.add(tr.src); try { localStorage.setItem('lihie-heard', JSON.stringify([...heard])); } catch (e) {}
     if (TRACKS.every(x => heard.has(x.src)) && window.lihieOnce)
-      window.lihieOnce('records', 'Дискотека на Стачек', 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', `пластинок: ${TRACKS.length} из ${TRACKS.length}`);
+      window.lihieOnce('records', 'Филофонист', 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', `пластинок: ${TRACKS.length} из ${TRACKS.length}`);
   };
   audio.addEventListener('timeupdate', () => { if (audio.currentTime > 30) markHeard(); });
   audio.addEventListener('ended', markHeard);
@@ -4613,7 +4836,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     {key: 'delo', t: 'Дело закрыто (почти)', x: 'Все конверты вскрыты. Трофимов просит ничего не рассказывать прокурору.', hint: 'На Литейном лежит дело, которое никто не дочитал.'},
     {key: 'thief', t: 'Порча имущества', x: 'Снимок изъят из альбома. Витя составил протокол, Марина обиделась, Валентина Ивановна простила.', hint: 'В альбомах есть снимки, которые хочется унести с собой.'},
     {key: 'albums', t: 'Мама, хватит', x: 'Все три альбома пролистаны до последней страницы. Лёша просит больше никому их не показывать.', hint: 'На столе в архиве лежат альбомы. Их редко досматривают до конца.'},
-    {key: 'records', t: 'Дискотека на Стачек', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок много, а играет всё одна.'}
+    {key: 'records', t: 'Филофонист', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок на полке много. Послушайте каждую хотя бы по полминуты.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}
     REG.forEach(r => { try { if (localStorage.getItem('lihie-ach-' + r.key) === '1' && !g.includes(r.key)) g.push(r.key); } catch (e) {} });
@@ -4635,10 +4858,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const n = mothCount();
     wallBtn.querySelector('.aw-n').textContent = `${got.size}/${REG.length}`;
     const moths = REG.filter(r => r.key.startsWith('moth')), rest = REG.filter(r => !r.key.startsWith('moth'));
-    wallBox.querySelector('.as-list').innerHTML = [...moths.filter(r => got.has(r.key)), ...rest].map(r => got.has(r.key)
+    wallBox.querySelector('.as-list').innerHTML = rest.map(r => got.has(r.key)
       ? `<li class="on"><b>${r.t}</b><span>${r.x}</span></li>`
       : `<li><b>${'?'.repeat(Math.min(9, r.t.length))}</b><span>${r.hint}</span></li>`).join('');
-    wallBox.querySelector('.as-moth').innerHTML = (n ? `Моль ликвидирована: <b>${n}</b> ${tally(n)}` : 'Моль ликвидирована: <b>0</b>. Пока живёт и ест шубу.')
+    const mGot = moths.filter(r => got.has(r.key));
+    wallBox.querySelector('.as-slip').classList.toggle('done', n > 0);
+    wallBox.querySelector('.sl-list').innerHTML = mGot.map(r => `<li><b>${r.t}.</b>${r.x}</li>`).join('');
+    wallBox.querySelector('.as-moth').innerHTML = (n ? `Выдворено молей: <b>${n}</b> ${tally(n)}` : 'Выдворено молей: <b>0</b>. Моль пока живёт в шкафу и ест шубу.')
       + `<span class="as-marks">${moths.map(r => `<i class="${got.has(r.key) ? 'on' : ''}" title="${got.has(r.key) ? r.t : 'ещё нет'}">${r.key.slice(4)}</i>`).join('')}</span>`;
     wallBox.querySelector('.as-sum').textContent = got.size === REG.length ? 'Всё собрано. Витя выдаёт ключи от квартиры и просит больше не приходить.' : `Заслуг: ${got.size} из ${REG.length}`;
   }
