@@ -2225,42 +2225,85 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   .dk-ring{position:absolute; left:52%; top:6%; width:90px; height:90px; border-radius:50%; border:6px solid rgba(70,35,10,.28); filter:blur(.6px)}
 }
 
-/* ================= ABOUT ================= */
-.about .ab-desk{display:grid; grid-template-columns:minmax(200px, 290px) 1fr; gap:clamp(28px, 4.5vw, 56px); align-items:start; margin-top:34px}
-.about .ab-desk.rev{grid-template-columns:1fr minmax(200px, 290px); margin-top:clamp(40px, 6vw, 72px)}
-.ab-desk.rev .ab-photos{padding-top:60px}
-.ab-photos{display:flex; flex-direction:column; gap:34px; padding-top:14px}
-.ab-ph{position:relative; margin:0; padding:12px 12px 14px; background:#f4efe2; box-shadow:0 14px 30px rgba(0,0,0,.45); transform:rotate(var(--r, 0deg))}
-.ab-ph::before{content:""; position:absolute; top:-13px; left:50%; width:92px; height:28px; transform:translateX(-50%) rotate(-4deg); background:rgba(236,226,192,.62); box-shadow:0 1px 3px rgba(0,0,0,.18)}
-.ab-desk.rev .ab-ph::before{transform:translateX(-50%) rotate(5deg)}
-.about .fr{position:relative; overflow:hidden; background:#2b2622}
-.ab-ph .fr{aspect-ratio:3/4}
-.about .fr img{display:block; width:100%; height:100%; object-fit:cover}
-.about .fr.nofoto{background:repeating-linear-gradient(135deg, #2e2924 0 10px, #332d27 10px 20px)}
-.about .fr.nofoto::after{content:"здесь будет фото"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-4deg); padding:4px 10px; background:var(--stamp); color:#f1e6cc; font:700 12px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
-.ab-ph figcaption{margin-top:10px; text-align:center; font:700 30px/1 'Caveat', cursive; color:var(--pen)}
-.ab-ph figcaption small{display:block; margin-top:5px; font:400 12px/1.3 var(--mono); letter-spacing:.06em; color:var(--ink-soft)}
+/* ================= ABOUT: the kitchen table ================= */
+/* an old floral oilcloth under the lampshade: letters, photos on paperclips, tea, a postcard */
+.ab-table{position:relative; margin-top:30px; padding:clamp(40px, 6vw, 80px) clamp(18px, 5vw, 70px) clamp(36px, 5vw, 60px); border-radius:8px;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255,214,150,.38), transparent 70%),
+    linear-gradient(112deg, transparent 38%, rgba(255,255,255,.13) 47%, transparent 56%),
+    radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(40,22,8,.42)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .27  0 0 0 0 .16  0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg opacity='.62'%3E%3Cg transform='translate(30 30)'%3E%3Cpath d='M-14 8c6-2 10 2 12 8M14-8c-6 2-10-2-12-8' stroke='%236f8a4a' stroke-width='3' fill='none'/%3E%3Cg fill='%23c6533c'%3E%3Ccircle cy='-7' r='5'/%3E%3Ccircle cx='6.7' cy='-2.2' r='5'/%3E%3Ccircle cx='4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-6.7' cy='-2.2' r='5'/%3E%3C/g%3E%3Ccircle r='3.2' fill='%23e8b33c'/%3E%3C/g%3E%3Cg transform='translate(90 90) scale(.8)'%3E%3Cpath d='M-14 8c6-2 10 2 12 8M14-8c-6 2-10-2-12-8' stroke='%236f8a4a' stroke-width='3' fill='none'/%3E%3Cg fill='%233f6aa8'%3E%3Ccircle cy='-7' r='5'/%3E%3Ccircle cx='6.7' cy='-2.2' r='5'/%3E%3Ccircle cx='4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-6.7' cy='-2.2' r='5'/%3E%3C/g%3E%3Ccircle r='3.2' fill='%23e8b33c'/%3E%3C/g%3E%3Cg fill='%23c6533c'%3E%3Ccircle cx='88' cy='22' r='2.2'/%3E%3Ccircle cx='96' cy='30' r='2.2'/%3E%3Ccircle cx='26' cy='94' r='2.2'/%3E%3Ccircle cx='18' cy='86' r='2.2'/%3E%3C/g%3E%3Cg fill='%236f8a4a'%3E%3Ccircle cx='60' cy='60' r='2'/%3E%3Ccircle cx='0' cy='60' r='2'/%3E%3Ccircle cx='60' cy='0' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px,
+    #ece2c8;
+  box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 60px rgba(0,0,0,.55), inset 0 0 40px rgba(60,35,10,.25)}
+/* the hem of the oilcloth hanging over the table edge */
+.ab-table::after{content:""; position:absolute; left:0; right:0; bottom:-14px; height:16px; border-radius:0 0 8px 8px; pointer-events:none;
+  background:linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.05)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg opacity='.62'%3E%3Cg transform='translate(30 30)'%3E%3Cpath d='M-14 8c6-2 10 2 12 8M14-8c-6 2-10-2-12-8' stroke='%236f8a4a' stroke-width='3' fill='none'/%3E%3Cg fill='%23c6533c'%3E%3Ccircle cy='-7' r='5'/%3E%3Ccircle cx='6.7' cy='-2.2' r='5'/%3E%3Ccircle cx='4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-6.7' cy='-2.2' r='5'/%3E%3C/g%3E%3Ccircle r='3.2' fill='%23e8b33c'/%3E%3C/g%3E%3Cg transform='translate(90 90) scale(.8)'%3E%3Cpath d='M-14 8c6-2 10 2 12 8M14-8c-6 2-10-2-12-8' stroke='%236f8a4a' stroke-width='3' fill='none'/%3E%3Cg fill='%233f6aa8'%3E%3Ccircle cy='-7' r='5'/%3E%3Ccircle cx='6.7' cy='-2.2' r='5'/%3E%3Ccircle cx='4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-4.1' cy='5.7' r='5'/%3E%3Ccircle cx='-6.7' cy='-2.2' r='5'/%3E%3C/g%3E%3Ccircle r='3.2' fill='%23e8b33c'/%3E%3C/g%3E%3Cg fill='%23c6533c'%3E%3Ccircle cx='88' cy='22' r='2.2'/%3E%3Ccircle cx='96' cy='30' r='2.2'/%3E%3Ccircle cx='26' cy='94' r='2.2'/%3E%3Ccircle cx='18' cy='86' r='2.2'/%3E%3C/g%3E%3Cg fill='%236f8a4a'%3E%3Ccircle cx='60' cy='60' r='2'/%3E%3Ccircle cx='0' cy='60' r='2'/%3E%3Ccircle cx='60' cy='0' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px, #e2d6b8; box-shadow:0 10px 18px rgba(0,0,0,.45)}
+.ab-props{position:absolute; inset:0; pointer-events:none; overflow:hidden; border-radius:8px}
+.ab-props svg{position:absolute; filter:drop-shadow(3px 6px 5px rgba(0,0,0,.35))}
+.pr-env{right:3%; top:3%; width:190px; transform:rotate(9deg)}
+.pr-tape{left:47%; top:2.5%; width:110px; transform:rotate(-12deg)}
+.pr-keys{right:2.5%; bottom:10%; width:110px; transform:rotate(-24deg)}
+.pr-tape{}
+
+.ab-letters{position:relative; z-index:1; display:grid; grid-template-columns:56% 46%; grid-template-rows:auto 1fr; align-items:start}
+.ab-letters .ab-letter{grid-column:1; grid-row:1 / 3}
+.ab-letters .ab-letter.sq{grid-column:2; grid-row:1; margin:70px 0 0 -4%}
+.ab-letters .ab-still{grid-column:2; grid-row:2; align-self:stretch}
 
 /* a sheet from a school exercise book: ruled lines, red margin */
-.ab-letter{--lh:34px; --mg:clamp(38px, 6vw, 70px); position:relative; transform:rotate(.5deg); color:#22355a;
-  padding:calc(var(--lh) * 2) clamp(22px, 4.5vw, 56px) calc(var(--lh) * 1.5) calc(var(--mg) + clamp(16px, 2.4vw, 28px));
+.ab-letter{--lh:34px; --mg:clamp(38px, 6vw, 70px); position:relative; transform:rotate(-1deg); color:#22355a;
+  padding:calc(var(--lh) * 2) clamp(22px, 3.4vw, 46px) calc(var(--lh) * 1.5) calc(var(--mg) + clamp(16px, 2.2vw, 26px));
   background:#f7f3e6 repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) - 1px), rgba(84,124,176,.32) calc(var(--lh) - 1px) var(--lh)) 0 6px;
-  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 18px 40px rgba(0,0,0,.45);
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 14px 30px rgba(40,20,5,.4);
   font:400 21px/var(--lh) var(--hand)}
 .ab-letter::before{content:""; position:absolute; top:0; bottom:0; left:var(--mg); width:2px; background:rgba(204,72,64,.55)}
 .ab-letter::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.35), transparent 55%), radial-gradient(ellipse at 95% 100%, rgba(140,110,60,.12), transparent 60%)}
 .ab-letter p{position:relative; z-index:1; margin:0 0 var(--lh)}
 /* Milki writes on squared paper, in violet ink */
-.ab-letter.sq{transform:rotate(-.6deg); color:#45367f;
+.ab-letter.sq{transform:rotate(1.6deg); color:#45367f; z-index:2;
   background:repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) / 2 - 1px), rgba(90,120,160,.26) calc(var(--lh) / 2 - 1px) calc(var(--lh) / 2)) 0 6px,
-    repeating-linear-gradient(90deg, transparent 0 calc(var(--lh) / 2 - 1px), rgba(90,120,160,.26) calc(var(--lh) / 2 - 1px) calc(var(--lh) / 2)) 0 0 #f6f4ec}
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--lh) / 2 - 1px), rgba(90,120,160,.26) calc(var(--lh) / 2 - 1px) calc(var(--lh) / 2)) 0 0 #f6f4ec;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, -10px 16px 30px rgba(40,20,5,.42)}
 .ab-letter .ab-hi{font:700 44px/var(--lh) 'Caveat', cursive; margin-bottom:var(--lh)}
 .ab-letter u{text-decoration:underline wavy rgba(204,72,64,.75); text-decoration-thickness:1.5px; text-underline-offset:5px}
 .ab-letter .ab-sign{margin:0; text-align:right; font:700 40px/var(--lh) 'Caveat', cursive; padding-right:4%}
+.ab-pen{position:absolute; z-index:3; right:-6%; bottom:-6px; width:250px; transform:rotate(-14deg); filter:drop-shadow(3px 7px 5px rgba(0,0,0,.4)); pointer-events:none}
+
+/* photos on paperclips; they turn over like the ones in the albums */
+.ab-ph{position:relative; z-index:3; width:clamp(150px, 15vw, 190px); display:grid; cursor:var(--cur-hover, pointer); perspective:1400px; outline:none; -webkit-tap-highlight-color:transparent}
+.ab-ph.me{float:left; margin:-96px 22px 12px calc(-1 * (var(--mg) + clamp(16px, 2.2vw, 26px)) - 34px); transform:rotate(-5deg)}
+.ab-ph.mi{float:right; margin:-110px calc(-1 * clamp(22px, 3.4vw, 46px) - 34px) 12px 20px; transform:rotate(5deg)}
+.ab-ph:focus-visible .ph-face{box-shadow:0 0 0 3px var(--glow), 0 12px 24px rgba(0,0,0,.45)}
+.ph-face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#f4efe2; box-shadow:0 12px 24px rgba(40,20,5,.45); transition:transform .8s cubic-bezier(.45,.05,.25,1)}
+.ph-front{padding:10px 10px 6px}
+.ph-back{transform:rotateY(180deg); display:flex; flex-direction:column; justify-content:center; gap:10px; padding:18px 16px; background:#efe8d6;
+  background-image:linear-gradient(rgba(0,0,0,.03), rgba(0,0,0,0)), repeating-linear-gradient(0deg, rgba(120,100,70,.05) 0 1px, transparent 1px 4px)}
+.ab-ph.on .ph-front{transform:rotateY(-180deg)} .ab-ph.on .ph-back{transform:rotateY(0)}
+.ph-back p{margin:0; font:700 21px/1.18 'Caveat', cursive; color:#2b3f7a; text-align:left}
+.ph-back span{font:400 12px/1 var(--mono); color:#7a6e58; text-align:right}
+.ab-letter.sq .ph-back p{color:#45367f}
+.ab-ph .fr{aspect-ratio:3/4}
+.ph-cap{margin:8px 0 0 !important; text-align:center; font:700 28px/1 'Caveat', cursive; color:var(--pen)}
+.ph-cap small{display:block; margin-top:4px; font:400 11.5px/1.3 var(--mono); letter-spacing:.06em; color:var(--ink-soft)}
+.ab-clip{position:absolute; z-index:4; top:-30px; left:22%; width:20px; height:56px; transform:rotate(6deg); filter:drop-shadow(1px 2px 1px rgba(0,0,0,.35)); pointer-events:none}
+.ab-ph.mi .ab-clip{left:auto; right:24%; transform:rotate(-8deg)}
+.about .fr{position:relative; overflow:hidden; background:#2b2622}
+.about .fr img{display:block; width:100%; height:100%; object-fit:cover}
+.about .fr.nofoto{background:repeating-linear-gradient(135deg, #2e2924 0 10px, #332d27 10px 20px)}
+.about .fr.nofoto::after{content:"здесь будет фото"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(-4deg); padding:4px 10px; background:var(--stamp); color:#f1e6cc; font:700 11px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
+
+/* second row: tea and sushki on the left, the postcard on the right */
+.ab-row2{position:relative; z-index:1; display:flex; justify-content:center; margin-top:clamp(50px, 7vw, 90px)}
+.ab-row2 .ab-post-wrap{width:min(780px, 100%)}
+.ab-still{position:relative; min-height:300px}
+.pr-tea{position:absolute; left:16%; top:12%; width:min(60%, 220px); filter:drop-shadow(4px 8px 6px rgba(0,0,0,.25))}
+.pr-sushki{position:absolute; left:52%; top:44%; width:min(42%, 170px); transform:rotate(-8deg); filter:drop-shadow(3px 6px 5px rgba(0,0,0,.25))}
+.ab-post-wrap{max-width:780px; margin:0; text-align:center}
+.ab-post-lede{margin:0 0 14px; font:700 34px/1.1 'Caveat', cursive; color:#4a3220}
+.ab-hint{margin:16px 0 0; font:400 12.5px/1.4 var(--mono); color:#5a4630}
 
 /* the postcard: photo on the front, thanks on the back */
-.ab-post-wrap{max-width:780px; margin:clamp(56px, 8vw, 96px) auto 0; text-align:center}
-.ab-post-lede{margin:0 0 18px; font:700 34px/1.1 'Caveat', cursive; color:var(--cream)}
 .ab-post{display:grid; perspective:2000px; cursor:var(--cur-hover, pointer); text-align:left; transform:rotate(-1.2deg); outline:none}
 .ab-post:focus-visible .face{box-shadow:0 0 0 3px var(--glow), 0 20px 44px rgba(0,0,0,.5)}
 .ab-post .face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#f6f1e3; color:var(--ink); box-shadow:0 20px 44px rgba(0,0,0,.5); transition:transform .9s cubic-bezier(.45,.05,.25,1)}
@@ -2290,30 +2333,39 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .pk-from a:hover{text-decoration:underline}
 .pk-idx{display:flex; gap:5px; margin-top:auto}
 .pk-idx svg{width:22px; height:36px}
-.ab-hint{margin:18px 0 0; font:400 13px/1.4 var(--mono); color:#c9bc98}
+@media (max-width:860px){
+  .ab-letters{grid-template-columns:1fr; grid-template-rows:none}
+  .ab-letters .ab-letter{grid-column:1; grid-row:auto}
+  .ab-letters .ab-letter.sq{grid-column:1; grid-row:auto; margin:-6px 0 0 6%}
+  .ab-letters .ab-still{grid-column:1; grid-row:auto; min-height:0; height:160px; margin-top:20px}
+  .pr-tea{left:6%; top:0; width:150px} .pr-sushki{left:auto; right:8%; top:14px; width:130px}
+  .pr-env{width:130px; top:1%} .pr-tape{display:none} .pr-keys{display:none}
+}
 @media (max-width:760px){
-  .about .ab-desk{grid-template-columns:1fr; gap:30px}
-  .about .ab-desk.rev{grid-template-columns:1fr}
-  .ab-desk.rev .ab-photos{order:-1; padding-top:14px}
-  .ab-photos{flex-direction:row; justify-content:center; padding:14px 6px 0}
-  .ab-ph{flex:0 1 58%; max-width:230px; padding:8px 8px 10px}
-  .ab-ph figcaption{font-size:24px}
-  .ab-ph figcaption small{font-size:10.5px}
-  .ab-letter{--lh:30px; font-size:18.5px; transform:none}
+  .ab-table{padding:56px 14px 40px}
+  .ab-letter{--lh:30px; font-size:18.5px}
   .ab-letter .ab-hi{font-size:38px}
+  .ab-letters .ab-letter.sq{margin:-4px 0 0 4%; transform:rotate(1deg)}
+  .ab-ph{width:128px}
+  .ab-ph.me{margin:-70px 14px 8px -34px}
+  .ab-ph.mi{margin:-70px -22px 8px 14px}
+  .ph-cap{font-size:22px} .ph-cap small{font-size:10px}
+  .ph-back{padding:12px 10px} .ph-back p{font-size:17px}
+  .ab-ph .fr.nofoto::after{font-size:8.5px; padding:3px 6px; letter-spacing:.08em}
+  .ab-pen{width:170px; right:-4%}
   /* on a phone the back would stretch the photo, so the postcard lies face up with its back beside it */
   .ab-post{display:flex; flex-direction:column; gap:26px; transform:none; cursor:default}
   .ab-post .face, .ab-post.on .face{transform:rotate(-1deg); backface-visibility:visible; -webkit-backface-visibility:visible; transition:none}
   .ab-post .back, .ab-post.on .back{transform:rotate(1deg)}
   .ab-post .front .fr{aspect-ratio:4/3}
-  .pk-turn, .ab-hint{display:none}
+  .pk-turn{display:none}
   .ab-post .back{grid-template-columns:1fr}
   .pk-msg{padding:0 0 18px; border-right:0; border-bottom:1.5px solid #9a8c70; margin-bottom:12px; font-size:17.5px}
   .pk-adr{padding-left:0}
   .ab-post .front .cap{flex-direction:column; gap:2px}
   .ab-post .front .cap span{text-align:left}
 }
-@media (prefers-reduced-motion:reduce){ .ab-post .face{transition:none} }
+@media (prefers-reduced-motion:reduce){ .ab-post .face, .ph-face{transition:none} }
 </style>
 </head>
 <body>
@@ -3111,17 +3163,22 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 <main class="page" data-route="/about">
   <div class="wrap section on-wall about">
     <h2>О проекте</h2>
-    <p class="lede prose" style="color:var(--cream)">Пара слов от тех, кто всё это придумал.</p>
+    <p class="lede prose" style="color:var(--cream)">Пара слов от тех, кто всё это придумал. Садитесь, чай уже налит.</p>
 
-    <div class="ab-desk">
-      <div class="ab-photos">
-        <figure class="ab-ph" style="--r:-3deg">
-          <div class="fr"><img src="assets/about/slopi.webp" alt="Слопи" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
-          <figcaption>Слопи<small>придумала Витю</small></figcaption>
-        </figure>
+    <div class="ab-table">
+      <div class="ab-props" aria-hidden="true">
+        <svg class="pr-env" viewBox="0 0 200 130"><rect x="2" y="2" width="196" height="126" rx="2" fill="#d2b07a"/><path d="M2 2l98 70 98-70" fill="none" stroke="#a9884f" stroke-width="2"/><rect x="150" y="12" width="36" height="44" fill="#fbf6e8"/><rect x="155" y="17" width="26" height="34" fill="#a8261f" opacity=".75"/><circle cx="150" cy="40" r="18" fill="none" stroke="#2c2b48" stroke-width="1.5" opacity=".5"/><path d="M20 96h90M20 108h70" stroke="#6b5838" stroke-width="2" opacity=".5"/></svg>
+        <svg class="pr-tape" viewBox="0 0 120 76"><rect x="2" y="2" width="116" height="72" rx="5" fill="#1d1b1a"/><rect x="12" y="8" width="96" height="22" rx="2" fill="#e9d38f"/><text x="60" y="24" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="15" fill="#2b4a8b">Кино — 89</text><rect x="26" y="38" width="68" height="22" rx="11" fill="#3a3632"/><circle cx="40" cy="49" r="7" fill="#f1e6cc"/><circle cx="80" cy="49" r="7" fill="#f1e6cc"/><circle cx="40" cy="49" r="3" fill="#1d1b1a"/><circle cx="80" cy="49" r="3" fill="#1d1b1a"/><path d="M34 70l6-6h40l6 6" fill="none" stroke="#3a3632" stroke-width="2"/></svg>
+        <svg class="pr-keys" viewBox="0 0 120 80"><circle cx="24" cy="24" r="16" fill="none" stroke="#b9b2a0" stroke-width="4"/><g transform="rotate(18 40 40)"><rect x="36" y="30" width="70" height="9" rx="3" fill="#c9a24a"/><circle cx="34" cy="34" r="11" fill="#c9a24a"/><circle cx="31" cy="34" r="4" fill="#efe6cf"/><path d="M80 39v8M90 39v6M98 39v9" stroke="#c9a24a" stroke-width="5"/></g></svg>
       </div>
 
-      <article class="ab-letter">
+      <div class="ab-letters">
+        <article class="ab-letter">
+        <div class="ab-ph me" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Слопи. Нажмите, чтобы перевернуть">
+          <svg class="ab-clip" viewBox="0 0 30 80" aria-hidden="true"><path d="M10 74V14a8 8 0 0 1 16 0v52a12 12 0 0 1-24 0V20" fill="none" stroke="#9aa3ab" stroke-width="3" stroke-linecap="round"/><path d="M10 74V14a8 8 0 0 1 16 0" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"/></svg>
+          <div class="ph-face ph-front"><div class="fr"><img src="assets/about/slopi.webp" alt="Слопи" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Слопи<small>придумала Витю</small></p></div>
+          <div class="ph-face ph-back"><p>Слопи. Снято за секунду до того, как Витя сказал: «Гражданочка, фотографировать не положено».</p><span>окт. 96</span></div>
+        </div>
         <p class="ab-hi">Привет!</p>
         <p>Меня зовут Слопи, и «Лихие» — мой самый любимый и самый личный проект.</p>
         <p>Я коренная петербурженка, и мои родители тоже. Поэтому Петербург для меня не декорация для ботов, а дом. Вся эта серия выросла из любви к нему: к дворам-колодцам, трамваям, мокрым крышам и кухням, где до ночи пьют чай и разговаривают обо всём на свете.</p>
@@ -3130,27 +3187,39 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <p>И я делала это не одна. Милки — моя самая близкая подруга. Это она придумала и написала Лёшу, и без него Витя был бы совсем другим. Мы вместе придумывали этот Петербург девяносто шестого и вместе в нём жили.</p>
         <p>Этот проект очень много для меня значит. Я вложила в него кусочек своего города, своей семьи и <u>своего сердца</u>. И когда кто-то пишет, что Витя или Лёша показались ему настоящими, у меня внутри всё откликается.</p>
         <p class="ab-sign">Ваша Слопи</p>
-      </article>
-    </div>
-
-    <div class="ab-desk rev">
-      <article class="ab-letter sq">
+          <svg class="ab-pen" viewBox="0 0 260 30" aria-hidden="true"><path d="M2 15l26-7v14z" fill="#c9a24a"/><path d="M2 15l9-2.4v4.8z" fill="#2b2622"/><rect x="28" y="6" width="200" height="18" rx="9" fill="#1f2e4f"/><rect x="28" y="8" width="200" height="4" rx="2" fill="rgba(255,255,255,.18)"/><rect x="150" y="3" width="70" height="5" rx="2.5" fill="#c9a24a"/><rect x="226" y="6" width="30" height="18" rx="6" fill="#c9a24a"/></svg>
+        </article>
+        <article class="ab-letter sq">
+        <div class="ab-ph mi" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Милки. Нажмите, чтобы перевернуть">
+          <svg class="ab-clip" viewBox="0 0 30 80" aria-hidden="true"><path d="M10 74V14a8 8 0 0 1 16 0v52a12 12 0 0 1-24 0V20" fill="none" stroke="#9aa3ab" stroke-width="3" stroke-linecap="round"/><path d="M10 74V14a8 8 0 0 1 16 0" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"/></svg>
+          <div class="ph-face ph-front"><div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Милки<small>придумала Лёшу</small></p></div>
+          <div class="ph-face ph-back"><p>Милки. Подпись тут должна была быть длиннее, но Лёша опять одолжил ручку и не вернул.</p><span>окт. 96</span></div>
+        </div>
         <p class="ab-hi">Привет-привет!</p>
         <p>Бла-бла-бла, тут скоро будет очень трогательный текст от Милки. Бла-бла, бла-бла-бла, и ещё немножко бла.</p>
         <p>Лёша передаёт всем привет и просит не верить ничему, что про него рассказывает Витя. Бла-бла-бла. Витя просит не верить Лёше. Бла.</p>
         <p>Бла-бла-бла-бла, бла-бла. Пирата покормили. Бла!</p>
         <p class="ab-sign">Ваша Милки</p>
-      </article>
-      <div class="ab-photos">
-        <figure class="ab-ph" style="--r:2.5deg">
-          <div class="fr"><img src="assets/about/milki.webp" alt="Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
-          <figcaption>Милки<small>придумала Лёшу</small></figcaption>
-        </figure>
+        </article>
+        <div class="ab-still" aria-hidden="true">
+          <svg class="pr-tea" viewBox="0 0 200 170"><defs><radialGradient id="teaG" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#d08a3a"/><stop offset=".6" stop-color="#8a4414"/><stop offset="1" stop-color="#4a200a"/></radialGradient><linearGradient id="podG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2ddd2"/><stop offset=".5" stop-color="#9c968a"/><stop offset="1" stop-color="#d4cfc3"/></linearGradient></defs>
+            <ellipse cx="86" cy="94" rx="72" ry="70" fill="rgba(0,0,0,.25)"/>
+            <path d="M146 70c34-6 46 28 14 40" fill="none" stroke="url(#podG)" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="80" cy="82" r="66" fill="url(#podG)"/><circle cx="80" cy="82" r="60" fill="none" stroke="#7d776b" stroke-width="2" stroke-dasharray="3 5"/>
+            <circle cx="80" cy="82" r="54" fill="#f2efe8" opacity=".7"/><circle cx="80" cy="82" r="49" fill="url(#teaG)"/>
+            <g transform="translate(66 70)"><circle r="16" fill="#f3e48a" stroke="#e2c84c" stroke-width="3"/><path d="M0-14V14M-14 0H14M-10-10L10 10M10-10L-10 10" stroke="#e2c84c" stroke-width="1.4"/></g>
+            <path d="M100 60l70-50" stroke="#cfc9bd" stroke-width="6" stroke-linecap="round"/><ellipse cx="96" cy="64" rx="9" ry="6" transform="rotate(-36 96 64)" fill="#cfc9bd"/>
+            <ellipse cx="58" cy="56" rx="22" ry="9" transform="rotate(-30 58 56)" fill="rgba(255,255,255,.28)"/></svg>
+          <svg class="pr-sushki" viewBox="0 0 170 150"><ellipse cx="88" cy="80" rx="74" ry="64" fill="rgba(0,0,0,.22)"/><circle cx="82" cy="72" r="66" fill="#f6f2ea"/><circle cx="82" cy="72" r="58" fill="none" stroke="#3f6aa8" stroke-width="3"/><circle cx="82" cy="72" r="52" fill="none" stroke="#3f6aa8" stroke-width="1" stroke-dasharray="2 4"/>
+            <g fill="none" stroke-linecap="round"><circle cx="60" cy="58" r="17" stroke="#b9772f" stroke-width="11"/><circle cx="100" cy="60" r="17" stroke="#c4843a" stroke-width="11"/><circle cx="80" cy="94" r="17" stroke="#b06c28" stroke-width="11"/>
+            <path d="M48 50a17 17 0 0 1 18-8M90 46a17 17 0 0 1 18 2M68 84a17 17 0 0 1 18-6" stroke="rgba(255,236,190,.55)" stroke-width="3"/></g>
+            <g fill="#2a2018"><circle cx="56" cy="44" r="1.2"/><circle cx="72" cy="62" r="1.2"/><circle cx="104" cy="46" r="1.2"/><circle cx="114" cy="66" r="1.2"/><circle cx="74" cy="104" r="1.2"/><circle cx="92" cy="88" r="1.2"/></g></svg>
+        </div>
       </div>
-    </div>
 
-    <div class="ab-post-wrap">
-      <p class="ab-post-lede">А это вам.<span class="pk-turn"> Переверните.</span></p>
+      <div class="ab-row2">
+        <div class="ab-post-wrap">
+          <p class="ab-post-lede">А это вам.<span class="pk-turn"> Переверните.</span></p>
       <div class="ab-post" role="button" tabindex="0" aria-pressed="false" aria-label="Открытка от Слопи и Милки. Нажмите, чтобы перевернуть">
         <div class="face front">
           <div class="fr"><img src="assets/about/vdvoem.webp" alt="Слопи и Милки" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div>
@@ -3176,7 +3245,9 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
           </div>
         </div>
       </div>
-      <p class="ab-hint">Нажмите на открытку, чтобы перевернуть.</p>
+          <p class="ab-hint"><span class="pk-turn">Нажмите на открытку, чтобы перевернуть. </span>Фотографии на скрепках тоже переворачиваются.</p>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -3714,6 +3785,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 
   /* ---------- «О проекте»: the postcard turns over, the postal code is drawn in the old template ---------- */
   (() => {
+    document.querySelectorAll('.ab-ph').forEach(ph => {
+      const turn = () => { const on = ph.classList.toggle('on'); ph.setAttribute('aria-pressed', String(on)); };
+      ph.addEventListener('click', turn);
+      ph.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); turn(); } });
+    });
     const card = document.querySelector('.ab-post'); if (!card) return;
     const flip = () => { const on = card.classList.toggle('on'); card.setAttribute('aria-pressed', String(on)); };
     card.addEventListener('click', e => { if (!e.target.closest('a')) flip(); });
