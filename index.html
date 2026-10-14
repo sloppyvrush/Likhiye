@@ -1917,6 +1917,7 @@ body.splash-on{overflow:hidden}
 .vc-in p{margin:0 0 1.15em}
 .vc-in .vc-sep{margin:2.2em auto; width:60px; height:1px; background:rgba(239,231,212,.45)}
 .vc-in .vc-you{font-family:var(--mono); font-size:.82em; color:#e3c98f}
+.vc-in .vc-say{color:#f2c37e}
 .vc-in .vc-cast{margin-top:120px; font:15px/2.1 var(--mono); letter-spacing:.18em; text-transform:uppercase; color:#d8ccb0}
 .vc-in .vc-cast b{display:block; margin-bottom:16px; font:400 26px var(--display); letter-spacing:.1em; color:#fff6e2}
 .vc-in .vc-end{margin-top:140px; font:400 clamp(30px, 5vw, 46px)/1.1 var(--display); letter-spacing:.08em; color:#fff6e2}
@@ -3750,11 +3751,11 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const pg = cur.pages[n], cls = `abv-pg ${side || ''}`;
       if (!pg) return `<div class="${cls}"><span class="ab-first blank"></span></div>`;
       if (pg.items == null) return `<div class="${cls}"><span class="ab-first">${esc(pg.first)}</span></div>`;
-      const its = pg.items.map(([k, cap], j) => {
+      const its = pg.items.map(([k, cap, bk], j) => {
         const [src, shape, , date] = PHOTOS[k], [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
         const seed = (n * 7 + j * 13) % 5, ox = pg.k === 'pp' ? 0 : [-7, 6, -3, 8, -5][seed] * (j ? -1 : 1);
         const rr = [-2.2, 1.6, -1, 2.4, .8][seed];
-        return `<button type="button" class="ab-it${/torn/.test(tone) ? ' torn' : ''}" data-k="${k}" data-cap="${esc(cap || '')}" style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
+        return `<button type="button" class="ab-it${/torn/.test(tone) ? ' torn' : ''}" data-k="${k}" data-cap="${esc(cap || '')}"${bk ? ` data-back="${esc(bk)}"` : ''} style="--iw:${width(k, pg.k)}cqw; --ox:${ox}cqw; --rr:${rr}deg" aria-label="Снимок: ${esc(cap || '')}. Взять в руки">
           <span class="ab-pr${tone ? ' ' + tone : ''}"><img src="${src}" alt="" style="--ar:${AR[f] || '3/4'}" draggable="false">${date ? `<span class="ap-date">${date}</span>` : ''}<i class="ab-cn"></i></span>
           ${cap ? `<span class="ab-cap">${esc(cap)}</span>` : ''}</button>`;
       }).join('');
@@ -3850,7 +3851,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     document.body.appendChild(hand);
     let held = null, spin = null;
     const takeOut = it => {
-      const k = it.dataset.k, [src, shape, back, date, whole] = PHOTOS[k], [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
+      const k = it.dataset.k, [src, shape, back0, date, whole] = PHOTOS[k], back = it.dataset.back || back0, [f, ...tn] = String(shape).split(' '), tone = tn.join(' ');
       const el = document.createElement('div');
       el.className = `ap ${/^h/.test(f) ? 'h' : f === 'sq' ? 'sq' : 'v'} ${f}${tone ? ' ' + tone : ''} color exam`;
       el.tabIndex = 0; el.setAttribute('role', 'button'); el.setAttribute('aria-label', 'Снимок в руках. Enter переворачивает, Escape вкладывает обратно');
@@ -4094,6 +4095,37 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const roll = document.getElementById('vcRoll'), rs = roll.querySelector('.vc-scroll'), rin = roll.querySelector('.vc-in'), pauseB = roll.querySelector('.vc-pause');
     const escH = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const md = t => escH(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\{\{user\}\}/g, '<span class="vc-you">{{user}}</span>').replace(/\{\{char\}\}/g, '');
+    /* direct speech in the credits: «реплика», — сказал он  →  — Реплика, — сказал он; speech gets its own colour */
+    const say = s => `<span class="vc-say">${md(s)}</span>`;
+    const inner = q => {           // «A, — сказал он. — B»: the author's words between dashes stay uncoloured
+      const parts = q.split(' — '); let speech = true, out = '';
+      parts.forEach((p, k) => {
+        if (k){ if (/[.,!?…]$/.test(parts[k - 1].trim())) speech = !speech; out += ' — '; }
+        out += speech ? say(p) : md(p);
+      });
+      return out;
+    };
+    const dlg = par => {
+      let out = '', i = 0;
+      while (i < par.length){
+        const o = par.indexOf('«', i);
+        if (o < 0){ out += md(par.slice(i)); break; }
+        let d = 0, c = -1;
+        for (let j = o; j < par.length; j++){ if (par[j] === '«') d++; else if (par[j] === '»' && !--d){ c = j; break; } }
+        if (c < 0){ out += md(par.slice(i)); break; }
+        const before = par.slice(i, o), prev = (par.slice(0, o)).replace(/\s+$/, ''), q = par.slice(o + 1, c), after = par.slice(c + 1);
+        const start = !prev || /[.!?…*]$/.test(prev), colon = /:$/.test(prev);
+        const spoken = /[.!?…]$/.test(q) || /^(\s*$|[,.]|\s+—)/.test(after);
+        if (!(start || colon) || !spoken){ out += md(par.slice(i, c + 1)); i = c + 1; continue; }
+        out += md(before);
+        if (colon){ out += '«' + inner(q) + '»'; i = c + 1; continue; }
+        out += '— ' + inner(q);
+        if (/^,/.test(after)){ out += ','; i = c + 2; }
+        else if (/^\./.test(after)){ out += '.'; i = c + 2; }
+        else i = c + 1;
+      }
+      return out;
+    };
     let rollRaf = 0, rollPos = 0, held = 0, paused = false, last = 0, playingSt = null;
     const speed = () => innerWidth < 640 ? 26 : 30;
     const loop = t => {
@@ -4121,7 +4153,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       if (playingSt !== st) return;
       // the bold heading line of the card is replaced by the title card above
       text = text.replace(/^\s*\*\*[^\n]*\*\*\s*\n/, '').replace(/^\s*_{3,}\s*$/m, '');
-      const body = text.split(/\n\s*\n+/).map(par => par.trim()).filter(Boolean).map(par => /^_{3,}$/.test(par) ? '<div class="vc-sep"></div>' : `<p>${md(par).replace(/\n/g, '<br>')}</p>`).join('');
+      const body = text.split(/\n\s*\n+/).map(par => par.trim()).filter(Boolean).map(par => /^_{3,}$/.test(par) ? '<div class="vc-sep"></div>' : `<p>${dlg(par).replace(/\n/g, '<br>')}</p>`).join('');
       const SEEN = {viktor: /Вит|Виктор|Громов/, lesha: /Л[её]ш|Л[её]х|Тихонов/};
       const cast = BOTS.slice(0, 2).filter(b => b.id === st.bid || (SEEN[b.id] && SEEN[b.id].test(text))).map(b => escH(b.name)).join('<br>');
       rin.innerHTML = `<h2>${escH(st.h)}</h2><p class="vc-when">${escH(st.t)}</p>${body}
