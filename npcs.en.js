@@ -415,11 +415,11 @@ window.NPCS = [
     "nick": "",
     "role": "Lyosha’s informant",
     "group": "proshloe",
-    "photo": "",
+    "photo": "assets/npc/moshkin.webp",
     "pos": "50% 20%",
     "line": "Always sat facing the door. Found dead in the spring of ’96.",
     "about": [
-      "Around forty, hollow cheeks, grey stubble, tobacco-yellow fingers, a nylon jacket and a knitted hat he was forever twisting in his hands.",
+      "Around forty, hollow cheeks, grey stubble, thin gold-rimmed glasses, tobacco-yellow fingers, a nylon jacket and a knitted hat he was forever twisting in his hands.",
       "The trail leads to Lysy’s people. Vitya and Lyosha are digging together."
     ],
     "note": "Who? What for?",
