@@ -2509,10 +2509,10 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 /* ================= TOYS: phone, nardy, lottery, pager ================= */
 .rm-phone, .rm-nardy, .rm-ticket{padding:0; border:0; background:none; cursor:var(--cur-hover, pointer); -webkit-tap-highlight-color:transparent}
 .rm-phone svg, .rm-nardy svg, .rm-ticket svg{display:block; width:100%; overflow:visible}
-.rm-phone{left:19.5%; width:3.3%; top:37%; z-index:2; transform-origin:50% 0; filter:drop-shadow(.25cqw .45cqw .35cqw rgba(15,8,3,.55))}
-.rm-nardy{left:26%; width:13%; bottom:68.4%; z-index:7; rotate:-2deg; filter:drop-shadow(.2cqw .2cqw .25cqw rgba(0,0,0,.4))}
+.rm-phone{left:19.25%; width:2.75%; top:36%; z-index:2; transform-origin:50% 0; filter:drop-shadow(.25cqw .45cqw .35cqw rgba(15,8,3,.55))}
+.rm-nardy{left:26%; width:13%; bottom:68.35%; z-index:7; filter:drop-shadow(0 .3cqw .2cqw rgba(10,5,2,.55)) drop-shadow(.6cqw .2cqw .5cqw rgba(10,5,2,.3))}
 .rm-ticket{left:75.6%; width:3.6%; top:47.5%; z-index:4; rotate:-9deg; filter:drop-shadow(.1cqw .2cqw .2cqw rgba(0,0,0,.45))}
-.rm-phone:hover, .rm-ticket:hover{scale:1.06} .rm-nardy:hover{filter:drop-shadow(.2cqw .2cqw .25cqw rgba(0,0,0,.4)) brightness(1.15)}
+.rm-phone:hover, .rm-ticket:hover{scale:1.06} .rm-nardy:hover{filter:drop-shadow(0 .3cqw .2cqw rgba(10,5,2,.55)) drop-shadow(.6cqw .2cqw .5cqw rgba(10,5,2,.3)) brightness(1.12)}
 .rm-phone:focus-visible, .rm-nardy:focus-visible, .rm-ticket:focus-visible{outline:.2cqw solid #e3c98f; outline-offset:.2cqw}
 .rm-phone.ring{animation:phRing .12s linear infinite alternate}
 @keyframes phRing{from{rotate:-3deg} to{rotate:3deg}}
@@ -2785,8 +2785,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         </svg>
       </button>
       <button class="rm-nardy" id="rmNardy" type="button" aria-label="Нарды. Сыграть">
-        <svg viewBox="0 0 200 74" aria-hidden="true">
-          <ellipse cx="102" cy="66" rx="98" ry="7" fill="rgba(10,5,2,.45)"/>
+        <svg viewBox="0 0 200 64" aria-hidden="true">
           <path d="M16 6h168l12 34H4z" fill="#9a5528"/>
           <path d="M16 6h168l12 34H4z" fill="url(#nrTop)"/>
           <path d="M100 6v34" stroke="#4a240e" stroke-width="2.4"/>
