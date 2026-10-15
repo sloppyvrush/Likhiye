@@ -450,7 +450,7 @@ window.PHOTOS = {
   "viktor-vypusknoy": ["assets/archive/viktor-vypusknoy.webp", "h43 old", "Graduation, ’78. The whole class stayed out on the embankment till dawn, and Vitya stood off to one side watching the bridges go up. We bought the suit for him to grow into; I took up the sleeves myself.", ""],
   "viktor-provody": ["assets/archive/viktor-provody.webp", "v34 old", "November ’79, the draft office. I put a Chekhov in his bag. Marisha sobbed into her sleeve right up to the bus. I didn’t cry. Later.", ""],
   "hospital":       ["assets/archive/hospital.webp", "h43 old", "Tashkent, the army hospital, ’80. He writes that he got “a bit scratched.” They stitched up his cheek. Lyosha brought him a melon from the bazaar. Good boy, that one.", ""],
-  "viktor-wedding": ["assets/archive/viktor-wedding-torn.webp", "v34 old torn", "May ’86, the Wedding Palace on Angliyskaya. Lyokha was best man. The rest doesn’t matter.", "", "assets/archive/viktor-wedding.webp"],
+  "viktor-wedding": ["assets/archive/viktor-wedding-torn.webp", "v34 old torn", "May ’85, the Wedding Palace on Angliyskaya. Lyokha was best man. The rest doesn’t matter.", "", "assets/archive/viktor-wedding.webp"],
   "viktor-naida-first": ["assets/archive/viktor-naida-first.webp", "h43", "From the author: Spring 1994, the police dog kennels. Naida, an old service shepherd, had been retired on account of age. The handler warned that she wouldn’t go to strangers. Vitya crouched down, took out a sushka and waited. Five minutes later she came over, and she never left again.", "'94 4 17"],
   "viktor-volvo":   ["assets/archive/viktor-volvo.webp", "h43", "From the author: December 1995, a stakeout in the Volvo, hour six. Vitya is waiting for a mark who will never show and finishing off the second-to-last Mishka chocolate. The last one he’ll save for Lyosha.", "'95 12 14"],
   "viktor-syrniki-96": ["assets/archive/viktor-syrniki-96.webp", "h43", "From the author: A Sunday, April 1996. Vitya is frying syrniki from his mother’s recipe book for Petka and Anyutka. Anyutka ate four, Naida two. Petka honestly said Grandma’s were better.", "'96 4 14"],
@@ -484,7 +484,7 @@ window.ALBUMS = [
      ["viktor-sanki", "Vitya and Marisha"], ["viktor-fonarik", "Caught! 1974"], ["viktor-lager", "Camp “Zarya”"],
      ["viktor-vypusknoy", "Graduation. 1978"], ["viktor-provody", "Send-off. 1979"],
      ["army", "Afghanistan. 80"], ["hospital", "Tashkent. 80"], ["dembel", "Demob. 81"], ["school", "Police school"],
-     ["viktor-wedding", "May 86"], ["viktor-naida-first", "Naida. Day one"],
+     ["viktor-wedding", "May 85"], ["viktor-naida-first", "Naida. Day one"],
      ["viktor-kids", "Petka and Anyuta"], ["fishing", "Vuoksa. My pike"], ["viktor-marina-kids", "Marinka and the little ones"],
      ["militia-1", "Militsiya Day. 95"], ["viktor-volvo", "Work"], ["viktor-naida", "Naida. January"], ["naida-home", "Naida"],
      ["nardy", "Backgammon. 3 : 0"], ["viktor-syrniki-96", "Syrniki. Mum’s recipe"], ["viktor-night", "Can’t sleep"]
