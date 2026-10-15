@@ -5421,8 +5421,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const t = TRACKS[+btn.dataset.i], box = note.parentElement.getBoundingClientRect(), art = btn.querySelector('.lp-art').getBoundingClientRect();
     const rowBox = shelf.getBoundingClientRect();
     if (art.right < rowBox.left + 20 || art.left > rowBox.right - 20){ note.classList.remove('show'); return; }  // scrolled out of view
-    const grp = btn.dataset.g != null && GROUPS[+btn.dataset.g].length > 1;   // several records by one artist: just the artist; a single record: artist and title
-    note.querySelector('b').textContent = t.artist; note.querySelector('i').textContent = grp ? '' : t.title;
+    note.querySelector('b').textContent = t.title; note.querySelector('i').textContent = t.artist;
     note.style.left = Math.max(0, art.left - box.left + 4) + 'px';
     note.style.top = (art.bottom - box.top - 6) + 'px';
     if (noteFor !== btn){ note.classList.remove('show'); void note.offsetWidth; }
