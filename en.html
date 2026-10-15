@@ -203,7 +203,7 @@ a{color:inherit}
 .shelf-note.show{transform:perspective(300px) rotateX(0) rotate(-2deg); opacity:1}
 .shelf-note::before{content:""; position:absolute; left:50%; top:-5px; width:34px; height:10px; margin-left:-17px; background:rgba(232,226,204,.85); transform:rotate(-3deg)}
 .shelf-note b{font:400 17px/1.05 var(--hand); color:#22357a}
-.shelf-note i{font:normal 13px/1.1 var(--hand); color:#3b4f8f}
+.shelf-note i{font:normal 13px/1.1 var(--hand); color:#3b4f8f} .shelf-note i:empty{display:none}
 .records + .wrap > .section:first-child{padding-top:30px}
 .rk:focus-visible{outline:.2cqw solid var(--orange); outline-offset:.2cqw}
 
@@ -5421,7 +5421,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const t = TRACKS[+btn.dataset.i], box = note.parentElement.getBoundingClientRect(), art = btn.querySelector('.lp-art').getBoundingClientRect();
     const rowBox = shelf.getBoundingClientRect();
     if (art.right < rowBox.left + 20 || art.left > rowBox.right - 20){ note.classList.remove('show'); return; }  // scrolled out of view
-    note.querySelector('b').textContent = t.title; note.querySelector('i').textContent = t.artist;
+    const grp = btn.dataset.g != null && GROUPS[+btn.dataset.g].length > 1;   // several records by one artist: just the artist; a single record: artist and title
+    note.querySelector('b').textContent = t.artist; note.querySelector('i').textContent = grp ? '' : t.title;
     note.style.left = Math.max(0, art.left - box.left + 4) + 'px';
     note.style.top = (art.bottom - box.top - 6) + 'px';
     if (noteFor !== btn){ note.classList.remove('show'); void note.offsetWidth; }
@@ -5443,7 +5444,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const g = GROUPS[+b.dataset.g]; if (g.length < 2) return;
     const list = noHover ? g : g.filter(i => i !== +b.dataset.i);
     if (popFor !== b){
-      pop.innerHTML = list.map((i, k) => { const t = TRACKS[i]; return `<button class="pop-lp" type="button" data-i="${i}" style="--d:${k * 60}ms; --c:${t.color}"><span class="pl-cov"${t.cover ? ` style="background-image:url('${t.cover}')"` : ''}></span><span class="pl-t"><b>${t.title}</b><i>${t.artist}</i></span></button>`; }).join('');
+      pop.innerHTML = list.map((i, k) => { const t = TRACKS[i]; return `<button class="pop-lp" type="button" data-i="${i}" style="--d:${k * 60}ms; --c:${t.color}"><span class="pl-cov"${t.cover ? ` style="background-image:url('${t.cover}')"` : ''}></span><span class="pl-t"><b>${t.title}</b></span></button>`; }).join('');
     }
     popFor = b; pop.hidden = false; popSync();
     const box = pop.parentElement.getBoundingClientRect(), art = b.querySelector('.lp-art').getBoundingClientRect();

@@ -48,6 +48,36 @@ window.TRACKS = [
     "cover": "assets/covers/gruppa-krovi.webp"
   },
   {
+    "artist": "Kino",
+    "title": "Star",
+    "src": "music/06b-kino-zvezda.mp3",
+    "color": "#C8901A"
+  },
+  {
+    "artist": "Kombinatsiya",
+    "title": "Cherry Nine",
+    "src": "music/12-kombinatsiya-vishnyovaya-devyatka.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Kombinatsiya",
+    "title": "Two Little Pieces of Sausage",
+    "src": "music/13-kombinatsiya-dva-kusocheka-kolbaski.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Kombinatsiya",
+    "title": "Just You and Me",
+    "src": "music/14-kombinatsiya-vdvoyom-s-toboy.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Kombinatsiya",
+    "title": "Lyoshka",
+    "src": "music/15-kombinatsiya-lyoshka.mp3",
+    "color": "#D9437F"
+  },
+  {
     "artist": "Alla Pugacheva",
     "title": "Clocks",
     "src": "music/07-pugacheva-chasy.mp3",
@@ -60,6 +90,33 @@ window.TRACKS = [
     "src": "music/07b-pugacheva-nado-zhe.mp3",
     "color": "#C8501E",
     "cover": "assets/covers/nado-zhe.webp"
+  },
+  {
+    "artist": "Alla Pugacheva",
+    "title": "A Little Song About Me",
+    "src": "music/07c-pugacheva-pesenka-pro-menya.mp3",
+    "color": "#A8466E"
+  },
+  {
+    "artist": "Mirage",
+    "title": "Music Has Bound Us",
+    "src": "music/16-mirazh-muzyka-nas-svyazala.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
+  },
+  {
+    "artist": "Mirage",
+    "title": "I’m Not Joking",
+    "src": "music/17-mirazh-ya-ne-shuchu.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
+  },
+  {
+    "artist": "Mirage",
+    "title": "New Hero",
+    "src": "music/18-mirazh-novyi-geroi.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
   },
   {
     "artist": "Alyans",
@@ -88,5 +145,41 @@ window.TRACKS = [
     "src": "music/11-ddt-chto-takoe-osen.mp3",
     "color": "#E0662A",
     "cover": "assets/covers/chto-takoe-osen.webp"
+  },
+  {
+    "artist": "Agata Kristi",
+    "title": "Like at War",
+    "src": "music/19-agata-kristi-kak-na-voyne.mp3",
+    "color": "#2F2A5C"
+  },
+  {
+    "artist": "Tatyana Bulanova",
+    "title": "My Darling",
+    "src": "music/20-bulanova-moy-nenaglyadnyi.mp3",
+    "color": "#B5476A"
+  },
+  {
+    "artist": "Tatyana Bulanova",
+    "title": "Forgive Me",
+    "src": "music/21-bulanova-prosti-menya.mp3",
+    "color": "#B5476A"
+  },
+  {
+    "artist": "Irina Muravyova",
+    "title": "Call Me, Call Me",
+    "src": "music/22-muravyova-pozvoni-mne-pozvoni.mp3",
+    "color": "#2F7E8A"
+  },
+  {
+    "artist": "Angelika Varum",
+    "title": "Winter Cherry",
+    "src": "music/23-varum-zimnyaya-vishnya.mp3",
+    "color": "#8E2436"
+  },
+  {
+    "artist": "Sofia Rotaru",
+    "title": "That’s Not Enough",
+    "src": "music/24-rotaru-etogo-malo.mp3",
+    "color": "#C99A1E"
   }
 ];

@@ -48,6 +48,36 @@ window.TRACKS = [
     "cover": "assets/covers/gruppa-krovi.webp"
   },
   {
+    "artist": "Кино",
+    "title": "Звезда",
+    "src": "music/06b-kino-zvezda.mp3",
+    "color": "#C8901A"
+  },
+  {
+    "artist": "Комбинация",
+    "title": "Вишнёвая девятка",
+    "src": "music/12-kombinatsiya-vishnyovaya-devyatka.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Комбинация",
+    "title": "Два кусочека колбаски",
+    "src": "music/13-kombinatsiya-dva-kusocheka-kolbaski.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Комбинация",
+    "title": "Вдвоём с тобой",
+    "src": "music/14-kombinatsiya-vdvoyom-s-toboy.mp3",
+    "color": "#D9437F"
+  },
+  {
+    "artist": "Комбинация",
+    "title": "Лёшка",
+    "src": "music/15-kombinatsiya-lyoshka.mp3",
+    "color": "#D9437F"
+  },
+  {
     "artist": "Алла Пугачёва",
     "title": "Часы",
     "src": "music/07-pugacheva-chasy.mp3",
@@ -60,6 +90,33 @@ window.TRACKS = [
     "src": "music/07b-pugacheva-nado-zhe.mp3",
     "color": "#C8501E",
     "cover": "assets/covers/nado-zhe.webp"
+  },
+  {
+    "artist": "Алла Пугачёва",
+    "title": "Песенка про меня",
+    "src": "music/07c-pugacheva-pesenka-pro-menya.mp3",
+    "color": "#A8466E"
+  },
+  {
+    "artist": "Мираж",
+    "title": "Музыка нас связала",
+    "src": "music/16-mirazh-muzyka-nas-svyazala.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
+  },
+  {
+    "artist": "Мираж",
+    "title": "Я не шучу",
+    "src": "music/17-mirazh-ya-ne-shuchu.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
+  },
+  {
+    "artist": "Мираж",
+    "title": "Новый герой",
+    "src": "music/18-mirazh-novyi-geroi.mp3",
+    "color": "#5B3FA6",
+    "cover": "assets/covers/mirage.webp"
   },
   {
     "artist": "Альянс",
@@ -88,5 +145,41 @@ window.TRACKS = [
     "src": "music/11-ddt-chto-takoe-osen.mp3",
     "color": "#E0662A",
     "cover": "assets/covers/chto-takoe-osen.webp"
+  },
+  {
+    "artist": "Агата Кристи",
+    "title": "Как на войне",
+    "src": "music/19-agata-kristi-kak-na-voyne.mp3",
+    "color": "#2F2A5C"
+  },
+  {
+    "artist": "Татьяна Буланова",
+    "title": "Мой ненаглядный",
+    "src": "music/20-bulanova-moy-nenaglyadnyi.mp3",
+    "color": "#B5476A"
+  },
+  {
+    "artist": "Татьяна Буланова",
+    "title": "Прости меня",
+    "src": "music/21-bulanova-prosti-menya.mp3",
+    "color": "#B5476A"
+  },
+  {
+    "artist": "Ирина Муравьёва",
+    "title": "Позвони мне, позвони",
+    "src": "music/22-muravyova-pozvoni-mne-pozvoni.mp3",
+    "color": "#2F7E8A"
+  },
+  {
+    "artist": "Анжелика Варум",
+    "title": "Зимняя вишня",
+    "src": "music/23-varum-zimnyaya-vishnya.mp3",
+    "color": "#8E2436"
+  },
+  {
+    "artist": "София Ротару",
+    "title": "Этого мало",
+    "src": "music/24-rotaru-etogo-malo.mp3",
+    "color": "#C99A1E"
   }
 ];
