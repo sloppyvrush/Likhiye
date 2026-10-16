@@ -353,7 +353,7 @@ window.NPCS = [
     "nick": "Sapog",
     "role": "director of the Avtovo market, owner of bathhouses and warehouses, 42",
     "group": "rayon",
-    "photo": "",
+    "photo": "assets/npc/zhora.webp",
     "pos": "50% 20%",
     "line": "Ex-wrestler. Backgammon on Thursdays in the steam room.",
     "about": [
