@@ -1304,7 +1304,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 
 @media (max-width:860px){
   .intro .grid,.night .pair,.quotes{grid-template-columns:1fr}
-  .book{height:calc(calc(var(--vh1, 1svh) * 100) - 230px); min-height:480px}
+  .book{height:calc(calc(var(--vh1, 1svh) * 100) - 200px); min-height:560px}
   .book-inner{grid-template-columns:1fr}
   .slot.l{display:none}
   .slot.r{padding:12px; border-radius:6px; box-shadow:0 24px 40px rgba(0,0,0,.45)}
@@ -3858,7 +3858,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         let html = base;
         for (const w of [46, 40, 34, 28, 24]){ html = base.replace('<div class="mug">', `<div class="mug" style="width:${w}%">`); if (fits(html)) break; }
         let z = 1;
-        while (!fits(`<div class="pg-fit" style="zoom:${z}">${html}</div>`) && z > .7) z -= .03;
+        while (!fits(`<div class="pg-fit" style="zoom:${z}">${html}</div>`) && z > .52) z -= .03;
         out.push(z < 1 ? `<div class="pg-fit" style="zoom:${z.toFixed(2)}">${html}</div>` : html); return;
       }
       let cur = [], first = true;
@@ -4173,8 +4173,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
     const S = st(page); S.k = 0; paint(page);
     const leafR = book(page).querySelector('.slot.r .leaf'); if (leafRO && leafR) leafRO.observe(leafR);
     if (document.fonts && document.fonts.status !== 'loaded') document.fonts.ready.then(() => relay(page));
-    // phones: the folder is simply open, no cover swinging over a half-laid-out sheet
-    if (reduce || narrow()) return;
+    if (reduce) return;
     const {bk, inner, cover, back, left} = coverParts(page), n = narrow();
     const shut = n ? 'translateX(0)' : 'translateX(-25%)';      // the closed folder lies centred
     back.innerHTML = n ? '<div class="slot r"></div>' : left.outerHTML;   // the first page is pinned to the inside of the cover
@@ -5281,7 +5280,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       f.remove();
     };
     // a still behind the text for each start: assets/starts/<name>.webp, used only if the file is there
-    const START_BG = {'Убийство во дворе':'yard', 'Гроза и Найда':'storm', 'Нарды и «Пшеничная»':'kitchen', 'Нарды, «Пшеничная» и телефон':'kitchen', '«Крылья» есть?':'kiosk', 'Автосервис на трассе':'garage', 'Копейка':'garage', 'Пожар на рынке':'market'};
+    const START_BG = {'Дочь Сапога':'zhora', 'Сосед снизу':'sosed', 'Баня по четвергам':'banya', 'Дело Лёнина':'lenin', 'Убийство во дворе':'yard', 'Гроза и Найда':'storm', 'Нарды и «Пшеничная»':'kitchen', 'Нарды, «Пшеничная» и телефон':'kitchen', '«Крылья» есть?':'kiosk', 'Автосервис на трассе':'garage', 'Копейка':'garage', 'Пожар на рынке':'market'};
     const showEl = room.querySelector('.vr-show');
     const setBg = h => {
       showEl.style.removeProperty('--bg'); showEl.classList.remove('has-bg');
