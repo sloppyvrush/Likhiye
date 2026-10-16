@@ -2269,7 +2269,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   background:linear-gradient(90deg, #8d9195, #f2f3f4 35%, #c4c7ca 60%, #7d8185); box-shadow:4px 8px 10px rgba(0,0,0,.3)}
 .fr-vent{position:absolute; left:0; right:0; bottom:0; height:84px; border-radius:0 0 18px 18px; border-top:3px solid #d6d1c4;
   background:linear-gradient(transparent 26px, #4a4640 26px 30px, transparent 30px 38px, #4a4640 38px 42px, transparent 42px 50px, #4a4640 50px 54px, transparent 54px) 50% 0 / 60% 100% no-repeat, linear-gradient(90deg, #cdc8bb, #e9e6dd 30%, #e9e6dd 70%, #cdc8bb)}
-.fr-abc{position:absolute; top:88px; left:50%; translate:-50% 0; display:flex; gap:4px}
+.fr-abc{position:absolute; z-index:7; top:88px; left:50%; translate:-50% 0; display:flex; gap:4px}  /* above the sheets, so a falling letter slides over them */
 .fr-abc .abc.off{visibility:hidden}
 .fr-abc .abc:hover{scale:1.08}
 .fr-abc .abc{display:block; padding:0; border:0; background:none; cursor:var(--cur-hover, pointer); rotate:var(--r); font:400 60px/1 var(--display); color:var(--c);
@@ -2291,6 +2291,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .mg-straw::before{content:""; position:absolute; left:50%; top:-8px; width:30px; height:14px; translate:-50% 0; border-radius:50%; background:#4f8a3a; clip-path:polygon(0 50%, 20% 0, 35% 60%, 50% 0, 65% 60%, 80% 0, 100% 50%, 50% 100%)}
 .ab-post{position:relative}
 .mg:hover{scale:1.12} .mg:focus-visible{outline:2px solid var(--glow); outline-offset:3px}
+.mg.mg-ghost{pointer-events:none}
 /* a sheet whose magnet was taken falls to the floor; a note from us is left in its place */
 .dropped{visibility:hidden}
 .fall-note{position:absolute; z-index:8; width:200px; translate:-50% 0; padding:16px 14px 12px; rotate:var(--r, -3deg); background:#fbe68a; box-shadow:0 6px 12px rgba(40,26,10,.3);
@@ -3505,7 +3506,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         <div class="ab-ph me" data-drop="Это вообще-то мой лучший ракурс." data-by="Слопи" role="button" tabindex="0" aria-pressed="false" aria-label="Фото: Слопи. Нажмите, чтобы перевернуть">
           <button class="mg mg-red" type="button" aria-label="Снять магнит"></button>
           <div class="ph-face ph-front"><div class="fr"><img src="assets/about/slopi.webp" alt="Слопи" loading="lazy" onerror="this.parentNode.classList.add('nofoto'); this.remove()"></div><p class="ph-cap">Слопи<small>придумала Витю</small></p></div>
-          <div class="ph-face ph-back"><p>Слопи. Снято за секунду до того, как Витя сказал: «Гражданочка, фотографировать не положено».</p><span>окт. 96</span></div>
+          <div class="ph-face ph-back"><p>Слопи. Хотела посмотреть одну фотографию, а досмотрела весь альбом. Чай остыл.</p><span>окт. 96</span></div>
         </div>
         <p class="ab-hi">Привет!</p>
         <p>Я Слопи, и всё это – довольно личная для меня история.</p>
@@ -4299,15 +4300,18 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const mg = e.target.closest('.mg'); if (!mg) return;
       e.stopPropagation(); e.preventDefault();
       const item = mg.closest('[data-drop]'); if (!item || item.classList.contains('dropped') || item.dataset.falling) return;
-      const left = [...item.querySelectorAll(':scope > .mg:not(.mg-off)')];
+      if (mg.classList.contains('mg-ghost')) return;
+      const left = [...item.querySelectorAll(':scope > .mg:not(.mg-off):not(.mg-ghost)')];
       if (left.length > 1){
         // one magnet off: it falls, the sheet swings on the other one
         const other = left.find(x => x !== mg), ir = item.getBoundingClientRect(), or = other.getBoundingClientRect();
         mg.classList.add('mg-off');
-        const ghost = mg.cloneNode(); ghost.classList.remove('mg-off'); item.appendChild(ghost);
+        // the falling copy is only a picture: it must not count as a magnet that still holds the sheet
+        const ghost = mg.cloneNode(); ghost.classList.remove('mg-off'); ghost.classList.add('mg-ghost'); ghost.tabIndex = -1; ghost.setAttribute('aria-hidden', 'true'); item.appendChild(ghost);
         fallAnim(ghost, 200).then(() => ghost.remove());
         item.style.transformOrigin = `${or.left + or.width / 2 - ir.left}px ${or.top + or.height / 2 - ir.top}px`;
-        const deg = (or.left < ir.left + ir.width / 2) ? -9 : 9;
+        // the free side hangs down: held on the left, the sheet turns clockwise
+        const deg = (or.left + or.width / 2 < ir.left + ir.width / 2) ? 12 : -12;
         if (!reduce) item.animate([{rotate: '0deg'}, {rotate: `${deg * 1.5}deg`}, {rotate: `${deg * .7}deg`}, {rotate: `${deg}deg`}], {duration: 900, easing: 'ease-out'});
         item.style.rotate = deg + 'deg';
         return;
@@ -4328,14 +4332,23 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     async function trip(){
       if (busy || !page.classList.contains('on') || document.hidden){ schedule(); return; }
       busy = true; rat.hidden = false; petted = false; rat.classList.remove('pet');
+      rat.getAnimations().forEach(a => a.cancel());
       const fr = document.querySelector('.ab-fridge').getBoundingClientRect(), rr = run.getBoundingClientRect();
       const rw = rat.offsetWidth, fl = fr.left - rr.left, start = -rw - 20;
       const stop = Math.max(10, (fl - rw - 30) * (.3 + Math.random() * .5));
-      const hide = fl + Math.min(fr.width * .4, 260);
+      const hide = fl + rw + 40;
       await go(start, stop, 1500 + Math.random() * 600);
       await wait(2600 + Math.random() * 1800);
       while (rat.classList.contains('pet')) await wait(300);
-      await go(stop, hide, 1500);
+      // home: the rat turns into the gap behind the fridge, up from the floor to the line where the fridge stands, and the fridge hides it
+      const up = Math.min(0, fr.bottom - 6 - rat.getBoundingClientRect().bottom);
+      rat.classList.add('run'); rat.classList.remove('left');
+      await rat.animate([
+        {transform: `translate(${stop}px, 0)`},
+        {transform: `translate(${Math.max(stop, fl - rw * .7)}px, ${up}px) scale(.9)`, offset: .7},
+        {transform: `translate(${hide}px, ${up}px) scale(.88)`}
+      ], {duration: 1700, easing: 'cubic-bezier(.4,.1,.6,.9)', fill: 'forwards'}).finished;
+      rat.classList.remove('run');
       rat.hidden = true; busy = false; schedule();
     }
     const schedule = () => { clearTimeout(timer); timer = setTimeout(trip, 9000 + Math.random() * 16000); };
@@ -4586,7 +4599,7 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       ['ПРЕДСКАЗАНИЕ', 'Вечером позвонят и ошибутся номером. Скажут: «Это баня?»'], ['ВЫИГРЫШ', 'Сникерс. Целый. Не делить с Лёшей.'],
       ['ПРЕДСКАЗАНИЕ', 'Моль доберётся до шубы. Будьте начеку.'], ['БЕЗ ВЫИГРЫША', 'Билет можно сдать в макулатуру.'], ['ВЫИГРЫШ', 'Банка сгущёнки. Открывать ножом, как Лёша.']
     ];
-    let last = -1, done = false, down = false, lastSfx = 0;
+    let last = -1, done = false, down = false;
     const deal = () => {
       let i; do { i = Math.floor(Math.random() * PRIZES.length); } while (i === last); last = i;
       prize.innerHTML = `<span><em>${PRIZES[i][0]}</em>${PRIZES[i][1]}</span>`;
@@ -4603,7 +4616,6 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     const scratch = e => {
       const r = cv.getBoundingClientRect(), dpr = cv.width / r.width, x = (e.clientX - r.left) * dpr, y = (e.clientY - r.top) * dpr;
       c.lineWidth = 44 * dpr; c.lineCap = 'round'; c.beginPath(); c.moveTo(px ?? x, py ?? y); c.lineTo(x, y); c.stroke(); px = x; py = y;
-      const now = performance.now(); if (now - lastSfx > 70){ SFX.scratch(); lastSfx = now; }
     };
     const check = () => {
       if (done) return; const d = c.getImageData(0, 0, cv.width, cv.height).data; let clear = 0, n = 0;
