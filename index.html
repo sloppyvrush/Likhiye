@@ -1052,6 +1052,23 @@ p{margin:0 0 1em}
 .dossier{padding:28px 0 80px}
 .case-bar{display:flex; justify-content:flex-end; margin:0 0 18px}
 .case-bar.bottom{justify-content:center; margin:44px 0 0}
+/* a manila tag on the case: download the character card and the lorebook */
+.dl-tag{position:relative; display:flex; align-items:center; gap:14px 18px; flex-wrap:wrap; margin-right:6px; padding:12px 18px 12px 40px; background:linear-gradient(135deg,#ecdcae,#d6c08a);
+  color:#2a1c10; border-radius:4px 14px 14px 4px; box-shadow:0 3px 0 #9c8656, 0 8px 16px rgba(0,0,0,.35); transform:rotate(-1.6deg)}
+.dl-tag::before{content:""; position:absolute; left:14px; top:50%; width:13px; height:13px; margin-top:-6.5px; border-radius:50%; background:#3a2a1a; box-shadow:inset 0 0 0 3px #f3e7c4}
+.dl-tag::after{content:""; position:absolute; left:-46px; top:50%; width:58px; height:2px; background:#c9b27a; transform:rotate(-14deg); transform-origin:right center}
+.dl-tag b{font:700 23px/1 'Caveat',var(--hand); color:#a8261f; transform:rotate(-2deg)}
+.dl-tag a{display:inline-flex; flex-direction:column; gap:3px; padding:9px 14px 8px; border-radius:3px; background:#f6efd9; color:#22357a; text-decoration:none;
+  border:1.5px dashed #8a7446; font:700 16px/1.05 var(--serif); min-height:44px; justify-content:center; -webkit-tap-highlight-color:transparent; transition:transform .2s, box-shadow .2s}
+.dl-tag a small{font:12px/1.1 var(--mono); color:#5a4a33; font-weight:400}
+.dl-tag a:hover,.dl-tag a:focus-visible{transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,.25)}
+.case-bar:has(.dl-tag){align-items:center; gap:16px}
+@media (max-width:760px){
+  .case-bar:has(.dl-tag){flex-direction:column; align-items:stretch}
+  .dl-tag{margin:0; transform:none; padding-left:36px}
+  .dl-tag a{flex:1 1 140px}
+  .dl-tag::after{display:none}
+}
 .close-case{font:700 17px/1 var(--serif); color:var(--cream); background:var(--carpet); border:0; cursor:var(--cur-hover);
   padding:13px 20px 13px 18px; border-radius:3px; box-shadow:0 3px 0 #4a0f13, 0 6px 14px rgba(0,0,0,.35);
   display:inline-flex; align-items:center; gap:10px; min-height:44px; -webkit-tap-highlight-color:transparent}
@@ -1111,6 +1128,13 @@ p{margin:0 0 1em}
 .nn-ph{margin:0; padding:8px 8px 6px; background:#f6f1e4; box-shadow:0 4px 10px rgba(0,0,0,.3); transform:rotate(var(--r))}
 .nn-ph img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; filter:grayscale(.35) sepia(.2) contrast(1.08)}
 .nn-ph figcaption{margin-top:5px; font:17px/1.15 'Caveat',var(--hand); color:#1f2f6b}
+/* a surveillance photo inside the story: a bit narrower, with air above and below */
+.nn-in{width:84%; margin:14px auto 16px}
+.pg-title.in-flow{margin-top:26px}
+/* in a file where the lists follow the story, the connections are set a little tighter */
+.leaf .links.tight li{padding:4px 0; font-size:15px; line-height:1.35}
+.quotes + .quotes, .links + .links{margin-top:14px}
+.nn-in .nn-ph figcaption{font-size:16px}
 /* on a hero's card the stamp is the way into the full case file */
 .sheet-seal{position:absolute; right:44px; bottom:30px; width:104px; display:grid; justify-items:center; gap:2px; text-decoration:none; transform:rotate(-9deg); transition:transform .2s; cursor:var(--cur-hover)}
 .sheet-seal svg{width:100%; height:auto; display:block; opacity:.9; mix-blend-mode:multiply}
@@ -1235,6 +1259,8 @@ p{margin:0 0 1em}
 .pg-name{font-family:var(--display); font-weight:400; font-size:clamp(32px,4vw,48px); line-height:1.02; margin:0 0 10px}
 .leaf .sub{font-size:18px; color:var(--ink-soft); margin:0 0 20px}
 .pg-end{height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; font-family:var(--hand); font-size:24px; color:var(--pen)}
+.pg-end.tail{height:auto; margin-top:18px; gap:14px; flex-direction:row; justify-content:flex-start; font-size:21px}
+.pg-end.tail .stamp{width:78px}
 .pg-end .stamp{position:static; width:140px; transform:rotate(-12deg)}
 .leaf .quotes{grid-template-columns:1fr; gap:14px}
 .leaf .links{columns:1}
@@ -3824,24 +3850,35 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
     const top = `<p class="pg-head"><span>${b.unit}</span><span>${num}</span></p>`;
     const sec = (title, items, keep) => S.push({head: title ? `${top}<h2 class="pg-title">${title}</h2>` : '', cont: top, items, keep});
     const it = (h, w) => ({h, w: w || ''});
+    const nnPh = ([src, cap], k, w) => it(`<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`, w || 'nn');
     sec('', [it(`<div class="formhead"><span>Учётная карточка</span><span>${b.unit}</span></div>
       <div class="mug"><span class="clip"></span><img src="${b.cardPhoto || b.photo}" alt="${b.alt}" style="object-position:${b.cardPhoto ? '50% 25%' : b.pos}">${stampSvg(b)}</div>
       <dl class="fields">${list(b.fields, ([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>`)], true);
     S[0].cont = '';
     sec('', [it(`<h1 class="pg-name">${b.name}</h1><p class="sub">${b.sub}</p>`),
       it(`<div class="margin-notes" aria-label="Пометки на полях">${list(b.notes, p => `<p>${p}</p>`)}</div>`),
-      ...b.prose.map(p => it(`<p>${p}</p>`, 'prose'))]);
+      ...b.prose.flatMap((p, n) => [it(`<p>${p}</p>`, 'prose'), ...(b.watchAfter ? (b.watch || []).filter((w, k) => b.watchAfter[k] === n).map(w => nnPh(w, b.watch.indexOf(w), 'nnp')) : [])])]);
     S[1].head = ''; S[1].cont = top;
     // the big print goes right after the card, so the open folder shows card + photo side by side
     if (b.opPhoto){ sec('', [it(`${top}<figure class="op-ph"><span class="op-clip" aria-hidden="true"></span><img src="${b.opPhoto[0]}" alt=""><figcaption>${b.opPhoto[1] || ''}</figcaption></figure>`)], true); S.splice(1, 0, S.pop()); }
-    sec('Как говорит', (b.quotes || []).map(q => it(`<li>${q}</li>`, 'quotes')));
-    if (b.watch && b.watch.length) sec('Наружное наблюдение', b.watch.map(([src, cap], k) => it(`<figure class="nn-ph" style="--r:${[-1.5, 1.2, -.8][k % 3]}deg"><img src="${src}" alt="" loading="lazy"><figcaption>${cap}</figcaption></figure>`, 'nn')));
-    sec('Связи', (b.links || []).map(([n, d]) => it(`<li><b>${n}</b>, ${d}</li>`, 'links')));
-    if (b.credit) sec('', [it(`<p class="meta">${b.credit}</p>`)], true);
+    const quotesSec = () => sec('Как говорит', (b.quotes || []).map(q => it(`<li>${q}</li>`, 'quotes')));
+    if (b.watchAfter){
+      // the photos already sit inside the story; what he says and who he knows follow straight on, without starting a new page,
+      // each heading glued to its first line so it never hangs alone at the bottom of a page
+      const tail = S[S.length - 1].items, Q = b.quotes || [], L = (b.links || []).map(([n, d]) => `<li><b>${n}</b>, ${d}</li>`);
+      if (Q.length) tail.push(it(`<h2 class="pg-title in-flow">Как говорит</h2><ul class="quotes"><li>${Q[0]}</li></ul>`), ...Q.slice(1).map(x => it(`<li>${x}</li>`, 'quotes')));
+      if (L.length) tail.push(it(`<h2 class="pg-title in-flow">Связи</h2><ul class="links tight">${L[0]}</ul>`), ...L.slice(1).map(x => it(x, 'linksT')));
+      if (b.credit) tail.push(it(`<p class="meta">${b.credit}</p>`));
+    } else {
+      quotesSec();
+      if (b.watch && b.watch.length) sec('Наружное наблюдение', b.watch.map((x, k) => nnPh(x, k)));
+      sec('Связи', (b.links || []).map(([n, d]) => it(`<li><b>${n}</b>, ${d}</li>`, 'links')));
+      if (b.credit) sec('', [it(`<p class="meta">${b.credit}</p>`)], true);
+    }
     S.end = `<div class="pg-end">${stampSvg(b)}<p>Конец личного дела</p></div>`;
     return S;
   };
-  const WRAP = {prose: ['<div class="prose">', '</div>'], quotes: ['<ul class="quotes">', '</ul>'], links: ['<ul class="links">', '</ul>'], nn: ['<div class="nn">', '</div>']};
+  const WRAP = {prose: ['<div class="prose">', '</div>'], quotes: ['<ul class="quotes">', '</ul>'], links: ['<ul class="links">', '</ul>'], nn: ['<div class="nn">', '</div>'], nnp: ['<div class="nn nn-in">', '</div>'], linksT: ['<ul class="links tight">', '</ul>']};
   const join = items => { let h = '', w = ''; items.forEach(x => { if (x.w !== w){ if (w) h += WRAP[w][1]; if (x.w) h += WRAP[x.w][0]; w = x.w; } h += x.h; }); if (w) h += WRAP[w][1]; return h; };
   // lays the sections out into pages the size of the visible leaf: no scrolling inside a page
   function layoutCase(sections, leaf){
@@ -3862,10 +3899,16 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         out.push(z < 1 ? `<div class="pg-fit" style="zoom:${z.toFixed(2)}">${html}</div>` : html); return;
       }
       let cur = [], first = true;
-      const flush = () => { if (cur.length){ out.push((first ? sc.head : sc.cont) + join(cur)); first = false; cur = []; } };
+      // photos of the story that did not fit wait in a queue: each new page opens with one, and the next is let in after some text
+      const queue = [];
+      const flush = () => { if (cur.length){ out.push((first ? sc.head : sc.cont) + join(cur)); first = false; cur = []; } if (queue.length) cur.push(queue.shift()); };
+      const letIn = () => { if (queue.length && cur.length && cur[cur.length - 1].w !== 'nnp' && fits(lead() + join([...cur, queue[0]]))) cur.push(queue.shift()); };
       const lead = () => first ? sc.head : sc.cont;
       sc.items.forEach(x => {
-        if (fits(lead() + join([...cur, x]))){ cur.push(x); return; }
+        if (x.w === 'nnp' && queue.length){ queue.push(x); return; }
+        if (fits(lead() + join([...cur, x]))){ cur.push(x); if (x.w !== 'nnp') letIn(); return; }
+        // a photo in the story that does not fit: let the text fill this page and put the photo at the top of the next
+        if (x.w === 'nnp' && cur.length){ queue.push(x); return; }
         // a paragraph too long for what is left: split it by sentences
         const mt = x.w === 'prose' && x.h.match(/^<p>([\s\S]*)<\/p>$/);
         if (mt){
@@ -3874,17 +3917,19 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
             const take = [];
             while (rest.length && fits(lead() + join([...cur, para(take.concat(rest[0]), cont)]))) take.push(rest.shift());
             if (!take.length){ if (cur.length){ flush(); continue; } take.push(rest.shift()); }
-            cur.push(para(take, cont)); cont = true;
+            cur.push(para(take, cont)); cont = true; letIn();
             if (rest.length) flush();
           }
           return;
         }
-        flush(); cur.push(x);
+        flush(); if (cur.length && !fits(lead() + join([...cur, x]))) flush(); cur.push(x);
       });
-      flush();
+      while (cur.length || queue.length) flush();
     });
-    m.remove();
+    // the closing stamp: on a page of its own to even out the spreads, or under the last lines if there is room
     if (out.length % 2) out.push(sections.end);
+    else if (out.length && fits(out[out.length - 1] + sections.end.replace('pg-end', 'pg-end tail'))) out[out.length - 1] += sections.end.replace('pg-end', 'pg-end tail');
+    m.remove();
     return out.map((h, k) => h + `<span class="pg-no">— ${k + 1} —</span>`);
   }
   const para = (parts, cont) => ({h: `<p${cont ? ' class="cont"' : ''}>${parts.join(' ')}</p>`, w: 'prose'});
@@ -3893,7 +3938,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   const dossier = (b, i) => { PAGES[b.id] = pagesFor(b, i); return `
 <main class="page" data-route="/${b.id}">
   <div class="wrap dossier">
-    <div class="case-bar"><button class="close-case" type="button">Закрыть дело</button></div>
+    <div class="case-bar">${b.download ? `<div class="dl-tag" role="group" aria-label="Бирка: скачать карточку и лорбук"><b>Забрать себе</b><a href="${b.download.card[0]}" download="${b.download.card[1]}">Скачать карточку<small>PNG для SillyTavern, лорбук уже встроен</small></a><a href="${b.download.lore[0]}" download="${b.download.lore[1]}">Скачать лорбук<small>отдельным файлом (JSON)</small></a></div>` : ''}<button class="close-case" type="button">Закрыть дело</button></div>
     <div class="book" data-id="${b.id}">
       <div class="book-inner">
         <div class="slot l"><div class="leaf"></div><button class="corner prev" type="button" aria-label="Предыдущий лист"></button></div>
