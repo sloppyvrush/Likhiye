@@ -49,11 +49,11 @@ window.DELO = {
   evidence: [
     {id: 'protocol', seal: true, title: 'Crime Scene Examination Report', from: 'start “Murder in the Yard”', img: 'assets/yard.webp', cap: 'The yard by the garages, Zaitseva St., 8.10.96',
       lines: ['No signs of a struggle: the victim let the killer get right up close. Knife not found. The inside pocket torn out: they were after something specific.', '✎ The killer knew him. Or knew where to strike. — V.']},
-    {id: 'barsetka', seal: true, title: 'Man-bag', from: 'start “Storm and Naida”', img: '', cap: 'Man-bag, found by a dog, 9.10.96',
+    {id: 'barsetka', seal: true, title: 'Man-bag', from: 'start “Storm and Naida”', img: 'assets/case/ev-barsetka.webp', cap: 'Man-bag, found by a dog, 9.10.96',
       lines: ['During the storm Naida dragged a soaked man-bag in from the yard. Inside: a wad of money and a page torn from a squared notebook, a column of sums, each marked “T.”', '✎ The money was left. So it wasn’t the bag he wanted. — V.']},
-    {id: 'svertok', seal: true, title: 'Parcel “for Tolik”', from: 'start “Got ‘Wings’?”', img: '', cap: 'Tapes from the kiosk by Avtovo',
+    {id: 'svertok', seal: true, title: 'Parcel “for Tolik”', from: 'start “Got ‘Wings’?”', img: 'assets/case/ev-svertok.webp', cap: 'Tapes from the kiosk by Avtovo',
       lines: ['A regular the kiosk girl called Tolik left a parcel of tapes at the end of September: “Let it sit here, someone will pick it up.” He never came back. Tolik is the dead man.', '✎ Who was supposed to pick it up? — V.']},
-    {id: 'devyatka', seal: true, title: 'The “devyatka” at Mikhalych’s', from: 'the “Kopeyka” start', img: '', cap: 'VAZ-2109, “wet asphalt”, the garage on the Tallinn highway',
+    {id: 'devyatka', seal: true, title: 'The “devyatka” at Mikhalych’s', from: 'the “Kopeyka” start', img: 'assets/case/ev-devyatka.webp', cap: 'VAZ-2109, “wet asphalt”, the garage on the Tallinn highway',
       lines: ['The dead man’s car was brought in for repairs, and he never came back for it. A pager in the glovebox. Last message, 7.10.96, 23:48: “GARAGES 2:00. BRING EVERYTHING. K.”', '✎ Who’s “K.”? — V.']},
     {id: 'fire', seal: true, title: 'Fire at Avtovo Market', from: 'night call, stage 3', img: 'assets/starts/market.webp', cap: 'The meat pavilion after the fire',
       lines: ['The meat pavilion burned down in the night. The old watchman was found by the door, killed with the same blow as Ryaboy.', '✎ Same hand. — V.']}
