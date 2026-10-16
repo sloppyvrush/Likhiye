@@ -83,6 +83,13 @@ window.TRACKS = [
     "cover": "assets/covers/kombinatsiya.webp"
   },
   {
+    "artist": "Комбинация",
+    "title": "А я люблю военных",
+    "src": "music/15b-kombinatsiya-a-ya-lyublyu-voennyh.mp3",
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
+  },
+  {
     "artist": "Алла Пугачёва",
     "title": "Часы",
     "src": "music/07-pugacheva-chasy.mp3",

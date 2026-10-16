@@ -5338,7 +5338,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       f.remove();
     };
     // a still behind the text for each start: assets/starts/<name>.webp, used only if the file is there
-    const START_BG = {'Sapog’s Daughter':'zhora', 'Downstairs Neighbor':'sosed', 'Bathhouse Thursdays':'banya', 'The Lyonin Case':'lenin', 'Murder in the Yard':'yard', 'Storm and Naida':'storm', 'Backgammon and “Pshenichnaya”':'kitchen', 'Backgammon, “Pshenichnaya” and the Phone':'kitchen', 'Got “Wings”?':'kiosk', 'Garage on the Highway':'garage', 'The Kopeyka':'garage', 'Fire at the Market':'market'};
+    const START_BG = {'Sapog’s Daughter':'zhora', 'Downstairs Neighbor':'sosed', 'Bathhouse Thursdays':'banya', 'The Lyonin Case':'lenin', 'Murder in the Yard':'yard', 'Storm and Naida':'storm', 'Backgammon and “Pshenichnaya”':'kitchen', 'Backgammon, “Pshenichnaya” and the Phone':'kitchen', 'Got “Wings”?':'kiosk', 'Garage on the Highway':'garage', 'The Kopeyka':'garage', 'Fire at the Market':'market', 'First Day':'office'};
     const showEl = room.querySelector('.vr-show');
     const setBg = h => {
       showEl.style.removeProperty('--bg'); showEl.classList.remove('has-bg');
@@ -5425,9 +5425,10 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       } else rollPos = rs.scrollTop;
       rollRaf = requestAnimationFrame(loop);
     };
-    const hold = () => { held = performance.now() + 2600; };
+    // scrolling by hand stops the roll; it moves again only from the play button
+    const hold = () => { if (!paused) pauseB.click(); };
     ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => rs.addEventListener(ev, hold, {passive: true}));
-    // any scroll that isn't ours (scrollbar, keys, a flick) takes over for a moment
+    // any scroll that isn't ours (scrollbar, keys, a flick) pauses the roll
     rs.addEventListener('scroll', () => { if (Math.abs(rs.scrollTop - rollPos) > 4){ hold(); rollPos = rs.scrollTop; } }, {passive: true});
     const startRoll = async st => {
       playingSt = st;

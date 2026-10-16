@@ -83,6 +83,13 @@ window.TRACKS = [
     "cover": "assets/covers/kombinatsiya.webp"
   },
   {
+    "artist": "Kombinatsiya",
+    "title": "And I Love Military Men",
+    "src": "music/15b-kombinatsiya-a-ya-lyublyu-voennyh.mp3",
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
+  },
+  {
     "artist": "Alla Pugacheva",
     "title": "Clocks",
     "src": "music/07-pugacheva-chasy.mp3",

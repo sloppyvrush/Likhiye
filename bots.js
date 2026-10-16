@@ -441,6 +441,7 @@ window.BOTS = [
       ["assets/people/pirat.webp", "Фото 4. Кот Пират, одноглазый, прибился сам", "plaid", "Пират. Глаза нет, характера на двоих. Кормить в восемь, иначе мстит."]
     ],
     "galleryNotes": ["Бумажка с фамилиями, к вечеру выучит.", "Пират спит на его кителе. Глаз потерял в драке, ещё до Лёши."],
+    "download": {"card": ["assets/download/lesha-tikhonov.png", "Алексей Тихонов.png"], "json": ["assets/download/lesha-tikhonov.json", "Алексей Тихонов.json"], "lore": ["assets/download/lesha-tikhonov-lorebook.json", "Алексей Тихонов Lorebook.json"]},
     "credit": "Лёша персонаж <a href=\"https://t.me/milkiwaywlw\" target=\"_blank\" rel=\"noopener\">Milkiway</a>."
   }
 ];
