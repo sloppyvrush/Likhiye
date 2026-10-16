@@ -1243,6 +1243,12 @@ p{margin:0 0 1em}
 /* opened: the envelope gives way to a paper sheet */
 .dl-open{grid-column:1/-1; position:relative; padding:22px clamp(16px,3vw,30px) 18px; background:var(--paper); box-shadow:0 10px 22px rgba(0,0,0,.35); transform:rotate(var(--r,0deg)); animation:dlIn .45s cubic-bezier(.3,1.2,.4,1)}
 @keyframes dlIn{from{opacity:0; transform:translateY(-14px) rotate(var(--r,0deg)) scale(.97)}}
+/* the case file lies as one pile: opened sheets and sealed envelopes share the columns, no full-width sheets, no empty rows */
+.dl-grid{display:block; columns:3 250px; column-gap:18px}
+.dl-grid > *{display:block; width:auto; break-inside:avoid; -webkit-column-break-inside:avoid; margin:0 0 18px}
+.dl-grid > .dl-open{padding:18px 18px 14px}
+.dl-grid > .dl-open .dl-ph{float:none; width:100%; margin:2px 0 12px; transform:rotate(1.2deg)}
+.dl-grid > .dl-env{min-height:170px}
 .dl-open h5{margin:0 0 4px; font:400 22px/1.15 var(--display)}
 .dl-open .src{margin:0 0 12px; font:12.5px var(--mono); color:#7a6a50}
 .dl-open p{margin:0 0 8px; font-size:16px; line-height:1.55}
