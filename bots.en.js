@@ -45,7 +45,10 @@ window.BOTS = [
     "cardPhoto": "assets/case/viktor-card.webp",
     "watch": [
       ["assets/case/viktor-watch-market.webp", "Subject at a kiosk at Avtovo market, 12.10, 15:20. Buying Marlboro, counting out small change. Left without his change."],
-      ["assets/case/viktor-watch-naida.webp", "Subject in the yard outside his building, 21:40. Feeding the dog sushki. Stood there 40 minutes. Surveillance blown by the dog."]
+      ["assets/case/viktor-watch-naida.webp", "Subject in the yard outside his building, 21:40. Feeding the dog sushki. Stood there 40 minutes. Surveillance blown by the dog."],
+      ["assets/case/viktor-watch-car.webp", "Subject in a Volvo by the kiosk at Avtovo market, 14.10, 22:15. Turned round and smiled at the observer. Surveillance blown again."],
+      ["assets/case/viktor-watch-podezd.webp", "Subject in a stairwell near Avtovo metro, 15.10, 23:40. Stood at someone else’s door for 20 minutes. Who he was waiting for could not be established."],
+      ["assets/case/viktor-watch-zaliv.webp", "Subject on the shore of the Gulf, 16.10, 6:10, with the dog. Smoked and watched the water for 50 minutes. Before leaving, waved at the bushes where the observer was hiding."]
     ],
     "boardPhoto": "assets/portrait/viktor.webp",
     "boardPos": "48% 24%",
@@ -459,6 +462,19 @@ window.PHOTOS = {
   "viktor-volvo":   ["assets/archive/viktor-volvo.webp", "h43", "From the author: December 1995, a stakeout in the Volvo, hour six. Vitya is waiting for a mark who will never show and finishing off the second-to-last Mishka chocolate. The last one he’ll save for Lyosha.", "'95 12 14"],
   "viktor-syrniki-96": ["assets/archive/viktor-syrniki-96.webp", "h43", "From the author: A Sunday, April 1996. Vitya is frying syrniki from his mother’s recipe book for Petka and Anyutka. Anyutka ate four, Naida two. Petka honestly said Grandma’s were better.", "'96 4 14"],
   "viktor-night":   ["assets/archive/viktor-night.webp", "h43", "Author’s note: Three in the morning, and Vitya can’t sleep. “The Master and Margarita,” his mum’s copy with her pencil notes in the margins. He rereads the notes more often than the novel itself.", "'96 10 4"],
+  "viktor-utro": ["assets/archive/viktor-utro.webp", "h43", "Author’s note: A Sunday in September ’96, a rare morning with no call-outs. A cigarette, his mum’s Paustovsky and Radio Mayak on low. In ten minutes Lyosha will ring and the morning will be over.", "'96 9 15"],
+  "viktor-liteyny-forma": ["assets/archive/viktor-liteyny-forma.webp", "h43", "Author’s note: 4 Liteyny, after a meeting upstairs. Vitya puts the uniform on maybe three times a year and every time looks as if he was born in the cap. He has no idea.", "'96 10 2"],
+  "viktor-office": ["assets/archive/viktor-office.webp", "h43", "Author’s note: His office on Liteyny, past ten at night. The tea has gone cold, the ashtray is full, the case won’t add up. Vitya is smiling, which means it almost does.", "'96 10 9"],
+  "viktor-dopros": ["assets/archive/viktor-dopros.webp", "h43", "Author’s note: The interrogation room, October ’96. Vitya never raises his voice. He only needs to slide the folder a little closer and wait.", "'96 10 11"],
+  "viktor-home-forma": ["assets/archive/viktor-home-forma.webp", "h43", "Author’s note: The evening after duty. The cap goes on the hook, the tie comes off, and Naida meets him in the hall as if he’d been gone a year.", "'96 10 2"],
+  "viktor-divan": ["assets/archive/viktor-divan.webp", "h43", "Author’s note: Half past eleven, nothing but snow on the TV. The tunic is thrown over the sofa, Naida is asleep at his feet. He hasn’t got it in him to make it to bed.", "'96 10 3"],
+  "viktor-cvety": ["assets/archive/viktor-cvety.webp", "h43", "Author’s note: Chrysanthemums from the Avtovo market, wrapped in yesterday’s paper. He stood on the landing half an hour before ringing the bell. For a major who walks in on armed men, that is a very long time.", "'96 10 14"],
+  "viktor-vecher": ["assets/archive/viktor-vecher.webp", "h43", "Author’s note: Late evening, the kitchen. He didn’t get the shirt off in time: someone rang the bell. He has one smile for moments like this, and it works.", "'96 10 6"],
+  "viktor-banya": ["assets/archive/viktor-banya.webp", "h43", "Author’s note: A dacha near Priozersk, dawn. First the steam room, then the lake, then tea with three sugars. Questions later.", "'96 9 1"],
+  "viktor-boks": ["assets/archive/viktor-boks.webp", "h43", "Author’s note: The gym on Stachek, a Tuesday. Boxing since he was twelve; he still pulls the wraps tight with his teeth, the way his coach taught him. Still hits first.", "'96 9 24"],
+  "duo-banya": ["assets/archive/duo-banya.webp", "h43", "Author’s note: Zhora’s banya, a Thursday. Vitya with the birch broom, Lyosha with a mug of kvass. Neither of them has taken his dog tag off since 1980.", "'96 10 3"],
+  "duo-perekur": ["assets/archive/duo-perekur.webp", "h43", "Author’s note: The stairs on Liteyny, a smoke break. One match for two, like in Afghanistan. They talk about work, and laugh about work too.", "'96 10 8"],
+  "duo-planerka": ["assets/archive/duo-planerka.webp", "h43", "Author’s note: After the morning meeting. Lyosha is explaining that this is not how things are done. Vitya smokes with his feet on the desk and agrees with everything except the main point.", "'96 10 10"],
   "nardy":         ["assets/archive/nardy.webp", "h43", "Author’s note: Vitya’s kitchen, night. Backgammon, “Pshenichnaya” vodka, pelmeni on a sheet of newspaper. Lyosha is losing his third game in a row and pretending to think. Naida is waiting for a pelmen.", "'96 3 8"],
 
   "lesha-pirozhki": ["assets/archive/lesha-pirozhki.webp", "v34 old", "Lyoshenka making pirozhki, ’68. Made four, ate six. There was flour everywhere, even in the hallway.", ""],
@@ -492,13 +508,13 @@ window.ALBUMS = [
      ["viktor-wedding", "May 85"], ["viktor-naida-first", "Naida. Day one"],
      ["viktor-kids", "Petka and Anyuta"], ["fishing", "Vuoksa. My pike"], ["viktor-marina-kids", "Marinka and the little ones"],
      ["militia-1", "Militsiya Day. 95"], ["viktor-volvo", "Work"], ["viktor-naida", "Naida. January"], ["naida-home", "Naida"],
-     ["nardy", "Backgammon. 3 : 0"], ["viktor-syrniki-96", "Syrniki. Mum’s recipe"], ["viktor-night", "Can’t sleep"]
+     ["nardy", "Backgammon. 3 : 0"], ["viktor-syrniki-96", "Syrniki. Mum’s recipe"], ["viktor-night", "Can’t sleep"], ["viktor-utro", "A morning with no call-outs"], ["viktor-liteyny-forma", "4 Liteyny. In uniform"], ["viktor-office", "The office. Night"], ["viktor-dopros", "Interrogation room"], ["viktor-home-forma", "Home. Naida says hello"], ["viktor-divan", "After the shift"], ["viktor-cvety", "With flowers"], ["viktor-vecher", "Evening"], ["viktor-banya", "After the banya"], ["viktor-boks", "Boxing"]
    ]},
   {id: "vl", tag: "Vitya and Lyosha", sub: "from Marina", cover: "#4a3520", skin: "magnet", window: "army",
    first: "Vitya and Lyosha.\nPut together by Marina, because you two\nwould never get round to it.\n\nHappy 35th, both of you!",
    photos: [
      ["army", "’80. Not grey yet"], ["sgushchenka", "Splitting the condensed milk. Still splitting it"], ["hospital", "A melon from Tashkent"], ["dembel", "Back home"], ["school", "Lyosha cribbing"], ["militia-2", "Lyosha in a cap (rare sight)"],
-     ["militia-1", "A three-word toast"], ["fishing", "Vitya’s pike. No arguing"], ["nardy", "Lyosha lost again"] ]},
+     ["militia-1", "A three-word toast"], ["fishing", "Vitya’s pike. No arguing"], ["nardy", "Lyosha lost again"], ["duo-banya", "The banya. Thursday"], ["duo-perekur", "One match for two"], ["duo-planerka", "Lyosha explains"] ]},
   {id: "l", tag: "Lyosha", sub: "Mum’s album", cover: "#74191d", skin: "cream",
    first: "Lyoshenka’s album.\nKept by Mum.\n\nDo not take the photos out!\nV. I.",
    photos: [
