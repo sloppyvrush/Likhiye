@@ -618,9 +618,9 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 .shelf-head h2{margin:0}
 .vol-big{display:flex; align-items:center; gap:12px; font-size:16px; color:#d9c9a4}
 .vol-big input{width:min(240px,50vw); height:22px}
-.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-left:12px; padding:26px 12px 6px;
+.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-left:28px; padding:40px 26px 6px 28px;
   scrollbar-width:thin; scrollbar-color:#6E3B1F transparent;
-  background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 158px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 172px/100% 10px no-repeat}
+  background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 172px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 186px/100% 10px no-repeat}
 .lp{flex:0 0 auto; width:140px; scroll-snap-align:start; border:0; background:none; padding:0 0 4px; cursor:var(--cur-hover); text-align:left; color:var(--cream)}
 .lp-art{position:relative; display:block; width:132px; height:132px; margin-bottom:22px}
 .lp-disc{position:absolute; top:5px; left:5px; width:122px; height:122px; border-radius:50%;
@@ -5673,6 +5673,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   };
   audio.addEventListener('timeupdate', () => { if (audio.currentTime > 30) markHeard(); });
   audio.addEventListener('ended', markHeard);
+  // two records earn their own achievement as soon as they start playing
+  const SONG_ACH = {'music/20-bulanova-moy-nenaglyadnyi.mp3': 'bulanova', 'music/15-kombinatsiya-lyoshka.mp3': 'lyoshka'};
+  audio.addEventListener('playing', () => { const tr = TRACKS[+audio.dataset.i], k = tr && SONG_ACH[tr.src]; if (k && window.lihieOnce) window.lihieOnce(k); });
   // on arrival the first record starts by itself, very quietly, and slowly comes up to the set volume.
   // Browsers only allow sound after a click or a key, so if the first try is refused it waits for the first one.
   let fadeRaf = 0;
@@ -5940,6 +5943,8 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
     {key: 'phone', t: 'On the Line', x: 'You got through to Vitya, Lyosha, Marina and Mikhalych. The operators at the exchange know your voice by now.', hint: 'The phone on the wall works. The numbers are in the phone book, on the notice boards and on the board at the station.'},
     {key: 'dushesh', t: 'Du-shesh', x: 'Double six at backgammon. Lyosha demands the dice be checked, Vitya silently writes it down.', hint: 'Sometimes backgammon rolls you the very best.'},
     {key: 'sprint', t: 'Gambler', x: 'A “Sprint” ticket scratched. The grand prize is still with Lyosha, and Lyosha doesn’t know it.', hint: 'There’s a lottery ticket tucked away in the china cabinet.'},
+    {key: 'bulanova', t: 'Pam-pam-pam', x: '“My Darling” again. Vitya can’t stand this song: every kiosk plays it on repeat. And then he catches himself humming it over the frying pan.', hint: 'There’s a song on the shelf that makes Vitya wince.'},
+    {key: 'lyoshka', t: 'Namesake', x: 'You put on “Lyoshka”. Lyosha: “It’s not about me. But turn it up.”', hint: 'One record is suspiciously named after someone you know.'},
     {key: 'records', t: 'Record Collector', x: 'Every record has been played. The downstairs neighbours are banging on the radiator in time.', hint: 'There are lots of records on the shelf. Listen to each one for at least half a minute.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}

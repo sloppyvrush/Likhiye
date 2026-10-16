@@ -618,9 +618,9 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 .shelf-head h2{margin:0}
 .vol-big{display:flex; align-items:center; gap:12px; font-size:16px; color:#d9c9a4}
 .vol-big input{width:min(240px,50vw); height:22px}
-.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-left:12px; padding:26px 12px 6px;
+.shelf-row{display:flex; align-items:flex-start; gap:16px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-left:28px; padding:40px 26px 6px 28px;
   scrollbar-width:thin; scrollbar-color:#6E3B1F transparent;
-  background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 158px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 172px/100% 10px no-repeat}
+  background:linear-gradient(#6e3b1f, #4a2814 60%, #2a160b) 0 172px/100% 14px no-repeat, linear-gradient(rgba(0,0,0,.35), transparent) 0 186px/100% 10px no-repeat}
 .lp{flex:0 0 auto; width:140px; scroll-snap-align:start; border:0; background:none; padding:0 0 4px; cursor:var(--cur-hover); text-align:left; color:var(--cream)}
 .lp-art{position:relative; display:block; width:132px; height:132px; margin-bottom:22px}
 .lp-disc{position:absolute; top:5px; left:5px; width:122px; height:122px; border-radius:50%;
@@ -5672,6 +5672,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   };
   audio.addEventListener('timeupdate', () => { if (audio.currentTime > 30) markHeard(); });
   audio.addEventListener('ended', markHeard);
+  // two records earn their own achievement as soon as they start playing
+  const SONG_ACH = {'music/20-bulanova-moy-nenaglyadnyi.mp3': 'bulanova', 'music/15-kombinatsiya-lyoshka.mp3': 'lyoshka'};
+  audio.addEventListener('playing', () => { const tr = TRACKS[+audio.dataset.i], k = tr && SONG_ACH[tr.src]; if (k && window.lihieOnce) window.lihieOnce(k); });
   // on arrival the first record starts by itself, very quietly, and slowly comes up to the set volume.
   // Browsers only allow sound after a click or a key, so if the first try is refused it waits for the first one.
   let fadeRaf = 0;
@@ -5939,6 +5942,8 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
     {key: 'phone', t: 'Абонент', x: 'Дозвонилась до Вити, Лёши, Марины и Михалыча. Телефонистки на станции уже узнают тебя по голосу.', hint: 'Телефон на стене работает. Номера — в книжке, на досках объявлений и на доске в отделе.'},
     {key: 'dushesh', t: 'Ду-шеш', x: 'Две шестёрки в нарды. Лёша требует проверить кости, Витя молча записывает.', hint: 'В нарды иногда выпадает самое лучшее.'},
     {key: 'sprint', t: 'Азартная', x: 'Стёрт билет «Спринта». Главный приз пока у Лёши, Лёша не в курсе.', hint: 'В серванте засунут лотерейный билет.'},
+    {key: 'bulanova', t: 'Пам-пам-пам', x: 'Опять «Мой ненаглядный». Витя эту песню терпеть не может: её крутят из каждого ларька. А потом ловит себя на том, что сам напевает её над сковородкой.', hint: 'Есть на полке песня, от которой Витю передёргивает.'},
+    {key: 'lyoshka', t: 'Тёзка', x: 'Включили «Лёшку». Лёша: «Это не про меня. Но сделай погромче».', hint: 'Одна пластинка подозрительно называется как кое-кто из знакомых.'},
     {key: 'records', t: 'Филофонист', x: 'Все пластинки переслушаны. Соседи снизу стучат по батарее в такт.', hint: 'Пластинок на полке много. Послушайте каждую хотя бы по полминуты.'}
   ];
   const got = (() => { let g = []; try { g = JSON.parse(localStorage.getItem('lihie-got') || '[]'); } catch (e) {}

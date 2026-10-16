@@ -51,31 +51,36 @@ window.TRACKS = [
     "artist": "Кино",
     "title": "Звезда",
     "src": "music/06b-kino-zvezda.mp3",
-    "color": "#C8901A"
+    "color": "#C8901A",
+    "cover": "assets/covers/zvezda.webp"
   },
   {
     "artist": "Комбинация",
     "title": "Вишнёвая девятка",
     "src": "music/12-kombinatsiya-vishnyovaya-devyatka.mp3",
-    "color": "#D9437F"
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
   },
   {
     "artist": "Комбинация",
     "title": "Два кусочека колбаски",
     "src": "music/13-kombinatsiya-dva-kusocheka-kolbaski.mp3",
-    "color": "#D9437F"
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
   },
   {
     "artist": "Комбинация",
     "title": "Вдвоём с тобой",
     "src": "music/14-kombinatsiya-vdvoyom-s-toboy.mp3",
-    "color": "#D9437F"
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
   },
   {
     "artist": "Комбинация",
     "title": "Лёшка",
     "src": "music/15-kombinatsiya-lyoshka.mp3",
-    "color": "#D9437F"
+    "color": "#D9437F",
+    "cover": "assets/covers/kombinatsiya.webp"
   },
   {
     "artist": "Алла Пугачёва",
@@ -95,7 +100,8 @@ window.TRACKS = [
     "artist": "Алла Пугачёва",
     "title": "Песенка про меня",
     "src": "music/07c-pugacheva-pesenka-pro-menya.mp3",
-    "color": "#A8466E"
+    "color": "#A8466E",
+    "cover": "assets/covers/nado-zhe.webp"
   },
   {
     "artist": "Мираж",
@@ -150,36 +156,42 @@ window.TRACKS = [
     "artist": "Агата Кристи",
     "title": "Как на войне",
     "src": "music/19-agata-kristi-kak-na-voyne.mp3",
-    "color": "#2F2A5C"
+    "color": "#2F2A5C",
+    "cover": "assets/covers/agata.webp"
   },
   {
     "artist": "Татьяна Буланова",
     "title": "Мой ненаглядный",
     "src": "music/20-bulanova-moy-nenaglyadnyi.mp3",
-    "color": "#B5476A"
+    "color": "#B5476A",
+    "cover": "assets/covers/bulanova.webp"
   },
   {
     "artist": "Татьяна Буланова",
     "title": "Прости меня",
     "src": "music/21-bulanova-prosti-menya.mp3",
-    "color": "#B5476A"
+    "color": "#B5476A",
+    "cover": "assets/covers/bulanova.webp"
   },
   {
     "artist": "Ирина Муравьёва",
     "title": "Позвони мне, позвони",
     "src": "music/22-muravyova-pozvoni-mne-pozvoni.mp3",
-    "color": "#2F7E8A"
+    "color": "#2F7E8A",
+    "cover": "assets/covers/pozvoni.webp"
   },
   {
     "artist": "Анжелика Варум",
     "title": "Зимняя вишня",
     "src": "music/23-varum-zimnyaya-vishnya.mp3",
-    "color": "#8E2436"
+    "color": "#8E2436",
+    "cover": "assets/covers/varum.webp"
   },
   {
     "artist": "София Ротару",
     "title": "Этого мало",
     "src": "music/24-rotaru-etogo-malo.mp3",
-    "color": "#C99A1E"
+    "color": "#C99A1E",
+    "cover": "assets/covers/rotaru.webp"
   }
 ];
