@@ -46,7 +46,7 @@ window.BOTS = [
     "watch": [
       [
             "assets/case/viktor-watch-market.webp",
-            "Subject at a kiosk at Avtovo market, 12.10, 15:20. Buying Marlboro, counting out small change. Left without his change."
+            "Subject at a kiosk at Avtovo market, 12.10, 15:20. Buying Yava, counting out small change. Left without his change."
       ],
       [
             "assets/case/viktor-watch-naida.webp",

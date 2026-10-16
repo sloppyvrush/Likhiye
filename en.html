@@ -2738,11 +2738,11 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   <nav id="navList" aria-label="Sections">
     <a href="#/">Home</a>
     <a href="#/bots"><span class="long">Characters</span><span class="short">Heroes</span></a>
-    <a href="#/lyudi">People</a>
     <a href="#/starty">Starts</a>
+    <a href="#/lyudi">People</a>
     <a href="#/gorod">City</a>
-    <a href="#/delo">Case</a>
     <a href="#/archive"><span class="long">Photo archive</span><span class="short">Archive</span></a>
+    <a href="#/delo">Case</a>
     <a href="#/start"><span class="long">How to set up</span><span class="short">Set up</span></a>
     <a href="#/about"><span class="long">About the project</span><span class="short">About us</span></a>
   </nav>
@@ -3506,33 +3506,16 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
     <div class="sheet manual">
       <div class="cover"><span>Operating instructions</span><span>SillyTavern</span></div>
       <h2>How to set up</h2>
-      <p class="prose">Both cards are built the same way: description in English, speech and nicknames in Russian, lorebook built in, starts in Russian.</p>
+      <p class="prose">Both cards are built the same way: description in English, speech and nicknames in Russian, lorebook built in.</p>
 
       <ol class="steps">
         <li><h3>Download the card</h3><p>A PNG with the portrait or a JSON — same thing inside.</p></li>
         <li><h3>Import into SillyTavern</h3><p>Character list, the import-from-file button, pick the downloaded file.</p></li>
-        <li><h3>Accept the embedded lorebook</h3><p>The tavern will ask whether to import the character’s lorebook. Say “yes,” and it’ll link itself to the card.</p></li>
+        <li><h3>Import everything it offers</h3><p>On import, the tavern will ask whether to bring in everything built into the card along with it: the lorebook, the tags and the rest. Be sure to say yes to all of it — then the lorebook links itself to the card.</p></li>
         <li><h3>Pick a start</h3><p>The starts sit as swipes on the first message — flip through them with the right arrow. The last one, “Your start,” is empty: you write the opening yourself.</p></li>
       </ol>
 
-      <h3>World Info settings</h3>
-      <p>It works with the default settings too. If you want it the way it was meant:</p>
-      <table class="settings">
-        <tr><td>Scan Depth</td><td>2</td></tr>
-        <tr><td>Context %</td><td>17%</td></tr>
-        <tr><td>Budget Cap</td><td>8192</td></tr>
-        <tr><td>Recursive Scan</td><td>on</td></tr>
-        <tr><td>Max Recursion Steps</td><td>1</td></tr>
-        <tr><td>Insertion Strategy</td><td>Character Lore First</td></tr>
-      </table>
-
       <dl class="faq">
-        <dt>Lorebook entries don’t always fire. Is that how it should be?</dt>
-        <dd>Yes. Only the entry about the tone of the era is constant. The rest switch on by keywords in recent messages: mention Naida, and Naida shows up.</dd>
-        <dt>Why don’t the secrets surface right away?</dt>
-        <dd>They’re on a delay: they unlock once the chat gets longer. Intimate entries only fire when two conditions are met at once.</dd>
-        <dt>What’s the depth on entries?</dt>
-        <dd>It only matters for entries with the @Depth position: those are states like “wounded” or “tipsy,” and they slot in closer to the end of the context. The character’s author’s note is already built in too, at depth 4.</dd>
         <dt>Then why a separate lorebook file?</dt>
         <dd>In case the embedded one doesn’t load. Then: World Info, import, pick the file and link it to the character.</dd>
       </dl>
