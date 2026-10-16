@@ -40,7 +40,7 @@ window.DELO = {
   people: {
     title: 'Sheet 2. Persons Involved',
     list: [
-      {n: 'Unidentified man', r: 'victim', t: '30–35, broken nose, cropped hair, a tracksuit under a leather jacket. Identity being established.', reveal: 'stage2', real: 'Ryabtsev Anatoly Viktorovich, “Ryaboy”, 31. A small man from Avtovo market who drove somebody’s money once a week.'},
+      {n: 'Unidentified man', r: 'victim', t: '30–35, broken nose, cropped hair, a tracksuit under a leather jacket. Identity being established.', img: 'assets/npc/ryaboy.webp', reveal: 'stage2', real: 'Ryabtsev Anatoly Viktorovich, “Ryaboy”, 31. A small man from Avtovo market who drove somebody’s money once a week.'},
       {n: 'Gromov Viktor Semyonovich', r: 'Major, CID, GUVD', t: 'Leads the murder case.', img: 'assets/id/viktor.webp'},
       {n: 'Tikhonov Alexei Petrovich', r: 'Major, CID, Kirovsky OVD', t: 'First on the scene. It’s his district.', img: 'assets/id/lesha.webp'}
     ]

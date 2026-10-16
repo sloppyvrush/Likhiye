@@ -1062,11 +1062,26 @@ p{margin:0 0 1em}
   border:1.5px dashed #8a7446; font:700 16px/1.05 var(--serif); min-height:44px; justify-content:center; -webkit-tap-highlight-color:transparent; transition:transform .2s, box-shadow .2s}
 .dl-tag a small{font:12px/1.1 var(--mono); color:#5a4a33; font-weight:400}
 .dl-tag a:hover,.dl-tag a:focus-visible{transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,.25)}
+.dl-pick{position:relative; display:inline-flex}
+.dl-tag .dl-card{display:inline-flex; flex-direction:column; align-items:flex-start; gap:3px; padding:9px 14px 8px; border-radius:3px; background:#f6efd9; color:#22357a; cursor:var(--cur-hover, pointer);
+  border:1.5px dashed #8a7446; font:700 16px/1.05 var(--serif); min-height:44px; justify-content:center; -webkit-tap-highlight-color:transparent; transition:transform .2s, box-shadow .2s; text-align:left}
+.dl-tag .dl-card small{font:12px/1.1 var(--mono); color:#5a4a33; font-weight:400}
+.dl-tag .dl-card:hover,.dl-tag .dl-card:focus-visible,.dl-pick.open .dl-card{transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,.25)}
+/* the little tag that drops out of «download the card»: pick PNG or JSON */
+.dl-pop{position:absolute; z-index:30; left:-6px; top:calc(100% + 14px); display:flex; flex-direction:column; gap:8px; width:max-content; min-width:100%; padding:14px 14px 12px 34px;
+  background:linear-gradient(135deg,#efe0b4,#d9c48f); border-radius:4px 14px 14px 4px; box-shadow:0 3px 0 #9c8656, 0 10px 18px rgba(0,0,0,.4);
+  transform-origin:24px -10px; transform:rotate(2deg) translateY(-6px); opacity:0; visibility:hidden; transition:opacity .18s, transform .25s cubic-bezier(.3,1.4,.5,1), visibility 0s .25s}
+.dl-pop::before{content:""; position:absolute; left:12px; top:16px; width:11px; height:11px; border-radius:50%; background:#3a2a1a; box-shadow:inset 0 0 0 3px #f3e7c4}
+.dl-pop::after{content:""; position:absolute; left:16px; top:-16px; width:2px; height:34px; background:#c9b27a; transform:rotate(-8deg)}
+.dl-pick.open .dl-pop{opacity:1; visibility:visible; transform:rotate(2deg) translateY(0); transition:opacity .18s, transform .25s cubic-bezier(.3,1.4,.5,1)}
+.dl-pop a{min-width:220px}
+.case-bar:has(.dl-pick.open){position:relative; z-index:60}
 .case-bar:has(.dl-tag){align-items:center; gap:16px}
 @media (max-width:760px){
   .case-bar:has(.dl-tag){flex-direction:column; align-items:stretch}
   .dl-tag{margin:0; transform:none; padding-left:36px}
   .dl-tag a{flex:1 1 140px}
+  .dl-pick{flex:1 1 140px} .dl-tag .dl-card{width:100%} .dl-pop{left:0; right:0; width:auto} .dl-pop a{min-width:0; flex:none}
   .dl-tag::after{display:none}
 }
 .close-case{font:700 17px/1 var(--serif); color:var(--cream); background:var(--carpet); border:0; cursor:var(--cur-hover);
@@ -2051,7 +2066,8 @@ body.splash-on{overflow:hidden}
 /* ---------- drawers lead to the starts ---------- */
 .drawer .tag{position:absolute; z-index:3; left:50%; bottom:-38%; transform:translateX(-50%) rotate(-3deg); white-space:nowrap; font:400 1.5cqw/1 var(--hand); color:#22357a;
   background:#f4ecd2; padding:.3cqw .7cqw .4cqw; box-shadow:0 .2cqw .4cqw rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .3s .35s}
-.drawer.open .tag{opacity:1}
+.drawer.open .tag{opacity:1; pointer-events:auto; cursor:var(--cur-hover)}
+.drawer.open .tag:hover{background:#fff7de}
 .duo-env{margin-top:40px}
 /* ---------- NPC board: cork, yarn, notes ---------- */
 #people .muted{max-width:760px}
@@ -2533,6 +2549,17 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 @media (max-width:860px){
   .ab-letters .fr-list.fr-pin{position:relative; left:auto; top:auto; justify-self:center; margin:34px 0 0}
 }
+/* the notes hang right under Milki's letter, filling the column next to Slopi's long one */
+@media (min-width:861px){
+  .ab-mcol .fr-notes{width:100%; grid-template-columns:1fr 1fr; margin:-34px 0 0; padding:0 4% 0 2%; gap:22px 10px; position:relative; z-index:3}
+  .ab-mcol .fr-notes > div{grid-column:auto; max-width:190px}
+  .ab-mcol .fr-notes .fr-spot{justify-self:start; margin-top:30px}
+  .ab-mcol .fr-notes .fr-vnote{justify-self:end; margin-top:58px}
+  .ab-mcol .fr-notes .fr-lnote{justify-self:start; margin-left:8%}
+  .ab-mcol .fr-notes .fr-recipe{justify-self:end; margin-top:-6px}
+  .ab-row2{grid-template-columns:1fr; justify-items:center}
+}
+@media (max-width:860px){ .ab-mcol .fr-notes{width:100%; margin-top:16px; padding-top:20px} }
 /* a magnet taken off the postcard; the card swings on the other one */
 .mg.mg-off{visibility:hidden}
 /* ================= TOYS: phone, nardy, lottery, pager ================= */
@@ -2995,7 +3022,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
 
       <div class="stand"><div class="body">
         <button class="drawer" type="button" aria-expanded="false" aria-label="Левый ящик тумбы"><span class="box"><img src="assets/room/vhs-stack.webp" alt="Стопка видеокассет"></span><span class="front"></span></button>
-        <button class="drawer" type="button" aria-expanded="false" aria-label="Правый ящик тумбы"><span class="box"><img class="matrix" src="assets/room/vhs-matrix.webp" alt="Видеокассета"></span><span class="front"></span></button>
+        <button class="drawer" type="button" aria-expanded="false" aria-label="Правый ящик тумбы"><span class="box"><img class="matrix" src="assets/room/vhs-commando.webp" alt="Видеокассета"></span><span class="front"></span></button>
       </div><i class="leg l" aria-hidden="true"></i><i class="leg r" aria-hidden="true"></i></div>
 
       <div class="tv">
@@ -3595,6 +3622,12 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <p>И пусть тогда времена были совсем не весёлые, мне было очень интересно работать с таким сеттингом!</p>
         <p class="ab-sign">Ваша Милки</p>
         </article>
+        <div class="fr-notes">
+            <div class="fr-spot" data-drop="Без музыки читать — как чай без сахара. Повесь!" data-by="Слопи"><button class="mg mg-spot" type="button" aria-label="Снять магнит"></button><b>Что послушать</b><span>Мы собрали плейлист под атмосферу «Лихих». Включайте, пока читаете и играете.</span><a href="https://open.spotify.com/playlist/1uiPB1MWlylfv3SsScDeHF" target="_blank" rel="noopener">Плейлист в Spotify →</a></div>
+            <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
+            <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
+            <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
+          </div>
         </div>
         </div>
 
@@ -3628,12 +3661,6 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
           </div>
         </div>
             <p class="ab-hint"><span class="pk-turn">Нажмите на открытку, чтобы перевернуть. </span>Фотографии тоже переворачиваются.</p>
-          </div>
-          <div class="fr-notes">
-            <div class="fr-spot" data-drop="Без музыки читать — как чай без сахара. Повесь!" data-by="Слопи"><button class="mg mg-spot" type="button" aria-label="Снять магнит"></button><b>Что послушать</b><span>Мы собрали плейлист под атмосферу «Лихих». Включайте, пока читаете и играете.</span><a href="https://open.spotify.com/playlist/1uiPB1MWlylfv3SsScDeHF" target="_blank" rel="noopener">Плейлист в Spotify →</a></div>
-            <div class="fr-vnote" data-drop="Гражданочка, вещдоки руками не трогаем." data-by="Витя"><button class="mg mg-red" type="button" aria-label="Снять магнит"></button>Кто доел сырники — признавайтесь сразу. Чистосердечное смягчает.<b>— В.</b></div>
-            <div class="fr-lnote" data-drop="Э, это личная переписка вообще-то!" data-by="Лёша"><button class="mg mg-lemon" type="button" aria-label="Снять магнит"></button>Витя, взял твою кассету «Кино» на пару дней. Верну. Честно.<b>— Л.</b></div>
-            <div class="fr-recipe" data-drop="Без сырников Витя не работает. Верни." data-by="Слопи"><button class="mg mg-blue" type="button" aria-label="Снять магнит"></button><b>Сырники</b><span>творог — пачка, яйцо, 2 ложки муки, сахар по вкусу.</span><span>Жарить на маленьком огне и НЕ отходить от плиты!</span></div>
           </div>
         </div>
         <div class="fr-vent" aria-hidden="true"></div>
@@ -3921,7 +3948,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   const dossier = (b, i) => { PAGES[b.id] = pagesFor(b, i); return `
 <main class="page" data-route="/${b.id}">
   <div class="wrap dossier">
-    <div class="case-bar">${b.download ? `<div class="dl-tag" role="group" aria-label="Бирка: скачать карточку и лорбук"><b>Забрать себе</b><a href="${b.download.card[0]}" download="${b.download.card[1]}">Скачать карточку<small>PNG для SillyTavern, лорбук уже встроен</small></a><a href="${b.download.lore[0]}" download="${b.download.lore[1]}">Скачать лорбук<small>отдельным файлом (JSON)</small></a></div>` : ''}<button class="close-case" type="button">Закрыть дело</button></div>
+    <div class="case-bar">${b.download ? `<div class="dl-tag" role="group" aria-label="Бирка: скачать карточку и лорбук"><b>Забрать себе</b>${b.download.json ? `<span class="dl-pick"><button class="dl-card" type="button" aria-expanded="false">Скачать карточку<small>PNG или JSON, лорбук уже встроен</small></button><span class="dl-pop" role="group" aria-label="Бирка: в каком виде скачать карточку"><a href="${b.download.card[0]}" download="${b.download.card[1]}">PNG<small>с портретом, для SillyTavern и Tavo</small></a><a href="${b.download.json[0]}" download="${b.download.json[1]}">JSON<small>та же карточка, без картинки</small></a></span></span>` : `<a href="${b.download.card[0]}" download="${b.download.card[1]}">Скачать карточку<small>PNG для SillyTavern, лорбук уже встроен</small></a>`}<a href="${b.download.lore[0]}" download="${b.download.lore[1]}">Скачать лорбук<small>отдельным файлом (JSON)</small></a></div>` : ''}<button class="close-case" type="button">Закрыть дело</button></div>
     <div class="book" data-id="${b.id}">
       <div class="book-inner">
         <div class="slot l"><div class="leaf"></div><button class="corner prev" type="button" aria-label="Предыдущий лист"></button></div>
@@ -5492,16 +5519,23 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   /* the left drawer stays a little open, so it begs to be pulled */
   document.querySelector('.drawer')?.classList.add('ajar');
 
+  /* «download the card» drops a tag: PNG or JSON */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.dl-card');
+    document.querySelectorAll('.dl-pick.open').forEach(p => { if (!btn || p !== btn.parentNode){ p.classList.remove('open'); p.querySelector('.dl-card').setAttribute('aria-expanded', 'false'); } });
+    if (btn){ const o = btn.parentNode.classList.toggle('open'); btn.setAttribute('aria-expanded', String(o)); }
+    else if (e.target.closest('.dl-pop a')) setTimeout(() => document.querySelectorAll('.dl-pick.open').forEach(p => p.classList.remove('open')), 300);
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.dl-pick.open').forEach(p => { p.classList.remove('open'); p.querySelector('.dl-card').setAttribute('aria-expanded', 'false'); }); });
   /* ---------- drawers under the TV ---------- */
-  // first click opens a drawer with a «старты» note, the second one puts every start on the VCR table
+  // a click opens or closes a drawer; the «старты» note on an open drawer puts every start on the VCR table
   document.querySelectorAll('.drawer').forEach(d => {
     d.dataset.env = 'duo';
     d.insertAdjacentHTML('beforeend', '<span class="tag" aria-hidden="true">старты ▸</span>');
-    d.addEventListener('click', () => {
-      const wasOpen = d.classList.contains('open');
+    d.addEventListener('click', e => {
       d.classList.remove('ajar');
+      if (d.classList.contains('open') && e.target.closest('.tag')){ if (window.openStarts) window.openStarts(d); return; }
       const open = d.classList.toggle('open'); d.setAttribute('aria-expanded', String(open));
-      if (wasOpen && window.openStarts) window.openStarts(d);
     });
   });
 
@@ -5876,6 +5910,8 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       ? `<article class="dl-open${it.red ? ' red' : ''}" style="--r:${rot(k) * .4}deg" data-id="${it.id}">${it.img !== undefined ? photo(it.img, it.cap) : ''}<h5>${esc(it.title)}</h5><p class="src">${esc(it.from ? 'Откуда: ' + it.from : it.when ? 'Когда: ' + it.when : '')}</p>${it.lines.map(para).join('')}<button class="dl-close" type="button" data-shut="${it.id}">запечатать обратно</button></article>`
       : `<div class="dl-env ${it.red ? 'red' : 'gray'}" style="--r:${rot(k)}deg" data-id="${it.id}"><button class="dl-seal" type="button" aria-label="Вскрыть: ${esc(it.title)}">ВСКРЫТЬ</button><span class="t">${esc(it.title)}</span>${it.from ? `<span class="f">${esc(it.from)}</span>` : ''}${it.when ? `<span class="when">${esc(it.when)}</span>` : ''}
           <div class="q">${it.deep ? 'Это главный спойлер истории: кто убил и что прячет Лёша. Точно?' : 'Это спойлер: здесь то, до чего герои доходят позже. Вскрыть?'}<br><button type="button" data-yes>Вскрыть</button><button type="button" class="no" data-no>Не сейчас</button></div></div>`;
+    // opened sheets read top to bottom in their own order; the envelopes still sealed wait below as one pile
+    const lay = (list, o) => { const ix = list.map((x, k) => [x, k + o]); return [...ix.filter(([x]) => opened.has(x.id)), ...ix.filter(([x]) => !opened.has(x.id))].map(([x, k]) => env(x, k)).join(''); };
     function draw(){
       const n = sealed.filter(x => opened.has(x.id)).length;
       root.innerHTML = `
@@ -5890,10 +5926,10 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <section class="dl-sheet" style="--r:-.4deg"><h4>${esc(D.fabula.title)}</h4>${D.fabula.lines.map(para).join('')}</section>
         <section class="dl-sheet" style="--r:.3deg"><h4>${esc(D.people.title)}</h4><div class="dl-people">${D.people.list.map(p => `<div class="dl-p"><span class="ph">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : ''}</span><span><b>${esc(p.n)}</b><i>${esc(p.r)}</i><span>${esc(p.t)}</span>${p.real && named() ? `<span class="real">${esc(p.real)}</span>` : ''}</span></div>`).join('')}</div></section>
         <h3 class="dl-h">Вещественные доказательства<small>Серые печати: то, что можно найти в стартах. Вскрывайте, когда нашли в игре.</small></h3>
-        <div class="dl-grid">${D.evidence.map(env).join('')}</div>
+        <div class="dl-grid">${lay(D.evidence, 0)}</div>
         <h3 class="dl-h">Ход расследования<small>Красные печати: четыре этапа дела по ходу истории. Спойлеры.</small></h3>
-        <div class="dl-grid">${D.stages.map((x, k) => env(x, k + 2)).join('')}</div>
-        <div class="dl-deep"><p>Совершенно секретно. Только для тех, кто уже доиграл или не боится спойлеров.</p><div class="dl-grid">${D.secret.map((x, k) => env(x, k + 4)).join('')}</div></div>
+        <div class="dl-grid">${lay(D.stages, 2)}</div>
+        <div class="dl-deep"><p>Совершенно секретно. Только для тех, кто уже доиграл или не боится спойлеров.</p><div class="dl-grid">${lay(D.secret, 4)}</div></div>
         <button class="dl-reset" type="button">Запечатать всё обратно</button>`;
     }
     draw();
