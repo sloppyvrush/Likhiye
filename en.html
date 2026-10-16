@@ -2038,6 +2038,13 @@ body.splash-on{overflow:hidden}
 .vc-in .vc-cast b{display:block; margin-bottom:16px; font:400 26px var(--display); letter-spacing:.1em; color:#fff6e2}
 .vc-in .vc-end{margin-top:140px; font:400 clamp(30px, 5vw, 46px)/1.1 var(--display); letter-spacing:.08em; color:#fff6e2}
 .vc-in .vc-again{margin-top:30px; padding:8px 18px; border:1px solid rgba(239,231,212,.5); background:none; color:#efe7d4; font:14px var(--mono); letter-spacing:.14em; cursor:var(--cur-hover)}
+/* the start's own still behind the credits: soft, dim, a little blurred, with VHS lines and a slow tracking wobble */
+.vc-bg{position:absolute; inset:-24px; pointer-events:none; background:var(--vcbg, none) center/cover no-repeat; filter:blur(3.5px) saturate(.8) brightness(.4) contrast(1.08); opacity:0; transition:opacity 1s ease; animation:vcWobble 7s ease-in-out infinite}
+.vcr.has-bg .vc-bg{opacity:1}
+.vc-lines{position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity 1s ease; background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 4px), linear-gradient(90deg, rgba(255,40,40,.05), transparent 30%, transparent 70%, rgba(40,120,255,.05))}
+.vcr.has-bg .vc-lines{opacity:1}
+@keyframes vcWobble{0%,100%{transform:translate(0,0)} 48%{transform:translate(0,0)} 50%{transform:translate(-3px,1px)} 51%{transform:translate(2px,0)} 53%{transform:translate(0,0)}}
+@media (prefers-reduced-motion:reduce){ .vc-bg{animation:none} }
 /* film: grain, flicker, a dark frame */
 .vc-film{position:absolute; inset:-50%; pointer-events:none; opacity:.16; animation:vcGrain .5s steps(4) infinite;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23f)'/%3E%3C/svg%3E")}
@@ -3713,6 +3720,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
   <p class="vr-hint">Pick a tape and it’ll slot into the VCR by itself.</p>
 </div>
 <div class="vcr" id="vcRoll" hidden role="dialog" aria-modal="true" aria-label="Credits">
+  <i class="vc-bg" aria-hidden="true"></i><i class="vc-lines" aria-hidden="true"></i>
   <div class="vc-scroll" tabindex="0"><div class="vc-in"></div></div>
   <i class="vc-film" aria-hidden="true"></i>
   <div class="vc-ui"><button class="vc-btn vc-pause" type="button" aria-label="Pause">❚❚</button><button class="vc-btn vc-x" type="button">close ✕</button></div>
@@ -5441,6 +5449,8 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       const who = BOTS.find(b => b.id === st.bid) || BOTS[0];
       rin.innerHTML = `<h2>${escH(st.h)}</h2><p class="vc-when">${escH(st.t)}</p><p>…</p>`;
       roll.hidden = false; document.documentElement.style.overflow = 'hidden';
+      { roll.classList.remove('has-bg'); roll.style.removeProperty('--vcbg'); const bk = typeof START_BG !== 'undefined' && START_BG[st.h];
+        if (bk){ const im = new Image(); im.onload = () => { if (playingSt === st){ roll.style.setProperty('--vcbg', `url('${im.src}')`); roll.classList.add('has-bg'); } }; im.src = `assets/starts/${bk}.webp`; } }
       rollPos = 0; rs.scrollTop = 0; paused = !!reduce; held = 0; last = 0; pauseB.textContent = paused ? '▶' : '❚❚';
       cancelAnimationFrame(rollRaf); rollRaf = requestAnimationFrame(loop);
       rs.focus({preventScroll: true});
