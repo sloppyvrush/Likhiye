@@ -148,8 +148,7 @@ window.BOTS = [
       "“We’ll sort it out.”",
       "“Don’t make a fuss.”",
       "“Now that’s a plot twist.”",
-      "“As you were.”",
-      "Almost honest."
+      "“As you were.”"
     ],
     "prose": [
       "He is thirty-five, a born Leningrader. He grew up in a Stalin-era block by Avtovo: his mother taught literature at school and taught her son to read and to cook; his father, a former officer, worked his whole life at the Kirov plant and said little, but always to the point.",
