@@ -780,7 +780,7 @@ input.vol{accent-color:#7A1C22; height:1.1cqw; cursor:var(--cur-hover)}
 
 /* panorama: the full desktop room on a phone, swiped sideways */
 @media (max-width:760px){
-  html.room-pan .room{--stageW:calc(min(100svh - var(--bar) - 60px, 640px) * 16 / 9); --floor:17%; overflow-x:auto; overflow-y:hidden;
+  html.room-pan .room{--stageW:calc(min(calc(var(--vh1, 1svh) * 100) - var(--bar) - 60px, 640px) * 16 / 9); --floor:17%; overflow-x:auto; overflow-y:hidden;
     overscroll-behavior-x:contain; scrollbar-width:none; touch-action:pan-x pan-y; -webkit-overflow-scrolling:touch}
   html.room-pan .room::-webkit-scrollbar{display:none}
   /* wallpaper rides on its own layer as wide as the room, so it scrolls with everything else on any phone */
@@ -1059,7 +1059,7 @@ p{margin:0 0 1em}
   background:linear-gradient(currentColor,currentColor) 50% 45%/60% 2px no-repeat}
 .close-case:active{transform:translateY(2px); box-shadow:0 1px 0 #4a0f13}
 /* the case folder as a book */
-.book{position:relative; height:clamp(540px, calc(100svh - 210px), 760px)}
+.book{position:relative; height:clamp(540px, calc(calc(var(--vh1, 1svh) * 100) - 210px), 760px)}
 .book-inner{position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:minmax(0,1fr)}
 .slot{min-height:0}
 .slot{position:relative; background:var(--kraft);
@@ -1219,7 +1219,7 @@ p{margin:0 0 1em}
 @media (max-width:640px){ .dl-ph{float:none; width:100%; margin:4px 0 12px} .dl-cover .stamp-dsp{position:static; display:inline-block; margin-bottom:12px} }
 /* a big print clipped to its own page of the case: shrinks to fit the leaf, never scrolls */
 .op-ph{position:relative; margin:10px auto 0; width:min(100%, 420px); padding:10px 10px 8px; background:#f6f1e4; box-shadow:0 6px 16px rgba(0,0,0,.32); transform:rotate(-1.5deg)}
-.op-ph img{display:block; width:100%; max-height:calc(min(100svh - 210px, 760px) - 200px); aspect-ratio:3/4; object-fit:cover; object-position:50% 20%; filter:sepia(.12) contrast(1.03)}
+.op-ph img{display:block; width:100%; max-height:calc(min(calc(var(--vh1, 1svh) * 100) - 210px, 760px) - 200px); aspect-ratio:3/4; object-fit:cover; object-position:50% 20%; filter:sepia(.12) contrast(1.03)}
 .op-ph figcaption{margin-top:6px; font:20px/1.15 'Caveat',var(--hand); color:#1f2f6b}
 .op-clip{position:absolute; left:16%; top:-16px; width:16px; height:44px; border:3px solid #b9bcc2; border-radius:10px; box-shadow:1px 1px 1px rgba(0,0,0,.35)}
 /* navigation under the folder */
@@ -1304,7 +1304,7 @@ footer .sig{font-family:var(--display); color:var(--cream); font-size:24px; marg
 
 @media (max-width:860px){
   .intro .grid,.night .pair,.quotes{grid-template-columns:1fr}
-  .book{height:calc(100svh - 230px); min-height:480px}
+  .book{height:calc(calc(var(--vh1, 1svh) * 100) - 230px); min-height:480px}
   .book-inner{grid-template-columns:1fr}
   .slot.l{display:none}
   .slot.r{padding:12px; border-radius:6px; box-shadow:0 24px 40px rgba(0,0,0,.45)}
@@ -1702,10 +1702,10 @@ body.splash-on{overflow:hidden}
 .abv{position:fixed; inset:0; z-index:950; display:grid; place-items:center; background:rgba(12,8,5,.86); animation:veilIn .3s ease; touch-action:pan-y}
 .abv[hidden]{display:none}
 .abv-wrap{position:relative; display:flex; flex-direction:column; align-items:center; gap:14px}
-.abv-book{--pw:min(calc(46vw - 64px), calc((100vh - 150px) * .75), 520px); position:relative; padding:14px; border-radius:6px; background:var(--cov, #333);
+.abv-book{--pw:min(calc(46vw - 64px), calc((calc(var(--vh1, 1svh) * 100) - 150px) * .75), 520px); position:relative; padding:14px; border-radius:6px; background:var(--cov, #333);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 30px rgba(0,0,0,.5), 0 30px 70px rgba(0,0,0,.65); animation:abIn .45s cubic-bezier(.2,.8,.3,1)}
 @keyframes abIn{from{transform:translateY(30px) scale(.94); opacity:0}}
-.abv.single .abv-book{--pw:min(calc(100vw - 48px), calc((100vh - 170px) * .75))}
+.abv.single .abv-book{--pw:min(calc(100vw - 48px), calc((calc(var(--vh1, 1svh) * 100) - 170px) * .75))}
 .abv-sp{position:relative; display:flex; perspective:2600px}
 .abv-pg{position:relative; width:var(--pw); aspect-ratio:3/4; overflow:hidden; container-type:size; background:var(--pg); -webkit-backface-visibility:hidden; backface-visibility:hidden}
 .abv-pg.r{box-shadow:inset 18px 0 22px -14px rgba(0,0,0,.55)} .abv-pg.l{box-shadow:inset -18px 0 22px -14px rgba(0,0,0,.55)}
@@ -2616,7 +2616,58 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 .pl-t i{font:normal 13px/1.1 var(--hand); color:#3b4f8f}
 @keyframes popUp{from{opacity:0; transform:translateY(26px) scale(.92)} to{opacity:1; transform:none}}
 @media (prefers-reduced-motion:reduce){ .pop-lp{animation:none} }
+
+/* ================= phones: fixes ================= */
+/* the top bar: on a phone the sections fold into a list under a «menu» button instead of hiding off the right edge */
+.nav-tg{display:none; align-items:center; gap:10px; margin-right:auto; padding:7px 12px 7px 10px; border:1px solid rgba(231,214,176,.32); border-radius:4px;
+  background:rgba(0,0,0,.2); color:var(--cream); font:17px/1 var(--serif); cursor:pointer; -webkit-tap-highlight-color:transparent}
+.nav-tg .nb{display:grid; gap:4px; width:18px}
+.nav-tg .nb i{display:block; height:2px; border-radius:1px; background:currentColor; transition:transform .25s, opacity .2s}
+.nav-tg .caret{width:0; height:0; margin-top:3px; border:5px solid transparent; border-top-color:currentColor; border-bottom:0; opacity:.75; transition:transform .25s}
+.bar.open .nav-tg .caret{transform:rotate(180deg)}
+.bar.open .nav-tg .nb i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.bar.open .nav-tg .nb i:nth-child(2){opacity:0}
+.bar.open .nav-tg .nb i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@keyframes navDrop{from{opacity:0; transform:translateY(-8px)}}
+@media (max-width:760px){
+  .bar{gap:10px}
+  .nav-tg{display:flex}
+  .bar nav{position:absolute; left:0; right:0; top:100%; margin:0; display:none; flex-direction:column; gap:0; padding:4px 0 10px;
+    max-height:calc(var(--vh1, 1svh) * 100 - var(--bar) - 24px); overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain;
+    background:linear-gradient(#2c1a0f,#1d1007); border-bottom:2px solid #120904; box-shadow:0 16px 28px rgba(0,0,0,.6)}
+  .bar.open nav{display:flex; animation:navDrop .22s ease}
+  .bar nav a{padding:13px max(22px, env(safe-area-inset-left)); font-size:19px; border-radius:0; border-top:1px solid rgba(231,214,176,.08)}
+  .bar nav a[aria-current="page"]{color:var(--cream); background:rgba(231,214,176,.07); box-shadow:inset 4px 0 0 var(--orange)}
+  .bar nav .long{display:inline} .bar nav .short{display:none}
+}
+/* the wall phone and other toys: the close button stays on screen even when the box is taller than the phone */
+@media (max-width:760px){
+  .toy{padding-top:64px}
+  .toy-x{position:fixed; top:calc(10px + env(safe-area-inset-top)); right:12px; z-index:320}
+}
+/* touch screens: no focus frames around whatever was tapped or focused for the keyboard */
+@media (hover:none) and (pointer:coarse){ :focus-visible{outline:none !important} }
+/* Safari lets transformed children spill past rounded corners: a mask makes the screens clip for real */
+.screen, .vr-screen{-webkit-mask-image:-webkit-radial-gradient(white, black)}
+/* the moth on phones: no CSS filters (some phones paint a filtered moth black); the dark is painted into the wings instead */
+html.room-pan .moth, html.room-pan .room.dark .moth{filter:none}
+html.room-pan .room.dark .moth .wing path{fill:#454a5e}
+html.room-pan .room.dark .moth ellipse{fill:#2d3040}
+/* cassettes on phones: only the shelf of tapes scrolls, up and down, never sideways and never the page behind */
+@media (max-width:820px){
+  .vhs-room{touch-action:none}
+  .vr-tapes{overflow-x:hidden; touch-action:pan-y}
+}
+/* turning sheets: Safari needs a 3D transform on the front face to hide it from behind */
+.turn .tf.f, .abv-leaf .front, .cover .front{transform:rotateY(0deg)}
 </style>
+<script>
+/* one viewport height for the whole visit: phone toolbars sliding in and out while scrolling must not resize the room, the case file or the albums;
+   it is measured again only when the width changes (the phone is turned) */
+(() => { const de = document.documentElement; let w = 0;
+  const set = () => { if (innerWidth === w) return; w = innerWidth; de.style.setProperty('--vh1', (innerHeight / 100) + 'px'); };
+  set(); addEventListener('resize', set); addEventListener('orientationchange', () => { w = 0; setTimeout(set, 250); }); })();
+</script>
 </head>
 <body>
 
@@ -2657,7 +2708,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
 
 <header class="bar">
   <a class="brand" href="#/">Лихие</a>
-  <nav aria-label="Sections">
+  <button class="nav-tg" type="button" aria-expanded="false" aria-controls="navList" aria-label="Site sections"><span class="nb" aria-hidden="true"><i></i><i></i><i></i></span><span class="cur">Home</span><span class="caret" aria-hidden="true"></span></button>
+  <nav id="navList" aria-label="Sections">
     <a href="#/">Home</a>
     <a href="#/bots"><span class="long">Characters</span><span class="short">Heroes</span></a>
     <a href="#/lyudi">People</a>
@@ -4072,13 +4124,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     if (n){
       // phone: one page, the sheet turns over its left edge
       if (dir > 0){
+        // the sheet swings up off the page and is gone: its blank back never shows
         const t = makeTurn(bk, 'single', P[S.k], null);
         fill(R, P[to]);
-        const a = t.animate([{transform:P3D + 'rotateY(0deg)'}, {transform:P3D + 'rotateY(-180deg)'}], {duration:DUR, easing:easeBook, fill:'forwards'});
-        shadeAnim(t, DUR); await a.finished.catch(() => {}); t.remove();
+        const a = t.animate([{transform:P3D + 'rotateY(0deg)', opacity:1}, {transform:P3D + 'rotateY(-90deg)', opacity:.6}], {duration:DUR * .6, easing:'ease-in', fill:'forwards'});
+        shadeAnim(t, DUR * .6); await a.finished.catch(() => {}); t.remove();
       } else {
         const t = makeTurn(bk, 'single', P[to], null);
-        const a = t.animate([{transform:P3D + 'rotateY(-180deg)'}, {transform:P3D + 'rotateY(0deg)'}], {duration:DUR, easing:easeBook, fill:'forwards'});
+        const a = t.animate([{transform:P3D + 'rotateY(-90deg)', opacity:.6}, {transform:P3D + 'rotateY(0deg)', opacity:1}], {duration:DUR * .6, easing:'ease-out', fill:'forwards'});
         await a.finished.catch(() => {}); fill(R, P[to]); t.remove();
       }
     } else if (dir > 0){
@@ -4110,10 +4163,18 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     bk.querySelectorAll('.turn').forEach(t => t.remove());
     st(page).busy = false;
   }
+  // the pages are laid out to fit the sheet: again once the fonts arrive and whenever the sheet changes size
+  const relay = page => { if (!page || !page.classList.contains('on') || !book(page)) return; const S = st(page);
+    if (S.busy){ setTimeout(() => relay(page), 300); return; }
+    delete LAID[book(page).dataset.id]; const n = pagesOf(page).length; S.k = Math.min(S.k, n - 1); paint(page); };
+  const leafRO = window.ResizeObserver && new ResizeObserver(es => { clearTimeout(window.__leafRT); window.__leafRT = setTimeout(() => es.forEach(e => relay(e.target.closest('main.page'))), 150); });
   async function openFolder(page){
     resetFolder(page);
     const S = st(page); S.k = 0; paint(page);
-    if (reduce) return;
+    const leafR = book(page).querySelector('.slot.r .leaf'); if (leafRO && leafR) leafRO.observe(leafR);
+    if (document.fonts && document.fonts.status !== 'loaded') document.fonts.ready.then(() => relay(page));
+    // phones: the folder is simply open, no cover swinging over a half-laid-out sheet
+    if (reduce || narrow()) return;
     const {bk, inner, cover, back, left} = coverParts(page), n = narrow();
     const shut = n ? 'translateX(0)' : 'translateX(-25%)';      // the closed folder lies centred
     back.innerHTML = n ? '<div class="slot r"></div>' : left.outerHTML;   // the first page is pinned to the inside of the cover
@@ -4634,12 +4695,22 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   const pages = [...document.querySelectorAll('.page')];
   document.querySelector('.lang-sw')?.addEventListener('click', e => { const a = e.currentTarget; a.href = a.getAttribute('href').split('#')[0] + location.hash; });
   const navLinks = [...document.querySelectorAll('.bar nav a')];
+  // phones: the sections open as a list under the «menu» button
+  const barEl = document.querySelector('.bar'), navTg = barEl.querySelector('.nav-tg'), navCur = navTg && navTg.querySelector('.cur');
+  const setNav = o => { barEl.classList.toggle('open', o); navTg && navTg.setAttribute('aria-expanded', String(o)); };
+  navTg && navTg.addEventListener('click', e => { e.stopPropagation(); setNav(!barEl.classList.contains('open')); });
+  document.addEventListener('click', e => { if (barEl.classList.contains('open') && !e.target.closest('.bar nav')) setNav(false); });
+  barEl.querySelector('nav').addEventListener('click', e => { if (e.target.closest('a')) setNav(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && barEl.classList.contains('open')){ setNav(false); navTg.focus(); } });
   function route(){
     let r = (location.hash.replace(/^#/, '') || '/');
     if (!titles[r]) r = '/';
     pages.forEach(p => p.classList.toggle('on', p.dataset.route === r));
     const navR = botIds.has(r) ? '/bots' : r;
     navLinks.forEach(a => a.getAttribute('href') === '#' + navR ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'));
+    const curA = navLinks.find(a => a.hasAttribute('aria-current'));
+    if (navCur && curA) navCur.textContent = (curA.querySelector('.long') || curA).textContent;
+    setNav(false);
     document.title = titles[r];
     window.scrollTo(0, 0);
     homeVisible = r === '/';
@@ -4959,13 +5030,14 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
       const leaf = document.createElement('div'); leaf.className = 'abv-leaf';
       const from = cur.i;
       if (cur.single){
+        // one page on a phone: the sheet swings up off the album and the next one is already under it; no empty back, no bare frame
         if (dir > 0){
           sp.innerHTML = pageHTML(to);
-          leaf.innerHTML = pageHTML(from).replace('abv-pg', 'abv-pg front') + `<div class="abv-pg back"></div>`;
+          leaf.innerHTML = pageHTML(from).replace('abv-pg', 'abv-pg front');
           leaf.style.cssText = 'left:0; transform-origin:0 50%; transform:rotateY(0deg)';
         } else {
-          leaf.innerHTML = pageHTML(to).replace('abv-pg', 'abv-pg front') + `<div class="abv-pg back"></div>`;
-          leaf.style.cssText = 'left:0; transform-origin:0 50%; transform:rotateY(-180deg)';
+          leaf.innerHTML = pageHTML(to).replace('abv-pg', 'abv-pg front');
+          leaf.style.cssText = 'left:0; transform-origin:0 50%; transform:rotateY(-90deg); opacity:.6';
         }
       } else if (dir > 0){
         sp.innerHTML = pageHTML(from, 'l') + pageHTML(to + 1, 'r');
@@ -4977,7 +5049,8 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         leaf.style.cssText = 'left:0; transform-origin:100% 50%; transform:rotateY(0deg)';
       }
       sp.appendChild(leaf); leaf.offsetWidth; leaf.classList.add('go');
-      leaf.style.transform = cur.single ? (dir > 0 ? 'rotateY(-180deg)' : 'rotateY(0deg)') : (dir > 0 ? 'rotateY(-180deg)' : 'rotateY(180deg)');
+      if (cur.single){ leaf.style.transition = 'transform .5s ease-in-out, opacity .5s'; leaf.style.opacity = dir > 0 ? '.6' : '1'; }
+      leaf.style.transform = cur.single ? (dir > 0 ? 'rotateY(-90deg)' : 'rotateY(0deg)') : (dir > 0 ? 'rotateY(-180deg)' : 'rotateY(180deg)');
       let done = false;
       const fin = () => { if (done) return; done = true; cur.i = to; paint(); busy = false; };
       leaf.addEventListener('transitionend', e => { if (e.target === leaf && e.propertyName === 'transform') fin(); });
@@ -5267,11 +5340,16 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
         for (let j = o; j < par.length; j++){ if (par[j] === '«') d++; else if (par[j] === '»' && !--d){ c = j; break; } }
         if (c < 0){ out += md(par.slice(i)); break; }
         const before = par.slice(i, o), prev = (par.slice(0, o)).replace(/\s+$/, ''), q = par.slice(o + 1, c), after = par.slice(c + 1);
-        const start = !prev || /[.!?…*]$/.test(prev), colon = /:$/.test(prev);
-        const spoken = /[.!?…]$/.test(q) || /^(\s*$|[,.]|\s+—)/.test(after);
-        if (!(start || colon) || !spoken){ out += md(par.slice(i, c + 1)); i = c + 1; continue; }
+        const start = !prev || /[.!?…*]$/.test(prev), colon = /:$/.test(prev), dashed = /—$/.test(prev);
+        const spoken = /[.!?…]$/.test(q) || /^(\s*$|[,.!?…]|\s+—)/.test(after);
+        if (!(start || colon || dashed) || !spoken){
+          // a remark quoted inside the narration («обедает, а вы что?») is speech too; names and signs stay plain
+          const reported = q.length > 14 && /[,!?…]/.test(q) && q !== q.toUpperCase();
+          out += md(before) + (reported ? '«' + say(q) + '»' : md('«' + q + '»')); i = c + 1; continue; }
         out += md(before);
         if (colon){ out += '«' + inner(q) + '»'; i = c + 1; continue; }
+        // «A», — said he. — «B»: the dash is already there, the second line is just coloured
+        if (dashed){ out += inner(q); if (/^[,.]/.test(after)){ out += after[0]; i = c + 2; } else i = c + 1; continue; }
         out += '— ' + inner(q);
         if (/^,/.test(after)){ out += ','; i = c + 2; }
         else if (/^\./.test(after)){ out += '.'; i = c + 2; }
@@ -5704,7 +5782,17 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
   ];
   BEAMS.forEach(b => b.motes = Array.from({length: b.n}, () => ({u: Math.random(), v: Math.random(), r: Math.random() * .9 + .35,
     du: (Math.random() - .5) * .00025, dv: (Math.random() - .5) * .00012 - .00003, ph: Math.random() * 6.28})));
-  let nightWas = false;
+  let nightWas = false, shaftKey = '';
+  // one shaft of light, brightest at its source and fading towards the floor, with soft edges
+  function shaft(b, W, H, X, Y){
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d'), off = W + 100, [A, B, C, D] = b.q;
+    const g = x.createLinearGradient(X((A[0] + B[0]) / 2) - off, Y(A[1]), X((C[0] + D[0]) / 2) - off, Y(C[1]));
+    g.addColorStop(0, `rgba(0,0,0,${b.a})`); g.addColorStop(.12, `rgba(0,0,0,${b.a})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.shadowColor = `rgb(${b.c})`; x.shadowBlur = (b.soft || 6) * 2.4; x.shadowOffsetX = off;
+    x.fillStyle = g; x.beginPath(); x.moveTo(X(A[0]) - off, Y(A[1])); x.lineTo(X(B[0]) - off, Y(B[1])); x.lineTo(X(C[0]) - off, Y(C[1])); x.lineTo(X(D[0]) - off, Y(D[1])); x.closePath(); x.fill();
+    return c;
+  }
   function drawNight(now){
     if (!airCtx) return;
     const dark = roomEl && roomEl.classList.contains('dark');
@@ -5715,13 +5803,13 @@ button.cd:focus-visible{outline:3px solid #e3c98f; outline-offset:4px}
     nightWas = true;
     const k2 = W / nCv.clientWidth, t = now / 1000, X = p => (stageBox.l + p / 100 * stageBox.w) * k2, Y = p => p / 100 * H;
     airCtx.clearRect(0, 0, W, H);
+    // the soft shafts are painted once per size and then only dimmed; blurred with a canvas shadow, which every browser has (Safari has no ctx.filter)
+    const key = W + 'x' + H + ':' + stageBox.l + ':' + stageBox.w;
+    if (shaftKey !== key){ shaftKey = key; BEAMS.forEach(b => b.img = shaft(b, W, H, X, Y)); }
     for (const b of BEAMS){
       const [A, B, C, D] = b.q;
       const flick = b.tv ? .82 + .18 * Math.sin(t * 7.3) * Math.sin(t * 2.1 + 1) : .92 + .08 * Math.sin(t * .7);
-      // the shaft itself: brightest at its source, fading towards the floor
-      const g = airCtx.createLinearGradient(X((A[0] + B[0]) / 2), Y(A[1]), X((C[0] + D[0]) / 2), Y(C[1]));
-      g.addColorStop(0, `rgba(${b.c},${(b.a * flick).toFixed(3)})`); g.addColorStop(1, `rgba(${b.c},0)`);
-      airCtx.save(); airCtx.filter = `blur(${b.soft || 6}px)`; airCtx.fillStyle = g; airCtx.beginPath(); airCtx.moveTo(X(A[0]), Y(A[1])); airCtx.lineTo(X(B[0]), Y(B[1])); airCtx.lineTo(X(C[0]), Y(C[1])); airCtx.lineTo(X(D[0]), Y(D[1])); airCtx.closePath(); airCtx.fill(); airCtx.restore();
+      airCtx.globalAlpha = flick; airCtx.drawImage(b.img, 0, 0); airCtx.globalAlpha = 1;
       // dust drifting inside the shaft
       for (const m of b.motes){
         if (!reduce){ m.u += m.du + Math.sin(t * .6 + m.ph) * .00018; m.v += m.dv + Math.cos(t * .5 + m.ph) * .00007; }
