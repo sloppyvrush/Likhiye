@@ -1013,6 +1013,11 @@ p{margin:0 0 1em}
 .intro .grid{display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:start}
 .intro .tag{font-family:var(--hand); color:var(--pen); font-size:22px; line-height:1.3; transform:rotate(-2deg); border-left:3px solid rgba(43,74,139,.35); padding-left:16px}
 .intro .tag p{margin:0 0 .8em}
+.intro .grid{align-items:stretch}
+.intro .tag{display:flex; flex-direction:column}
+.intro-stamp{display:block; width:170px; height:170px; margin:auto 0 6px auto; color:rgba(168,38,31,.72); transform:rotate(-14deg); font-family:var(--mono); fill:currentColor; mix-blend-mode:multiply;}
+.intro-stamp text{fill:currentColor}
+@media (max-width:1000px){ .intro-stamp{width:120px; height:120px; margin:10px auto 0} }
 
 /* folders */
 .folders{display:grid; gap:40px}
@@ -3235,7 +3240,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <div class="grid">
           <div class="prose">
             <h2>Petersburg, <span class="nw">1996</span></h2>
-            <p class="lede">Cigarettes sold one at a time at the kiosk, wages at the Kirov plant promised “any day now” again. Damp stairwells, rumours in every courtyard. October, business as usual.</p>
+            <p class="lede">Autumn ’96 came to Petersburg the way it always does, without asking: fine rain and wind off the Gulf.</p>
+            <p>The city has been Petersburg again for five years, but on the trams people still say “Leningrad” out of habit, and on peeling facades leaflets from the last election are pasted over old slogans. The markets pay for protection. Cops go half a year without pay, fuel their own UAZ patrol cars and quit one after another: some into private security, some into the gangs. Sometimes it’s the same road.</p>
+            <p>At night the only lights are the kiosks by the metro. In their windows, all jumbled together: water, Rasputin vodka, Snickers, Turbo gum with the little inserts and cigarettes sold one at a time.</p>
             <p>Every character here shares one city: the same streets, familiar faces, shared stories, only each of them remembers it their own way. Some have old debts, some have secrets, and nobody is in a hurry to tell.</p>
             <p>A dead man was found by the garages on Zaitseva Street. The case runs through every start and keeps growing details. You can try to work out what happened. Or start from a blank page: it’s a big city.</p>
           </div>
@@ -3243,6 +3250,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
             <p>Name rings a bell. Can’t remember where.</p>
             <p>Let’s keep quiet about that. You’ll find out.</p>
             <p>Don’t want the script? Start from scratch.</p>
+            <p>Don’t hang around the kiosk after midnight.</p>
+            <p>The city will grow. Drop by.</p>
+          <svg class="intro-stamp" viewBox="0 0 140 140" aria-hidden="true"><defs><path id="isr" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><circle cx="70" cy="70" r="64" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="70" cy="70" r="40" fill="none" stroke="currentColor" stroke-width="2"/><text font-size="12" font-weight="700"><textPath href="#isr" textLength="318" lengthAdjust="spacing">LIKHIYE · ST PETERSBURG · 1996 ·</textPath></text><text x="70" y="67" text-anchor="middle" font-size="12.5" font-weight="700" letter-spacing=".5">OCTOBER</text><text x="70" y="81" text-anchor="middle" font-size="7.5">KIROVSKY DIST.</text><path d="M70 86l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="currentColor"/></svg>
           </div>
         </div>
       </div>

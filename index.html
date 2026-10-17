@@ -1010,6 +1010,11 @@ p{margin:0 0 1em}
 .intro .grid{display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:start}
 .intro .tag{font-family:var(--hand); color:var(--pen); font-size:22px; line-height:1.3; transform:rotate(-2deg); border-left:3px solid rgba(43,74,139,.35); padding-left:16px}
 .intro .tag p{margin:0 0 .8em}
+.intro .grid{align-items:stretch}
+.intro .tag{display:flex; flex-direction:column}
+.intro-stamp{display:block; width:170px; height:170px; margin:auto 0 6px auto; color:rgba(168,38,31,.72); transform:rotate(-14deg); font-family:var(--mono); fill:currentColor; mix-blend-mode:multiply;}
+.intro-stamp text{fill:currentColor}
+@media (max-width:1000px){ .intro-stamp{width:120px; height:120px; margin:10px auto 0} }
 
 /* folders */
 .folders{display:grid; gap:40px}
@@ -3232,7 +3237,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <div class="grid">
           <div class="prose">
             <h2>Петербург, <span class="nw">1996-й</span></h2>
-            <p class="lede">У ларька сигареты поштучно, на Кировском заводе зарплату опять обещают «на днях». В подъездах сыро, по дворам ходят слухи. Октябрь, обычное дело.</p>
+            <p class="lede">Осень 96-го пришла в Петербург, как всегда, без спроса: с мелким дождём и ветром с залива.</p>
+            <p>Город пять лет как снова Петербург, но в трамваях по привычке говорят «Ленинград», а на облупленных фасадах поверх старых лозунгов клеят листовки с последних выборов. Рынки платят за крышу. Менты по полгода сидят без зарплаты, сами заправляют служебные «уазики» и уходят один за другим: кто в охрану, кто в бандиты. Порой это одна и та же дорога.</p>
+            <p>Ночью светятся только ларьки у метро. В окошках вперемешку вода, водка «Распутин», «Сникерсы», жвачка «Турбо» с вкладышами и сигареты поштучно.</p>
             <p>Здесь у всех персонажей один город: те же улицы, знакомые лица, общие истории, только каждый помнит их по-своему. У кого-то старые долги, у кого-то секреты, и рассказывать о них никто не торопится.</p>
             <p>У гаражей на улице Зайцева нашли убитого. Дело тянется через все старты и обрастает подробностями. Можно разобраться, что там случилось. А можно начать с чистого листа: город большой.</p>
           </div>
@@ -3240,6 +3247,9 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
             <p>Фамилия знакомая. Где слышал — не вспомню.</p>
             <p>Про это пока помолчим. Сам узнаешь.</p>
             <p>Не хочешь по сценарию? Начни с нуля.</p>
+            <p>У ларька после полуночи не задерживайся.</p>
+            <p>Город ещё пополнится. Заглядывай.</p>
+          <svg class="intro-stamp" viewBox="0 0 140 140" aria-hidden="true"><defs><path id="isr" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><circle cx="70" cy="70" r="64" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="70" cy="70" r="40" fill="none" stroke="currentColor" stroke-width="2"/><text font-size="12" font-weight="700"><textPath href="#isr" textLength="318" lengthAdjust="spacing">ЛИХИЕ · САНКТ-ПЕТЕРБУРГ · 1996 ·</textPath></text><text x="70" y="67" text-anchor="middle" font-size="12.5" font-weight="700" letter-spacing=".5">ОКТЯБРЬ</text><text x="70" y="81" text-anchor="middle" font-size="7.5">КИРОВСКИЙ Р-Н</text><path d="M70 86l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="currentColor"/></svg>
           </div>
         </div>
       </div>
