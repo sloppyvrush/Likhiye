@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#241309">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Likhiye</title>
-<meta name="description" content="Likhiye: SillyTavern bots in one city. Petersburg, 1996.">
+<meta name="description" content="Likhiye: roleplay bots that share one city. Petersburg, 1996.">
 <meta property="og:title" content="Likhiye">
-<meta property="og:description" content="Petersburg, 1996. SillyTavern bots that all live in the same city.">
+<meta property="og:description" content="Petersburg, 1996. Roleplay bots. One city for everyone.">
 <meta property="og:image" content="assets/duo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1249,6 +1252,17 @@ p{margin:0 0 1em}
 .dl-grid > .dl-open{padding:18px 18px 14px}
 .dl-grid > .dl-open .dl-ph{float:none; width:100%; margin:2px 0 12px; transform:rotate(1.2deg)}
 .dl-grid > .dl-env{min-height:170px}
+.dl-pile{display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:18px; margin-top:14px; width:100%; box-sizing:border-box}
+.dl-pile > .dl-env{min-height:170px}
+/* computer: the sealed envelopes are thrown on the desk in a heap, a little askew and on top of each other */
+@media (min-width:900px){
+  .dl-pile{display:flex; flex-wrap:wrap; justify-content:center; gap:0; max-width:calc(var(--cols) * 236px + 70px); margin:22px auto 6px; padding:6px 0 40px}
+  .dl-pile > .dl-env{flex:0 0 262px; min-height:178px; margin:0 -13px -26px; z-index:var(--z); transform:translateY(var(--ty)) rotate(var(--tr));
+    transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s; box-shadow:0 12px 26px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.15) inset}
+  .dl-pile > .dl-env:hover, .dl-pile > .dl-env.ask{z-index:30; transform:translateY(calc(var(--ty) - 10px)) rotate(calc(var(--tr) * .35)); box-shadow:0 22px 36px rgba(0,0,0,.5)}
+  .dl-grid + .dl-pile{margin-top:34px}
+  .dl-deep .dl-pile{padding-bottom:30px}
+}
 .dl-open h5{margin:0 0 4px; font:400 22px/1.15 var(--display)}
 .dl-open .src{margin:0 0 12px; font:12.5px var(--mono); color:#7a6a50}
 .dl-open p{margin:0 0 8px; font-size:16px; line-height:1.55}
@@ -3214,14 +3228,14 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <div class="grid">
           <div class="prose">
             <h2>Petersburg, <span class="nw">1996</span></h2>
-            <p class="lede">A kiosk on every corner, cigarettes sold one at a time, and wages at the Kirov Plant promised “any day now.” The city is Petersburg again, but people still get mixed up about what to call it.</p>
-            <p>At night the yards turn up those whose luck ran out. People here know their “roof” better than their beat cop, and the militsiya is honest only sometimes, and never all the way.</p>
-            <p>Here you’ll find SillyTavern bots that all live in one city: the same streets, the same people, shared starts. Some serve in the militsiya, some pay off the bandits, some just live one floor up.</p>
+            <p class="lede">Cigarettes sold one at a time at the kiosk, wages at the Kirov plant promised “any day now” again. Damp stairwells, rumours in every courtyard. October, business as usual.</p>
+            <p>Every character here shares one city: the same streets, familiar faces, shared stories, only each of them remembers it their own way. Some have old debts, some have secrets, and nobody is in a hurry to tell.</p>
+            <p>A dead man was found by the garages on Zaitseva Street. The case runs through every start and keeps growing details. You can try to work out what happened. Or start from a blank page: it’s a big city.</p>
           </div>
           <div class="tag" aria-label="Margin notes">
-            <p>Everyone here knows each other. Or has at least heard of each other.</p>
-            <p>Secrets don’t come out right away.</p>
-            <p>Everyone has an empty start, so you can begin your own way.</p>
+            <p>Name rings a bell. Can’t remember where.</p>
+            <p>Let’s keep quiet about that. You’ll find out.</p>
+            <p>Don’t want the script? Start from scratch.</p>
           </div>
         </div>
       </div>
@@ -3232,14 +3246,6 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       <div data-pile></div>
     </section>
 
-
-    <section class="section on-wall">
-      <p class="story-kicker">The first story</p>
-      <h2>Almost Honest</h2>
-      <p class="muted prose">Viktor Gromov and Alexei Tikhonov, army brothers and both majors. Vitya can’t stand lies. Lyosha keeps the “department kitty” and one case that’s better left buried. Neither knows everything about the other.</p>
-      <p class="muted prose">They share starts: the scene is the same, but each has his own thoughts.</p>
-
-    </section>
   </div>
 </main>
 
@@ -3688,7 +3694,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
 
 <footer>
   <div class="sig">Likhiye</div>
-  <p>SillyTavern bots about nineties Petersburg.</p>
+  <p>Roleplay bots. One city for everyone.</p>
   <p id="credits"></p>
   <p>Site: <a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Sloppy</a></p>
 </footer>
@@ -5932,7 +5938,14 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       : `<div class="dl-env ${it.red ? 'red' : 'gray'}" style="--r:${rot(k)}deg" data-id="${it.id}"><button class="dl-seal" type="button" aria-label="Open: ${esc(it.title)}">OPEN</button><span class="t">${esc(it.title)}</span>${it.from ? `<span class="f">${esc(it.from)}</span>` : ''}${it.when ? `<span class="when">${esc(it.when)}</span>` : ''}
           <div class="q">${it.deep ? 'This is the story’s biggest spoiler: who did the killing and what Lyosha is hiding. Sure?' : 'Spoiler: this is something the heroes only find out later. Open it?'}<br><button type="button" data-yes>Open</button><button type="button" class="no" data-no>Not now</button></div></div>`;
     // opened sheets read top to bottom in their own order; the envelopes still sealed wait below as one pile
-    const lay = (list, o) => { const ix = list.map((x, k) => [x, k + o]); return [...ix.filter(([x]) => opened.has(x.id)), ...ix.filter(([x]) => !opened.has(x.id))].map(([x, k]) => env(x, k)).join(''); };
+    // opened sheets read top to bottom in their own grid; the sealed envelopes lie below as one messy pile, overlapping a little
+    const TOSS = [[-6, 0], [4, 16], [-2, -8], [7, 10], [-5, 18], [3, -4], [-7, 8], [5, 0]];
+    const lay = (list, o) => {
+      const ix = list.map((x, k) => [x, k + o]), op = ix.filter(([x]) => opened.has(x.id)), sl = ix.filter(([x]) => !opened.has(x.id));
+      const cols = sl.length <= 3 ? sl.length : Math.ceil(sl.length / 2);
+      return (op.length ? `<div class="dl-grid">${op.map(([x, k]) => env(x, k)).join('')}</div>` : '')
+        + (sl.length ? `<div class="dl-pile" style="--cols:${cols}">${sl.map(([x, k], j) => env(x, k).replace('style="--r:', `style="--tr:${TOSS[(j + o) % 8][0]}deg; --ty:${TOSS[(j + o) % 8][1]}px; --z:${j + 1}; --r:`)).join('')}</div>` : '');
+    };
     function draw(){
       const n = sealed.filter(x => opened.has(x.id)).length;
       root.innerHTML = `
@@ -5947,10 +5960,10 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <section class="dl-sheet" style="--r:-.4deg"><h4>${esc(D.fabula.title)}</h4>${D.fabula.lines.map(para).join('')}</section>
         <section class="dl-sheet" style="--r:.3deg"><h4>${esc(D.people.title)}</h4><div class="dl-people">${D.people.list.map(p => `<div class="dl-p"><span class="ph">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : ''}</span><span><b>${esc(p.n)}</b><i>${esc(p.r)}</i><span>${esc(p.t)}</span>${p.real && named() ? `<span class="real">${esc(p.real)}</span>` : ''}</span></div>`).join('')}</div></section>
         <h3 class="dl-h">Physical evidence<small>Grey seals: things you can find in the starts. Open them once you’ve found them in play.</small></h3>
-        <div class="dl-grid">${lay(D.evidence, 0)}</div>
+        ${lay(D.evidence, 0)}
         <h3 class="dl-h">Course of the investigation<small>Red seals: the four stages of the case as the story unfolds. Spoilers.</small></h3>
-        <div class="dl-grid">${lay(D.stages, 2)}</div>
-        <div class="dl-deep"><p>Top secret. Only for those who have finished playing or aren’t afraid of spoilers.</p><div class="dl-grid">${lay(D.secret, 4)}</div></div>
+        ${lay(D.stages, 2)}
+        <div class="dl-deep"><p>Top secret. Only for those who have finished playing or aren’t afraid of spoilers.</p>${lay(D.secret, 4)}</div>
         <button class="dl-reset" type="button">Seal everything back up</button>`;
     }
     draw();

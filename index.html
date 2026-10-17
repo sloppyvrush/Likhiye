@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#241309">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Лихие</title>
-<meta name="description" content="Лихие: боты для SillyTavern в одном городе. Петербург, 1996 год.">
+<meta name="description" content="Лихие: ролевые боты, у которых один город на всех. Петербург, 1996 год.">
 <meta property="og:title" content="Лихие">
-<meta property="og:description" content="Петербург, 1996-й. Боты для SillyTavern, которые живут в одном городе.">
+<meta property="og:description" content="Петербург, 1996-й. Ролевые боты. Один город на всех.">
 <meta property="og:image" content="assets/duo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1246,6 +1249,17 @@ p{margin:0 0 1em}
 .dl-grid > .dl-open{padding:18px 18px 14px}
 .dl-grid > .dl-open .dl-ph{float:none; width:100%; margin:2px 0 12px; transform:rotate(1.2deg)}
 .dl-grid > .dl-env{min-height:170px}
+.dl-pile{display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:18px; margin-top:14px; width:100%; box-sizing:border-box}
+.dl-pile > .dl-env{min-height:170px}
+/* computer: the sealed envelopes are thrown on the desk in a heap, a little askew and on top of each other */
+@media (min-width:900px){
+  .dl-pile{display:flex; flex-wrap:wrap; justify-content:center; gap:0; max-width:calc(var(--cols) * 236px + 70px); margin:22px auto 6px; padding:6px 0 40px}
+  .dl-pile > .dl-env{flex:0 0 262px; min-height:178px; margin:0 -13px -26px; z-index:var(--z); transform:translateY(var(--ty)) rotate(var(--tr));
+    transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s; box-shadow:0 12px 26px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.15) inset}
+  .dl-pile > .dl-env:hover, .dl-pile > .dl-env.ask{z-index:30; transform:translateY(calc(var(--ty) - 10px)) rotate(calc(var(--tr) * .35)); box-shadow:0 22px 36px rgba(0,0,0,.5)}
+  .dl-grid + .dl-pile{margin-top:34px}
+  .dl-deep .dl-pile{padding-bottom:30px}
+}
 .dl-open h5{margin:0 0 4px; font:400 22px/1.15 var(--display)}
 .dl-open .src{margin:0 0 12px; font:12.5px var(--mono); color:#7a6a50}
 .dl-open p{margin:0 0 8px; font-size:16px; line-height:1.55}
@@ -3211,14 +3225,14 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <div class="grid">
           <div class="prose">
             <h2>Петербург, <span class="nw">1996-й</span></h2>
-            <p class="lede">Ларёк на каждом углу, сигареты поштучно, зарплату на Кировском заводе обещают «на днях». Город снова Петербург, но люди ещё путаются, как его называть.</p>
-            <p>По ночам во дворах находят тех, кому не повезло. «Крышу» здесь знают лучше, чем участкового, а милиция бывает честной не всегда и не до конца.</p>
-            <p>Здесь собраны боты для SillyTavern, которые живут в одном городе: те же улицы, те же люди, общие старты. Кто-то служит в милиции, кто-то платит бандитам, кто-то просто живёт этажом выше.</p>
+            <p class="lede">У ларька сигареты поштучно, на Кировском заводе зарплату опять обещают «на днях». В подъездах сыро, по дворам ходят слухи. Октябрь, обычное дело.</p>
+            <p>Здесь у всех персонажей один город: те же улицы, знакомые лица, общие истории, только каждый помнит их по-своему. У кого-то старые долги, у кого-то секреты, и рассказывать о них никто не торопится.</p>
+            <p>У гаражей на улице Зайцева нашли убитого. Дело тянется через все старты и обрастает подробностями. Можно разобраться, что там случилось. А можно начать с чистого листа: город большой.</p>
           </div>
           <div class="tag" aria-label="Заметки на полях">
-            <p>Все здесь друг друга знают. Или хотя бы слышали.</p>
-            <p>Секреты открываются не сразу.</p>
-            <p>У каждого есть пустой старт, чтобы начать по-своему.</p>
+            <p>Фамилия знакомая. Где слышал — не вспомню.</p>
+            <p>Про это пока помолчим. Сам узнаешь.</p>
+            <p>Не хочешь по сценарию? Начни с нуля.</p>
           </div>
         </div>
       </div>
@@ -3229,14 +3243,6 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       <div data-pile></div>
     </section>
 
-
-    <section class="section on-wall">
-      <p class="story-kicker">Первая история</p>
-      <h2>Почти честные</h2>
-      <p class="muted prose">Виктор Громов и Алексей Тихонов, армейские братья и оба майоры. Витя не терпит вранья. Лёша держит «кассу отдела» и одно дело, которое лучше не поднимать. Каждый знает про другого не всё.</p>
-      <p class="muted prose">У них общие старты: сцена та же, а мысли у каждого свои.</p>
-
-    </section>
   </div>
 </main>
 
@@ -3685,7 +3691,7 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
 
 <footer>
   <div class="sig">Лихие</div>
-  <p>Боты для SillyTavern о Петербурге девяностых.</p>
+  <p>Ролевые боты. Один город на всех.</p>
   <p id="credits"></p>
   <p>Сайт: <a href="https://t.me/sillysloppy" target="_blank" rel="noopener">Sloppy</a></p>
 </footer>
@@ -5928,7 +5934,14 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
       : `<div class="dl-env ${it.red ? 'red' : 'gray'}" style="--r:${rot(k)}deg" data-id="${it.id}"><button class="dl-seal" type="button" aria-label="Вскрыть: ${esc(it.title)}">ВСКРЫТЬ</button><span class="t">${esc(it.title)}</span>${it.from ? `<span class="f">${esc(it.from)}</span>` : ''}${it.when ? `<span class="when">${esc(it.when)}</span>` : ''}
           <div class="q">${it.deep ? 'Это главный спойлер истории: кто убил и что прячет Лёша. Точно?' : 'Это спойлер: здесь то, до чего герои доходят позже. Вскрыть?'}<br><button type="button" data-yes>Вскрыть</button><button type="button" class="no" data-no>Не сейчас</button></div></div>`;
     // opened sheets read top to bottom in their own order; the envelopes still sealed wait below as one pile
-    const lay = (list, o) => { const ix = list.map((x, k) => [x, k + o]); return [...ix.filter(([x]) => opened.has(x.id)), ...ix.filter(([x]) => !opened.has(x.id))].map(([x, k]) => env(x, k)).join(''); };
+    // opened sheets read top to bottom in their own grid; the sealed envelopes lie below as one messy pile, overlapping a little
+    const TOSS = [[-6, 0], [4, 16], [-2, -8], [7, 10], [-5, 18], [3, -4], [-7, 8], [5, 0]];
+    const lay = (list, o) => {
+      const ix = list.map((x, k) => [x, k + o]), op = ix.filter(([x]) => opened.has(x.id)), sl = ix.filter(([x]) => !opened.has(x.id));
+      const cols = sl.length <= 3 ? sl.length : Math.ceil(sl.length / 2);
+      return (op.length ? `<div class="dl-grid">${op.map(([x, k]) => env(x, k)).join('')}</div>` : '')
+        + (sl.length ? `<div class="dl-pile" style="--cols:${cols}">${sl.map(([x, k], j) => env(x, k).replace('style="--r:', `style="--tr:${TOSS[(j + o) % 8][0]}deg; --ty:${TOSS[(j + o) % 8][1]}px; --z:${j + 1}; --r:`)).join('')}</div>` : '');
+    };
     function draw(){
       const n = sealed.filter(x => opened.has(x.id)).length;
       root.innerHTML = `
@@ -5943,10 +5956,10 @@ html.room-pan .room.dark .moth ellipse{fill:#2d3040}
         <section class="dl-sheet" style="--r:-.4deg"><h4>${esc(D.fabula.title)}</h4>${D.fabula.lines.map(para).join('')}</section>
         <section class="dl-sheet" style="--r:.3deg"><h4>${esc(D.people.title)}</h4><div class="dl-people">${D.people.list.map(p => `<div class="dl-p"><span class="ph">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : ''}</span><span><b>${esc(p.n)}</b><i>${esc(p.r)}</i><span>${esc(p.t)}</span>${p.real && named() ? `<span class="real">${esc(p.real)}</span>` : ''}</span></div>`).join('')}</div></section>
         <h3 class="dl-h">Вещественные доказательства<small>Серые печати: то, что можно найти в стартах. Вскрывайте, когда нашли в игре.</small></h3>
-        <div class="dl-grid">${lay(D.evidence, 0)}</div>
+        ${lay(D.evidence, 0)}
         <h3 class="dl-h">Ход расследования<small>Красные печати: четыре этапа дела по ходу истории. Спойлеры.</small></h3>
-        <div class="dl-grid">${lay(D.stages, 2)}</div>
-        <div class="dl-deep"><p>Совершенно секретно. Только для тех, кто уже доиграл или не боится спойлеров.</p><div class="dl-grid">${lay(D.secret, 4)}</div></div>
+        ${lay(D.stages, 2)}
+        <div class="dl-deep"><p>Совершенно секретно. Только для тех, кто уже доиграл или не боится спойлеров.</p>${lay(D.secret, 4)}</div>
         <button class="dl-reset" type="button">Запечатать всё обратно</button>`;
     }
     draw();
