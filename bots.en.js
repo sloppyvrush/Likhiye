@@ -204,7 +204,7 @@ window.BOTS = [
       ],
       [
         "Barinov",
-        "childhood friend from the same yard, rich importer; the port is never discussed"
+        "«Barin», childhood friend from the next stairwell, owns an import firm and a casino; the port is never discussed"
       ],
       [
         "Lysy",

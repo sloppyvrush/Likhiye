@@ -59,16 +59,16 @@ window.NPCS = [
   {
     "id": "barinov",
     "name": "Oleg Barinov",
-    "nick": "",
-    "role": "childhood friend, businessman, imports through the port",
+    "nick": "Barin",
+    "role": "childhood friend, owner of Balt-Import and the White Nights casino",
     "group": "svoi",
     "photo": "assets/npc/barinov.webp",
     "pos": "50% 22%",
-    "line": "Grew up in the same yard as Vitya. Now keeps a security detail of Afghan vets.",
+    "line": "Five years younger than Vitya, he used to tag along after him around the yard on Stachek. Now he wears Italian suits and keeps a security detail of Afghan vets.",
     "about": [
-      "Charming, generous, genuinely fond of Viktor. Once a month they have dinner and reminisce about the yard on Stachek Avenue; they never talk business.",
-      "His firm, Balt-Import: food and alcohol “from Europe” through the Sea Port, warehouse No. 7. The port is under Lysy, so Barinov pays him too, and he has his own dealings with Captain Zorin.",
-      "Both know their interests may one day collide."
+      "Thirty, a languages degree from Leningrad University, onyx rings and cigars. A charming talker and a generous show-off, always counting behind the smile. To him, Vitya is the older brother he never had.",
+      "His firm, Balt-Import: food and alcohol “from Europe” through the Sea Port, warehouse No. 7. The port is under Lysy, so Barinov pays him too, and he has his own dealings with Captain Zorin. He won the White Nights casino on the Lieutenant Schmidt Embankment at preferans.",
+      "Once a month he and Vitya have dinner without bodyguards in a little bar near Avtovo and reminisce about the yard; they never talk business. Both know their interests may one day collide."
     ],
     "note": "Don’t ask about the port.",
     "who": "Vitya"
